@@ -8,3 +8,5 @@ NamedWindow("opencv")
 ShowImage("opencv",img)
 WaitKey(0)
 
+
+CreateImage

@@ -1,0 +1,10 @@
+Playground for Kinect using PyOpenCL PyOpenGL with libfreenect and OpenCV python wrappers
+#Authors: Ian Johnson, Nathan Crock, Evan Bollig
+
+Depends on
+numpy
+PyOpenGL
+pygame
+PyOpenCL
+libfreenect
+OpenCV
