@@ -2,6 +2,7 @@
 import freenect
 import cv
 import frame_convert
+import numpy
 
 cv.NamedWindow('Depth')
 cv.NamedWindow('Video')
@@ -17,7 +18,18 @@ def get_video():
 
 
 while 1:
-    cv.ShowImage('Depth', get_depth())
-    cv.ShowImage('Video', get_video())
+    video = freenect.sync_get_video()[0]
+    video = video[:, :, ::-1]  # RGB -> BGR
+    image = cv.CreateImageHeader((video.shape[1], video.shape[0]),
+                                 cv.IPL_DEPTH_8U,
+                                 3)
+    cv.SetData(image, video.tostring(),
+               video.dtype.itemsize * 3 * video.shape[1])
+
+
+    cv.ShowImage("asd", image)
+    print image.width
+    #cv.ShowImage('Depth', get_depth())
+    #cv.ShowImage('Video', get_video())
     if cv.WaitKey(10) == 27:
         break
