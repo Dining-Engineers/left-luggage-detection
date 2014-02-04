@@ -28,10 +28,11 @@ while 1:
 
 
     cv.ShowImage("asd", image)
-    video = freenect.sync_get_depth()[0]
-    print video
+    #cv.WaitKey(3)
+    #video = freenect.sync_get_depth()[0]
+    #print video
     #print image.width
     #cv.ShowImage('Depth', get_depth())
     #cv.ShowImage('Video', get_video())
-    if cv.WaitKey(10) == 27:
+    if cv.WaitKey(3) == 27:
         break
