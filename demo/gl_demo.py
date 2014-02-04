@@ -19,7 +19,7 @@ import freenect
 import cv
 import frame_convert
 
-
+keep_running = True
 bool_new_rgb = False
 bool_new_depth = False
 
@@ -32,37 +32,39 @@ window = 0
 
 texture = 0
 
-def LoadTextures():
+def LoadTextures(data):
 
     #global texture
 
-    video = freenect.sync_get_video()[0]
+    video = data;#freenect.sync_get_video()[0]
     video = video[:, :, ::-1]  # RGB -> BGR
-    image = cv.CreateImageHeader((video.shape[1], video.shape[0]), cv.IPL_DEPTH_8U, 3)
-    cv.SetData(image, video.tostring(), video.dtype.itemsize * 3 * video.shape[1])
-    cv.ShowImage("asd", image)
-    ix = image.width
-    iy = image.height
+    #image = cv.CreateImageHeader((video.shape[1], video.shape[0]), cv.IPL_DEPTH_8U, 3)
+    #cv.SetData(image, video.tostring(), video.dtype.itemsize * 3 * video.shape[1])
+    #cv.ShowImage("asd", image)
+    ix = video.shape[0]
+    iy = video.shape[1]
     #im = image
 
-    im = open("sblinda.ppm")
-    ix = im.size[0]
-    iy = im.size[1]
+    #im = open("sblinda.ppm")
+    #ix = im.size[0]
+    #iy = im.size[1]
 
     #image = image.tostring("raw", "RGBX", 0, -1)
-
-    try:
-        image = im.tostring("raw", "RGBA", 0, -1)
-    except SystemError:
-        image = im.tostring("raw", "RGBX", 0, -1)
+    #image = video
+    #try:
+    #    image = image.tostring("raw", "RGBA", 0, -1)
+    #except SystemError:
+    #    image = image.tostring("raw", "RGBX", 0, -1)
 
     # Create Texture
     glBindTexture(GL_TEXTURE_2D, glGenTextures(1))   # 2d texture (x and y size)
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1)
 
+    #print "lol"
     ## errore
-    glTexImage2D(GL_TEXTURE_2D, 0, 3, ix, iy, 0, GL_RGBA, GL_UNSIGNED_BYTE, image)
+    glTexImage2D(GL_TEXTURE_2D, 0, 3, ix, iy, 0, GL_RGBA, GL_UNSIGNED_BYTE, video)
     ##
+    #print "bbb"
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP)
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP)
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT)
@@ -89,7 +91,34 @@ def InitGL(Width, Height):				# We call this right after our OpenGL window is cr
     glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); ## WAT
     glShadeModel(GL_SMOOTH)				# Enables Smooth Color Shading
     print "aaa"
-    LoadTextures()
+
+    im = open("NeHe.bmp")
+    ix = im.size[0]
+    iy = im.size[1]
+
+    try:
+        image = im.tostring("raw", "RGBA", 0, -1)
+    except SystemError:
+        image = im.tostring("raw", "RGBX", 0, -1)
+
+    # Create Texture
+    glBindTexture(GL_TEXTURE_2D, glGenTextures(1))   # 2d texture (x and y size)
+    glPixelStorei(GL_UNPACK_ALIGNMENT, 1)
+
+    #print "lol"
+    ## errore
+    glTexImage2D(GL_TEXTURE_2D, 0, 3, ix, iy, 0, GL_RGBA, GL_UNSIGNED_BYTE, image)
+    ##
+    #print "bbb"
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP)
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP)
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT)
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT)
+
+    ## quale filtro usare se va ridimensionata
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST)
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST)
+    glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_DECAL)
     print "ccc"
     ReSizeGLScene(Width, Height)
 
@@ -139,7 +168,27 @@ def main():
     # Start kinect recording
     # freenect.runloop(depth=display_depth, video=display_rgb, body=body)
     # start opengl
+    # init_gl()
+    freenect.runloop(depth=display_depth,
+                 video=display_rgb,
+                 body=body)
+
+def display_depth(dev, data, timestamp):
+    if cv.WaitKey(10) == 27:
+        keep_running = False
+
+
+def display_rgb(dev, data, timestamp):
+    print "new frame"
+    LoadTextures(data)
+    if cv.WaitKey(10) == 27:
+        keep_running = False
+
+
+def body(*args):
     init_gl()
+    if not keep_running:
+        raise freenect.Kill
 
 
 def init_gl():
