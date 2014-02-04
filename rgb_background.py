@@ -25,9 +25,10 @@ cam = Kinect()
 
 fgbg = cv2.BackgroundSubtractorMOG2(1, 5)
 
-while(1):
+while not d.isDone():
     #ret, frame = cap.read()
     frame = cam.getImage()
+    print frame
     frame_np = frame.getNumpyCv2()
 
     fgmask = fgbg.apply(frame_np)
@@ -48,9 +49,12 @@ while(1):
     frame.save(d)
     #Image(fgmask).save(d)
     #cv2.imshow('frame',fgmask)
-    k = cv2.waitKey(30) & 0xff
-    if k == 27:
-        break
+
+    if d.mouseLeft:
+        d.done = True
+        d.quit()
+        #pg.quit()
+
 
 
 #cv2.destroyAllWindows()

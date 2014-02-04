@@ -11,7 +11,6 @@ while(1):
 
     fgmask = Image(fgbg.apply(frame)).grayscale()
 
-    applyBinaryMask
 
     cv2.imshow('frame',frame-fgmask)
     k = cv2.waitKey(30) & 0xff
