@@ -5,7 +5,7 @@ import utils
 
 
 def get_background_running_average(moving_average, frame):
-    cv2.accumulateWeighted(frame, moving_average, 0.0320)
+    cv2.accumulateWeighted(frame, moving_average, 0.320)
     return moving_average
 
 
@@ -20,7 +20,7 @@ def get_mask_from_running_average(current_frame, bg_frame):
     cv2.threshold(diff, 5, 1, cv2.THRESH_BINARY, mask)
     # smooth values
     #cv2.GaussianBlur(diff, (5,5), 0, diff)
-    cv2.erode(mask, (150,150), mask)
+    cv2.erode(mask, (3,3), mask)
     cv2.threshold(diff, 5, 1, cv2.THRESH_BINARY, mask)
     return mask
 
@@ -56,3 +56,8 @@ def get_background_from_mask(image, mask):
 def get_foreground_from_mask(image, mask):
     mask2 = np.where((mask == 0), 0, 1)
     return (image * mask2)
+
+def pretty_print(array):
+    for i in range(100,110):
+        print array[50,i],
+    print "\n"
