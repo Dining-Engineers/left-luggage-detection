@@ -13,8 +13,7 @@ def get_background_zivkovic(f_bg, current_frame):
     # get foreground in numpy array
     foreground = f_bg.apply(current_frame)
     # rotate image
-    foreground = foreground.transpose(1, 0)
-
+    #foreground = foreground.transpose()
     return foreground
 
 

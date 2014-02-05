@@ -14,6 +14,9 @@ background_depth_frames = ImageSet()    # buffer of frames for running average
 
 f_bg = cv2.BackgroundSubtractorMOG2()   # define zivkovic background subs function
 
+
+
+#print help(f_bg)
 # main loop
 while not d.isDone():
 
@@ -23,8 +26,9 @@ while not d.isDone():
     current_frame_depth = cam.getDepthMatrix()
 
     # get rgb background
-    # NB background is black (255) and foreground white (0)
-    background_rgb_mask = background_models.get_background_zivkovic(f_bg, current_frame_rgb.getNumpyCv2())
+    # NB background is black (0) and foreground white (255) and shadows (graylevel)
+    background_rgb_mask = background_models.get_background_zivkovic(f_bg, current_frame_rgb.getNumpy())
+
     # get depth background
     background_depth = background_models.get_background_running_average()
 
@@ -38,7 +42,9 @@ while not d.isDone():
 
     ##
 
-
+    # dove where(x,y,z) dove si verifica x sostituisci y, il resto mettilo a z
+    mask2 = np.where((background_rgb_mask == 255), 0, 1)
+    draw = current_frame_rgb.getNumpy() * to_rgb1a(mask2)
 
 
     #fgmask = fgbg.apply(frame_np)
@@ -55,8 +61,9 @@ while not d.isDone():
     #Image(fgmask).save(d)
     #cv2.imshow('frame',fgmask)
 
-
-    frame_draw = Image(background_rgb_mask)# current_frame_rgb
+    #draw = draw.transpose([1,0,2])#.transpose(0,1,2)
+    #draw = draw[:, :, ::-1]
+    frame_draw = Image(draw)#background_rgb_mask)# current_frame_rgb
 
     # draw next frame
     frame_draw.save(d)

@@ -56,7 +56,9 @@ while not d.isDone():
 
     frame = ((imgscene - compositeframe.binarize(10).invert()) + compositeframe) + imgscene.edges()#.flipHorizontal()
     #subtract our composite frame from our camera image, then add it back in in red. False = Show red channel as red, [0] = first (red) channel
-    frame.save(d) #show in browser
+    num = frame.getNumpy()
+    Image(num).save(d)
+    #frame.save(d) #show in browser
     if d.mouseLeft:
         d.done = True
         pg.quit()

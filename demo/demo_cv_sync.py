@@ -34,5 +34,5 @@ while 1:
     #print image.width
     #cv.ShowImage('Depth', get_depth())
     #cv.ShowImage('Video', get_video())
-    if cv.WaitKey(3) == 27:
+    if cv.WaitKey(1) == 27:
         break
