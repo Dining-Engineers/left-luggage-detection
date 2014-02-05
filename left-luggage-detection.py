@@ -11,7 +11,8 @@ d = Display(resolution = (1280, 480))
 cam = Kinect()
 
 background_depth_frames = ImageSet()                # buffer of frames for running average
-background_depth = np.zeros(shape=(480, 640, 3), dtype=np.float32)
+background_depth = np.zeros(shape=(480, 640), dtype=np.float32)
+accul = np.zeros(shape=(640, 480), dtype=np.float32)
 f_bg = cv2.BackgroundSubtractorMOG2(5, 900, False)  # define zivkovic background subs function
 first_run = True                                    # first loop
 
@@ -42,9 +43,15 @@ while not d.isDone():
     # applico funzioni C RawDepthToMeters e DepthToWorld
     # ottengo rappresentazione xyz -> creo struttura dati octree sia di background sia di current
 
+
     # get depth frame to draw
     mask_depth = background_models.get_mask_from_running_average(current_frame_depth.T, background_depth.T)
-    frame_draw_depth = Image(mask_depth)
+    #accul = accul - mask_depth
+
+    cv2.accumulate(mask_depth-accul, accul)
+    visual_accul = np.zeros(shape=(accul.shape), dtype=np.float32)
+    cv2.threshold(accul, 2, 255, cv2.THRESH_BINARY, visual_accul)
+    frame_draw_depth = Image(accul*255)
 
     # get rgb frame to draw
     frame_draw_rgb = Image(background_models.get_foreground_from_mask_rgb(current_frame_rgb.getNumpy(),
