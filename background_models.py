@@ -11,11 +11,11 @@ def get_background_running_average(moving_average, frame):
     #    dst - Accumulator image with the same number of channels as input image, 32-bit or 64-bit floating-point.
     #    alpha - Weight of the input image.
     #    mask - Optional operation mask.
-    print frame.shape
-    print cv2.cv.GetSize(moving_average)
+    #print frame.shape
+    #print cv2.cv.GetSize((cv.fromarray(frame)))
     cv.RunningAvg(cv.fromarray(frame), moving_average, 0.1, None)
     #cv2.ConvertScaleAbs(moving_average, avg_show) # converting back to 8-bit to show
-    pass
+    return moving_average
 
 
 # get rgb background

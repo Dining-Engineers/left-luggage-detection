@@ -23,14 +23,20 @@ while not d.isDone():
     # get next video frame
     current_frame_rgb = cam.getImage()
     # get next depth frame (11-bit precision)
-    current_frame_depth = cam.getDepthMatrix()
+    current_frame_depth = cam.getDepth()
+
+    depth_ = current_frame_depth.getGrayNumpyCv2()
+    #print depth_.shape
+
+    #cam.getDepth().getNumpyCv2()[:, :, 1].copy()# cam.getDepthMatrix()
 
     # get rgb background
     # NB background is black (0) and foreground white (255) and shadows (graylevel)
     background_rgb_mask = background_models.get_background_zivkovic(f_bg, current_frame_rgb.getNumpy())
 
     # get depth background
-    background_depth = background_models.get_background_running_average(background_depth, cam.getDepthMatrix().transpose().copy())
+    background_depth = background_models.get_background_running_average(background_depth, depth_)
+    #current_frame_rgb.getGrayNumpyCv2())
 
     # convert current_frame_depth and background_depth in octree-based representation
     # (voxel grids)
@@ -53,7 +59,7 @@ while not d.isDone():
     #frame = Image(to_rgb1a(fgmask).transpose(1,0,2))
 
     cv.ConvertScaleAbs(background_depth, avg_show)
-    frame_draw = Image(avg_show)
+    frame_draw = current_frame_depth#-Image(avg_show)
     #frame_draw = Image(background_models.get_background_from_mask(current_frame_rgb.getNumpy(), background_rgb_mask))
     #background_rgb_mask)#draw)#background_rgb_mask)# current_frame_rgb
 
