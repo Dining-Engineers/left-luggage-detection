@@ -13,8 +13,8 @@ background_frames = 4                   # number of frames to build background m
 background_depth_frames = ImageSet()    # buffer of frames for running average
 
 f_bg = cv2.BackgroundSubtractorMOG2(1, 900, False)   # define zivkovic background subs function
-
-
+background_depth = cv.CreateImage((640, 480), 32, 1)
+avg_show = cv.CreateImage((640, 480),8, 1)
 
 #print help(f_bg)
 # main loop
@@ -30,7 +30,7 @@ while not d.isDone():
     background_rgb_mask = background_models.get_background_zivkovic(f_bg, current_frame_rgb.getNumpy())
 
     # get depth background
-    background_depth = background_models.get_background_running_average()
+    background_depth = background_models.get_background_running_average(background_depth, cam.getDepthMatrix().transpose().copy())
 
     # convert current_frame_depth and background_depth in octree-based representation
     # (voxel grids)
@@ -52,8 +52,9 @@ while not d.isDone():
     #foreground
     #frame = Image(to_rgb1a(fgmask).transpose(1,0,2))
 
-
-    frame_draw = Image(background_models.get_background_from_mask(current_frame_rgb.getNumpy(), background_rgb_mask))
+    cv.ConvertScaleAbs(background_depth, avg_show)
+    frame_draw = Image(avg_show)
+    #frame_draw = Image(background_models.get_background_from_mask(current_frame_rgb.getNumpy(), background_rgb_mask))
     #background_rgb_mask)#draw)#background_rgb_mask)# current_frame_rgb
 
     # draw next frame
