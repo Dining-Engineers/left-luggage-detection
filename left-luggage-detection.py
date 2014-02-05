@@ -12,7 +12,7 @@ cam = Kinect()
 background_frames = 4                   # number of frames to build background model
 background_depth_frames = ImageSet()    # buffer of frames for running average
 
-f_bg = cv2.BackgroundSubtractorMOG2()   # define zivkovic background subs function
+f_bg = cv2.BackgroundSubtractorMOG2(1, 900, False)   # define zivkovic background subs function
 
 
 
@@ -42,9 +42,6 @@ while not d.isDone():
 
     ##
 
-    # dove where(x,y,z) dove si verifica x sostituisci y, il resto mettilo a z
-    mask2 = np.where((background_rgb_mask == 255), 0, 1)
-    draw = current_frame_rgb.getNumpy() * to_rgb1a(mask2)
 
 
     #fgmask = fgbg.apply(frame_np)
@@ -55,15 +52,9 @@ while not d.isDone():
     #foreground
     #frame = Image(to_rgb1a(fgmask).transpose(1,0,2))
 
-    #frame - Image(to_rgb1a(fgmask))
-    #Image(Image(fgmask).toRGB().getNumpyCv2().transpose(1,0,2))
-    #frame.save(d)
-    #Image(fgmask).save(d)
-    #cv2.imshow('frame',fgmask)
 
-    #draw = draw.transpose([1,0,2])#.transpose(0,1,2)
-    #draw = draw[:, :, ::-1]
-    frame_draw = Image(draw)#background_rgb_mask)# current_frame_rgb
+    frame_draw = Image(background_models.get_background_from_mask(current_frame_rgb.getNumpy(), background_rgb_mask))
+    #background_rgb_mask)#draw)#background_rgb_mask)# current_frame_rgb
 
     # draw next frame
     frame_draw.save(d)
