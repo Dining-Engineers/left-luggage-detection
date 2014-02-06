@@ -5,12 +5,43 @@ import utils
 
 
 def get_background_running_average(moving_average, frame):
-    cv2.accumulateWeighted(frame, moving_average, 0.320)
+    #frame = np.where(mask > 0, 0, frame)
+    # get holdes in depth map
+    moving_average = running_average(frame, moving_average, 0.00910)
+    #cv2.accumulateWeighted(frame, moving_average, 0.10)
     return moving_average
 
 
-def get_mask_from_running_average(current_frame, bg_frame):
+def running_average(frame, average, alpha):
+    # detect holes in depth map
+    # either in current frame and in average frame
+    holes_frame = np.where(frame == 2**11-1, 1, 0)
+    holes_average = np.where(average == 2**11-1, 1, 0)
 
+    # diff to detect if a pixel (x,y) is a:
+    #   hole in current frame and not in average = 1
+    #   hole in average and not in current frame = -1
+    # if holes in current and average leave hole (will be fixed by another frame in the future)
+    holes_diff = holes_frame - holes_average
+    frame = np.where(holes_diff == 1, average, frame)
+    average = np.where(holes_diff == -1, frame, average)
+
+    # get running average
+    average = (1-alpha)*average + alpha*frame
+    return average
+
+
+def get_foreground_from_running_average(current_frame, bg_frame):
+
+    current_frame = (np.where(current_frame == 2**11-1, bg_frame, current_frame)).astype(np.float32)
+
+    diff = (current_frame.T - bg_frame.T)
+    diff_filter = (np.where(np.abs(diff) >= 3, diff, 0))
+
+    return diff_filter
+
+
+def sblinda():
     diff = np.zeros(shape=(current_frame.shape), dtype=np.float32)
     #np.abs((current_frame-bg_frame), diff)
     cv2.absdiff(current_frame.astype(np.float32), bg_frame, diff)
@@ -26,7 +57,7 @@ def get_mask_from_running_average(current_frame, bg_frame):
 
 
 # get rgb background
-def get_background_zivkovic(f_bg, current_frame):
+def get_background_mask_zivkovic(f_bg, current_frame):
     #print current_frame
     #f_bg = cv2.BackgroundSubtractorMOG2()
     # get foreground in numpy array
