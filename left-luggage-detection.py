@@ -83,13 +83,18 @@ while not d.isDone():
 
     ## cut foreground
     foreground_rgb = background_models.get_foreground_from_mask_rgb(current_frame_rgb.getNumpy(), background_mask_rgb)
+
+    #print (foreground_mask_depth.dtype)
+    foreground_mask_depth = foreground_mask_depth.astype(np.uint8)
+    kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(5,5))
+    foreground_mask_depth = cv2.morphologyEx(foreground_mask_depth, cv2.MORPH_OPEN, kernel)
     foreground_depth = background_models.get_foreground_from_mask_depth(current_frame_depth.T, foreground_mask_depth)
 
 
     frame_upper_left = current_frame_rgb
     frame_upper_right = Image(current_frame_depth.T)
     frame_bottom_left = Image(foreground_rgb)
-    frame_bottom_right = Image(foreground_depth)
+    frame_bottom_right = Image(foreground_depth)#foreground_mask_depth*255)#foreground_depth)
 
 
     frame_up = frame_upper_left.sideBySide(frame_upper_right)
