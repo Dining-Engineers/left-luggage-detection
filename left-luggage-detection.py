@@ -13,16 +13,20 @@ cam = Kinect()
 background_depth_frames = ImageSet()  # buffer of frames for running average
 background_depth = np.zeros(shape=(480, 640), dtype=np.float32)
 depth_accumulator = np.zeros(shape=(640, 480), dtype=np.float32)
-f_bg = cv2.BackgroundSubtractorMOG2(5, 900, False)  # define zivkovic background subs function
+f_bg = cv2.BackgroundSubtractorMOG2(1, 900, False)  # define zivkovic background subs function
 first_run = True  # first loop
 
+print type(f_bg)
+print help(f_bg)
 
 # main loop
 while not d.isDone():
 
     # get next video frame
     current_frame_rgb = cam.getImage()
+
     # get next depth frame (11-bit precision)
+    # NB darker => closer
     current_frame_depth = cam.getDepthMatrix()
 
     if first_run:
@@ -34,7 +38,8 @@ while not d.isDone():
     background_depth = background_models.get_background_running_average(background_depth, current_frame_depth)
 
     # get depth foreground
-    foreground_depth = background_models.get_foreground_from_running_average(current_frame_depth, background_depth)
+    # 0 = background - 1 = foreground
+    foreground_mask_depth = background_models.get_foreground_mask_from_running_average(current_frame_depth, background_depth)
 
     # get rgb background
     # NB background is black (0) and foreground white (255) and shadows (graylevel)
@@ -79,10 +84,15 @@ while not d.isDone():
     #cv2.erode(depth_accumulator, (3,3), depth_accumulator)
 
 
+    ## cut foreground
+    foreground_rgb = background_models.get_foreground_from_mask_rgb(current_frame_rgb.getNumpy(), background_mask_rgb)
+    foreground_depth = background_models.get_foreground_from_mask_depth(current_frame_depth.T, foreground_mask_depth,)
+
     frame_upper_left = current_frame_rgb
     frame_upper_right = Image(current_frame_depth.T)
-    frame_bottom_left = Image(background_models.get_foreground_from_mask_rgb(current_frame_rgb.getNumpy(), background_mask_rgb))
+    frame_bottom_left = Image(foreground_rgb)
     frame_bottom_right = Image(foreground_depth)
+
 
     frame_up = frame_upper_left.sideBySide(frame_upper_right)
     frame_bottom = frame_bottom_left.sideBySide(frame_bottom_right)
