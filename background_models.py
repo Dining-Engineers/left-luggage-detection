@@ -33,6 +33,7 @@ def running_average(frame, average, alpha):
 
 def get_foreground_mask_from_running_average(current_frame, bg_frame):
 
+    print np.sum(np.where(bg_frame == 2**11-1, 1, 0))
     current_frame_filtered = (np.where(current_frame == 2**11-1, bg_frame, current_frame)).astype(np.float32)
 
     diff = (current_frame_filtered.T - bg_frame.T)

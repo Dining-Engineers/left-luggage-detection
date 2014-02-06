@@ -16,9 +16,6 @@ depth_accumulator = np.zeros(shape=(640, 480), dtype=np.float32)
 f_bg = cv2.BackgroundSubtractorMOG2(1, 900, False)  # define zivkovic background subs function
 first_run = True  # first loop
 
-print type(f_bg)
-print help(f_bg)
-
 # main loop
 while not d.isDone():
 
@@ -86,7 +83,8 @@ while not d.isDone():
 
     ## cut foreground
     foreground_rgb = background_models.get_foreground_from_mask_rgb(current_frame_rgb.getNumpy(), background_mask_rgb)
-    foreground_depth = background_models.get_foreground_from_mask_depth(current_frame_depth.T, foreground_mask_depth,)
+    foreground_depth = background_models.get_foreground_from_mask_depth(current_frame_depth.T, foreground_mask_depth)
+
 
     frame_upper_left = current_frame_rgb
     frame_upper_right = Image(current_frame_depth.T)
