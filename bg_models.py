@@ -61,7 +61,7 @@ def get_foreground_from_mask_rgb(image, mask):
     mask2 = np.where((mask == 0), 0, 1)
     return image * utils.to_rgb1a(mask2)
 
-#cv2.MORPH_ELLIPSE
+
 def apply_opening(image, kernel_size, kernel_type):
     # get uint image because cv2 needs it
     u_image = image.astype(np.uint8)
@@ -71,6 +71,8 @@ def apply_opening(image, kernel_size, kernel_type):
     return u_image
 
 
+def apply_morph_reconstruction(seed, image):
+    pass
 
 
 

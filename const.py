@@ -1,4 +1,4 @@
-# Depth holes in openfreenect has maximum value in 11 bit
+# Depth holes in openfreenect have maximum value in 11 bit
 DEPTH_HOLE_VALUE = 2**11-1
 
 # Background (Depth) Paramethers

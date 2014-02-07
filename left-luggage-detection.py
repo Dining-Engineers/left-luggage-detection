@@ -3,7 +3,7 @@ from SimpleCV.Display import Display
 from utils import *
 import bg_models
 from const import *
-
+import pymorph
 
 #create video streams
 d = Display(resolution=(1280, 960))
@@ -40,12 +40,17 @@ while not d.isDone():
     # 0 = background - 1 = foreground
     foreground_mask_depth = bg_models.get_foreground_mask_from_running_average(current_frame_depth,
                                                                                background_depth, BG_MASK_THRESHOLD)
-
     # get rgb background
-    # NB background is black (0) and foreground white (255) and shadows (graylevel)
+    # NB background is black (0) and foreground white (255) and shadows (gray level)
     background_mask_rgb = bg_models.get_background_mask_zivkovic(f_bg, current_frame_rgb.getNumpy(), BG_ZIV_LRATE)
 
+    ## apply opening to remove noise
+    foreground_mask_depth = bg_models.apply_opening(foreground_mask_depth, 10, cv2.MORPH_ELLIPSE)
+    background_mask_rgb = bg_models.apply_opening(background_mask_rgb, 7, cv2.MORPH_ELLIPSE)
 
+    ## cut foreground
+    foreground_rgb = bg_models.get_foreground_from_mask_rgb(current_frame_rgb.getNumpy(), background_mask_rgb)
+    foreground_depth = bg_models.get_foreground_from_mask_depth(current_frame_depth.T, foreground_mask_depth)
 
     # convert current_frame_depth and background_depth in octree-based representation
     # (voxel grids)
@@ -83,28 +88,17 @@ while not d.isDone():
     ###
     #cv2.erode(depth_accumulator, (3,3), depth_accumulator)
 
-    background_mask_rgb = bg_models.apply_opening(background_mask_rgb, 7, cv2.MORPH_ELLIPSE)
-
-    ## cut foreground
-    foreground_rgb = bg_models.get_foreground_from_mask_rgb(current_frame_rgb.getNumpy(), background_mask_rgb)
-
-    #print (foreground_mask_depth.dtype)
-    #foreground_mask_depth = foreground_mask_depth.astype(np.uint8)
-    #kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (7, 7))
-    #foreground_mask_depth = cv2.morphologyEx(foreground_mask_depth, cv2.MORPH_OPEN, kernel)
-
-    foreground_mask_depth = bg_models.apply_opening(foreground_mask_depth, 7, cv2.MORPH_ELLIPSE)
-    foreground_depth = bg_models.get_foreground_from_mask_depth(current_frame_depth.T, foreground_mask_depth)
-
-
+    # save images to display
     frame_upper_left = current_frame_rgb
     frame_upper_right = Image(current_frame_depth.T)
     frame_bottom_left = Image(foreground_rgb)
-    frame_bottom_right = Image(foreground_depth)#foreground_mask_depth*255)#foreground_depth)
+    frame_bottom_right = Image(foreground_depth)    #foreground_mask_depth*255)#foreground_depth)
 
-
+    # rows of display
     frame_up = frame_upper_left.sideBySide(frame_upper_right)
     frame_bottom = frame_bottom_left.sideBySide(frame_bottom_right)
+
+    # save images to display
     frame_up.sideBySide(frame_bottom, side="bottom").save(d)
 
     # quit if click on display
