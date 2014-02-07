@@ -1,7 +1,8 @@
 from SimpleCV import *
 from SimpleCV.Display import Display
 from utils import *
-import background_models
+import bg_models
+from const import *
 
 
 #create video streams
@@ -10,11 +11,12 @@ d = Display(resolution=(1280, 960))
 #initialize the camera
 cam = Kinect()
 
-background_depth_frames = ImageSet()  # buffer of frames for running average
+# variables
 background_depth = np.zeros(shape=(480, 640), dtype=np.float32)
 depth_accumulator = np.zeros(shape=(640, 480), dtype=np.float32)
-f_bg = cv2.BackgroundSubtractorMOG2(1, 900, False)  # define zivkovic background subs function
-first_run = True  # first loop
+f_bg = cv2.BackgroundSubtractorMOG2(BG_ZIV_HIST, BG_ZIV_THRESH, False)  # define zivkovic background subs function
+# first loop
+first_run = True
 
 # main loop
 while not d.isDone():
@@ -32,15 +34,16 @@ while not d.isDone():
         first_run = False
 
     # get depth background
-    background_depth = background_models.get_background_running_average(background_depth, current_frame_depth)
+    background_depth = bg_models.get_background_running_average(current_frame_depth, background_depth, BG_RUN_AVG_LRATE)
 
     # get depth foreground
     # 0 = background - 1 = foreground
-    foreground_mask_depth = background_models.get_foreground_mask_from_running_average(current_frame_depth, background_depth)
+    foreground_mask_depth = bg_models.get_foreground_mask_from_running_average(current_frame_depth,
+                                                                               background_depth, BG_MASK_THRESHOLD)
 
     # get rgb background
     # NB background is black (0) and foreground white (255) and shadows (graylevel)
-    background_mask_rgb = background_models.get_background_mask_zivkovic(f_bg, current_frame_rgb.getNumpy())
+    background_mask_rgb = bg_models.get_background_mask_zivkovic(f_bg, current_frame_rgb.getNumpy(), BG_ZIV_LRATE)
 
 
 
@@ -80,15 +83,18 @@ while not d.isDone():
     ###
     #cv2.erode(depth_accumulator, (3,3), depth_accumulator)
 
+    background_mask_rgb = bg_models.apply_opening(background_mask_rgb, 7, cv2.MORPH_ELLIPSE)
 
     ## cut foreground
-    foreground_rgb = background_models.get_foreground_from_mask_rgb(current_frame_rgb.getNumpy(), background_mask_rgb)
+    foreground_rgb = bg_models.get_foreground_from_mask_rgb(current_frame_rgb.getNumpy(), background_mask_rgb)
 
     #print (foreground_mask_depth.dtype)
-    foreground_mask_depth = foreground_mask_depth.astype(np.uint8)
-    kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(5,5))
-    foreground_mask_depth = cv2.morphologyEx(foreground_mask_depth, cv2.MORPH_OPEN, kernel)
-    foreground_depth = background_models.get_foreground_from_mask_depth(current_frame_depth.T, foreground_mask_depth)
+    #foreground_mask_depth = foreground_mask_depth.astype(np.uint8)
+    #kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (7, 7))
+    #foreground_mask_depth = cv2.morphologyEx(foreground_mask_depth, cv2.MORPH_OPEN, kernel)
+
+    foreground_mask_depth = bg_models.apply_opening(foreground_mask_depth, 7, cv2.MORPH_ELLIPSE)
+    foreground_depth = bg_models.get_foreground_from_mask_depth(current_frame_depth.T, foreground_mask_depth)
 
 
     frame_upper_left = current_frame_rgb
