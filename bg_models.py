@@ -28,7 +28,7 @@ def get_background_running_average(frame, average, alpha):
 
 def get_foreground_mask_from_running_average(current_frame, bg_frame, threshold_filter):
 
-    print np.sum(np.where(bg_frame == DEPTH_HOLE_VALUE, 1, 0))
+    #print np.sum(np.where(bg_frame == DEPTH_HOLE_VALUE, 1, 0))
     current_frame_filtered = (np.where(current_frame == DEPTH_HOLE_VALUE, bg_frame, current_frame)).astype(np.float32)
     diff = (current_frame_filtered.T - bg_frame.T)
     diff_filter = (np.where(np.abs(diff) >= threshold_filter, 1, 0))
@@ -46,20 +46,19 @@ def get_background_mask_zivkovic(f_bg, current_frame, alpha):
     foreground = np.zeros(shape=current_frame.shape, dtype=np.float32)
     # get foreground in numpy array
     foreground = f_bg.apply(current_frame, foreground, alpha)
-    # rotate image
-    #foreground = foreground.transpose()
+    # convert to 0 1 notation since by default apply => 0 bg, 255fg shadow other value
+    foreground = np.where((foreground == 0), 0, 1)
     return foreground
 
 
 def get_background_from_mask_rgb(image, mask):
     # dove where(x,y,z) dove si verifica x sostituisci y, il resto mettilo a z
-    mask2 = np.where((mask == 255), 0, 1)
-    return image * utils.to_rgb1a(mask2)
+    #mask2 = np.where((mask == 255), 0, 1)
+    return image * utils.to_rgb1a(mask)
 
 
 def get_foreground_from_mask_rgb(image, mask):
-    mask2 = np.where((mask == 0), 0, 1)
-    return image * utils.to_rgb1a(mask2)
+    return image * utils.to_rgb1a(mask)
 
 
 def apply_opening(image, kernel_size, kernel_type):
@@ -69,6 +68,21 @@ def apply_opening(image, kernel_size, kernel_type):
     kernel = cv2.getStructuringElement(kernel_type, (kernel_size, kernel_size))
     u_image = cv2.morphologyEx(u_image, cv2.MORPH_OPEN, kernel)
     return u_image
+
+
+def update_detection_aggregator(aggregator, foreground_long, foreground_short):
+    proposal_candidate = foreground_long*np.int64(np.logical_not(foreground_short))
+    other_cases = np.int64(np.logical_not(proposal_candidate))
+
+    # increment aggregator
+    result = aggregator + proposal_candidate
+
+    # add penalty to pixel not in proposal
+    result = result - other_cases*AGG_PENALTY
+
+    # set aggregate bounds
+    result = np.clip(result, 0, AGG_MAX_E)
+    return result
 
 
 def apply_morph_reconstruction(seed, image):

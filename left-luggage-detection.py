@@ -3,7 +3,6 @@ from SimpleCV.Display import Display
 from utils import *
 import bg_models
 from const import *
-import pymorph
 
 #create video streams
 d = Display(resolution=(1280, 960))
@@ -14,7 +13,11 @@ cam = Kinect()
 # variables
 background_depth = np.zeros(shape=(480, 640), dtype=np.float32)
 depth_accumulator = np.zeros(shape=(640, 480), dtype=np.float32)
+
 f_bg = cv2.BackgroundSubtractorMOG2(BG_ZIV_HIST, BG_ZIV_THRESH, False)  # define zivkovic background subs function
+f_bg2 = cv2.BackgroundSubtractorMOG2(BG_ZIV_HIST, BG_ZIV_THRESH, False)  # define zivkovic background subs function
+background_aggregator = np.zeros(shape=(640, 480), dtype=np.int64)
+
 # first loop
 first_run = True
 
@@ -41,16 +44,24 @@ while not d.isDone():
     foreground_mask_depth = bg_models.get_foreground_mask_from_running_average(current_frame_depth,
                                                                                background_depth, BG_MASK_THRESHOLD)
     # get rgb background
-    # NB background is black (0) and foreground white (255) and shadows (gray level)
-    background_mask_rgb = bg_models.get_background_mask_zivkovic(f_bg, current_frame_rgb.getNumpy(), BG_ZIV_LRATE)
+    # NB background is black (0) and foreground white (1)
+    background_mask_rgb_long = bg_models.get_background_mask_zivkovic(f_bg, current_frame_rgb.getNumpy(), BG_ZIV_LRATE)
+    background_mask_rgb_short = bg_models.get_background_mask_zivkovic(f_bg2, current_frame_rgb.getNumpy(), 0.01)
+
+    background_aggregator = bg_models.update_detection_aggregator(background_aggregator, background_mask_rgb_long,
+                                                                  background_mask_rgb_short)
+    proposal_rgb_mask = np.where(background_aggregator == AGG_MAX_E, 1, 0)
 
     ## apply opening to remove noise
     foreground_mask_depth = bg_models.apply_opening(foreground_mask_depth, 10, cv2.MORPH_ELLIPSE)
-    background_mask_rgb = bg_models.apply_opening(background_mask_rgb, 7, cv2.MORPH_ELLIPSE)
+    #background_mask_rgb = bg_models.apply_opening(background_mask_rgb, 3, cv2.MORPH_ELLIPSE)
+    #background_mask_rgb2 = bg_models.apply_opening(background_mask_rgb2, 3, cv2.MORPH_ELLIPSE)
 
     ## cut foreground
-    foreground_rgb = bg_models.get_foreground_from_mask_rgb(current_frame_rgb.getNumpy(), background_mask_rgb)
+    foreground_rgb_long = bg_models.get_foreground_from_mask_rgb(current_frame_rgb.getNumpy(), background_mask_rgb_long)
     foreground_depth = bg_models.get_foreground_from_mask_depth(current_frame_depth.T, foreground_mask_depth)
+    foreground_rgb_proposal = bg_models.get_foreground_from_mask_rgb(current_frame_rgb.getNumpy(), proposal_rgb_mask)
+
 
     # convert current_frame_depth and background_depth in octree-based representation
     # (voxel grids)
@@ -87,11 +98,10 @@ while not d.isDone():
 
     ###
     #cv2.erode(depth_accumulator, (3,3), depth_accumulator)
-
     # save images to display
     frame_upper_left = current_frame_rgb
-    frame_upper_right = Image(current_frame_depth.T)
-    frame_bottom_left = Image(foreground_rgb)
+    frame_upper_right = Image(foreground_rgb_proposal)#current_frame_depth.T)
+    frame_bottom_left = Image(foreground_rgb_long)
     frame_bottom_right = Image(foreground_depth)    #foreground_mask_depth*255)#foreground_depth)
 
     # rows of display
