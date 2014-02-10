@@ -14,5 +14,7 @@ BG_ZIV_THRESH = 900
 BG_ZIV_OPEN_KSIZE = 5
 
 # Aggregator parameters
-AGG_MAX_E = 15          # number of frames after which a pixel is considered an left item
-AGG_PENALTY = 1
+AGG_RGB_MAX_E = 15          # number of frames after which a pixel is considered an left item
+AGG_RGB_PENALTY = 1
+AGG_DEPTH_MAX_E = 3          # number of frames after which a pixel is considered an left item
+AGG_DEPTH_PENALTY = 1

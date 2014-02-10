@@ -1,3 +1,4 @@
+from reportlab.lib.colors import toColor
 from SimpleCV import *
 from SimpleCV.Display import Display
 from utils import *
@@ -16,7 +17,8 @@ depth_accumulator = np.zeros(shape=(640, 480), dtype=np.float32)
 
 f_bg = cv2.BackgroundSubtractorMOG2(BG_ZIV_HIST, BG_ZIV_THRESH, False)  # define zivkovic background subs function
 f_bg2 = cv2.BackgroundSubtractorMOG2(BG_ZIV_HIST, BG_ZIV_THRESH, False)  # define zivkovic background subs function
-background_aggregator = np.zeros(shape=(640, 480), dtype=np.int64)
+background_rgb_aggregator = np.zeros(shape=(640, 480), dtype=np.int64)
+background_depth_aggregator = np.zeros(shape=(640, 480), dtype=np.int64)
 
 # first loop
 first_run = True
@@ -51,12 +53,18 @@ while not d.isDone():
                                                                                background_depth, BG_MASK_THRESHOLD)
 
     ## apply opening to remove noise
-    foreground_mask_depth = bg_models.apply_opening(foreground_mask_depth, 10, cv2.MORPH_ELLIPSE)
-    ## cut foreground
-    foreground_depth = bg_models.get_foreground_from_mask_depth(current_frame_depth.T, foreground_mask_depth)
-    # get
-    bbox_depth, bbox_depth_areas = bg_models.get_bounding_boxes(foreground_mask_depth)
+    foreground_mask_depth = bg_models.apply_opening(foreground_mask_depth, 5, cv2.MORPH_ELLIPSE)
 
+    # update depth aggregator
+    background_depth_aggregator = bg_models.update_depth_detection_aggregator(background_depth_aggregator,
+                                                                              foreground_mask_depth)
+    # get rgb proposal
+    proposal_depth_mask = np.where(background_depth_aggregator == AGG_DEPTH_MAX_E, 1, 0)
+    # get bounding boxes
+    bbox_depth, bbox_depth_areas = bg_models.get_bounding_boxes(proposal_depth_mask.astype(np.uint8))
+
+    ## cut foreground with real values
+    foreground_depth_proposal = bg_models.get_foreground_from_mask_depth(current_frame_depth.T, proposal_depth_mask)
 
     ###################################
     #
@@ -72,10 +80,11 @@ while not d.isDone():
                                                                        BG_ZIV_SHORT_LRATE)
 
     # update rgb aggregator
-    background_aggregator = bg_models.update_rgb_detection_aggregator(background_aggregator, foreground_mask_rgb_long,
-                                                                      foreground_mask_rgb_short)
+    background_rgb_aggregator = bg_models.update_rgb_detection_aggregator(background_rgb_aggregator,
+                                                                          foreground_mask_rgb_long,
+                                                                          foreground_mask_rgb_short)
     # get rgb proposal
-    proposal_rgb_mask = np.where(background_aggregator == AGG_MAX_E, 1, 0)
+    proposal_rgb_mask = np.where(background_rgb_aggregator == AGG_RGB_MAX_E, 1, 0)
     # get rgb blobs
     bbox_rgb, bbox_rgb_areas = bg_models.get_bounding_boxes(proposal_rgb_mask.astype(np.uint8))
 
@@ -96,8 +105,9 @@ while not d.isDone():
     for s in bbox_rgb:
         cv2.rectangle(foreground_rgb_proposal, (s[0], s[1]), (s[0]+s[2], s[1]+s[3]), 255, 1)
 
+    foreground_depth_proposal = to_rgb1a(foreground_depth_proposal)
     for s in bbox_depth:
-        cv2.rectangle(foreground_depth, (s[0], s[1]), (s[0]+s[2], s[1]+s[3]), 255, 1)
+        cv2.rectangle(foreground_depth_proposal, (s[0], s[1]), (s[0]+s[2], s[1]+s[3]), 255, 1)
 
 
 
@@ -143,8 +153,8 @@ while not d.isDone():
     # save images to display
     frame_upper_left = current_frame_rgb
     frame_upper_right = Image(foreground_rgb_proposal)#current_frame_depth.T)
-    frame_bottom_left = Image(foreground_depth)#foreground_rgb_long)
-    frame_bottom_right = Image(foreground_depth)    #foreground_mask_depth*255)#foreground_depth)
+    frame_bottom_left = Image(foreground_depth_proposal)#foreground_rgb_long)
+    frame_bottom_right = Image(foreground_depth_proposal)    #foreground_mask_depth*255)#foreground_depth)
 
     # rows of display
     frame_up = frame_upper_left.sideBySide(frame_upper_right)

@@ -79,7 +79,7 @@ def update_rgb_detection_aggregator(aggregator, foreground_long, foreground_shor
 
     # AVOID REMOVING FROM PROPOSA OF ALREADY DETECTED OBJECT
     # mask of max values (proposal)
-    mask_proposal = np.where((result >= AGG_MAX_E), 1, 0)
+    mask_proposal = np.where((result >= AGG_RGB_MAX_E), 1, 0)
     mask_new_pixel_in_bg = np.int64(np.logical_not(foreground_long))*np.int64(np.logical_not(foreground_short))
     # pixel of older proposal that are becoming background (FL =0 and FS = 0)
     mask = mask_proposal*mask_new_pixel_in_bg
@@ -88,11 +88,21 @@ def update_rgb_detection_aggregator(aggregator, foreground_long, foreground_shor
 
 
     # add penalty to pixel not in proposal
-    result = result - other_cases*AGG_PENALTY
+    result = result - other_cases*AGG_RGB_PENALTY
 
 
     # set aggregate bounds
-    result = np.clip(result, 0, AGG_MAX_E)
+    result = np.clip(result, 0, AGG_RGB_MAX_E)
+    return result
+
+
+def update_depth_detection_aggregator(aggregator, foreground_current):
+
+    not_in_current_foreground = np.int64(np.logical_not(foreground_current))
+    # increment aggregator
+    result = aggregator + foreground_current - not_in_current_foreground*AGG_DEPTH_PENALTY
+    # set aggregate bounds
+    result = np.clip(result, 0, AGG_DEPTH_MAX_E)
     return result
 
 
@@ -106,6 +116,7 @@ def get_bounding_boxes(image):
     areas = []
     contours, hierarchy = cv2.findContours(image, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
     for cnt in contours:
+        # filter contours with area less than 20 pixel
         if cv2.contourArea(cnt) > 20:
             #M = cv2.moments(cnt)
             #cx, cy = int(M['m10']/M['m00']), int(M['m01']/M['m00'])
