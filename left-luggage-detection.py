@@ -26,10 +26,16 @@ while not d.isDone():
 
     # get next video frame
     current_frame_rgb = cam.getImage()
-
     # get next depth frame (11-bit precision)
     # NB darker => closer
     current_frame_depth = cam.getDepthMatrix()
+
+
+    ###################################
+    #
+    #    PREPROCESSING: DEPTH MAP
+    #
+    ###################################
 
     if first_run:
         # in first run moving average start from first frame
@@ -43,24 +49,60 @@ while not d.isDone():
     # 0 = background - 1 = foreground
     foreground_mask_depth = bg_models.get_foreground_mask_from_running_average(current_frame_depth,
                                                                                background_depth, BG_MASK_THRESHOLD)
-    # get rgb background
-    # NB background is black (0) and foreground white (1)
-    background_mask_rgb_long = bg_models.get_background_mask_zivkovic(f_bg, current_frame_rgb.getNumpy(), BG_ZIV_LRATE)
-    background_mask_rgb_short = bg_models.get_background_mask_zivkovic(f_bg2, current_frame_rgb.getNumpy(), 0.01)
-
-    background_aggregator = bg_models.update_detection_aggregator(background_aggregator, background_mask_rgb_long,
-                                                                  background_mask_rgb_short)
-    proposal_rgb_mask = np.where(background_aggregator == AGG_MAX_E, 1, 0)
 
     ## apply opening to remove noise
     foreground_mask_depth = bg_models.apply_opening(foreground_mask_depth, 10, cv2.MORPH_ELLIPSE)
+    ## cut foreground
+    foreground_depth = bg_models.get_foreground_from_mask_depth(current_frame_depth.T, foreground_mask_depth)
+    # get
+    bbox_depth, bbox_depth_areas = bg_models.get_bounding_boxes(foreground_mask_depth)
+
+
+    ###################################
+    #
+    #    PREPROCESSING: RGB MAP
+    #
+    ###################################
+
+    # get rgb dual background (long and short sensitivity)
+    # NB background is black (0) and foreground white (1)
+    foreground_mask_rgb_long = bg_models.get_background_mask_zivkovic(f_bg, current_frame_rgb.getNumpy(),
+                                                                      BG_ZIV_LONG_LRATE)
+    foreground_mask_rgb_short = bg_models.get_background_mask_zivkovic(f_bg2, current_frame_rgb.getNumpy(),
+                                                                       BG_ZIV_SHORT_LRATE)
+
+    # update rgb aggregator
+    background_aggregator = bg_models.update_rgb_detection_aggregator(background_aggregator, foreground_mask_rgb_long,
+                                                                      foreground_mask_rgb_short)
+    # get rgb proposal
+    proposal_rgb_mask = np.where(background_aggregator == AGG_MAX_E, 1, 0)
+    # get rgb blobs
+    bbox_rgb, bbox_rgb_areas = bg_models.get_bounding_boxes(proposal_rgb_mask.astype(np.uint8))
+
+    ## cut foreground
+    foreground_rgb_long = bg_models.get_foreground_from_mask_rgb(current_frame_rgb.getNumpy(), foreground_mask_rgb_long)
+    foreground_rgb_proposal = bg_models.get_foreground_from_mask_rgb(current_frame_rgb.getNumpy(), proposal_rgb_mask)
+
     #background_mask_rgb = bg_models.apply_opening(background_mask_rgb, 3, cv2.MORPH_ELLIPSE)
     #background_mask_rgb2 = bg_models.apply_opening(background_mask_rgb2, 3, cv2.MORPH_ELLIPSE)
 
-    ## cut foreground
-    foreground_rgb_long = bg_models.get_foreground_from_mask_rgb(current_frame_rgb.getNumpy(), background_mask_rgb_long)
-    foreground_depth = bg_models.get_foreground_from_mask_depth(current_frame_depth.T, foreground_mask_depth)
-    foreground_rgb_proposal = bg_models.get_foreground_from_mask_rgb(current_frame_rgb.getNumpy(), proposal_rgb_mask)
+    ###################################
+    #
+    #   Combine proposals
+    #
+    ###################################
+
+    # Draws bounding boxes
+    for s in bbox_rgb:
+        cv2.rectangle(foreground_rgb_proposal, (s[0], s[1]), (s[0]+s[2], s[1]+s[3]), 255, 1)
+
+    for s in bbox_depth:
+        cv2.rectangle(foreground_depth, (s[0], s[1]), (s[0]+s[2], s[1]+s[3]), 255, 1)
+
+
+
+
+
 
 
     # convert current_frame_depth and background_depth in octree-based representation
@@ -101,7 +143,7 @@ while not d.isDone():
     # save images to display
     frame_upper_left = current_frame_rgb
     frame_upper_right = Image(foreground_rgb_proposal)#current_frame_depth.T)
-    frame_bottom_left = Image(foreground_rgb_long)
+    frame_bottom_left = Image(foreground_depth)#foreground_rgb_long)
     frame_bottom_right = Image(foreground_depth)    #foreground_mask_depth*255)#foreground_depth)
 
     # rows of display

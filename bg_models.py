@@ -70,15 +70,26 @@ def apply_opening(image, kernel_size, kernel_type):
     return u_image
 
 
-def update_detection_aggregator(aggregator, foreground_long, foreground_short):
+def update_rgb_detection_aggregator(aggregator, foreground_long, foreground_short):
     proposal_candidate = foreground_long*np.int64(np.logical_not(foreground_short))
     other_cases = np.int64(np.logical_not(proposal_candidate))
 
     # increment aggregator
     result = aggregator + proposal_candidate
 
+    # AVOID REMOVING FROM PROPOSA OF ALREADY DETECTED OBJECT
+    # mask of max values (proposal)
+    mask_proposal = np.where((result >= AGG_MAX_E), 1, 0)
+    mask_new_pixel_in_bg = np.int64(np.logical_not(foreground_long))*np.int64(np.logical_not(foreground_short))
+    # pixel of older proposal that are becoming background (FL =0 and FS = 0)
+    mask = mask_proposal*mask_new_pixel_in_bg
+    # avoid previous pixel from being penalized
+    #other_cases = np.where((other_cases == mask), 0, other_cases)
+
+
     # add penalty to pixel not in proposal
     result = result - other_cases*AGG_PENALTY
+
 
     # set aggregate bounds
     result = np.clip(result, 0, AGG_MAX_E)
@@ -89,9 +100,29 @@ def apply_morph_reconstruction(seed, image):
     pass
 
 
+def get_bounding_boxes(image):
+
+    squares = []
+    areas = []
+    contours, hierarchy = cv2.findContours(image, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
+    for cnt in contours:
+        if cv2.contourArea(cnt) > 20:
+            #M = cv2.moments(cnt)
+            #cx, cy = int(M['m10']/M['m00']), int(M['m01']/M['m00'])
+            #cv2.circle(foreground_depth, (cx, cy), 20, 255, 1)
+            rect = cv2.boundingRect(cnt)
+            if rect not in squares:
+                area = rect[2]*rect[3]
+                squares.append(rect)
+                areas.append(area)
+    return squares, areas
 
 
-
+    # but if the saved object is removed we need to decrement the accumulator
+    # case of FL = 0 and FS = 1
+    #mask_remove_proposal = np.int64(np.logical_not(foreground_long))*foreground_short
+    #mask2 = mask_proposal*mask_remove_proposal
+    #other_cases = np.where((other_cases == mask2), 0, other_cases)
 
 
 
