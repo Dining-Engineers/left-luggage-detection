@@ -81,9 +81,11 @@ while not d.isDone():
             # and keep only the ones that have almost the same center and area
             kdtree_curr = KDTree(bbox_new_depth_val)
             # idx is a list of index of match in kdtree
-            dist, idx = kdtree_curr.query(bbox_old_depth_val, distance_upper_bound=200)
-            for match in idx:
-                if match != len(bbox_new_pixels): # aka no record in this distance
+            dist, idx = kdtree_curr.query(bbox_old_depth_val, k=2)
+            for i in range(len(idx)):
+                match = idx[i][0]
+                if dist[i][0]/dist[i][1] <= 0.8: # aka no record in this distance
+                    #print "tengo ",
                     #print " aa", idx, len(bbox_old_pixels), len(bbox_new_pixels), match
                     #print type(bbox_curr_depth)
                     #print match, bbox_curr_depth[match].shape
@@ -94,8 +96,10 @@ while not d.isDone():
                     #    b = s[0, 0]
                     #    a = s[0, 1]
                     #    proposal_depth_mask[a, b] = 1
+                #else:
+                    #print "scarto"
             #print "-"
-    print len(bbox_new_depth), len(bbox_depth)
+    #print len(bbox_new_depth), len(bbox_depth)
     #final_proposal_depth_mask = proposal_depth_mask
     #bbox_depth = bbox_new_depth
 
