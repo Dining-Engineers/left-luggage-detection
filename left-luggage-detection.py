@@ -4,6 +4,7 @@ from SimpleCV.Display import Display
 from utils import *
 import bg_models
 from const import *
+from pykdtree.kdtree import KDTree
 
 #create video streams
 d = Display(resolution=(1280, 960))
@@ -49,22 +50,63 @@ while not d.isDone():
 
     # get depth foreground
     # 0 = background - 1 = foreground
-    foreground_mask_depth = bg_models.get_foreground_mask_from_running_average(current_frame_depth,
-                                                                               background_depth, BG_MASK_THRESHOLD)
+    foreground_mask_depth_current = bg_models.get_foreground_mask_from_running_average(current_frame_depth,
+                                                                                       background_depth,
+                                                                                       BG_MASK_THRESHOLD)
 
     ## apply opening to remove noise
-    foreground_mask_depth = bg_models.apply_opening(foreground_mask_depth, 5, cv2.MORPH_ELLIPSE)
+    foreground_mask_depth_current = bg_models.apply_opening(foreground_mask_depth_current, 5, cv2.MORPH_ELLIPSE)
+
+    # get depth old accumulator proposal
+    old_proposal_depth_mask = np.where(background_depth_aggregator >= 5, 1, 0)
+
+    # get bounding boxes accumulator depth frame
+    bbox_old_depth, bbox_old_depth_val, bbox_old_pixels = bg_models.get_bounding_boxes(old_proposal_depth_mask.astype(np.uint8))
 
     # update depth aggregator
     background_depth_aggregator = bg_models.update_depth_detection_aggregator(background_depth_aggregator,
-                                                                              foreground_mask_depth)
-    # get rgb proposal
-    proposal_depth_mask = np.where(background_depth_aggregator == AGG_DEPTH_MAX_E, 1, 0)
+                                                                              foreground_mask_depth_current)
+
+    # get depth proposal
+    proposal_depth_mask = np.where(background_depth_aggregator >= 5, 1, 0)
+
+    # get bounding boxes current depth frame
+    bbox_new_depth, bbox_new_depth_val, bbox_new_pixels = bg_models.get_bounding_boxes(proposal_depth_mask.astype(np.uint8))
+
+    bbox_depth = []
+    final_proposal_depth_mask = (np.zeros(shape=(640, 480), dtype=np.uint8))
+    if bbox_new_depth_val.size is not 0:
+        if bbox_old_depth_val.size is not 0:
+            # compare bounding boxes of: current frame vs accumulator
+            # and keep only the ones that have almost the same center and area
+            kdtree_curr = KDTree(bbox_new_depth_val)
+            # idx is a list of index of match in kdtree
+            dist, idx = kdtree_curr.query(bbox_old_depth_val, distance_upper_bound=200)
+            for match in idx:
+                if match != len(bbox_new_pixels): # aka no record in this distance
+                    #print " aa", idx, len(bbox_old_pixels), len(bbox_new_pixels), match
+                    #print type(bbox_curr_depth)
+                    #print match, bbox_curr_depth[match].shape
+                    cv2.drawContours(final_proposal_depth_mask, [bbox_new_pixels[match]], -1, 1, -1)
+                    bbox_depth.append(bbox_new_depth[match])
+                    # select the right pixels
+                    #for s in bbox_curr_pixels[match]:
+                    #    b = s[0, 0]
+                    #    a = s[0, 1]
+                    #    proposal_depth_mask[a, b] = 1
+            #print "-"
+    print len(bbox_new_depth), len(bbox_depth)
+    #final_proposal_depth_mask = proposal_depth_mask
+    #bbox_depth = bbox_new_depth
+
+    #proposal_depth_mask = proposal_depth_mask[:, :, 0]
+    #print proposal_depth_mask.shape
+
     # get bounding boxes
-    bbox_depth, bbox_depth_areas = bg_models.get_bounding_boxes(proposal_depth_mask.astype(np.uint8))
+    #bbox_depth, bbox_depth_element, _ = bg_models.get_bounding_boxes(proposal_depth_mask.astype(np.uint8))
 
     ## cut foreground with real values
-    foreground_depth_proposal = bg_models.get_foreground_from_mask_depth(current_frame_depth.T, proposal_depth_mask)
+    foreground_depth_proposal = bg_models.get_foreground_from_mask_depth(current_frame_depth.T, final_proposal_depth_mask)
 
     ###################################
     #
@@ -86,7 +128,7 @@ while not d.isDone():
     # get rgb proposal
     proposal_rgb_mask = np.where(background_rgb_aggregator == AGG_RGB_MAX_E, 1, 0)
     # get rgb blobs
-    bbox_rgb, bbox_rgb_areas = bg_models.get_bounding_boxes(proposal_rgb_mask.astype(np.uint8))
+    bbox_rgb, bbox_rgb_element, _ = bg_models.get_bounding_boxes(proposal_rgb_mask.astype(np.uint8))
 
     ## cut foreground
     foreground_rgb_long = bg_models.get_foreground_from_mask_rgb(current_frame_rgb.getNumpy(), foreground_mask_rgb_long)
@@ -154,7 +196,7 @@ while not d.isDone():
     frame_upper_left = current_frame_rgb
     frame_upper_right = Image(foreground_rgb_proposal)#current_frame_depth.T)
     frame_bottom_left = Image(foreground_depth_proposal)#foreground_rgb_long)
-    frame_bottom_right = Image(foreground_depth_proposal)    #foreground_mask_depth*255)#foreground_depth)
+    frame_bottom_right = Image(proposal_depth_mask*255)#foreground_rgb_long)    #foreground_mask_depth*255)#foreground_depth)
 
     # rows of display
     frame_up = frame_upper_left.sideBySide(frame_upper_right)
