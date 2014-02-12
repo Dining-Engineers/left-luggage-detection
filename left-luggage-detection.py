@@ -21,6 +21,7 @@ f_bg2 = cv2.BackgroundSubtractorMOG2(BG_ZIV_HIST, BG_ZIV_THRESH, False)  # defin
 background_rgb_aggregator = np.zeros(shape=(640, 480), dtype=np.int64)
 background_depth_aggregator = np.zeros(shape=(640, 480), dtype=np.int64)
 
+depth_rect_acc = []
 # first loop
 first_run = True
 
@@ -56,58 +57,129 @@ while not d.isDone():
 
     ## apply opening to remove noise
     foreground_mask_depth_current = bg_models.apply_opening(foreground_mask_depth_current, 5, cv2.MORPH_ELLIPSE)
+    bbox_depth, _, bbox_pixels = bg_models.get_bounding_boxes(foreground_mask_depth_current.astype(np.uint8))
 
-    # get depth old accumulator proposal
-    old_proposal_depth_mask = np.where(background_depth_aggregator >= 5, 1, 0)
+    res = []
+    bool_acc = [False]*len(depth_rect_acc)
+    bool_curr = [False]*len(bbox_depth)
 
-    # get bounding boxes accumulator depth frame
-    bbox_old_depth, bbox_old_depth_val, bbox_old_pixels = bg_models.get_bounding_boxes(old_proposal_depth_mask.astype(np.uint8))
+    if len(depth_rect_acc) != 0:
+        print "acc not empty: ", len(depth_rect_acc)
+        for i in range(len(depth_rect_acc)):
+            acc_entry = depth_rect_acc[i]
+            for j in range(len(bbox_depth)):
+                #print "bbox_depth: ", bbox_depth, "prendo ", bbox_depth[j]
+                curr_entry = bbox_depth[j]
+                print "check similarity: ", acc_entry[0], curr_entry
+                if rect_similarity(acc_entry[0], curr_entry):
+                    val = (curr_entry, acc_entry[1] + 1)
+                    print "val1 ", val
+                    #val[3] = acc_entry[3] + 1
+                    res.append(val)
+                    bool_acc[i] = bool_curr[j] = True
 
-    # update depth aggregator
-    background_depth_aggregator = bg_models.update_depth_detection_aggregator(background_depth_aggregator,
-                                                                              foreground_mask_depth_current)
+        for i, rect_match in enumerate(bool_curr):
+            if not rect_match:
+                val = (bbox_depth[i], 1)
+                print "val2: ", val
+                res.append(val)
 
-    # get depth proposal
-    proposal_depth_mask = np.where(background_depth_aggregator >= 5, 1, 0)
+        for i, rect_match in enumerate(bool_acc):
+            if not rect_match:
+                counter = depth_rect_acc[i][1]
+                if counter > 0:
+                    val = (depth_rect_acc[i][0], depth_rect_acc[i][1]-1)
+                    print "val3 ", val
+                    res.append(val)
 
-    # get bounding boxes current depth frame
-    bbox_new_depth, bbox_new_depth_val, bbox_new_pixels = bg_models.get_bounding_boxes(proposal_depth_mask.astype(np.uint8))
+    else:
+        print "acc empty", len(depth_rect_acc)
+        if len(bbox_depth) is not 0:
+            print "current not empty: ", len(bbox_depth)
+            for rect in bbox_depth:
+                #c_x, c_y, area = get_center_area_from_rect(rect)
+                #query = (c_x, c_y, area, 1)
+                res.append((rect, 1))
 
-    bbox_depth = []
+    depth_rect_acc = res
+
+    bbox_depth_final = []
+    for box in depth_rect_acc:
+        print box[1]
+        if box[1] >= 5:
+            bbox_depth_final.append(box[0])
+            #print box[0], bbox_depth
+
+    proposal_depth_mask = foreground_mask_depth_current
     final_proposal_depth_mask = (np.zeros(shape=(640, 480), dtype=np.uint8))
-    if bbox_new_depth_val.size is not 0:
-        if bbox_old_depth_val.size is not 0:
-            # compare bounding boxes of: current frame vs accumulator
-            # and keep only the ones that have almost the same center and area
-            kdtree_curr = KDTree(bbox_new_depth_val)
-            # idx is a list of index of match in kdtree
-            dist, idx = kdtree_curr.query(bbox_old_depth_val, k=2)
-            for i in range(len(idx)):
-                match = idx[i][0]
-                if dist[i][0]/dist[i][1] <= 0.8: # aka no record in this distance
-                    #print "tengo ",
-                    #print " aa", idx, len(bbox_old_pixels), len(bbox_new_pixels), match
-                    #print type(bbox_curr_depth)
-                    #print match, bbox_curr_depth[match].shape
-                    cv2.drawContours(final_proposal_depth_mask, [bbox_new_pixels[match]], -1, 1, -1)
-                    bbox_depth.append(bbox_new_depth[match])
-                    # select the right pixels
-                    #for s in bbox_curr_pixels[match]:
-                    #    b = s[0, 0]
-                    #    a = s[0, 1]
-                    #    proposal_depth_mask[a, b] = 1
-                #else:
-                    #print "scarto"
-            #print "-"
-    #print len(bbox_new_depth), len(bbox_depth)
-    #final_proposal_depth_mask = proposal_depth_mask
-    #bbox_depth = bbox_new_depth
+    #
+    # if bbox_depth_val.size is not 0:
+    #     for rect in bbox_depth_val:
+    #         c_x = rect[0]
+    #         c_y = rect[1]
+    #         area = rect[2]
+    #         query = (c_x, c_y, area)
+    #         if query in bbox_dict.keys():
+    #             bbox_dict[query] = bbox_dict[(c_x, c_y, area)] + 1
+    #         else:
+    #             bbox_dict[query] = 1
 
-    #proposal_depth_mask = proposal_depth_mask[:, :, 0]
-    #print proposal_depth_mask.shape
 
-    # get bounding boxes
-    #bbox_depth, bbox_depth_element, _ = bg_models.get_bounding_boxes(proposal_depth_mask.astype(np.uint8))
+
+    #        cv2.rectangle(foreground_depth_proposal, (s[0], s[1]), (s[0]+s[2], s[1]+s[3]), 255, 1)
+
+
+    # # get depth old accumulator proposal
+    # old_proposal_depth_mask = np.where(background_depth_aggregator >= 5, 1, 0)
+    #
+    # # get bounding boxes accumulator depth frame
+    # bbox_old_depth, bbox_old_depth_val, bbox_old_pixels = bg_models.get_bounding_boxes(old_proposal_depth_mask.astype(np.uint8))
+    #
+    # # update depth aggregator
+    # background_depth_aggregator = bg_models.update_depth_detection_aggregator(background_depth_aggregator,
+    #                                                                           foreground_mask_depth_current)
+    #
+    # # get depth proposal
+    # proposal_depth_mask = np.where(background_depth_aggregator >= 5, 1, 0)
+    #
+    # # get bounding boxes current depth frame
+    # bbox_new_depth, bbox_new_depth_val, bbox_new_pixels = bg_models.get_bounding_boxes(proposal_depth_mask.astype(np.uint8))
+    #
+    # bbox_depth = []
+    # final_proposal_depth_mask = (np.zeros(shape=(640, 480), dtype=np.uint8))
+    # if bbox_new_depth_val.size is not 0:
+    #     if bbox_old_depth_val.size is not 0:
+    #         # compare bounding boxes of: current frame vs accumulator
+    #         # and keep only the ones that have almost the same center and area
+    #         kdtree_curr = KDTree(bbox_new_depth_val)
+    #         # idx is a list of index of match in kdtree
+    #         dist, idx = kdtree_curr.query(bbox_old_depth_val, k=2)
+    #         for i in range(len(idx)):
+    #             match = idx[i][0]
+    #             if dist[i][0]/dist[i][1] <= 0.8:  # aka no record in this distance
+    #                 #print "tengo ",
+    #                 #print " aa", idx, len(bbox_old_pixels), len(bbox_new_pixels), match
+    #                 #print type(bbox_curr_depth)
+    #                 #print match, bbox_curr_depth[match].shape
+    #                 cv2.drawContours(final_proposal_depth_mask, [bbox_new_pixels[match]], -1, 1, -1)
+    #                 bbox_depth.append(bbox_new_depth[match])
+    #                 # select the right pixels
+    #                 #for s in bbox_curr_pixels[match]:
+    #                 #    b = s[0, 0]
+    #                 #    a = s[0, 1]
+    #                 #    proposal_depth_mask[a, b] = 1
+    #             #else:
+    #                 #print "scarto"
+    #         #print "-"
+    # #print len(bbox_new_depth), len(bbox_depth)
+    # #final_proposal_depth_mask = proposal_depth_mask
+    # #bbox_depth = bbox_new_depth
+    #
+    # #proposal_depth_mask = proposal_depth_mask[:, :, 0]
+    # #print proposal_depth_mask.shape
+    #
+    # # get bounding boxes
+    # #bbox_depth, bbox_depth_element, _ = bg_models.get_bounding_boxes(proposal_depth_mask.astype(np.uint8))
 
     ## cut foreground with real values
     foreground_depth_proposal = bg_models.get_foreground_from_mask_depth(current_frame_depth.T, final_proposal_depth_mask)
@@ -152,7 +224,8 @@ while not d.isDone():
         cv2.rectangle(foreground_rgb_proposal, (s[0], s[1]), (s[0]+s[2], s[1]+s[3]), 255, 1)
 
     foreground_depth_proposal = to_rgb1a(foreground_depth_proposal)
-    for s in bbox_depth:
+    for s in bbox_depth_final:
+        #print s, s[0], s[1], s[2], +s[3]
         cv2.rectangle(foreground_depth_proposal, (s[0], s[1]), (s[0]+s[2], s[1]+s[3]), 255, 1)
 
 

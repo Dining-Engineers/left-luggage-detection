@@ -118,14 +118,13 @@ def get_bounding_boxes(image):
     for cnt in contours:
 
         # filter contours with area less than 20 pixel
-        if cv2.contourArea(cnt) > 20:
+        if cv2.contourArea(cnt) > 50:
             #M = cv2.moments(cnt)
             #cx, cy = int(M['m10']/M['m00']), int(M['m01']/M['m00'])
             #cv2.circle(foreground_depth, (cx, cy), 20, 255, 1)
             # rect[0],rect[1] => bottom left vertex; rect[2], rect[3] => width, height
             rect = cv2.boundingRect(cnt)
             if rect not in squares:
-
 
                 area = rect[2] * rect[3]
                 squares.append(rect)
