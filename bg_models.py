@@ -30,7 +30,7 @@ def get_foreground_mask_from_running_average(current_frame, bg_frame, threshold_
     get foreground substracting current frame from background model
     where the difference is above threshold_filter
     """
-    # get foreground
+
     current_frame_filtered = (np.where(current_frame == DEPTH_HOLE_VALUE, bg_frame, current_frame)).astype(np.float32)
     diff = (current_frame_filtered.T - bg_frame.T)
     diff_filter = (np.where(np.abs(diff) >= threshold_filter, 1, 0))
@@ -43,7 +43,7 @@ def get_foreground_from_mask_depth(foreground, mask):
 
 # get rgb background
 def get_background_mask_zivkovic(f_bg, current_frame, alpha):
-    #print current_frame
+
     foreground = np.zeros(shape=current_frame.shape, dtype=np.float32)
     # get foreground in numpy array
     foreground = f_bg.apply(current_frame, foreground, alpha)
@@ -72,25 +72,24 @@ def apply_opening(image, kernel_size, kernel_type):
 
 
 def update_rgb_detection_aggregator(aggregator, foreground_long, foreground_short):
-    proposal_candidate = foreground_long * np.int64(np.logical_not(foreground_short))
-    other_cases = np.int64(np.logical_not(proposal_candidate))
+
+    proposal_candidate = foreground_long * np.int8(np.logical_not(foreground_short))
+    other_cases = np.int8(np.logical_not(proposal_candidate))
 
     # increment aggregator
     result = aggregator + proposal_candidate
 
-    # AVOID REMOVING FROM PROPOSA OF ALREADY DETECTED OBJECT
-    # mask of max values (proposal)
-    mask_proposal = np.where((result >= AGG_RGB_MAX_E), 1, 0)
-    mask_new_pixel_in_bg = np.int64(np.logical_not(foreground_long)) * np.int64(np.logical_not(foreground_short))
-    # pixel of older proposal that are becoming background (FL =0 and FS = 0)
-    mask = mask_proposal * mask_new_pixel_in_bg
-    # avoid previous pixel from being penalized
-    #other_cases = np.where((other_cases == mask), 0, other_cases)
-
+    # # AVOID REMOVING FROM PROPOSA OF ALREADY DETECTED OBJECT
+    # # mask of max values (proposal)
+    # mask_proposal = np.where((result >= AGG_RGB_MAX_E), 1, 0)
+    # mask_new_pixel_in_bg = np.int32(np.logical_not(foreground_long)) * np.int32(np.logical_not(foreground_short))
+    # # pixel of older proposal that are becoming background (FL =0 and FS = 0)
+    # mask = mask_proposal * mask_new_pixel_in_bg
+    # # avoid previous pixel from being penalized
+    # other_cases = np.where((other_cases == mask), 0, other_cases)
 
     # add penalty to pixel not in proposal
     result = result - other_cases * AGG_RGB_PENALTY
-
 
     # set aggregate bounds
     result = np.clip(result, 0, AGG_RGB_MAX_E)
@@ -117,7 +116,7 @@ def get_bounding_boxes(image):
     contours, hierarchy = cv2.findContours(image, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
     for cnt in contours:
 
-        # filter contours with area less than 20 pixel
+        # filter contours with area less than 50 pixel
         if cv2.contourArea(cnt) > 50:
             #M = cv2.moments(cnt)
             #cx, cy = int(M['m10']/M['m00']), int(M['m01']/M['m00'])
@@ -129,7 +128,7 @@ def get_bounding_boxes(image):
                 area = rect[2] * rect[3]
                 squares.append(rect)
                 cnt_selected.append(cnt)
-                #print cnt.shape, cnt_selected[-1].shape
+
                 # coordinates rect center
                 cx = rect[0] + rect[2] / 2
                 cy = rect[1] + rect[3] / 2
@@ -139,6 +138,10 @@ def get_bounding_boxes(image):
                     kdtree_elements = np.concatenate((kdtree_elements, [[cx, cy, area]]))
 
     return squares, kdtree_elements, cnt_selected
+
+
+# def get_depth_proposal( foreground_mask_depth_current )
+#     return depth_mask_foreground, bbox
 
 
     # but if the saved object is removed we need to decrement the accumulator

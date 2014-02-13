@@ -33,7 +33,7 @@ def rect_similarity(rect1, rect2):
 
 
 def get_center_area_from_rect(rect):
-    print "rect: ", rect
+    #print "rect: ", rect
     """ coordinates rect center """
     cx = rect[0] + rect[2] / 2
     cy = rect[1] + rect[3] / 2
