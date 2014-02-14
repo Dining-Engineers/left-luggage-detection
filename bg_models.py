@@ -52,10 +52,10 @@ def get_background_mask_zivkovic(f_bg, current_frame, alpha):
     return foreground
 
 
-def get_background_from_mask_rgb(image, mask):
-    # dove where(x,y,z) dove si verifica x sostituisci y, il resto mettilo a z
-    #mask2 = np.where((mask == 255), 0, 1)
-    return image * utils.to_rgb1a(mask)
+# def get_background_from_mask_rgb(image, mask):
+#     # dove where(x,y,z) dove si verifica x sostituisci y, il resto mettilo a z
+#     #mask2 = np.where((mask == 255), 0, 1)
+#     return image * utils.to_rgb1a(mask)
 
 
 def get_foreground_from_mask_rgb(image, mask):

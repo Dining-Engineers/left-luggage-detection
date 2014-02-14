@@ -37,9 +37,9 @@ class DepthProcessing:
 
     def get_proposal_bbox(self):
 
-        bbox, _, bbox_pixels = bg_models.get_bounding_boxes(self.foreground_mask)
-
+        # temp list of proposal
         results = []
+        bbox, _, bbox_pixels = bg_models.get_bounding_boxes(self.foreground_mask)
 
         bool_accum = [False]*len(self.rect_accum)
         bool_curr = [False]*len(bbox)
