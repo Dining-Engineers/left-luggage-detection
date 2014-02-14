@@ -53,9 +53,7 @@ while not d.isDone():
     if first_run:
         # in first run moving average start from first frame
         depth.background_model = depth.current_frame.astype(depth.background_model.dtype)
-
         depth2.background_model = depth2.current_frame.astype(depth2.background_model.dtype)
-
         first_run = False
 
     # get depth background
@@ -83,12 +81,12 @@ while not d.isDone():
     depth2.extract_foreground_mask_from_run_avg()
 
     # apply opening to remove noise
-    depth2.foreground_mask = bg_models.apply_opening( depth2.foreground_mask, 5, cv2.MORPH_ELLIPSE)
+    depth2.foreground_mask = bg_models.apply_opening(depth2.foreground_mask, 5, cv2.MORPH_ELLIPSE)
 
     t2 = datetime.datetime.now()
     bbox_to_draw2 = depth2.extract_proposal_bbox(depth2.RECT_MATCHING)
     t3 = datetime.datetime.now()
-    print t1-t0, t3-t2, len(bbox_to_draw2)
+    #print t1-t0, t3-t2, len(bbox_to_draw2)
 
     # cut foreground with real values
     foreground_depth_proposal2 = bg_models.get_foreground_from_mask_depth(depth2.current_frame.T, depth2.foreground_mask)

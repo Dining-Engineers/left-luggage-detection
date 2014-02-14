@@ -55,7 +55,7 @@ class DepthProcessing:
             bbox, _, bbox_pixels = bg_models.get_bounding_boxes(self.foreground_mask)
 
 
-            print len(bbox), len(self.rect_accum)
+            #print len(bbox), len(self.rect_accum)
 
             bool_accum = [False]*len(self.rect_accum)
             bool_curr = [False]*len(bbox)

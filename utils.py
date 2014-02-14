@@ -44,7 +44,7 @@ def get_center_area_from_rect(rect):
 def boxes_intersect(bbox1, bbox2):
     return ((np.abs(bbox1[0]-bbox2[0])*2) < (bbox1[2]+bbox2[2])) and ((np.abs(bbox1[1]-bbox2[1])*2) < (bbox1[3]+bbox2[3]))
 
-def rect_similarity(r1, r2):
+def rect_similarity2(r1, r2):
     if boxes_intersect(r1,r2):
 
         left = max(r1[0], r2[0])
