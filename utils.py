@@ -39,3 +39,25 @@ def get_center_area_from_rect(rect):
     cy = rect[1] + rect[3] / 2
     area = area = rect[2] * rect[3]
     return cx, cy, area
+
+# (s[0], s[1]), (s[0]+s[2], s[1]+s[3])
+def boxes_intersect(bbox1, bbox2):
+    return ((np.abs(bbox1[0]-bbox2[0])*2) < (bbox1[2]+bbox2[2])) and ((np.abs(bbox1[1]-bbox2[1])*2) < (bbox1[3]+bbox2[3]))
+
+def rect_similarity(r1, r2):
+    if boxes_intersect(r1,r2):
+
+        left = max(r1[0], r2[0])
+        right = min(r1[0]+r1[2], r2[0]+r2[2])
+        bottom = max(r1[1], r2[1])
+        top = min(r1[1]+r1[3], r2[1]+r2[3])
+        intersection = (top-bottom)*(right-left)
+        r1_area = r1[2]*r1[3]
+        r2_area = r2[2]*r2[3]
+        union = r1_area + r2_area - intersection
+        # return similarity
+        if intersection/union > 0.5:
+            return True
+        return  False
+
+    return False

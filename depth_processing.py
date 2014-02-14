@@ -33,7 +33,7 @@ class DepthProcessing:
          - 0 = background
          - 1 = foreground
         """
-        self.foreground_mask = bg_models.get_foreground_mask_from_running_average( self.current_frame,
+        self.foreground_mask = bg_models.get_foreground_mask_from_running_average(self.current_frame,
                                                                                    self.background_model,
                                                                                    BG_MASK_THRESHOLD)
 
@@ -49,11 +49,13 @@ class DepthProcessing:
             bbox_to_draw = bbox
 
         elif method == self.RECT_MATCHING:
-
             # temp list of proposal
             results = []
 
             bbox, _, bbox_pixels = bg_models.get_bounding_boxes(self.foreground_mask)
+
+
+            print len(bbox), len(self.rect_accum)
 
             bool_accum = [False]*len(self.rect_accum)
             bool_curr = [False]*len(bbox)
@@ -86,8 +88,8 @@ class DepthProcessing:
                         #c_x, c_y, area = get_center_area_from_rect(rect)
                         #query = (c_x, c_y, area, 1)
                         results.append((rect, 1))
-                    self.rect_accum = results
 
+            self.rect_accum = results
             for box in self.rect_accum:
                 if box[1] >= 5:
                     bbox_to_draw.append(box[0])

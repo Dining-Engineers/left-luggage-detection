@@ -7,6 +7,7 @@ from const import *
 from pykdtree.kdtree import KDTree
 from depth_processing import *
 from intensity_processing import *
+import datetime
 
 #create video streams
 d = Display(resolution=(1024, 768))
@@ -19,6 +20,7 @@ first_run = True
 
 # DepthProcessing instance
 depth = DepthProcessing()
+depth2 = DepthProcessing()
 
 # IntensityProcessing instance
 rgb = IntensityProcessing()
@@ -32,7 +34,15 @@ while not d.isDone():
 
     # get next depth frame (11-bit precision)
     # N.B. darker => closer
-    depth.current_frame = cam.getDepthMatrix()
+
+    depth.current_frame = depth2.current_frame = cam.getDepthMatrix()
+
+    #depth_frame = cam.getDepthMatrix()
+    #print depth_frame.shape
+    #depth_frame = depth_frame[25:, 0:605]
+    #depth.current_frame = depth2.current_frame = cv2.resize(depth_frame, (640, 480))
+
+    #print depth.current_frame.shape, depth.current_frame.dtype
 
     ###################################
     #
@@ -43,6 +53,9 @@ while not d.isDone():
     if first_run:
         # in first run moving average start from first frame
         depth.background_model = depth.current_frame.astype(depth.background_model.dtype)
+
+        depth2.background_model = depth2.current_frame.astype(depth2.background_model.dtype)
+
         first_run = False
 
     # get depth background
@@ -54,10 +67,33 @@ while not d.isDone():
     # apply opening to remove noise
     depth.foreground_mask = bg_models.apply_opening( depth.foreground_mask, 5, cv2.MORPH_ELLIPSE)
 
-    bbox_to_draw = depth.extract_proposal_bbox()
+    t0 = datetime.datetime.now()
+    depth_proposal_bbox = depth.extract_proposal_bbox()
+    t1 = datetime.datetime.now()
 
     # cut foreground with real values
     foreground_depth_proposal = bg_models.get_foreground_from_mask_depth(depth.current_frame.T, depth.foreground_mask)
+
+#############################  CANC CANC CANC ##########################################
+
+    # get depth background
+    depth2.update_background_running_average()
+
+    # get depth foreground
+    depth2.extract_foreground_mask_from_run_avg()
+
+    # apply opening to remove noise
+    depth2.foreground_mask = bg_models.apply_opening( depth2.foreground_mask, 5, cv2.MORPH_ELLIPSE)
+
+    t2 = datetime.datetime.now()
+    bbox_to_draw2 = depth2.extract_proposal_bbox(depth2.RECT_MATCHING)
+    t3 = datetime.datetime.now()
+    print t1-t0, t3-t2, len(bbox_to_draw2)
+
+    # cut foreground with real values
+    foreground_depth_proposal2 = bg_models.get_foreground_from_mask_depth(depth2.current_frame.T, depth2.foreground_mask)
+
+#############################  CANC CANC CANC ##########################################
 
     #
     # # get bounding boxes current depth frame
@@ -106,7 +142,7 @@ while not d.isDone():
     # update rgb aggregator
     rgb.update_detection_aggregator()
 
-    foreground_rgb_proposal = rgb.extract_proposal_bbox()
+    rgb_proposal_bbox = rgb.extract_proposal_bbox()
 
     ###################################
     #
@@ -114,13 +150,27 @@ while not d.isDone():
     #
     ###################################
 
+    combined_proposal = []
+    foreground_rgb_proposal=rgb.proposal
+    foreground_depth_proposal = to_rgb1a(foreground_depth_proposal)
+
     # Draws bounding boxes
-    for s in rgb.bbox_to_draw:
+    for s in rgb_proposal_bbox:
         cv2.rectangle(foreground_rgb_proposal, (s[0], s[1]), (s[0]+s[2], s[1]+s[3]), 255, 1)
 
-    foreground_depth_proposal = to_rgb1a(foreground_depth_proposal)
-    for s in bbox_to_draw:
-        cv2.rectangle(foreground_depth_proposal, (s[0], s[1]), (s[0]+s[2], s[1]+s[3]), 255, 1)
+    for r in depth_proposal_bbox:
+        cv2.rectangle(foreground_depth_proposal, (r[0], r[1]), (r[0]+r[2], r[1]+r[3]), 255, 1)
+
+            # if rect_similarity(s, r):
+            #     combined_proposal.append(s)
+
+
+#############################  CANC CANC CANC ##########################################
+    foreground_depth_proposal2 = to_rgb1a(foreground_depth_proposal2)
+    for s in bbox_to_draw2:
+        cv2.rectangle(foreground_depth_proposal2, (s[0], s[1]), (s[0]+s[2], s[1]+s[3]), 255, 1)
+
+#############################  CANC CANC CANC ##########################################
 
     # convert current_frame_depth and background_depth in octree-based representation
     # (voxel grids)
@@ -130,11 +180,17 @@ while not d.isDone():
     # applico funzioni C RawDepthToMeters e DepthToWorld
     # ottengo rappresentazione xyz -> creo struttura dati octree sia di background sia di current
 
+
+
+    # foreground_final_proposal=rgb.proposal
+    # for s in combined_proposal:
+    #     cv2.rectangle(foreground_final_proposal, (s[0], s[1]), (s[0]+s[2], s[1]+s[3]), 255, 1)
+
     # save images to display
     frame_upper_left = Image(rgb.current_frame)
     frame_upper_right = Image(foreground_rgb_proposal)
     frame_bottom_left = Image(foreground_depth_proposal)
-    frame_bottom_right = Image(depth.foreground_mask*255)
+    frame_bottom_right = Image(foreground_depth_proposal2)
 
     # rows of display
     frame_up = frame_upper_left.sideBySide(frame_upper_right)

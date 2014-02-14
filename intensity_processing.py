@@ -14,7 +14,6 @@ class IntensityProcessing:
         self.foreground_mask_short_term = np.zeros(shape=(640, 480), dtype=np.int8)
         self.background_aggregator = np.zeros(shape=(640, 480), dtype=np.int8)
         self.proposal = np.zeros(shape=(640, 480, 3), dtype=np.uint8)
-        self.bbox_to_draw = []
 
         # define Zivkovic background subtraction function
         self.f_bg = cv2.BackgroundSubtractorMOG2(BG_ZIV_HIST, BG_ZIV_THRESH, False)
@@ -41,6 +40,5 @@ class IntensityProcessing:
         # get rgb blobs
         bbox, bbox_element, _ = bg_models.get_bounding_boxes(proposal_mask.astype(np.uint8))
 
-        self.bbox_to_draw = bbox
         self.proposal = bg_models.get_foreground_from_mask_rgb(self.current_frame, proposal_mask)
-        return self.proposal
+        return bbox

@@ -4,7 +4,7 @@ DEPTH_HOLE_VALUE = 2**11-1
 # Background (Depth) Paramethers
 BG_RUN_AVG_LRATE = 0.001
 BG_RUN_AVG_OPENING_KSIZE = 5
-BG_MASK_THRESHOLD = 2
+BG_MASK_THRESHOLD = 3
 
 # Background Zivkovich (RGB) Paramethers
 BG_ZIV_LONG_LRATE = 0.001
