@@ -35,7 +35,7 @@ class IntensityProcessing:
                                                                                self.foreground_mask_long_term,
                                                                                self.foreground_mask_short_term)
 
-    def extract_proposal(self):
+    def extract_proposal_bbox(self):
         # get rgb proposal
         proposal_mask = np.where(self.background_aggregator == AGG_RGB_MAX_E, 1, 0)
         # get rgb blobs

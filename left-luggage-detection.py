@@ -1,4 +1,4 @@
-from reportlab.lib.colors import toColor
+#from reportlab.lib.colors import toColor
 from SimpleCV import *
 from SimpleCV.Display import Display
 from utils import *
@@ -54,7 +54,7 @@ while not d.isDone():
     # apply opening to remove noise
     depth.foreground_mask = bg_models.apply_opening( depth.foreground_mask, 5, cv2.MORPH_ELLIPSE)
 
-    bbox_to_draw = depth.get_proposal_bbox()
+    bbox_to_draw = depth.extract_proposal_bbox()
 
     # cut foreground with real values
     foreground_depth_proposal = bg_models.get_foreground_from_mask_depth(depth.current_frame.T, depth.foreground_mask)
@@ -106,7 +106,7 @@ while not d.isDone():
     # update rgb aggregator
     rgb.update_detection_aggregator()
 
-    foreground_rgb_proposal = rgb.extract_proposal()
+    foreground_rgb_proposal = rgb.extract_proposal_bbox()
 
     ###################################
     #

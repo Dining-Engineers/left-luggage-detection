@@ -97,9 +97,10 @@ def update_rgb_detection_aggregator(aggregator, foreground_long, foreground_shor
 
 
 def update_depth_detection_aggregator(aggregator, foreground_current):
-    not_in_current_foreground = np.int64(np.logical_not(foreground_current))
+    not_in_current_foreground = np.int8(np.logical_not(foreground_current))
     # increment aggregator
     result = aggregator + foreground_current - not_in_current_foreground * AGG_DEPTH_PENALTY
+
     # set aggregate bounds
     result = np.clip(result, 0, AGG_DEPTH_MAX_E)
     return result
@@ -113,6 +114,7 @@ def get_bounding_boxes(image):
     squares = []
     cnt_selected = []
     kdtree_elements = np.array([])  #np.zeros(shape=(1,3))
+
     contours, hierarchy = cv2.findContours(image, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
     for cnt in contours:
 
