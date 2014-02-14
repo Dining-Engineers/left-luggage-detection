@@ -17,7 +17,7 @@ def query_kdtree(data_tree, data_query):
     return dist, idx
 
 
-def rect_similarity(rect1, rect2):
+def rect_similarity4(rect1, rect2):
     cx1, cy1, a1 = get_center_area_from_rect(rect1)
     cx2, cy2, a2 = get_center_area_from_rect(rect2)
 
@@ -40,9 +40,11 @@ def get_center_area_from_rect(rect):
     area = area = rect[2] * rect[3]
     return cx, cy, area
 
+
 # (s[0], s[1]), (s[0]+s[2], s[1]+s[3])
 def boxes_intersect(bbox1, bbox2):
     return ((np.abs(bbox1[0]-bbox2[0])*2) < (bbox1[2]+bbox2[2])) and ((np.abs(bbox1[1]-bbox2[1])*2) < (bbox1[3]+bbox2[3]))
+
 
 def rect_similarity2(r1, r2):
     if boxes_intersect(r1,r2):
@@ -57,7 +59,25 @@ def rect_similarity2(r1, r2):
         union = r1_area + r2_area - intersection
         # return similarity
         if intersection/union > 0.5:
+            print "vero"
             return True
-        return  False
-
+        print "falso"
+        return False
+    print "falso"
     return False
+
+
+def rect_similarity(bbox_test,bbox_target):
+
+    def gen_box(bbox):
+        from shapely.geometry import box
+        box = box(bbox[0], bbox[1], bbox[0]+bbox[2], bbox[1]+bbox[3])
+        return box
+
+    bbtest=gen_box(bbox_test)
+    bbtarget=gen_box(bbox_target)
+
+    if bbtarget.intersection(bbtest).area/bbtarget.union(bbtest).area > 0.5:
+        return True
+    else:
+        return False
