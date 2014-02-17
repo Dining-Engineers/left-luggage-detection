@@ -45,8 +45,8 @@ class DepthProcessing:
         bbox_to_draw = []
 
         if method == self.ACCUMULATOR:
-            self.accumulator = bg_models.update_depth_detection_aggregator( self.accumulator, self.foreground_mask)
-            bbox, _, bbox_pixels = bg_models.get_bounding_boxes( np.uint8(self.accumulator))
+            self.accumulator = bg_models.update_depth_detection_aggregator(self.accumulator, self.foreground_mask)
+            bbox, _, bbox_pixels = bg_models.get_bounding_boxes(np.uint8(self.accumulator))
             bbox_to_draw = bbox
 
         elif method == self.RECT_MATCHING:
@@ -54,21 +54,26 @@ class DepthProcessing:
             # temp list of proposal
             results = []
 
+            # get current bbox
             bbox, _, bbox_pixels = bg_models.get_bounding_boxes(self.foreground_mask)
 
-            #print len(bbox), len(self.rect_accum)
-
+            # bool list for each bbox in rect_accumulator
+            # if true => we had a match between current and accumulator
             bool_accum = [False]*len(self.rect_accum)
             bool_curr = [False]*len(bbox)
 
             if len(self.rect_accum) != 0:
+
+
                 for i in range(len(self.rect_accum)):
                     accum_entry = self.rect_accum[i]
                     for j in range(len(bbox)):
                         curr_entry = bbox[j]
                         if rect_similarity(accum_entry[0], curr_entry):
-                            #print "ACC ", accum_entry[1]
-                            val = (curr_entry, accum_entry[1] + 1)
+                            if accum_entry[1] < AGG_DEPTH_MAX_E:
+                                val = (curr_entry, accum_entry[1] + 1)
+                            else:
+                                val = (curr_entry, accum_entry[1])
                             results.append(val)
                             bool_accum[i] = bool_curr[j] = True
 
@@ -81,7 +86,7 @@ class DepthProcessing:
                     if not rect_match:
                         counter = self.rect_accum[i][1]
                         if counter > 0:
-                            val = (self.rect_accum[i][0], self.rect_accum[i][1]-1)
+                            val = (self.rect_accum[i][0], self.rect_accum[i][1]-AGG_DEPTH_PENALTY)
                             results.append(val)
 
             else:
@@ -93,10 +98,8 @@ class DepthProcessing:
 
             self.rect_accum = results
             for box in self.rect_accum:
-                #print box[1]
-                if box[1] >= 5:
+                if box[1] >= 7:
                     bbox_to_draw.append(box[0])
-                    print "roba"
 
         elif method == self.RECT_MATCHING2:
 
@@ -123,14 +126,15 @@ class DepthProcessing:
                     for j, r_acc in enumerate(self.rect_accum2):
                         # keep track of the best match for the current rect
                         distance = similarity_measure_rect(r_curr, r_acc)
-                        print distance,
+                        #print distance,
                         if distance > 0.5:
-                            print r_curr, r_acc
+                        #if rect_similarity(r_curr, r_acc):
+                            #print r_curr, r_acc
                             # save in accumulator_match that we have a match
                             accumulator_match[j] = True
                             if max_value < distance:
                                 max_idx = j
-                                max_value = distance
+                                #max_value = distance
                     current_best_match_idx[i] = max_idx
 
                 # increment counter of the matched rect and add the new ones found in current
@@ -143,7 +147,8 @@ class DepthProcessing:
                     else:
                         # we had a match in accumulator
                         # increment counter
-                        self.rect_accum2[idx][-1] += 1
+                        if self.rect_accum2[idx][-1] < AGG_DEPTH_MAX_E:
+                            self.rect_accum2[idx][-1] += 1
                         # update coords with the new values
                         self.rect_accum2[idx][0:4] = rect_current[i][0:4]
 
