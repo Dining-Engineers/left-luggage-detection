@@ -15,11 +15,11 @@ class IntensityProcessing:
         self.background_aggregator = np.zeros(shape=(640, 480), dtype=np.int8)
         self.proposal = np.zeros(shape=(640, 480, 3), dtype=np.uint8)
 
-        # define Zivkovic background subtraction function
+        # define Zivkovic background subtraction function LONG
         self.f_bg = cv2.BackgroundSubtractorMOG2(BG_ZIV_HIST, BG_ZIV_THRESH, False)
 
-        # define zivkovic background subtraction function
-        self.f_bg2 = cv2.BackgroundSubtractorMOG2(BG_ZIV_HIST, BG_ZIV_THRESH, False)
+        # define zivkovic background subtraction function SHORT
+        self.f_bg2 = cv2.BackgroundSubtractorMOG2(BG_ZIV_HIST, BG_ZIV_SHORT_THRESH, False)
 
     def extract_background_mask_porikli(self):
 

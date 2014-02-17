@@ -57,9 +57,10 @@ def rect_similarity(rect1, rect2):
     else:
         return False
 
+
 def rect_similarity2(r1, r2):
     """ Return if r1 and r2 satisfy overlapping criterion """
-    if boxes_intersect(r1, r2):
+    if boxes_intersect2(r1, r2):
         # return similarity
         if similarity_measure_rect(r1, r2) > 0.5:
             return True

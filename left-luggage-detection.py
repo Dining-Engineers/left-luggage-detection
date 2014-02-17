@@ -70,7 +70,7 @@ while not d.isDone():
     depth.foreground_mask = bg_models.apply_opening(depth.foreground_mask, 5, cv2.MORPH_ELLIPSE)
 
     t0 = datetime.datetime.now().microsecond
-    depth_proposal_bbox = depth.extract_proposal_bbox(depth.RECT_MATCHING)
+    depth_proposal_bbox = depth.extract_proposal_bbox(depth.ACCUMULATOR)
     t1 = datetime.datetime.now().microsecond
     #print t1 - t0
 
@@ -129,6 +129,7 @@ while not d.isDone():
     foreground_depth_proposal = to_rgb1a(foreground_depth_proposal)
 
     match_rgb = rgb.current_frame.copy()
+    #a = match_rgb.copy()
 
     #match = []
 
@@ -140,13 +141,16 @@ while not d.isDone():
             cv2.rectangle(foreground_depth_proposal, (r[0], r[1]), (r[0]+r[2], r[1]+r[3]), 255, 1)
 
             if rect_similarity2(s, r):
+                #print "interseeeect", type(match_rgb), match_rgb.shape, match_rgb.dtype, \
+                #        type(foreground_rgb_proposal), foreground_rgb_proposal.shape, foreground_rgb_proposal.dtype
+                #match.append(s)
                 cv2.rectangle(match_rgb, (s[0], s[1]), (s[0]+s[2], s[1]+s[3]), (255, 0, 0), 1)
 
             # if intersection_bbox(s, r):
             #     print "trovato un match"
             #     match.append(match, r)
 
-
+    #match_rgb = a.copy()
     #for k in match:
     #    cv2.rectangle(match_rgb, (s[0], s[1]), (s[0]+s[2], s[1]+s[3]), 255, 1)
 
@@ -178,7 +182,7 @@ while not d.isDone():
     if ENABLE_SECOND_DEPTH:
         frame_bottom_right = Image(foreground_depth_proposal2)#match_rgb)
     else:
-        frame_bottom_right = Image(match_rgb)
+        frame_bottom_right = Image(match_rgb)# rgb.current_frame * to_rgb1a(rgb.foreground_mask_short_term))#
 
     # rows of display
     frame_up = frame_upper_left.sideBySide(frame_upper_right)
