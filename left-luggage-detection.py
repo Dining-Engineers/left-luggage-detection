@@ -70,7 +70,7 @@ while not d.isDone():
     depth.foreground_mask = bg_models.apply_opening(depth.foreground_mask, 5, cv2.MORPH_ELLIPSE)
 
     t0 = datetime.datetime.now().microsecond
-    depth_proposal_bbox = depth.extract_proposal_bbox(depth.ACCUMULATOR)
+    depth_proposal_bbox = depth.extract_proposal_bbox(depth.RECT_MATCHING)
     t1 = datetime.datetime.now().microsecond
     #print t1 - t0
 
@@ -128,7 +128,7 @@ while not d.isDone():
     foreground_rgb_proposal = rgb.proposal
     foreground_depth_proposal = to_rgb1a(foreground_depth_proposal)
 
-    match_rgb = rgb.current_frame
+    match_rgb = rgb.current_frame.copy()
 
     #match = []
 
@@ -139,10 +139,7 @@ while not d.isDone():
         for r in depth_proposal_bbox:
             cv2.rectangle(foreground_depth_proposal, (r[0], r[1]), (r[0]+r[2], r[1]+r[3]), 255, 1)
 
-            if boxes_intersect2(s, r):
-                print "interseeeect", type(match_rgb), match_rgb.shape, match_rgb.dtype, \
-                        type(foreground_rgb_proposal), foreground_rgb_proposal.shape, foreground_rgb_proposal.dtype
-                #match.append(s)
+            if rect_similarity2(s, r):
                 cv2.rectangle(match_rgb, (s[0], s[1]), (s[0]+s[2], s[1]+s[3]), (255, 0, 0), 1)
 
             # if intersection_bbox(s, r):
