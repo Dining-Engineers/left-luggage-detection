@@ -113,7 +113,7 @@ def apply_morph_reconstruction(seed, image):
 def get_bounding_boxes(image):
     squares = []
     cnt_selected = []
-    kdtree_elements = np.array([])  #np.zeros(shape=(1,3))
+    kdtree_elements = np.array([], dtype=int)  #np.zeros(shape=(1,3))
 
     contours, hierarchy = cv2.findContours(image, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
     for cnt in contours:
@@ -126,7 +126,6 @@ def get_bounding_boxes(image):
             # rect[0],rect[1] => bottom left vertex; rect[2], rect[3] => width, height
             rect = cv2.boundingRect(cnt)
             if rect not in squares:
-
                 area = rect[2] * rect[3]
                 squares.append(rect)
                 cnt_selected.append(cnt)
@@ -135,10 +134,10 @@ def get_bounding_boxes(image):
                 cx = rect[0] + rect[2] / 2
                 cy = rect[1] + rect[3] / 2
                 if kdtree_elements.size is 0:
-                    kdtree_elements = np.array([[cx, cy, area]])
+                    kdtree_elements = np.array([[rect[0], rect[1], rect[2], rect[3], 1]])#np.append(rect, 1)#
                 else:
-                    kdtree_elements = np.concatenate((kdtree_elements, [[cx, cy, area]]))
-
+                    kdtree_elements = np.concatenate((kdtree_elements, [[rect[0], rect[1], rect[2], rect[3], 1]]))
+                    # np.append(rect, 1)))#[[cx, cy, area, 1]]))
     return squares, kdtree_elements, cnt_selected
 
 

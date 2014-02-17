@@ -18,3 +18,4 @@ AGG_RGB_MAX_E = 15          # number of frames after which a pixel is considered
 AGG_RGB_PENALTY = 1
 AGG_DEPTH_MAX_E = 30          # number of frames after which a pixel is considered an left item
 AGG_DEPTH_PENALTY = 1
+AGG_DEPTH_BBOX = 5
