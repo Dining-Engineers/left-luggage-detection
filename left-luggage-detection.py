@@ -8,6 +8,7 @@ from pykdtree.kdtree import KDTree
 from depth_processing import *
 from intensity_processing import *
 import datetime
+import itertools
 
 #create video streams
 d = Display(resolution=(1024, 768))
@@ -25,8 +26,9 @@ depth2 = DepthProcessing()
 # IntensityProcessing instance
 rgb = IntensityProcessing()
 
-T1 = 0
-T2 = 0
+T1 = np.uint64(0)
+T2 = np.uint64(0)
+T3 = np.uint64(0)
 ENABLE_SECOND_DEPTH = False
 
 # main loop
@@ -89,9 +91,9 @@ while not d.isDone():
         # apply opening to remove noise
         depth2.foreground_mask = bg_models.apply_opening(depth2.foreground_mask, 5, cv2.MORPH_ELLIPSE)
 
-        t2 = datetime.datetime.now().microsecond
+        t2 = datetime.datetime.now().microsecond / 1000
         bbox_to_draw2 = depth2.extract_proposal_bbox(depth2.RECT_MATCHING2)
-        t3 = datetime.datetime.now().microsecond
+        t3 = datetime.datetime.now().microsecond / 1000
         print t1-t0, t3-t2, len(bbox_to_draw2)
         T1 += abs(t1-t0)
         T2 += abs(t3-t2)
@@ -137,33 +139,19 @@ while not d.isDone():
     for s in rgb_proposal_bbox:
         cv2.rectangle(foreground_rgb_proposal, (s[0], s[1]), (s[0]+s[2], s[1]+s[3]), 255, 1)
 
-        for r in depth_proposal_bbox:
-            cv2.rectangle(foreground_depth_proposal, (r[0], r[1]), (r[0]+r[2], r[1]+r[3]), 255, 1)
+    for r in depth_proposal_bbox:
+        cv2.rectangle(foreground_depth_proposal, (r[0], r[1]), (r[0]+r[2], r[1]+r[3]), 255, 1)
 
-            if rect_similarity2(s, r):
-                #print "interseeeect", type(match_rgb), match_rgb.shape, match_rgb.dtype, \
-                #        type(foreground_rgb_proposal), foreground_rgb_proposal.shape, foreground_rgb_proposal.dtype
-                #match.append(s)
-                cv2.rectangle(match_rgb, (s[0], s[1]), (s[0]+s[2], s[1]+s[3]), (255, 0, 0), 1)
-
-            # if intersection_bbox(s, r):
-            #     print "trovato un match"
-            #     match.append(match, r)
-
-    #match_rgb = a.copy()
-    #for k in match:
-    #    cv2.rectangle(match_rgb, (s[0], s[1]), (s[0]+s[2], s[1]+s[3]), 255, 1)
+    for k in itertools.product(rgb_proposal_bbox, depth_proposal_bbox):
+        if rect_similarity2(k[0], k[1]):
+            cv2.rectangle(match_rgb, (k[0][0], k[0][1]), (k[0][0]+k[0][2], k[0][1]+k[0][3]), (255, 0, 0), 1)
 
 #############################  CANC CANC CANC ##########################################
-
     if ENABLE_SECOND_DEPTH:
-
         foreground_depth_proposal2 = to_rgb1a(foreground_depth_proposal2)
         for s in bbox_to_draw2:
             #print "disegno"
             cv2.rectangle(foreground_depth_proposal2, (s[0], s[1]), (s[0]+s[2], s[1]+s[3]), 255, 1)
-
-
 #############################  CANC CANC CANC ##########################################
 
     # convert current_frame_depth and background_depth in octree-based representation
@@ -193,8 +181,8 @@ while not d.isDone():
 
     # quit if click on display
     if d.mouseLeft:
-        print "FINEE ", T1, T2
+        #print "FINEE ", T1, T2
         d.done = True
 
-
+print "Time to draw bounding boxes ", T3
 d.quit()
