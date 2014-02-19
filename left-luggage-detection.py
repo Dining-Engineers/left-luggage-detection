@@ -80,7 +80,6 @@ while not d.isDone():
     foreground_depth_proposal = bg_models.get_foreground_from_mask_depth(depth.current_frame.T, depth.foreground_mask)
 
 #############################  CANC CANC CANC ##########################################
-
     if ENABLE_SECOND_DEPTH:
         # get depth background
         depth2.update_background_running_average()
@@ -98,11 +97,8 @@ while not d.isDone():
         T1 += abs(t1-t0)
         T2 += abs(t3-t2)
 
-
         # cut foreground with real values
         foreground_depth_proposal2 = bg_models.get_foreground_from_mask_depth(depth2.current_frame.T, depth2.foreground_mask)
-
-
 #############################  CANC CANC CANC ##########################################
 
 
@@ -130,17 +126,14 @@ while not d.isDone():
     foreground_rgb_proposal = rgb.proposal
     foreground_depth_proposal = to_rgb1a(foreground_depth_proposal)
 
-    match_rgb = rgb.current_frame.copy()
-    #a = match_rgb.copy()
-
-    #match = []
-
     # Draws bounding boxes
     for s in rgb_proposal_bbox:
         cv2.rectangle(foreground_rgb_proposal, (s[0], s[1]), (s[0]+s[2], s[1]+s[3]), 255, 1)
 
     for r in depth_proposal_bbox:
         cv2.rectangle(foreground_depth_proposal, (r[0], r[1]), (r[0]+r[2], r[1]+r[3]), 255, 1)
+
+    match_rgb = rgb.current_frame.copy()
 
     for k in itertools.product(rgb_proposal_bbox, depth_proposal_bbox):
         if rect_similarity2(k[0], k[1]):
