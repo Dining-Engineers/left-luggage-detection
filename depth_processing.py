@@ -20,6 +20,7 @@ class DepthProcessing:
         self.rect_accum2 = np.array([], dtype=int)
 
     def update_background_running_average(self):
+        #TODO RETURN VALUE
         """
         get depth background by running average
         """

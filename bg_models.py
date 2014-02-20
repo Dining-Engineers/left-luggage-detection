@@ -113,10 +113,11 @@ def apply_morph_reconstruction(seed, image):
 
 
 def get_bounding_boxes(image):
+    """ Return Bounding Boxes in the format x,y,w,h where (x,y) is the top left corner """
+
     squares = []
     cnt_selected = []
     kdtree_elements = np.array([], dtype=int)  #np.zeros(shape=(1,3))
-
     contours, hierarchy = cv2.findContours(image, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
     for cnt in contours:
 

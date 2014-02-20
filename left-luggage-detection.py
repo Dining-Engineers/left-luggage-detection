@@ -46,6 +46,7 @@ while not d.isDone():
     #depth_frame = cam.getDepthMatrix()
     #print depth_frame.shape
     #depth_frame = depth_frame[25:, 0:605]
+    # TODO correggi offset depth
     #depth.current_frame = depth2.current_frame = cv2.resize(depth_frame, (640, 480))
 
     #print depth.current_frame.shape, depth.current_frame.dtype
@@ -115,7 +116,7 @@ while not d.isDone():
     # update rgb aggregator
     rgb.update_detection_aggregator()
 
-    rgb_proposal_bbox = rgb.extract_proposal_bbox()
+    rgb_proposal_bbox, rgb_contours = rgb.extract_proposal_bbox()
 
     ###################################
     #
@@ -125,19 +126,80 @@ while not d.isDone():
 
     foreground_rgb_proposal = rgb.proposal
     foreground_depth_proposal = to_rgb1a(foreground_depth_proposal)
-
-    # Draws bounding boxes
-    for s in rgb_proposal_bbox:
-        cv2.rectangle(foreground_rgb_proposal, (s[0], s[1]), (s[0]+s[2], s[1]+s[3]), 255, 1)
-
-    for r in depth_proposal_bbox:
-        cv2.rectangle(foreground_depth_proposal, (r[0], r[1]), (r[0]+r[2], r[1]+r[3]), 255, 1)
-
     match_rgb = rgb.current_frame.copy()
 
-    for k in itertools.product(rgb_proposal_bbox, depth_proposal_bbox):
-        if rect_similarity2(k[0], k[1]):
-            cv2.rectangle(match_rgb, (k[0][0], k[0][1]), (k[0][0]+k[0][2], k[0][1]+k[0][3]), (255, 0, 0), 1)
+    # needed by grabcut
+    bgdModel = np.zeros((1, 65), np.float64)
+    fgdModel = np.zeros((1, 65), np.float64)
+
+
+
+    draw_depth_once = False
+    watershed_mask = np.zeros(shape=(640, 480), dtype=np.int32)
+    # Draws bounding boxes
+    for k, s in enumerate(rgb_proposal_bbox):
+        cv2.rectangle(foreground_rgb_proposal, (s[0], s[1]), (s[0]+s[2], s[1]+s[3]), 255, 1)
+        #cv2.drawContours(match_rgb, rgb_contours[k], -1, (0, 255, 0), -1)
+        for r in depth_proposal_bbox:
+            if not draw_depth_once:
+                cv2.rectangle(foreground_depth_proposal, (r[0], r[1]), (r[0]+r[2], r[1]+r[3]), 255, 1)
+            if rect_similarity2(s, r):
+                cv2.rectangle(match_rgb, (s[0], s[1]), (s[0]+s[2], s[1]+s[3]), (255, 0, 0), 1)
+                # mark rect slice for proposal for watershed segmentation
+                watershed_mask[s[1]:s[1]+s[3], s[0]:s[0]+s[2]] = rgb.proposal_mask[s[1]:s[1]+s[3], s[0]:s[0]+s[2]]*k+1
+
+                # mask = np.zeros(shape=(s[3], s[2]), dtype=np.uint8)
+                # #print match_rgb.shape, "-----" , s, r
+                # #print s[0], s[0]+s[2], s[1], s[1]+s[3], s
+                # img = match_rgb[s[1]:s[1]+s[3], s[0]:s[0]+s[2], :]#.copy()
+                # print img.shape, mask.shape, match_rgb[s[0]+s[2], s[1]+s[3]]
+                # cv2.grabCut(img, mask, s, bgdModel, fgdModel, 5, cv2.GC_INIT_WITH_RECT)
+                # mask = np.where((mask == 2) | (mask == 0), 0, 1).astype('uint8')
+                # colors = np.array([[0, 0, 0], [0, 1, 0]]) * 255
+                # overlay = colors[np.maximum(mask, 0) % 2]
+                # cv2.addWeighted(match_rgb[s[1]:s[1]+s[3], s[0]:s[0]+s[2], :], 0.5, overlay, 0.5, 0.0, dtype=cv2.CV_8UC3)
+
+        draw_depth_once = True
+
+    watershed_bg_mask = rgb.proposal_mask+depth.foreground_mask
+    watershed_mask = np.where(watershed_bg_mask == 0, 1, watershed_mask)
+    cv2.watershed(match_rgb, watershed_mask)
+
+    watershed_mask = np.where(watershed_mask == 1, 0, 1)
+    colors = np.array([[0, 0, 0], [191, 29, 167]])
+    overlay = colors[watershed_mask]
+    print overlay.shape, overlay
+    match_rgb = cv2.addWeighted(match_rgb, 0.5, overlay, 0.5, 0.0, dtype=cv2.CV_8UC3)
+
+
+    # overlay = colors[np.maximum(draw_obj_mask, 2)%2]
+    # match_rgb = cv2.addWeighted(match_rgb, 0.5, overlay, 0.5, 0.0, dtype=cv2.CV_8UC3)
+
+
+    # draw_obj_mask = np.zeros(shape=(640, 480), dtype=np.int32)
+    #
+    # for k, s in enumerate(rgb_proposal_bbox):
+    #     for r in depth_proposal_bbox:
+    #         if rect_similarity2(s, r):
+    #             cv2.rectangle(match_rgb, (s[0], s[1]), (s[0]+s[2], s[1]+s[3]), (255, 0, 0), 1)
+    #             # nb enumerate start from 0, segment need >0
+    #             # we set bg = 1 so other seg start from 2
+    #             cv2.drawContours(draw_obj_mask, [rgb_contours[k]], -1, k+2, -1)
+
+    #colors = np.int32(list(np.ndindex(2, 1, 1)) ) * 255
+
+    # colors = np.array([[0, 0, 0], [0, 1, 0], [1, 0, 0]]) * 255
+    # bg_marker = depth.foreground_mask + rgb.foreground_mask_short_term
+    # draw_obj_mask = np.where(bg_marker == 0, 1, draw_obj_mask)
+    #
+    # cv2.watershed(match_rgb, draw_obj_mask)
+    # overlay = colors[np.maximum(draw_obj_mask, 2)%2]
+    # match_rgb = cv2.addWeighted(match_rgb, 0.5, overlay, 0.5, 0.0, dtype=cv2.CV_8UC3)
+
+
+    # for k in itertools.product(rgb_proposal_bbox, depth_proposal_bbox):
+    #     if rect_similarity2(k[0], k[1]):
+    #         cv2.rectangle(match_rgb, (k[0][0], k[0][1]), (k[0][0]+k[0][2], k[0][1]+k[0][3]), (255, 0, 0), 1)
 
 #############################  CANC CANC CANC ##########################################
     if ENABLE_SECOND_DEPTH:
