@@ -14,44 +14,62 @@ class DepthProcessing:
         self.accumulator = np.zeros(shape=image_shape, dtype=np.uint8)
         self.background_aggregator = np.zeros(shape=image_shape, dtype=np.int8)
         self.background_model = np.zeros(shape=image_shape, dtype=np.float32)
-        self.foreground_mask = np.zeros(shape=image_shape, dtype=np.uint8)
+        self.foreground_mask = np.zeros(shape=image_shape)
         self.rect_accum = []
         self.rect_accum2 = np.array([], dtype=int)
 
-
-    def update_background_running_average(self):
+    def update_background_model(self, current_frame):
         """
-            get depth background by running average
+        Update depth background by running average
 
+        :param current_frame: current frame whereby update bg model
+        :return: background model
+        :rtype: np.float32
         """
-        #TODO RETURN VALUE
-        self.background_model = bg_models.get_background_running_average(self.current_frame,
-                                                                         self.background_model, BG_RUN_AVG_LRATE)
+        self.background_model = bg_models.compute_background_running_average(current_frame,
+                                                                             self.background_model, BG_RUN_AVG_LRATE)
+        return self.background_model
 
-    def extract_foreground_mask_from_run_avg(self):
+    def extract_foreground_mask_from_run_avg(self, current_frame):
         """
-        get depth foreground mask from running average computed
-        with get_background_running_average
-        the mask:
-         - 0 = background
-         - 1 = foreground
-        """
-        self.foreground_mask = bg_models.get_foreground_mask_from_running_average(self.current_frame,
-                                                                                   self.background_model,
-                                                                                   BG_MASK_THRESHOLD)
+        Extract depth foreground mask from running average computed substracting current_frame from background model
+        where the difference is above BG_MASK_THRESHOLD
 
+        :param current_frame: current frame from which extract foreground
+        :return: binary mask with 1 for foreground and 0 for background
+        :rtype: np.int64
+        """
+        current_frame_filtered = (np.where(current_frame == DEPTH_HOLE_VALUE, self.background_model, current_frame)).astype(np.float32)
+        diff = (current_frame_filtered - self.background_model)
+        self.foreground_mask = (np.where(np.abs(diff) >= BG_MASK_THRESHOLD, 1, 0))
         return self.foreground_mask
 
     def extract_proposal_bbox(self, method=ACCUMULATOR):
         """
-        Sblinda Estrai
-        :param method: paremtro che sblinda
-        :return: :raise NotImplementedError:
+        Compute bounding boxes for connected components from foreground masks that remain constant
+        for AGG_DEPTH_MAX_E frames.
+
+        To keep track of the bounding boxes over time the function uses an aggregator
+        depending on the method specified
+
+        :param method: method used to keep track of the bounding boxes history. Methods available are:
+
+            - *ACCUMULATOR*: to use an image accumulator for each pixel (fastest method).
+              The bounding boxes are extracted from the pixels accumulated AGG_DEPTH_MAX_E times.
+
+            - *RECT_MATCHING/RECT_MATCHING2*: to keep track of the number of times a particular bounding box occurs over
+              time (slower method but more accurate).
+              Two bounding boxes in different frames are considered the same if their placement and dimension remain
+              within a tolerance threshold.
+
+        :return: list of bounding boxes in the form of (x,y, width, height) where (x,y) is the top left corner
+        :rtype: List
+        :raise: *NotImplementedError*: if a method different from ACCUMULATOR or RECT_MATCHING or RECT_MATCHING2 is specified
         """
         bbox_to_draw = []
 
         if method == self.ACCUMULATOR:
-            self.accumulator = bg_models.update_depth_detection_aggregator(self.accumulator, self.foreground_mask)
+            self.accumulator = update_depth_detection_aggregator(self.accumulator, self.foreground_mask)
             bbox = bg_models.get_bounding_boxes(np.uint8(self.accumulator))
             bbox_to_draw = bbox
 
@@ -194,11 +212,15 @@ class DepthProcessing:
 
         return bbox_to_draw
 
-## per fare get and set
-    # @property
-    # def background_depth(self):
-    #     return self._background_depth
-    #
-    # @background_depth.setter
-    # def background_depth(self, value):
-    #     self._background_depth = value
+
+
+
+def update_depth_detection_aggregator(aggregator, foreground_current):
+    not_in_current_foreground = np.int8(np.logical_not(foreground_current))
+    # increment aggregator
+    result = aggregator + foreground_current - not_in_current_foreground * AGG_DEPTH_PENALTY
+
+    # set aggregate bounds
+    result = np.clip(result, 0, AGG_DEPTH_MAX_E)
+    return result
+

@@ -59,11 +59,23 @@
 <span id="intensity-processing-module"></span><h1>intensity_processing Module<a class="headerlink" href="#module-intensity_processing" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="intensity_processing.IntensityProcessing">
-<em class="property">class </em><tt class="descclassname">intensity_processing.</tt><tt class="descname">IntensityProcessing</tt><a class="reference internal" href="_modules/intensity_processing.html#IntensityProcessing"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#intensity_processing.IntensityProcessing" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">intensity_processing.</tt><tt class="descname">IntensityProcessing</tt><big>(</big><em>image_shape=(640</em>, <em>480)</em><big>)</big><a class="reference internal" href="_modules/intensity_processing.html#IntensityProcessing"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#intensity_processing.IntensityProcessing" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="method">
-<dt id="intensity_processing.IntensityProcessing.extract_background_mask_porikli">
-<tt class="descname">extract_background_mask_porikli</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/intensity_processing.html#IntensityProcessing.extract_background_mask_porikli"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#intensity_processing.IntensityProcessing.extract_background_mask_porikli" title="Permalink to this definition">¶</a></dt>
-<dd><p>Lol</p>
+<dt id="intensity_processing.IntensityProcessing.compute_foreground_masks">
+<tt class="descname">compute_foreground_masks</tt><big>(</big><em>frame</em><big>)</big><a class="headerlink" href="#intensity_processing.IntensityProcessing.compute_foreground_masks" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute foreground masks for term background and short term background following Porikli&#8217;s method</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>frame</strong> (<em>np.uint8</em>) &#8211; frame (3 channels) from which extract foregrounds masks</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">foreground masks for long term and short term backgrounds</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">np.int8</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">

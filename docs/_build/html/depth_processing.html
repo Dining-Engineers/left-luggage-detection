@@ -59,40 +59,74 @@
 <span id="depth-processing-module"></span><h1>depth_processing Module<a class="headerlink" href="#module-depth_processing" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="depth_processing.DepthProcessing">
-<em class="property">class </em><tt class="descclassname">depth_processing.</tt><tt class="descname">DepthProcessing</tt><a class="reference internal" href="_modules/depth_processing.html#DepthProcessing"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#depth_processing.DepthProcessing" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">depth_processing.</tt><tt class="descname">DepthProcessing</tt><big>(</big><em>image_shape=(640</em>, <em>480)</em><big>)</big><a class="reference internal" href="_modules/depth_processing.html#DepthProcessing"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#depth_processing.DepthProcessing" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="method">
-<dt id="depth_processing.DepthProcessing.current_frame">
-<tt class="descname">current_frame</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="_modules/depth_processing.html#DepthProcessing.current_frame"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#depth_processing.DepthProcessing.current_frame" title="Permalink to this definition">¶</a></dt>
-<dd><p>Setter for current frame: the depth matrix obtained is transposed so we cast the right shpae
-:param np.uint16 value: 11-bit depth matrix</p>
-</dd></dl>
-
-<dl class="method">
 <dt id="depth_processing.DepthProcessing.extract_foreground_mask_from_run_avg">
-<tt class="descname">extract_foreground_mask_from_run_avg</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/depth_processing.html#DepthProcessing.extract_foreground_mask_from_run_avg"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#depth_processing.DepthProcessing.extract_foreground_mask_from_run_avg" title="Permalink to this definition">¶</a></dt>
-<dd><p>get depth foreground mask from running average computed
-with get_background_running_average
-the mask:</p>
-<blockquote>
-<div><ul class="simple">
-<li>0 = background</li>
-<li>1 = foreground</li>
-</ul>
-</div></blockquote>
+<tt class="descname">extract_foreground_mask_from_run_avg</tt><big>(</big><em>current_frame</em><big>)</big><a class="reference internal" href="_modules/depth_processing.html#DepthProcessing.extract_foreground_mask_from_run_avg"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#depth_processing.DepthProcessing.extract_foreground_mask_from_run_avg" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract depth foreground mask from running average computed substracting current_frame from background model
+where the difference is above BG_MASK_THRESHOLD</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>current_frame</strong> &#8211; current frame from which extract foreground</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">binary mask with 1 for foreground and 0 for background</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">np.int64</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="depth_processing.DepthProcessing.extract_proposal_bbox">
 <tt class="descname">extract_proposal_bbox</tt><big>(</big><em>method=0</em><big>)</big><a class="reference internal" href="_modules/depth_processing.html#DepthProcessing.extract_proposal_bbox"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#depth_processing.DepthProcessing.extract_proposal_bbox" title="Permalink to this definition">¶</a></dt>
-<dd><p>Sblinda Estrai
-:param method: paremtro che sblinda
-:return: :raise NotImplementedError:</p>
+<dd><p>Compute bounding boxes for connected components from foreground masks that remain constant
+for AGG_DEPTH_MAX_E frames.</p>
+<p>To keep track of the bounding boxes over time the function uses an aggregator
+depending on the method specified</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>method</strong> &#8211; <p>method used to keep track of the bounding boxes history. Methods available are:</p>
+<ul class="simple">
+<li><em>ACCUMULATOR</em>: to use an image accumulator for each pixel (fastest method).
+The bounding boxes are extracted from the pixels accumulated AGG_DEPTH_MAX_E times.</li>
+<li><em>RECT_MATCHING/RECT_MATCHING2</em>: to keep track of the number of times a particular bounding box occurs over
+time (slower method but more accurate).
+Two bounding boxes in different frames are considered the same if their placement and dimension remain
+within a tolerance threshold.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">list of bounding boxes in the form of (x,y, width, height) where (x,y) is the top left corner</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">List</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raise :</th><td class="field-body"><em>NotImplementedError</em>: if a method different from ACCUMULATOR or RECT_MATCHING or RECT_MATCHING2 is specified</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
-<dt id="depth_processing.DepthProcessing.update_background_running_average">
-<tt class="descname">update_background_running_average</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/depth_processing.html#DepthProcessing.update_background_running_average"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#depth_processing.DepthProcessing.update_background_running_average" title="Permalink to this definition">¶</a></dt>
-<dd><p>get depth background by running average</p>
+<dt id="depth_processing.DepthProcessing.update_background_model">
+<tt class="descname">update_background_model</tt><big>(</big><em>current_frame</em><big>)</big><a class="headerlink" href="#depth_processing.DepthProcessing.update_background_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update depth background by running average</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>current_frame</strong> &#8211; current frame whereby update bg model</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">background model</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">np.float32</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="attribute">
