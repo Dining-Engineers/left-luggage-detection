@@ -1,0 +1,170 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>bg_models Module &mdash; Left Luggage Detection 0.1.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Left Luggage Detection 0.1.1 documentation" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">Left Luggage Detection 0.1.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-bg_models">
+<span id="bg-models-module"></span><h1>bg_models Module<a class="headerlink" href="#module-bg_models" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="bg_models.apply_morph_reconstruction">
+<tt class="descclassname">bg_models.</tt><tt class="descname">apply_morph_reconstruction</tt><big>(</big><em>seed</em>, <em>image</em><big>)</big><a class="reference internal" href="_modules/bg_models.html#apply_morph_reconstruction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bg_models.apply_morph_reconstruction" title="Permalink to this definition">¶</a></dt>
+<dd><p>&#64;param seed:
+&#64;param image:</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="bg_models.apply_opening">
+<tt class="descclassname">bg_models.</tt><tt class="descname">apply_opening</tt><big>(</big><em>image</em>, <em>kernel_size</em>, <em>kernel_type</em><big>)</big><a class="reference internal" href="_modules/bg_models.html#apply_opening"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bg_models.apply_opening" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="bg_models.get_background_from_mask">
+<tt class="descclassname">bg_models.</tt><tt class="descname">get_background_from_mask</tt><big>(</big><em>image</em>, <em>mask</em><big>)</big><a class="reference internal" href="_modules/bg_models.html#get_background_from_mask"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bg_models.get_background_from_mask" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="bg_models.get_background_mask_zivkovic">
+<tt class="descclassname">bg_models.</tt><tt class="descname">get_background_mask_zivkovic</tt><big>(</big><em>f_bg</em>, <em>current_frame</em>, <em>alpha</em><big>)</big><a class="reference internal" href="_modules/bg_models.html#get_background_mask_zivkovic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bg_models.get_background_mask_zivkovic" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="bg_models.get_background_running_average">
+<tt class="descclassname">bg_models.</tt><tt class="descname">get_background_running_average</tt><big>(</big><em>frame</em>, <em>average</em>, <em>alpha</em><big>)</big><a class="reference internal" href="_modules/bg_models.html#get_background_running_average"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bg_models.get_background_running_average" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="bg_models.get_bounding_boxes">
+<tt class="descclassname">bg_models.</tt><tt class="descname">get_bounding_boxes</tt><big>(</big><em>image</em><big>)</big><a class="reference internal" href="_modules/bg_models.html#get_bounding_boxes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bg_models.get_bounding_boxes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return Bounding Boxes in the format x,y,w,h where (x,y) is the top left corner
+&#64;param image:</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="bg_models.get_foreground_from_mask">
+<tt class="descclassname">bg_models.</tt><tt class="descname">get_foreground_from_mask</tt><big>(</big><em>image</em>, <em>mask</em><big>)</big><a class="reference internal" href="_modules/bg_models.html#get_foreground_from_mask"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bg_models.get_foreground_from_mask" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="bg_models.get_foreground_from_mask_depth">
+<tt class="descclassname">bg_models.</tt><tt class="descname">get_foreground_from_mask_depth</tt><big>(</big><em>foreground</em>, <em>mask</em><big>)</big><a class="reference internal" href="_modules/bg_models.html#get_foreground_from_mask_depth"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bg_models.get_foreground_from_mask_depth" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="bg_models.get_foreground_from_mask_rgb">
+<tt class="descclassname">bg_models.</tt><tt class="descname">get_foreground_from_mask_rgb</tt><big>(</big><em>image</em>, <em>mask</em><big>)</big><a class="reference internal" href="_modules/bg_models.html#get_foreground_from_mask_rgb"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bg_models.get_foreground_from_mask_rgb" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="bg_models.get_foreground_mask_from_running_average">
+<tt class="descclassname">bg_models.</tt><tt class="descname">get_foreground_mask_from_running_average</tt><big>(</big><em>current_frame</em>, <em>bg_frame</em>, <em>threshold_filter</em><big>)</big><a class="reference internal" href="_modules/bg_models.html#get_foreground_mask_from_running_average"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bg_models.get_foreground_mask_from_running_average" title="Permalink to this definition">¶</a></dt>
+<dd><p>get foreground substracting current frame from background model
+where the difference is above threshold_filter</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="bg_models.pretty_print">
+<tt class="descclassname">bg_models.</tt><tt class="descname">pretty_print</tt><big>(</big><em>array</em><big>)</big><a class="reference internal" href="_modules/bg_models.html#pretty_print"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bg_models.pretty_print" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="bg_models.update_depth_detection_aggregator">
+<tt class="descclassname">bg_models.</tt><tt class="descname">update_depth_detection_aggregator</tt><big>(</big><em>aggregator</em>, <em>foreground_current</em><big>)</big><a class="reference internal" href="_modules/bg_models.html#update_depth_detection_aggregator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bg_models.update_depth_detection_aggregator" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="bg_models.update_rgb_detection_aggregator">
+<tt class="descclassname">bg_models.</tt><tt class="descname">update_rgb_detection_aggregator</tt><big>(</big><em>aggregator</em>, <em>foreground_long</em>, <em>foreground_short</em><big>)</big><a class="reference internal" href="_modules/bg_models.html#update_rgb_detection_aggregator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bg_models.update_rgb_detection_aggregator" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/bg_models.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">Left Luggage Detection 0.1.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Andrea Rizzo, Matteo Bruni.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

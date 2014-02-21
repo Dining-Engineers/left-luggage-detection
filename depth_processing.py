@@ -21,8 +21,12 @@ class DepthProcessing:
 
     def update_background_running_average(self):
         #TODO RETURN VALUE
+        #"""
+        #
+        #"""
         """
-        get depth background by running average
+            get depth background by running average
+
         """
         self.background_model = bg_models.get_background_running_average(self.current_frame,
                                                                          self.background_model, BG_RUN_AVG_LRATE)
@@ -42,7 +46,11 @@ class DepthProcessing:
         return self.foreground_mask
 
     def extract_proposal_bbox(self, method=ACCUMULATOR):
-
+        """
+        Sblinda Estrai
+        :param method: paremtro che sblinda
+        :return: :raise NotImplementedError:
+        """
         bbox_to_draw = []
 
         if method == self.ACCUMULATOR:

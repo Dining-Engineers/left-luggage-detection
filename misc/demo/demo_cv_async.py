@@ -1,7 +1,10 @@
 #!/usr/bin/env python
 import freenect
+
 import cv
-import frame_convert
+
+from misc.demo import frame_convert
+
 
 cv.NamedWindow('Depth')
 cv.NamedWindow('RGB')
