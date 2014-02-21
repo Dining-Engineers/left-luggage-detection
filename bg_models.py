@@ -109,11 +109,18 @@ def update_depth_detection_aggregator(aggregator, foreground_current):
 
 
 def apply_morph_reconstruction(seed, image):
+    """
+    
+    @param seed:
+    @param image:
+    """
     pass
 
 
 def get_bounding_boxes(image):
-    """ Return Bounding Boxes in the format x,y,w,h where (x,y) is the top left corner """
+    """ Return Bounding Boxes in the format x,y,w,h where (x,y) is the top left corner
+    @param image:
+    """
 
     squares = []
     cnt_selected = []

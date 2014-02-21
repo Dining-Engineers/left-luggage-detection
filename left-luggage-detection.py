@@ -166,9 +166,9 @@ while not d.isDone():
     cv2.watershed(match_rgb, watershed_mask)
 
     watershed_mask = np.where(watershed_mask == 1, 0, 1)
-    colors = np.array([[0, 0, 0], [191, 29, 167]])
+    colors = np.array([[0, 0, 0], [0, 255, 0]])#[191, 29, 167]])
     overlay = colors[watershed_mask]
-    print overlay.shape, overlay
+    #print overlay.shape, overlay
     match_rgb = cv2.addWeighted(match_rgb, 0.5, overlay, 0.5, 0.0, dtype=cv2.CV_8UC3)
 
 
