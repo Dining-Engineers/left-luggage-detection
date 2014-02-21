@@ -27,12 +27,15 @@ def get_background_running_average(frame, average, alpha):
 
 def get_foreground_mask_from_running_average(current_frame, bg_frame, threshold_filter):
     """
-    get foreground substracting current frame from background model
-    where the difference is above threshold_filter
+            get foreground substracting current frame from background model
+            where the difference is above threshold_filter
+    :param sblinda current_frame:
+    :param str bg_frame:
+    :param threshold_filter:
+    :return:
     """
-
     current_frame_filtered = (np.where(current_frame == DEPTH_HOLE_VALUE, bg_frame, current_frame)).astype(np.float32)
-    diff = (current_frame_filtered.T - bg_frame.T)
+    diff = (current_frame_filtered - bg_frame)
     diff_filter = (np.where(np.abs(diff) >= threshold_filter, 1, 0))
     return diff_filter
 
@@ -108,16 +111,26 @@ def update_depth_detection_aggregator(aggregator, foreground_current):
     return result
 
 
-def apply_morph_reconstruction(seed, image):
-    """
-    
-    @param seed:
-    @param image:
-    """
-    pass
-
-
 def get_bounding_boxes(image):
+    """
+
+    :param image:
+    :return:
+    """
+    bbox = []
+    contours, hierarchy = cv2.findContours(image, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
+
+    for cnt in contours:
+        # filter contours with area less than 50 pixel
+        if cv2.contourArea(cnt) > BBOX_MIN_AREA:
+            rect = cv2.boundingRect(cnt)
+            if rect not in bbox:
+                bbox.append(rect)
+
+    return bbox
+
+
+def get_bounding_boxes2(image):
     """ Return Bounding Boxes in the format x,y,w,h where (x,y) is the top left corner
     @param image:
     """
@@ -129,7 +142,7 @@ def get_bounding_boxes(image):
     for cnt in contours:
 
         # filter contours with area less than 50 pixel
-        if cv2.contourArea(cnt) > 50:
+        if cv2.contourArea(cnt) > BBOX_MIN_AREA:
             #M = cv2.moments(cnt)
             #cx, cy = int(M['m10']/M['m00']), int(M['m01']/M['m00'])
             #cv2.circle(foreground_depth, (cx, cy), 20, 255, 1)
@@ -148,7 +161,7 @@ def get_bounding_boxes(image):
                 else:
                     kdtree_elements = np.concatenate((kdtree_elements, [[rect[0], rect[1], rect[2], rect[3], 1]]))
                     # np.append(rect, 1)))#[[cx, cy, area, 1]]))
-    return squares, kdtree_elements, cnt_selected
+    return kdtree_elements
 
 
 # def get_depth_proposal( foreground_mask_depth_current )

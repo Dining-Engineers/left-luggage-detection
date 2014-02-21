@@ -5,29 +5,26 @@ from utils import *
 
 
 class DepthProcessing:
-
     ACCUMULATOR = 0
     RECT_MATCHING = 1
     RECT_MATCHING2 = 2
 
-    def __init__(self):
-        self.current_frame = np.zeros(shape=(640, 480), dtype=np.uint16)
-        self.accumulator = np.zeros(shape=(640, 480), dtype=np.uint8)
-        self.background_aggregator = np.zeros(shape=(640, 480), dtype=np.int8)
-        self.background_model = np.zeros(shape=(480, 640), dtype=np.float32)
-        self.foreground_mask = np.zeros( shape=(640, 480), dtype=np.uint8)
+    def __init__(self, image_shape=(640, 480)):
+        self.current_frame = np.zeros(shape=image_shape, dtype=np.uint16)
+        self.accumulator = np.zeros(shape=image_shape, dtype=np.uint8)
+        self.background_aggregator = np.zeros(shape=image_shape, dtype=np.int8)
+        self.background_model = np.zeros(shape=image_shape, dtype=np.float32)
+        self.foreground_mask = np.zeros(shape=image_shape, dtype=np.uint8)
         self.rect_accum = []
         self.rect_accum2 = np.array([], dtype=int)
 
+
     def update_background_running_average(self):
-        #TODO RETURN VALUE
-        #"""
-        #
-        #"""
         """
             get depth background by running average
 
         """
+        #TODO RETURN VALUE
         self.background_model = bg_models.get_background_running_average(self.current_frame,
                                                                          self.background_model, BG_RUN_AVG_LRATE)
 
@@ -55,7 +52,7 @@ class DepthProcessing:
 
         if method == self.ACCUMULATOR:
             self.accumulator = bg_models.update_depth_detection_aggregator(self.accumulator, self.foreground_mask)
-            bbox, _, bbox_pixels = bg_models.get_bounding_boxes(np.uint8(self.accumulator))
+            bbox = bg_models.get_bounding_boxes(np.uint8(self.accumulator))
             bbox_to_draw = bbox
 
         elif method == self.RECT_MATCHING:
@@ -64,7 +61,7 @@ class DepthProcessing:
             results = []
 
             # get current bbox
-            bbox, _, bbox_pixels = bg_models.get_bounding_boxes(self.foreground_mask)
+            bbox = bg_models.get_bounding_boxes(self.foreground_mask)
 
             # bool list for each bbox in rect_accumulator
             # if true => we had a match between current and accumulator
@@ -112,7 +109,7 @@ class DepthProcessing:
 
         elif method == self.RECT_MATCHING2:
 
-            _, rect_current, _ = bg_models.get_bounding_boxes(self.foreground_mask)
+            rect_current = bg_models.get_bounding_boxes2(self.foreground_mask)
 
             if self.rect_accum2.size != 0:
                 # accumulator is not empty check with current rect

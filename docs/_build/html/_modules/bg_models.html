@@ -79,10 +79,13 @@
 </div>
 <div class="viewcode-block" id="get_foreground_mask_from_running_average"><a class="viewcode-back" href="../bg_models.html#bg_models.get_foreground_mask_from_running_average">[docs]</a><span class="k">def</span> <span class="nf">get_foreground_mask_from_running_average</span><span class="p">(</span><span class="n">current_frame</span><span class="p">,</span> <span class="n">bg_frame</span><span class="p">,</span> <span class="n">threshold_filter</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    get foreground substracting current frame from background model</span>
-<span class="sd">    where the difference is above threshold_filter</span>
+<span class="sd">            get foreground substracting current frame from background model</span>
+<span class="sd">            where the difference is above threshold_filter</span>
+<span class="sd">    :param sblinda current_frame:</span>
+<span class="sd">    :param str bg_frame:</span>
+<span class="sd">    :param threshold_filter:</span>
+<span class="sd">    :return:</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-
     <span class="n">current_frame_filtered</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">current_frame</span> <span class="o">==</span> <span class="n">DEPTH_HOLE_VALUE</span><span class="p">,</span> <span class="n">bg_frame</span><span class="p">,</span> <span class="n">current_frame</span><span class="p">))</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
     <span class="n">diff</span> <span class="o">=</span> <span class="p">(</span><span class="n">current_frame_filtered</span><span class="o">.</span><span class="n">T</span> <span class="o">-</span> <span class="n">bg_frame</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
     <span class="n">diff_filter</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">diff</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">threshold_filter</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>

@@ -21,3 +21,5 @@ AGG_DEPTH_MAX_E = 30          # number of frames after which a pixel is consider
 AGG_DEPTH_PENALTY = 1
 AGG_DEPTH_BBOX = 5
 
+# Bounding Boxes
+BBOX_MIN_AREA = 50    # minimum area in pixel to create a bounding box

@@ -57,7 +57,6 @@
 
 
 <div class="viewcode-block" id="DepthProcessing"><a class="viewcode-back" href="../depth_processing.html#depth_processing.DepthProcessing">[docs]</a><span class="k">class</span> <span class="nc">DepthProcessing</span><span class="p">:</span>
-
     <span class="n">ACCUMULATOR</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">RECT_MATCHING</span> <span class="o">=</span> <span class="mi">1</span>
     <span class="n">RECT_MATCHING2</span> <span class="o">=</span> <span class="mi">2</span>
@@ -71,15 +70,21 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">rect_accum</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">rect_accum2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
 
+
+    <span class="c">#@current_frame.setter</span>
+<div class="viewcode-block" id="DepthProcessing.current_frame"><a class="viewcode-back" href="../depth_processing.html#depth_processing.DepthProcessing.current_frame">[docs]</a>    <span class="k">def</span> <span class="nf">current_frame</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Setter for current frame: the depth matrix obtained is transposed so we cast the right shpae</span>
+<span class="sd">        :param np.uint16 value: 11-bit depth matrix</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_background_depth</span> <span class="o">=</span> <span class="n">value</span>
+</div>
 <div class="viewcode-block" id="DepthProcessing.update_background_running_average"><a class="viewcode-back" href="../depth_processing.html#depth_processing.DepthProcessing.update_background_running_average">[docs]</a>    <span class="k">def</span> <span class="nf">update_background_running_average</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="c">#TODO RETURN VALUE</span>
-        <span class="c">#&quot;&quot;&quot;</span>
-        <span class="c">#</span>
-        <span class="c">#&quot;&quot;&quot;</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">            get depth background by running average</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c">#TODO RETURN VALUE</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">background_model</span> <span class="o">=</span> <span class="n">bg_models</span><span class="o">.</span><span class="n">get_background_running_average</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_frame</span><span class="p">,</span>
                                                                          <span class="bp">self</span><span class="o">.</span><span class="n">background_model</span><span class="p">,</span> <span class="n">BG_RUN_AVG_LRATE</span><span class="p">)</span>
 </div>

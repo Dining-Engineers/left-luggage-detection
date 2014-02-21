@@ -27,7 +27,8 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="Left Luggage Detection 0.1.1 documentation" href="index.html" />
-    <link rel="prev" title="Welcome to Left Luggage Detection’s documentation!" href="index.html" /> 
+    <link rel="next" title="intensity_processing Module" href="intensity_processing.html" />
+    <link rel="prev" title="bg_models Module" href="bg_models.html" /> 
   </head>
   <body>
     <div class="related">
@@ -40,7 +41,10 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="index.html" title="Welcome to Left Luggage Detection’s documentation!"
+          <a href="intensity_processing.html" title="intensity_processing Module"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="bg_models.html" title="bg_models Module"
              accesskey="P">previous</a> |</li>
         <li><a href="index.html">Left Luggage Detection 0.1.1 documentation</a> &raquo;</li> 
       </ul>
@@ -57,6 +61,13 @@
 <dt id="depth_processing.DepthProcessing">
 <em class="property">class </em><tt class="descclassname">depth_processing.</tt><tt class="descname">DepthProcessing</tt><a class="reference internal" href="_modules/depth_processing.html#DepthProcessing"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#depth_processing.DepthProcessing" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="method">
+<dt id="depth_processing.DepthProcessing.current_frame">
+<tt class="descname">current_frame</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="_modules/depth_processing.html#DepthProcessing.current_frame"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#depth_processing.DepthProcessing.current_frame" title="Permalink to this definition">¶</a></dt>
+<dd><p>Setter for current frame: the depth matrix obtained is transposed so we cast the right shpae
+:param np.uint16 value: 11-bit depth matrix</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="depth_processing.DepthProcessing.extract_foreground_mask_from_run_avg">
 <tt class="descname">extract_foreground_mask_from_run_avg</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/depth_processing.html#DepthProcessing.extract_foreground_mask_from_run_avg"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#depth_processing.DepthProcessing.extract_foreground_mask_from_run_avg" title="Permalink to this definition">¶</a></dt>
 <dd><p>get depth foreground mask from running average computed
@@ -110,8 +121,11 @@ the mask:</p>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
   <h4>Previous topic</h4>
-  <p class="topless"><a href="index.html"
-                        title="previous chapter">Welcome to Left Luggage Detection&#8217;s documentation!</a></p>
+  <p class="topless"><a href="bg_models.html"
+                        title="previous chapter">bg_models Module</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="intensity_processing.html"
+                        title="next chapter">intensity_processing Module</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="_sources/depth_processing.txt"
@@ -144,7 +158,10 @@ the mask:</p>
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="index.html" title="Welcome to Left Luggage Detection’s documentation!"
+          <a href="intensity_processing.html" title="intensity_processing Module"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="bg_models.html" title="bg_models Module"
              >previous</a> |</li>
         <li><a href="index.html">Left Luggage Detection 0.1.1 documentation</a> &raquo;</li> 
       </ul>

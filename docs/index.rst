@@ -11,7 +11,12 @@ Contents:
 .. toctree::
    :maxdepth: 2
 
+   bg_models
    depth_processing
+   intensity_processing
+   const
+   left-luggage-detection
+   utils
 
 Indices and tables
 ==================
