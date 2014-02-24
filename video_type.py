@@ -12,7 +12,6 @@ else:
     from SimpleCV import *
 
 
-
 class VideoDisplay:
 
     def __init__(self, v_type):
@@ -40,14 +39,13 @@ class VideoDisplay:
             surface = pygame.surfarray.make_surface(frame)
             self.screen.blit(surface, (0, 0))
 
-            text_color = (255, 0, 0)
             # pick a font you have and set its size
-            myfont = pygame.font.SysFont("Comic Sans MS", 15)
+            myfont = pygame.font.SysFont("Arial", 15)
             # apply it to text on a label
-            label_tl = myfont.render("Video Stream RGB", 1, text_color)
-            label_tr = myfont.render("RGB foreground and Detection Proposals", 1, text_color)
-            label_bl = myfont.render("DEPTH foreground and Detection Proposals", 1, text_color)
-            label_br = myfont.render("Final proposals", 1, text_color)
+            label_tl = myfont.render("Video Stream RGB", 1, (255, 255, 255))
+            label_tr = myfont.render("RGB foreground and detection Proposals", 1, (255, 255, 255))
+            label_bl = myfont.render("DEPTH foreground and detection Proposals", 1, (255, 255, 255))
+            label_br = myfont.render("Final proposals", 1, (255, 255, 255))
 
             # put the label object on the screen at point x=100, y=100
             self.screen.blit(label_tl, (20, 10))
