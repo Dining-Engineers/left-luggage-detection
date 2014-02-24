@@ -2,3 +2,4 @@
 
 .idea/*
 *.pyc
+docs/_build/*

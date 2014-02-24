@@ -2,6 +2,7 @@ from depth_processing import *
 from intensity_processing import *
 import cProfile
 from kinectconnector import *
+import numpy as np
 
 PYGAME = True
 if PYGAME:
@@ -198,17 +199,48 @@ def left_luggage_detection():
 
 
 if __name__ == "__main__":
-    #cProfile.run('left_luggage_detection()')
-    import os
-    #print os.environ['PATH']
+    left_luggage_detection()
 
-    from pycallgraph import PyCallGraph
-    from pycallgraph.output import GraphvizOutput
-
-    with PyCallGraph(output=GraphvizOutput()):
-        left_luggage_detection()
-
-    #left_luggage_detection()
-
+    # PROFILING
+    # cProfile.run('left_luggage_detection()')
     # command = """left_luggage_detection()"""
     # cProfile.runctx( command, globals(), locals(), filename="kinect_pygame.profile" )
+
+    ## GRAFO CHIAMATE
+    # from pycallgraph import PyCallGraph
+    # from pycallgraph.output import GraphvizOutput
+    # from pycallgraph import Config
+    # from pycallgraph import GlobbingFilter
+    #
+    # config = Config()
+    # config.trace_filter = GlobbingFilter(exclude=[
+    #     'pycallgraph.*',
+    #     '*.secret_function',
+    #     'logging.*',
+    #     'threading.*',
+    #     'ctypes.*'
+    #     're*',
+    #     'distutils.*',
+    #     'weakref.*',
+    #     'atexit.*',
+    #     'pkgutil.*',
+    #     'codecs.*',
+    #     'functools.*',
+    #     'posixpath.*',
+    #     'UserDict.*',
+    #     'encodings.*',
+    #     'string.*',
+    #     'sre_parse.*',
+    #     'ctypes*',
+    #     'genericpath*',
+    #     'stat*',
+    #     'sre_compile*',
+    #     'mpl_toolkits*'
+    # ])
+    #
+    # graphviz = GraphvizOutput(output_file='filter_exclude_2.png')
+    #
+    # with PyCallGraph(output=graphviz, config=config):
+    #     left_luggage_detection()
+
+
