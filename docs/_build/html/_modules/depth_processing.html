@@ -67,58 +67,68 @@
     <span class="n">RECT_MATCHING</span> <span class="o">=</span> <span class="mi">1</span>
     <span class="n">RECT_MATCHING2</span> <span class="o">=</span> <span class="mi">2</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">current_frame</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">640</span><span class="p">,</span> <span class="mi">480</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint16</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">accumulator</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">640</span><span class="p">,</span> <span class="mi">480</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">background_aggregator</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">640</span><span class="p">,</span> <span class="mi">480</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int8</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">background_model</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">480</span><span class="p">,</span> <span class="mi">640</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">foreground_mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">640</span><span class="p">,</span> <span class="mi">480</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image_shape</span><span class="o">=</span><span class="p">(</span><span class="mi">640</span><span class="p">,</span> <span class="mi">480</span><span class="p">)):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_frame</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="n">image_shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint16</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">accumulator</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="n">image_shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">background_aggregator</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="n">image_shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int8</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">background_model</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="n">image_shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">foreground_mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="n">image_shape</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">rect_accum</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">rect_accum2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
 
-
-    <span class="c">#@current_frame.setter</span>
-<div class="viewcode-block" id="DepthProcessing.current_frame"><a class="viewcode-back" href="../depth_processing.html#depth_processing.DepthProcessing.current_frame">[docs]</a>    <span class="k">def</span> <span class="nf">current_frame</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+<div class="viewcode-block" id="DepthProcessing.update_background_model"><a class="viewcode-back" href="../depth_processing.html#depth_processing.DepthProcessing.update_background_model">[docs]</a>    <span class="k">def</span> <span class="nf">update_background_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">current_frame</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Setter for current frame: the depth matrix obtained is transposed so we cast the right shpae</span>
-<span class="sd">        :param np.uint16 value: 11-bit depth matrix</span>
+<span class="sd">        Update depth background by running average</span>
+
+<span class="sd">        :param current_frame: current frame whereby update bg model</span>
+<span class="sd">        :return: background model</span>
+<span class="sd">        :rtype: np.float32</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_background_depth</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">background_model</span> <span class="o">=</span> <span class="n">bg_models</span><span class="o">.</span><span class="n">compute_background_running_average</span><span class="p">(</span><span class="n">current_frame</span><span class="p">,</span>
+                                                                             <span class="bp">self</span><span class="o">.</span><span class="n">background_model</span><span class="p">,</span> <span class="n">BG_RUN_AVG_LRATE</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">background_model</span>
 </div>
-<div class="viewcode-block" id="DepthProcessing.update_background_running_average"><a class="viewcode-back" href="../depth_processing.html#depth_processing.DepthProcessing.update_background_running_average">[docs]</a>    <span class="k">def</span> <span class="nf">update_background_running_average</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="DepthProcessing.extract_foreground_mask_from_run_avg"><a class="viewcode-back" href="../depth_processing.html#depth_processing.DepthProcessing.extract_foreground_mask_from_run_avg">[docs]</a>    <span class="k">def</span> <span class="nf">extract_foreground_mask_from_run_avg</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">current_frame</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">            get depth background by running average</span>
+<span class="sd">        Extract depth foreground mask from running average computed substracting current_frame from background model</span>
+<span class="sd">        where the difference is above BG_MASK_THRESHOLD</span>
 
+<span class="sd">        :param current_frame: current frame from which extract foreground</span>
+<span class="sd">        :return: binary mask with 1 for foreground and 0 for background</span>
+<span class="sd">        :rtype: np.int64</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="c">#TODO RETURN VALUE</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">background_model</span> <span class="o">=</span> <span class="n">bg_models</span><span class="o">.</span><span class="n">get_background_running_average</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_frame</span><span class="p">,</span>
-                                                                         <span class="bp">self</span><span class="o">.</span><span class="n">background_model</span><span class="p">,</span> <span class="n">BG_RUN_AVG_LRATE</span><span class="p">)</span>
-</div>
-<div class="viewcode-block" id="DepthProcessing.extract_foreground_mask_from_run_avg"><a class="viewcode-back" href="../depth_processing.html#depth_processing.DepthProcessing.extract_foreground_mask_from_run_avg">[docs]</a>    <span class="k">def</span> <span class="nf">extract_foreground_mask_from_run_avg</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        get depth foreground mask from running average computed</span>
-<span class="sd">        with get_background_running_average</span>
-<span class="sd">        the mask:</span>
-<span class="sd">         - 0 = background</span>
-<span class="sd">         - 1 = foreground</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">foreground_mask</span> <span class="o">=</span> <span class="n">bg_models</span><span class="o">.</span><span class="n">get_foreground_mask_from_running_average</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_frame</span><span class="p">,</span>
-                                                                                   <span class="bp">self</span><span class="o">.</span><span class="n">background_model</span><span class="p">,</span>
-                                                                                   <span class="n">BG_MASK_THRESHOLD</span><span class="p">)</span>
-
+        <span class="n">current_frame_filtered</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">current_frame</span> <span class="o">==</span> <span class="n">DEPTH_HOLE_VALUE</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">background_model</span><span class="p">,</span> <span class="n">current_frame</span><span class="p">))</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+        <span class="n">diff</span> <span class="o">=</span> <span class="p">(</span><span class="n">current_frame_filtered</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">background_model</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">foreground_mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">diff</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">BG_MASK_THRESHOLD</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">foreground_mask</span>
 </div>
 <div class="viewcode-block" id="DepthProcessing.extract_proposal_bbox"><a class="viewcode-back" href="../depth_processing.html#depth_processing.DepthProcessing.extract_proposal_bbox">[docs]</a>    <span class="k">def</span> <span class="nf">extract_proposal_bbox</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="n">ACCUMULATOR</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Sblinda Estrai</span>
-<span class="sd">        :param method: paremtro che sblinda</span>
-<span class="sd">        :return: :raise NotImplementedError:</span>
+<span class="sd">        Compute bounding boxes for connected components from foreground masks that remain constant</span>
+<span class="sd">        for AGG_DEPTH_MAX_E frames.</span>
+
+<span class="sd">        To keep track of the bounding boxes over time the function uses an aggregator</span>
+<span class="sd">        depending on the method specified</span>
+
+<span class="sd">        :param method: method used to keep track of the bounding boxes history. Methods available are:</span>
+
+<span class="sd">            - *ACCUMULATOR*: to use an image accumulator for each pixel (fastest method).</span>
+<span class="sd">              The bounding boxes are extracted from the pixels accumulated AGG_DEPTH_MAX_E times.</span>
+
+<span class="sd">            - *RECT_MATCHING/RECT_MATCHING2*: to keep track of the number of times a particular bounding box occurs over</span>
+<span class="sd">              time (slower method but more accurate).</span>
+<span class="sd">              Two bounding boxes in different frames are considered the same if their placement and dimension remain</span>
+<span class="sd">              within a tolerance threshold.</span>
+
+<span class="sd">        :return: list of bounding boxes in the form of (x,y, width, height) where (x,y) is the top left corner</span>
+<span class="sd">        :rtype: List</span>
+<span class="sd">        :raise: *NotImplementedError*: if a method different from ACCUMULATOR or RECT_MATCHING or RECT_MATCHING2 is specified</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">bbox_to_draw</span> <span class="o">=</span> <span class="p">[]</span>
 
         <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">ACCUMULATOR</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">accumulator</span> <span class="o">=</span> <span class="n">bg_models</span><span class="o">.</span><span class="n">update_depth_detection_aggregator</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">accumulator</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">foreground_mask</span><span class="p">)</span>
-            <span class="n">bbox</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">bbox_pixels</span> <span class="o">=</span> <span class="n">bg_models</span><span class="o">.</span><span class="n">get_bounding_boxes</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">accumulator</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">accumulator</span> <span class="o">=</span> <span class="n">update_depth_detection_aggregator</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">accumulator</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">foreground_mask</span><span class="p">)</span>
+            <span class="n">bbox</span> <span class="o">=</span> <span class="n">bg_models</span><span class="o">.</span><span class="n">get_bounding_boxes</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">accumulator</span><span class="p">))</span>
             <span class="n">bbox_to_draw</span> <span class="o">=</span> <span class="n">bbox</span>
 
         <span class="k">elif</span> <span class="n">method</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">RECT_MATCHING</span><span class="p">:</span>
@@ -127,7 +137,7 @@
             <span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
 
             <span class="c"># get current bbox</span>
-            <span class="n">bbox</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">bbox_pixels</span> <span class="o">=</span> <span class="n">bg_models</span><span class="o">.</span><span class="n">get_bounding_boxes</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">foreground_mask</span><span class="p">)</span>
+            <span class="n">bbox</span> <span class="o">=</span> <span class="n">bg_models</span><span class="o">.</span><span class="n">get_bounding_boxes</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">foreground_mask</span><span class="p">)</span>
 
             <span class="c"># bool list for each bbox in rect_accumulator</span>
             <span class="c"># if true =&gt; we had a match between current and accumulator</span>
@@ -175,7 +185,7 @@
 
         <span class="k">elif</span> <span class="n">method</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">RECT_MATCHING2</span><span class="p">:</span>
 
-            <span class="n">_</span><span class="p">,</span> <span class="n">rect_current</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">bg_models</span><span class="o">.</span><span class="n">get_bounding_boxes</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">foreground_mask</span><span class="p">)</span>
+            <span class="n">rect_current</span> <span class="o">=</span> <span class="n">bg_models</span><span class="o">.</span><span class="n">get_bounding_boxes2</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">foreground_mask</span><span class="p">)</span>
 
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">rect_accum2</span><span class="o">.</span><span class="n">size</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
                 <span class="c"># accumulator is not empty check with current rect</span>
@@ -260,15 +270,18 @@
 
         <span class="k">return</span> <span class="n">bbox_to_draw</span>
 
-<span class="c">## per fare get and set</span>
-    <span class="c"># @property</span>
-    <span class="c"># def background_depth(self):</span>
-    <span class="c">#     return self._background_depth</span>
-    <span class="c">#</span>
-    <span class="c"># @background_depth.setter</span>
-    <span class="c"># def background_depth(self, value):</span>
-    <span class="c">#     self._background_depth = value</span></div></div>
-</pre></div>
+
+
+</div></div>
+<div class="viewcode-block" id="update_depth_detection_aggregator"><a class="viewcode-back" href="../depth_processing.html#depth_processing.update_depth_detection_aggregator">[docs]</a><span class="k">def</span> <span class="nf">update_depth_detection_aggregator</span><span class="p">(</span><span class="n">aggregator</span><span class="p">,</span> <span class="n">foreground_current</span><span class="p">):</span>
+    <span class="n">not_in_current_foreground</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">int8</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">logical_not</span><span class="p">(</span><span class="n">foreground_current</span><span class="p">))</span>
+    <span class="c"># increment aggregator</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">aggregator</span> <span class="o">+</span> <span class="n">foreground_current</span> <span class="o">-</span> <span class="n">not_in_current_foreground</span> <span class="o">*</span> <span class="n">AGG_DEPTH_PENALTY</span>
+
+    <span class="c"># set aggregate bounds</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">AGG_DEPTH_MAX_E</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span>
+</pre></div></div>
 
           </div>
         </div>
