@@ -3,9 +3,24 @@ from intensity_processing import *
 import cProfile
 from kinectconnector import *
 
+PYGAME = False
+if PYGAME:
+    import pygame
+    import pygame.camera
+    from pygame.locals import *
+else:
+    from SimpleCV import *
+
+
 def left_luggage_detection():
+
     #create video streams
-    d = Display(resolution=(1024, 768))
+    if PYGAME:
+        screen = pygame.display.set_mode([1280, 960])
+        pygame.init()
+    else:
+        screen = Display(resolution=(1280, 960))
+
 
     # initialize the camera
     cam = KinectConnector()
@@ -20,15 +35,17 @@ def left_luggage_detection():
     # IntensityProcessing instance
     rgb = IntensityProcessing(IMAGE_SHAPE)
 
-    frame = 1
+    n_frame = 1
+    loop = True
     # main loop
-    while not d.isDone():
+    while loop:
 
         # get next video frame
         rgb.current_frame = cam.get_image()#.getNumpy()
-        frame+=1
-        if frame == 80:
-            d.done = True
+        n_frame += 1
+        # print "frame: ", frame, rgb.current_frame.shape
+        if n_frame == 80:
+            loop = False
         # get next depth frame (11-bit precision)
         # N.B. darker => closer
         # the depth matrix obtained is transposed so we cast the right shape
@@ -125,26 +142,63 @@ def left_luggage_detection():
         overlay = colors[final_result_mask]
         final_result_image = cv2.addWeighted(final_result_image, 0.5, overlay, 0.5, 0.0, dtype=cv2.CV_8UC3)
 
-        # save images to display
-        frame_upper_left = Image(rgb.current_frame)
-        frame_upper_right = Image(foreground_rgb_proposal)
-        frame_bottom_left = Image(foreground_depth_proposal)
 
-        frame_bottom_right = Image(final_result_image)
 
-        # rows of display
-        frame_up = frame_upper_left.sideBySide(frame_upper_right)
-        frame_bottom = frame_bottom_left.sideBySide(frame_bottom_right)
+        if PYGAME:
+            frame_upper_left = rgb.current_frame
+            frame_upper_right = foreground_rgb_proposal
+            frame_bottom_left = foreground_depth_proposal
+            frame_bottom_right = final_result_image
 
-        # save images to display
-        frame_up.sideBySide(frame_bottom, side="bottom").save(d)
+            frame = np.zeros(shape=(1280, 960, 3))
+            frame[:640, :480] = frame_upper_left
+            frame[640:, :480] = frame_upper_right
+            frame[:640, 480:] = frame_bottom_left
+            frame[640:, 480:] = frame_bottom_right
 
-        # quit if click on display
-        if d.mouseLeft:
-            d.done = True
+            surface = pygame.surfarray.make_surface(frame)
+            screen.blit(surface, (0, 0))
+            pygame.display.flip()
 
-    d.quit()
+            events = pygame.event.get()
+            for event in events:
+                if event.type == pygame.MOUSEBUTTONUP:
+                    pygame.display.quit()
+                    loop = False
+
+            if not loop:
+                from meliae import scanner
+                scanner.dump_all_objects( "kinect_memory_pygame" )
+                pygame.display.quit()
+
+        else:
+
+            # save images to display
+            frame_upper_left = Image(rgb.current_frame)
+            frame_upper_right = Image(foreground_rgb_proposal)
+            frame_bottom_left = Image(foreground_depth_proposal)
+
+            frame_bottom_right = Image(final_result_image)
+
+            # rows of display
+            frame_up = frame_upper_left.sideBySide(frame_upper_right)
+            frame_bottom = frame_bottom_left.sideBySide(frame_bottom_right)
+
+            # save images to display
+            frame_up.sideBySide(frame_bottom, side="bottom").save(screen)
+
+            # quit if click on display
+            if screen.mouseLeft or loop == False:
+                loop = False
+                screen.done = True
+                screen.quit()
+                from meliae import scanner
+                scanner.dump_all_objects( "kinect_memory_simplecv" )
+
 
 if __name__ == "__main__":
     #cProfile.run('left_luggage_detection()')
-    left_luggage_detection()
+    #left_luggage_detection()
+
+    command = """left_luggage_detection()"""
+    cProfile.runctx( command, globals(), locals(), filename="kinect_pygame.profile" )

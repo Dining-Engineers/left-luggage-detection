@@ -1,6 +1,5 @@
 import numpy as np
 import bg_models
-from SimpleCV import *
 from const import *
 from utils import *
 import cv2
