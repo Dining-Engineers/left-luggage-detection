@@ -57,7 +57,18 @@
 <span class="kn">from</span> <span class="nn">const</span> <span class="kn">import</span> <span class="o">*</span>
 
 
-<div class="viewcode-block" id="get_background_running_average"><a class="viewcode-back" href="../bg_models.html#bg_models.get_background_running_average">[docs]</a><span class="k">def</span> <span class="nf">get_background_running_average</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">average</span><span class="p">,</span> <span class="n">alpha</span><span class="p">):</span>
+<div class="viewcode-block" id="compute_background_running_average"><a class="viewcode-back" href="../bg_models.html#bg_models.compute_background_running_average">[docs]</a><span class="k">def</span> <span class="nf">compute_background_running_average</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">average</span><span class="p">,</span> <span class="n">alpha</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate background using running average technique new background is equal to:</span>
+
+<span class="sd">        :math:`bg_{new} = (1-alpha)*bg_{old} + alpha*frame`</span>
+
+<span class="sd">    :param np.uint8 frame: current frame for background update</span>
+<span class="sd">    :param np.float32 average: background model to update</span>
+<span class="sd">    :param float alpha: update learning rate</span>
+<span class="sd">    :return: updated background model</span>
+<span class="sd">    :rtype: np.float32</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="c"># detect holes in depth map</span>
     <span class="c"># either in current frame and in average frame</span>
     <span class="n">holes_frame</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">frame</span> <span class="o">==</span> <span class="n">DEPTH_HOLE_VALUE</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
@@ -76,163 +87,94 @@
     <span class="n">cv2</span><span class="o">.</span><span class="n">accumulateWeighted</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">average</span><span class="p">,</span> <span class="n">alpha</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">average</span>
 
-</div>
-<div class="viewcode-block" id="get_foreground_mask_from_running_average"><a class="viewcode-back" href="../bg_models.html#bg_models.get_foreground_mask_from_running_average">[docs]</a><span class="k">def</span> <span class="nf">get_foreground_mask_from_running_average</span><span class="p">(</span><span class="n">current_frame</span><span class="p">,</span> <span class="n">bg_frame</span><span class="p">,</span> <span class="n">threshold_filter</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">            get foreground substracting current frame from background model</span>
-<span class="sd">            where the difference is above threshold_filter</span>
-<span class="sd">    :param sblinda current_frame:</span>
-<span class="sd">    :param str bg_frame:</span>
-<span class="sd">    :param threshold_filter:</span>
-<span class="sd">    :return:</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">current_frame_filtered</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">current_frame</span> <span class="o">==</span> <span class="n">DEPTH_HOLE_VALUE</span><span class="p">,</span> <span class="n">bg_frame</span><span class="p">,</span> <span class="n">current_frame</span><span class="p">))</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
-    <span class="n">diff</span> <span class="o">=</span> <span class="p">(</span><span class="n">current_frame_filtered</span><span class="o">.</span><span class="n">T</span> <span class="o">-</span> <span class="n">bg_frame</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
-    <span class="n">diff_filter</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">diff</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">threshold_filter</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
-    <span class="k">return</span> <span class="n">diff_filter</span>
-
-</div>
-<div class="viewcode-block" id="get_foreground_from_mask_depth"><a class="viewcode-back" href="../bg_models.html#bg_models.get_foreground_from_mask_depth">[docs]</a><span class="k">def</span> <span class="nf">get_foreground_from_mask_depth</span><span class="p">(</span><span class="n">foreground</span><span class="p">,</span> <span class="n">mask</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">foreground</span> <span class="o">*</span> <span class="n">mask</span>
-
 
 <span class="c"># get rgb background</span></div>
-<div class="viewcode-block" id="get_background_mask_zivkovic"><a class="viewcode-back" href="../bg_models.html#bg_models.get_background_mask_zivkovic">[docs]</a><span class="k">def</span> <span class="nf">get_background_mask_zivkovic</span><span class="p">(</span><span class="n">f_bg</span><span class="p">,</span> <span class="n">current_frame</span><span class="p">,</span> <span class="n">alpha</span><span class="p">):</span>
-
-    <span class="n">foreground</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="n">current_frame</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<div class="viewcode-block" id="compute_foreground_mask_from_func"><a class="viewcode-back" href="../bg_models.html#bg_models.compute_foreground_mask_from_func">[docs]</a><span class="k">def</span> <span class="nf">compute_foreground_mask_from_func</span><span class="p">(</span><span class="n">f_bg</span><span class="p">,</span> <span class="n">current_frame</span><span class="p">,</span> <span class="n">alpha</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Extract binary foreground mask (1 foreground, 0 background) from f_bg background modeling function and update</span>
+<span class="sd">    background model.</span>
+<span class="sd">    :param f_bg: background modeling function</span>
+<span class="sd">    :param current_frame: current frame from which extract foreground</span>
+<span class="sd">    :param alpha: update learning rate</span>
+<span class="sd">    :return:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">foreground</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="n">current_frame</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
     <span class="c"># get foreground in numpy array</span>
     <span class="n">foreground</span> <span class="o">=</span> <span class="n">f_bg</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">current_frame</span><span class="p">,</span> <span class="n">foreground</span><span class="p">,</span> <span class="n">alpha</span><span class="p">)</span>
     <span class="c"># convert to 0 1 notation since by default apply =&gt; 0 bg, 255fg shadow other value</span>
     <span class="n">foreground</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">((</span><span class="n">foreground</span> <span class="o">==</span> <span class="mi">0</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">foreground</span>
 
-
-<span class="c"># def get_background_from_mask_rgb(image, mask):</span>
-<span class="c">#     # dove where(x,y,z) dove si verifica x sostituisci y, il resto mettilo a z</span>
-<span class="c">#     #mask2 = np.where((mask == 255), 0, 1)</span>
-<span class="c">#     return image * utils.to_rgb1a(mask)</span>
-
 </div>
-<div class="viewcode-block" id="get_foreground_from_mask_rgb"><a class="viewcode-back" href="../bg_models.html#bg_models.get_foreground_from_mask_rgb">[docs]</a><span class="k">def</span> <span class="nf">get_foreground_from_mask_rgb</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">mask</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">image</span> <span class="o">*</span> <span class="n">utils</span><span class="o">.</span><span class="n">to_rgb1a</span><span class="p">(</span><span class="n">mask</span><span class="p">)</span>
+<div class="viewcode-block" id="cut_foreground"><a class="viewcode-back" href="../bg_models.html#bg_models.cut_foreground">[docs]</a><span class="k">def</span> <span class="nf">cut_foreground</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">mask</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    :param image:</span>
+<span class="sd">    :param mask:</span>
+<span class="sd">    :return: :raise IndexError:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span> <span class="ow">or</span> <span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="c"># we have a greyscale image</span>
+        <span class="k">return</span> <span class="n">image</span> <span class="o">*</span> <span class="n">mask</span>
+    <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span> <span class="ow">and</span> <span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">image</span> <span class="o">*</span> <span class="n">utils</span><span class="o">.</span><span class="n">to_rgb1a</span><span class="p">(</span><span class="n">mask</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">IndexError</span><span class="p">(</span><span class="s">&quot;image has the wrong number of channels (must have 1 or 3 channels&quot;</span><span class="p">)</span>
 
 </div>
 <div class="viewcode-block" id="apply_opening"><a class="viewcode-back" href="../bg_models.html#bg_models.apply_opening">[docs]</a><span class="k">def</span> <span class="nf">apply_opening</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">kernel_size</span><span class="p">,</span> <span class="n">kernel_type</span><span class="p">):</span>
     <span class="c"># get uint image because cv2 needs it</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    :param image:</span>
+<span class="sd">    :param kernel_size:</span>
+<span class="sd">    :param kernel_type:</span>
+<span class="sd">    :return:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">u_image</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
     <span class="c">#foreground_mask_depth = foreground_mask_depth.astype(np.uint8)</span>
     <span class="n">kernel</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">getStructuringElement</span><span class="p">(</span><span class="n">kernel_type</span><span class="p">,</span> <span class="p">(</span><span class="n">kernel_size</span><span class="p">,</span> <span class="n">kernel_size</span><span class="p">))</span>
     <span class="n">u_image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">morphologyEx</span><span class="p">(</span><span class="n">u_image</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">MORPH_OPEN</span><span class="p">,</span> <span class="n">kernel</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">u_image</span>
-
-</div>
-<div class="viewcode-block" id="update_rgb_detection_aggregator"><a class="viewcode-back" href="../bg_models.html#bg_models.update_rgb_detection_aggregator">[docs]</a><span class="k">def</span> <span class="nf">update_rgb_detection_aggregator</span><span class="p">(</span><span class="n">aggregator</span><span class="p">,</span> <span class="n">foreground_long</span><span class="p">,</span> <span class="n">foreground_short</span><span class="p">):</span>
-
-    <span class="n">proposal_candidate</span> <span class="o">=</span> <span class="n">foreground_long</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">int8</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">logical_not</span><span class="p">(</span><span class="n">foreground_short</span><span class="p">))</span>
-    <span class="n">other_cases</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">int8</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">logical_not</span><span class="p">(</span><span class="n">proposal_candidate</span><span class="p">))</span>
-
-    <span class="c"># increment aggregator</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="n">aggregator</span> <span class="o">+</span> <span class="n">proposal_candidate</span>
-
-    <span class="c"># AVOID REMOVING FROM PROPOSA OF ALREADY DETECTED OBJECT</span>
-    <span class="c"># mask of max values (proposal)</span>
-    <span class="n">mask_proposal</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">((</span><span class="n">result</span> <span class="o">&gt;=</span> <span class="n">AGG_RGB_MAX_E</span><span class="p">),</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-    <span class="n">mask_new_pixel_in_bg</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">logical_not</span><span class="p">(</span><span class="n">foreground_long</span><span class="p">))</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">logical_not</span><span class="p">(</span><span class="n">foreground_short</span><span class="p">))</span>
-    <span class="c"># # pixel of older proposal that are becoming background (FL =0 and FS = 0)</span>
-    <span class="n">mask</span> <span class="o">=</span> <span class="n">mask_proposal</span> <span class="o">*</span> <span class="n">mask_new_pixel_in_bg</span>
-    <span class="c"># # # avoid previous pixel from being penalized</span>
-    <span class="n">other_cases</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">((</span><span class="n">other_cases</span> <span class="o">==</span> <span class="n">mask</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="n">other_cases</span><span class="p">)</span>
-    <span class="c"># # caso 0 -1</span>
-    <span class="c"># mask_penalty = np.int32(np.logical_not(foreground_long)) * np.int32(foreground_short)</span>
-
-    <span class="c"># add penalty to pixel not in proposal</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="n">result</span> <span class="o">-</span> <span class="n">other_cases</span> <span class="o">*</span> <span class="n">AGG_RGB_PENALTY</span> <span class="c">#- mask_penalty * (AGG_RGB_MAX_E-1)</span>
-
-    <span class="c"># set aggregate bounds</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">AGG_RGB_MAX_E</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">result</span>
-
-</div>
-<div class="viewcode-block" id="update_depth_detection_aggregator"><a class="viewcode-back" href="../bg_models.html#bg_models.update_depth_detection_aggregator">[docs]</a><span class="k">def</span> <span class="nf">update_depth_detection_aggregator</span><span class="p">(</span><span class="n">aggregator</span><span class="p">,</span> <span class="n">foreground_current</span><span class="p">):</span>
-    <span class="n">not_in_current_foreground</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">int8</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">logical_not</span><span class="p">(</span><span class="n">foreground_current</span><span class="p">))</span>
-    <span class="c"># increment aggregator</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="n">aggregator</span> <span class="o">+</span> <span class="n">foreground_current</span> <span class="o">-</span> <span class="n">not_in_current_foreground</span> <span class="o">*</span> <span class="n">AGG_DEPTH_PENALTY</span>
-
-    <span class="c"># set aggregate bounds</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">AGG_DEPTH_MAX_E</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">result</span>
-
-</div>
-<div class="viewcode-block" id="apply_morph_reconstruction"><a class="viewcode-back" href="../bg_models.html#bg_models.apply_morph_reconstruction">[docs]</a><span class="k">def</span> <span class="nf">apply_morph_reconstruction</span><span class="p">(</span><span class="n">seed</span><span class="p">,</span> <span class="n">image</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    </span>
-<span class="sd">    @param seed:</span>
-<span class="sd">    @param image:</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">pass</span>
-
 </div>
 <div class="viewcode-block" id="get_bounding_boxes"><a class="viewcode-back" href="../bg_models.html#bg_models.get_bounding_boxes">[docs]</a><span class="k">def</span> <span class="nf">get_bounding_boxes</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Return Bounding Boxes in the format x,y,w,h where (x,y) is the top left corner</span>
-<span class="sd">    @param image:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return Bounding Boxes in the format x,y,w,h where (x,y) is the top left corner</span>
+<span class="sd">    :param image:</span>
+<span class="sd">    :return:</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">bbox</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">contours</span><span class="p">,</span> <span class="n">hierarchy</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">findContours</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">RETR_LIST</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">CHAIN_APPROX_SIMPLE</span><span class="p">)</span>
 
+    <span class="k">for</span> <span class="n">cnt</span> <span class="ow">in</span> <span class="n">contours</span><span class="p">:</span>
+        <span class="c"># filter contours with area less than 50 pixel</span>
+        <span class="k">if</span> <span class="n">cv2</span><span class="o">.</span><span class="n">contourArea</span><span class="p">(</span><span class="n">cnt</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">BBOX_MIN_AREA</span><span class="p">:</span>
+            <span class="n">rect</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">boundingRect</span><span class="p">(</span><span class="n">cnt</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">rect</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">bbox</span><span class="p">:</span>
+                <span class="n">bbox</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rect</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">bbox</span>
+
+</div>
+<div class="viewcode-block" id="get_bounding_boxes2"><a class="viewcode-back" href="../bg_models.html#bg_models.get_bounding_boxes2">[docs]</a><span class="k">def</span> <span class="nf">get_bounding_boxes2</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Return Bounding Boxes in the format x,y,w,h where (x,y) is the top left corner</span>
+<span class="sd">    :param image:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">squares</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="n">cnt_selected</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="n">kdtree_elements</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>  <span class="c">#np.zeros(shape=(1,3))</span>
+    <span class="n">bbox_elements</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
     <span class="n">contours</span><span class="p">,</span> <span class="n">hierarchy</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">findContours</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">RETR_LIST</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">CHAIN_APPROX_SIMPLE</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">cnt</span> <span class="ow">in</span> <span class="n">contours</span><span class="p">:</span>
-
         <span class="c"># filter contours with area less than 50 pixel</span>
-        <span class="k">if</span> <span class="n">cv2</span><span class="o">.</span><span class="n">contourArea</span><span class="p">(</span><span class="n">cnt</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">50</span><span class="p">:</span>
-            <span class="c">#M = cv2.moments(cnt)</span>
-            <span class="c">#cx, cy = int(M[&#39;m10&#39;]/M[&#39;m00&#39;]), int(M[&#39;m01&#39;]/M[&#39;m00&#39;])</span>
-            <span class="c">#cv2.circle(foreground_depth, (cx, cy), 20, 255, 1)</span>
-            <span class="c"># rect[0],rect[1] =&gt; bottom left vertex; rect[2], rect[3] =&gt; width, height</span>
+        <span class="k">if</span> <span class="n">cv2</span><span class="o">.</span><span class="n">contourArea</span><span class="p">(</span><span class="n">cnt</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">BBOX_MIN_AREA</span><span class="p">:</span>
             <span class="n">rect</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">boundingRect</span><span class="p">(</span><span class="n">cnt</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">rect</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">squares</span><span class="p">:</span>
-                <span class="n">area</span> <span class="o">=</span> <span class="n">rect</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="n">rect</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
                 <span class="n">squares</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rect</span><span class="p">)</span>
-                <span class="n">cnt_selected</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cnt</span><span class="p">)</span>
-
-                <span class="c"># coordinates rect center</span>
-                <span class="n">cx</span> <span class="o">=</span> <span class="n">rect</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">rect</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">/</span> <span class="mi">2</span>
-                <span class="n">cy</span> <span class="o">=</span> <span class="n">rect</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">rect</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">/</span> <span class="mi">2</span>
-                <span class="k">if</span> <span class="n">kdtree_elements</span><span class="o">.</span><span class="n">size</span> <span class="ow">is</span> <span class="mi">0</span><span class="p">:</span>
-                    <span class="n">kdtree_elements</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">rect</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">rect</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">rect</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">rect</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="mi">1</span><span class="p">]])</span><span class="c">#np.append(rect, 1)#</span>
+                <span class="k">if</span> <span class="n">bbox_elements</span><span class="o">.</span><span class="n">size</span> <span class="ow">is</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="c"># save bbox with a counter set to one</span>
+                    <span class="n">bbox_elements</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">rect</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">rect</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">rect</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">rect</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="mi">1</span><span class="p">]])</span>
                 <span class="k">else</span><span class="p">:</span>
-                    <span class="n">kdtree_elements</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">kdtree_elements</span><span class="p">,</span> <span class="p">[[</span><span class="n">rect</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">rect</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">rect</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">rect</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="mi">1</span><span class="p">]]))</span>
-                    <span class="c"># np.append(rect, 1)))#[[cx, cy, area, 1]]))</span>
-    <span class="k">return</span> <span class="n">squares</span><span class="p">,</span> <span class="n">kdtree_elements</span><span class="p">,</span> <span class="n">cnt_selected</span>
-
-
-<span class="c"># def get_depth_proposal( foreground_mask_depth_current )</span>
-<span class="c">#     return depth_mask_foreground, bbox</span>
-
-
-    <span class="c"># but if the saved object is removed we need to decrement the accumulator</span>
-    <span class="c"># case of FL = 0 and FS = 1</span>
-    <span class="c">#mask_remove_proposal = np.int64(np.logical_not(foreground_long))*foreground_short</span>
-    <span class="c">#mask2 = mask_proposal*mask_remove_proposal</span>
-    <span class="c">#other_cases = np.where((other_cases == mask2), 0, other_cases)</span>
-
-
-<span class="c">## delete</span></div>
-<div class="viewcode-block" id="get_background_from_mask"><a class="viewcode-back" href="../bg_models.html#bg_models.get_background_from_mask">[docs]</a><span class="k">def</span> <span class="nf">get_background_from_mask</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">mask</span><span class="p">):</span>
-    <span class="c"># dove where(x,y,z) dove si verifica x sostituisci y, il resto mettilo a z</span>
-    <span class="n">mask2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">((</span><span class="n">mask</span> <span class="o">==</span> <span class="mi">255</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-    <span class="k">return</span> <span class="p">(</span><span class="n">image</span> <span class="o">*</span> <span class="n">mask2</span><span class="p">)</span>
-
-</div>
-<div class="viewcode-block" id="get_foreground_from_mask"><a class="viewcode-back" href="../bg_models.html#bg_models.get_foreground_from_mask">[docs]</a><span class="k">def</span> <span class="nf">get_foreground_from_mask</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">mask</span><span class="p">):</span>
-    <span class="n">mask2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">((</span><span class="n">mask</span> <span class="o">==</span> <span class="mi">0</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-    <span class="k">return</span> <span class="p">(</span><span class="n">image</span> <span class="o">*</span> <span class="n">mask2</span><span class="p">)</span>
-
-</div>
-<div class="viewcode-block" id="pretty_print"><a class="viewcode-back" href="../bg_models.html#bg_models.pretty_print">[docs]</a><span class="k">def</span> <span class="nf">pretty_print</span><span class="p">(</span><span class="n">array</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">110</span><span class="p">):</span>
-        <span class="k">print</span> <span class="n">array</span><span class="p">[</span><span class="mi">50</span><span class="p">,</span> <span class="n">i</span><span class="p">],</span>
-    <span class="k">print</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span></div>
+                    <span class="n">bbox_elements</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">bbox_elements</span><span class="p">,</span> <span class="p">[[</span><span class="n">rect</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">rect</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">rect</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">rect</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="mi">1</span><span class="p">]]))</span>
+    <span class="k">return</span> <span class="n">bbox_elements</span></div>
 </pre></div>
 
           </div>
