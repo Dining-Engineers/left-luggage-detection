@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -10,7 +9,7 @@
     
     <title>bg_models Module &mdash; Left Luggage Detection 0.1.1 documentation</title>
     
-    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pyramid.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
@@ -28,9 +27,16 @@
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="Left Luggage Detection 0.1.1 documentation" href="index.html" />
     <link rel="next" title="depth_processing Module" href="depth_processing.html" />
-    <link rel="prev" title="Welcome to Left Luggage Detection’s documentation!" href="index.html" /> 
+    <link rel="prev" title="Welcome to Left Luggage Detection’s documentation!" href="index.html" />
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
+<!--[if lte IE 6]>
+<link rel="stylesheet" href="_static/ie6.css" type="text/css" media="screen" charset="utf-8" />
+<![endif]-->
+
   </head>
   <body>
+
     <div class="related">
       <h3>Navigation</h3>
       <ul>
@@ -107,7 +113,11 @@
 
 <dl class="function">
 <dt id="bg_models.compute_foreground_mask_from_func">
+<<<<<<< HEAD
 <tt class="descclassname">bg_models.</tt><tt class="descname">compute_foreground_mask_from_func</tt><big>(</big><em>f_bg</em>, <em>current_frame</em>, <em>alpha</em><big>)</big><a class="reference internal" href="_modules/bg_models.html#compute_foreground_mask_from_func"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bg_models.compute_foreground_mask_from_func" title="Permalink to this definition">¶</a></dt>
+=======
+<tt class="descclassname">bg_models.</tt><tt class="descname">compute_foreground_mask_from_func</tt><big>(</big><em>f_bg</em>, <em>current_frame</em>, <em>alpha</em><big>)</big><a class="headerlink" href="#bg_models.compute_foreground_mask_from_func" title="Permalink to this definition">¶</a></dt>
+>>>>>>> 8ec18df7c355867e592bf1a911f657145c4776d4
 <dd><p>Extract binary foreground mask (1 foreground, 0 background) from f_bg background modeling function and update
 background model.
 :param f_bg: background modeling function
@@ -118,7 +128,11 @@ background model.
 
 <dl class="function">
 <dt id="bg_models.cut_foreground">
+<<<<<<< HEAD
 <tt class="descclassname">bg_models.</tt><tt class="descname">cut_foreground</tt><big>(</big><em>image</em>, <em>mask</em><big>)</big><a class="reference internal" href="_modules/bg_models.html#cut_foreground"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bg_models.cut_foreground" title="Permalink to this definition">¶</a></dt>
+=======
+<tt class="descclassname">bg_models.</tt><tt class="descname">cut_foreground</tt><big>(</big><em>image</em>, <em>mask</em><big>)</big><a class="headerlink" href="#bg_models.cut_foreground" title="Permalink to this definition">¶</a></dt>
+>>>>>>> 8ec18df7c355867e592bf1a911f657145c4776d4
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -128,6 +142,7 @@ background model.
 <li><strong>mask</strong> &#8211; </li>
 </ul>
 </td>
+<<<<<<< HEAD
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -136,6 +151,16 @@ background model.
 <tr class="field-odd field"><th class="field-name" colspan="2">raise IndexError:</th></tr>
 <tr class="field-odd field"><td>&nbsp;</td><td class="field-body"></td>
 </tr>
+=======
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">raise IndexError:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"></td>
+</tr>
+>>>>>>> 8ec18df7c355867e592bf1a911f657145c4776d4
 </tbody>
 </table>
 </p>
@@ -155,7 +180,11 @@ background model.
 
 <dl class="function">
 <dt id="bg_models.get_bounding_boxes2">
+<<<<<<< HEAD
 <tt class="descclassname">bg_models.</tt><tt class="descname">get_bounding_boxes2</tt><big>(</big><em>image</em><big>)</big><a class="reference internal" href="_modules/bg_models.html#get_bounding_boxes2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bg_models.get_bounding_boxes2" title="Permalink to this definition">¶</a></dt>
+=======
+<tt class="descclassname">bg_models.</tt><tt class="descname">get_bounding_boxes2</tt><big>(</big><em>image</em><big>)</big><a class="headerlink" href="#bg_models.get_bounding_boxes2" title="Permalink to this definition">¶</a></dt>
+>>>>>>> 8ec18df7c355867e592bf1a911f657145c4776d4
 <dd><p>Return Bounding Boxes in the format x,y,w,h where (x,y) is the top left corner
 :param image:</p>
 </dd></dl>
@@ -174,11 +203,6 @@ background model.
   <h4>Next topic</h4>
   <p class="topless"><a href="depth_processing.html"
                         title="next chapter">depth_processing Module</a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="_sources/bg_models.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
 <div id="searchbox" style="display: none">
   <h3>Quick search</h3>
     <form class="search" action="search.html" method="get">
