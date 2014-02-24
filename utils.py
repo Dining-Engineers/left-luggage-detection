@@ -1,5 +1,5 @@
 import numpy as np
-import pykdtree.kdtree
+#import pykdtree.kdtree
 
 
 def to_rgb(im):
@@ -11,10 +11,10 @@ def to_rgb(im):
     return ret
 
 
-def query_kdtree(data_tree, data_query):
-    kdtree = pykdtree.kdtree.KDTree(data_tree)
-    dist, idx = kdtree.query(data_query)
-    return dist, idx
+# def query_kdtree(data_tree, data_query):
+#     kdtree = pykdtree.kdtree.KDTree(data_tree)
+#     dist, idx = kdtree.query(data_query)
+#     return dist, idx
 
 
 def get_center_area_from_rect(rect):
