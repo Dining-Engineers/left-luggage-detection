@@ -66,7 +66,7 @@ def cut_foreground(image, mask):
         # we have a greyscale image
         return image * mask
     elif len(image.shape) == 3 and image.shape[2] == 3:
-        return image * utils.to_rgb1a(mask)
+        return image * utils.to_rgb(mask)
     else:
         raise IndexError("image has the wrong number of channels (must have 1 or 3 channels")
 

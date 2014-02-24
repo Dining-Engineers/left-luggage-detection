@@ -3,30 +3,16 @@ from intensity_processing import *
 import cProfile
 from kinectconnector import *
 import numpy as np
-
-PYGAME = True
-if PYGAME:
-    import pygame
-    import pygame.camera
-    from pygame.locals import *
-else:
-    from SimpleCV import *
+from video_type import VideoDisplay
 
 
 def left_luggage_detection():
 
-    #create video streams
-    if PYGAME:
-        screen = pygame.display.set_mode([1280, 960])
-        pygame.init()
-    else:
-        screen = Display(resolution=(1280, 960))
-
+    # Initialize video display
+    screen = VideoDisplay(DISPLAY_TYPE)
 
     # initialize the camera
     cam = KinectConnector()
-    # shape of the image obtained from kinect
-    IMAGE_SHAPE = (640, 480)
 
     # first loop
     first_run = True
@@ -41,23 +27,17 @@ def left_luggage_detection():
     # main loop
     while loop:
 
-        try:
-            # get next video frame
-            rgb.current_frame = cam.get_image()#.getNumpy()
-            n_frame += 1
-            # print "frame: ", frame, rgb.current_frame.shape
-            # if n_frame == 80:
-            #     loop = False
+        # get next video frame
+        rgb.current_frame = cam.get_image()#.getNumpy()
 
-            # get next depth frame (11-bit precision)
-            # N.B. darker => closer
-            # the depth matrix obtained is transposed so we cast the right shape
-            depth.current_frame = cam.get_depth_matrix().T
-        except Exception as e:
-            print "eccezione: ", e
+        # get next depth frame (11-bit precision)
+        # N.B. darker => closer
+        # the depth matrix obtained is transposed so we cast the right shape
+        depth.current_frame = cam.get_depth_matrix().T
 
-
-        #wprint n_frame, rgb.current_frame.shape
+        n_frame += 1
+        # if n_frame == 80:
+        #     loop = False
 
         # TODO correggi offset depth
         #depth_frame = depth_frame[25:, 0:605]
@@ -112,7 +92,7 @@ def left_luggage_detection():
 
         foreground_rgb_proposal = rgb.proposal
         # convert to rgb to draw colored boxes
-        foreground_depth_proposal = to_rgb1a(foreground_depth_proposal)
+        foreground_depth_proposal = to_rgb(foreground_depth_proposal)
 
         # image where will draw the combined proposal
         final_result_image = rgb.current_frame.copy()
@@ -144,63 +124,21 @@ def left_luggage_detection():
         # apply watershed - result overwrite in mask
         cv2.watershed(final_result_image, watershed_mask)
 
+        # OUTPUT MASK FOR FURTHER STUDY
         final_result_mask = np.where(watershed_mask == 1, 0, 1)
         colors = np.array([[0, 0, 0], [0, 255, 0]])
         overlay = colors[final_result_mask]
         final_result_image = cv2.addWeighted(final_result_image, 0.5, overlay, 0.5, 0.0, dtype=cv2.CV_8UC3)
 
+        frame_upper_left = rgb.current_frame
+        frame_upper_right = foreground_rgb_proposal
+        frame_bottom_left = foreground_depth_proposal
+        frame_bottom_right = final_result_image
 
+        loop = screen.show(frame_upper_left, frame_upper_right, frame_bottom_left, frame_bottom_right)
 
-        if PYGAME:
-            frame_upper_left = rgb.current_frame
-            frame_upper_right = foreground_rgb_proposal
-            frame_bottom_left = foreground_depth_proposal
-            frame_bottom_right = final_result_image
-
-            frame = np.zeros(shape=(1280, 960, 3))
-            frame[:640, :480] = frame_upper_left
-            frame[640:, :480] = frame_upper_right
-            frame[:640, 480:] = frame_bottom_left
-            frame[640:, 480:] = frame_bottom_right
-
-            surface = pygame.surfarray.make_surface(frame)
-            screen.blit(surface, (0, 0))
-            pygame.display.flip()
-
-            events = pygame.event.get()
-            for event in events:
-                if event.type == pygame.MOUSEBUTTONUP:
-                    pygame.display.quit()
-                    loop = False
-
-            if not loop:
-                # from meliae import scanner
-                # scanner.dump_all_objects( "kinect_memory_pygame" )
-                pygame.display.quit()
-
-        else:
-
-            # save images to display
-            frame_upper_left = Image(rgb.current_frame)
-            frame_upper_right = Image(foreground_rgb_proposal)
-            frame_bottom_left = Image(foreground_depth_proposal)
-
-            frame_bottom_right = Image(final_result_image)
-
-            # rows of display
-            frame_up = frame_upper_left.sideBySide(frame_upper_right)
-            frame_bottom = frame_bottom_left.sideBySide(frame_bottom_right)
-
-            # save images to display
-            frame_up.sideBySide(frame_bottom, side="bottom").save(screen)
-
-            # quit if click on display
-            if screen.mouseLeft or loop == False:
-                loop = False
-                screen.done = True
-                screen.quit()
-                # from meliae import scanner
-                # scanner.dump_all_objects( "kinect_memory_simplecv" )
+        if not loop:
+            screen.quit()
 
 
 if __name__ == "__main__":

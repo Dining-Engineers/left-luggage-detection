@@ -17,7 +17,6 @@ class KinectConnector():
     # https://github.com/amiller/libfreenect-goodies
     def get_image(self):
         video = freenect.sync_get_video(self.device_number)[0]
-        print "rgb", type(video)
         #video = video[:, :, ::-1]  # RGB -> BGR
         return video.transpose([1, 0, 2])
 

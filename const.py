@@ -23,3 +23,10 @@ AGG_DEPTH_BBOX = 5
 
 # Bounding Boxes
 BBOX_MIN_AREA = 50    # minimum area in pixel to create a bounding box
+
+
+# Display Options
+DISPLAY_TYPE = "PYGAME" # can be PYGAME or SIMPLECV
+
+# shape of the image obtained from kinect
+IMAGE_SHAPE = (640, 480)

@@ -12,7 +12,7 @@ class DepthProcessing:
     def __init__(self, image_shape=(640, 480)):
         self.current_frame = np.zeros(shape=image_shape, dtype=np.uint16)
         self.accumulator = np.zeros(shape=image_shape, dtype=np.uint8)
-        self.background_aggregator = np.zeros(shape=image_shape, dtype=np.int8)
+        #self.background_aggregator = np.zeros(shape=image_shape, dtype=np.int8)
         self.background_model = np.zeros(shape=image_shape, dtype=np.float32)
         self.foreground_mask = np.zeros(shape=image_shape)
         self.rect_accum = []
