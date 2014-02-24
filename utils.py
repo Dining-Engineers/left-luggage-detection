@@ -1,5 +1,5 @@
 import numpy as np
-from pykdtree.kdtree import KDTree
+import pykdtree.kdtree
 
 
 def to_rgb(im):
@@ -12,7 +12,7 @@ def to_rgb(im):
 
 
 def query_kdtree(data_tree, data_query):
-    kdtree = KDTree(data_tree)
+    kdtree = pykdtree.kdtree.KDTree(data_tree)
     dist, idx = kdtree.query(data_query)
     return dist, idx
 
