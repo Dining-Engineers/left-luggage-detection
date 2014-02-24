@@ -3,7 +3,7 @@ from intensity_processing import *
 import cProfile
 from kinectconnector import *
 
-PYGAME = False
+PYGAME = True
 if PYGAME:
     import pygame
     import pygame.camera
@@ -46,6 +46,7 @@ def left_luggage_detection():
         # print "frame: ", frame, rgb.current_frame.shape
         if n_frame == 80:
             loop = False
+
         # get next depth frame (11-bit precision)
         # N.B. darker => closer
         # the depth matrix obtained is transposed so we cast the right shape
@@ -167,8 +168,8 @@ def left_luggage_detection():
                     loop = False
 
             if not loop:
-                from meliae import scanner
-                scanner.dump_all_objects( "kinect_memory_pygame" )
+                # from meliae import scanner
+                # scanner.dump_all_objects( "kinect_memory_pygame" )
                 pygame.display.quit()
 
         else:
@@ -192,13 +193,22 @@ def left_luggage_detection():
                 loop = False
                 screen.done = True
                 screen.quit()
-                from meliae import scanner
-                scanner.dump_all_objects( "kinect_memory_simplecv" )
+                # from meliae import scanner
+                # scanner.dump_all_objects( "kinect_memory_simplecv" )
 
 
 if __name__ == "__main__":
     #cProfile.run('left_luggage_detection()')
+    import os
+    #print os.environ['PATH']
+
+    from pycallgraph import PyCallGraph
+    from pycallgraph.output import GraphvizOutput
+
+    with PyCallGraph(output=GraphvizOutput()):
+        left_luggage_detection()
+
     #left_luggage_detection()
 
-    command = """left_luggage_detection()"""
-    cProfile.runctx( command, globals(), locals(), filename="kinect_pygame.profile" )
+    # command = """left_luggage_detection()"""
+    # cProfile.runctx( command, globals(), locals(), filename="kinect_pygame.profile" )

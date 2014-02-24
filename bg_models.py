@@ -27,6 +27,7 @@ def compute_background_running_average(frame, average, alpha):
     #   hole in average and not in current frame = -1
     # if holes in current and average leave hole (will be fixed by another frame in the future)
     holes_diff = holes_frame - holes_average
+    # replace holes with value of the other one
     frame = np.where(holes_diff == 1, average, frame)
     average = np.where(holes_diff == -1, frame, average)
 
