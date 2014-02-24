@@ -41,18 +41,23 @@ def left_luggage_detection():
     # main loop
     while loop:
 
-        # get next video frame
-        rgb.current_frame = cam.get_image()#.getNumpy()
-        n_frame += 1
-        # print "frame: ", frame, rgb.current_frame.shape
-        if n_frame == 80:
-            loop = False
+        try:
+            # get next video frame
+            rgb.current_frame = cam.get_image()#.getNumpy()
+            n_frame += 1
+            # print "frame: ", frame, rgb.current_frame.shape
+            # if n_frame == 80:
+            #     loop = False
 
-        # get next depth frame (11-bit precision)
-        # N.B. darker => closer
-        # the depth matrix obtained is transposed so we cast the right shape
-        depth.current_frame = cam.get_depth_matrix().T
+            # get next depth frame (11-bit precision)
+            # N.B. darker => closer
+            # the depth matrix obtained is transposed so we cast the right shape
+            depth.current_frame = cam.get_depth_matrix().T
+        except Exception as e:
+            print "eccezione: ", e
 
+
+        #wprint n_frame, rgb.current_frame.shape
 
         # TODO correggi offset depth
         #depth_frame = depth_frame[25:, 0:605]
