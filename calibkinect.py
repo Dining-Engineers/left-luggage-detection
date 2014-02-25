@@ -1,4 +1,6 @@
 """
+FROM https://github.com/amiller/libfreenect-goodies/blob/master/calibkinect.py
+
 These are some functions to help work with kinect camera calibration and projective
 geometry. 
 
