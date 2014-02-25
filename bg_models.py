@@ -78,6 +78,7 @@ def cut_foreground(image, mask):
 def apply_opening(image, kernel_size, kernel_type):
     """
     Apply opening to image with the specified kernel type and image
+
     :param image:   image to which apply opening
     :param kernel_size: size of the structuring element
     :param kernel_type: structuring element
