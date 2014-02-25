@@ -5,6 +5,8 @@ from utils import *
 
 
 class DepthProcessing:
+    """ Depth Processing Class """
+
     ACCUMULATOR = 0
     RECT_MATCHING = 1
     RECT_MATCHING2 = 2
@@ -74,6 +76,8 @@ class DepthProcessing:
             bbox_to_draw = bbox
 
         elif method == self.RECT_MATCHING:
+            # quicker than RECT_MATCHING2 but less accurate
+            # doesn't consider the best match but any match
 
             # temp list of proposal
             results = []
@@ -213,9 +217,15 @@ class DepthProcessing:
         return bbox_to_draw
 
 
-
-
 def update_depth_detection_aggregator(aggregator, foreground_current):
+    """
+    Update aggregator with the provided foreground. Each pixel of the image has a value that keeps the number of
+    times it has been seen as foreground.
+
+    :param aggregator: an image of uint8
+    :param foreground_current: mask of the current background
+    :return: updated accumulator
+    """
     not_in_current_foreground = np.int8(np.logical_not(foreground_current))
     # increment aggregator
     result = aggregator + foreground_current - not_in_current_foreground * AGG_DEPTH_PENALTY

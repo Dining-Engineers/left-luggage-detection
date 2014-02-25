@@ -64,7 +64,7 @@ def cut_foreground(image, mask):
     :param image: image from which cut foreground
     :param mask: mask of the foreground
     :return: image with only the foreground
-    :raise IndexError: error if the size of the image is wrong
+    :raise: *IndexError* error if the size of the image is wrong
     """
     if len(image.shape) == 2 or image.shape[2] == 1:
         # we have a greyscale image
