@@ -90,7 +90,7 @@ def left_luggage_detection():
         #
         ###################################
 
-        foreground_rgb_proposal = rgb.proposal
+        foreground_rgb_proposal = rgb.proposal_foreground
         # convert to rgb to draw colored boxes
         foreground_depth_proposal = to_rgb(foreground_depth_proposal)
 

@@ -223,7 +223,7 @@ def update_depth_detection_aggregator(aggregator, foreground_current):
     times it has been seen as foreground.
 
     :param aggregator: an image of uint8
-    :param foreground_current: mask of the current background
+    :param foreground_current: mask of the current foreground
     :return: updated accumulator
     """
     not_in_current_foreground = np.int8(np.logical_not(foreground_current))
