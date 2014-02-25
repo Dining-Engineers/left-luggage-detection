@@ -122,7 +122,7 @@ class DepthProcessing:
 
             self.rect_accum = results
             for box in self.rect_accum:
-                if box[1] >= 7:
+                if box[1] >= AGG_DEPTH_BBOX:
                     bbox_to_draw.append(box[0])
 
         elif method == self.RECT_MATCHING2:

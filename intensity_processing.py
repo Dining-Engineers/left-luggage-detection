@@ -20,7 +20,7 @@ class IntensityProcessing:
         self.proposal_mask = np.zeros(shape=image_shape, dtype=np.uint8)  # mask from aggregator
 
         # define Zivkovic background subtraction function LONG
-        self.f_bg_long = cv2.BackgroundSubtractorMOG2(BG_ZIV_HIST, BG_ZIV_THRESH, False)
+        self.f_bg_long = cv2.BackgroundSubtractorMOG2(BG_ZIV_HIST, BG_ZIV_LONG_THRESH, False)
         # define zivkovic background subtraction function SHORT
         self.f_bg_short = cv2.BackgroundSubtractorMOG2(BG_ZIV_HIST, BG_ZIV_SHORT_THRESH, False)
 

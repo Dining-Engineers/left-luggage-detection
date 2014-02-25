@@ -13,6 +13,10 @@ else:
 
 
 class VideoDisplay:
+    """
+    Video Display class. Depending on the method choosed (PYGAME or SIMPLECV)
+    Initialize a screen type to show the output.
+    """
 
     def __init__(self, v_type):
 
@@ -27,7 +31,17 @@ class VideoDisplay:
             self.type = v_type
 
     def show(self, frame_upper_left, frame_upper_right, frame_bottom_left, frame_bottom_right):
+        """
+        Display the four frames in a 1280x960 display
 
+        :param frame_upper_left:
+        :param frame_upper_right:
+        :param frame_bottom_left:
+        :param frame_bottom_right:
+        :return: True if the drawing succeed or False if the user choose to exit
+        :rtype: boolean
+        :raise SystemExit:
+        """
         if self.type == PYGAME:
 
             frame = np.zeros(shape=(1280, 960, 3))
@@ -89,8 +103,11 @@ class VideoDisplay:
                 return False
             return True
 
-
     def quit(self):
+        """
+        Quit the video stream
+
+        """
         if self.type == PYGAME:
             # from meliae import scanner
             # scanner.dump_all_objects( "kinect_memory_pygame" )
