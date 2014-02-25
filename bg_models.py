@@ -72,7 +72,6 @@ def cut_foreground(image, mask):
 
 
 def apply_opening(image, kernel_size, kernel_type):
-    # get uint image because cv2 needs it
     """
 
     :param image:
@@ -89,8 +88,10 @@ def apply_opening(image, kernel_size, kernel_type):
 def get_bounding_boxes(image):
     """
     Return Bounding Boxes in the format x,y,w,h where (x,y) is the top left corner
-    :param image:
-    :return:
+
+    :param image: image from which retrieve the bounding boxes
+    :return: bounding boxes array
+    :rtype: np.array
     """
     bbox = []
     contours, hierarchy = cv2.findContours(image, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
@@ -106,8 +107,12 @@ def get_bounding_boxes(image):
 
 
 def get_bounding_boxes2(image):
-    """ Return Bounding Boxes in the format x,y,w,h where (x,y) is the top left corner
-    :param image:
+    """
+    Return Bounding Boxes in the format x,y,w,h where (x,y) is the top left corner
+
+    :param image: image from which retrieve the bounding boxes
+    :return: bounding boxes array
+    :rtype: np.array
     """
     squares = []
     bbox_elements = np.array([], dtype=int)
