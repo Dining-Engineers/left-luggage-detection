@@ -28,20 +28,20 @@ APT users: (Works on Ubuntu 10.10)
 
 .. code-block:: console
 
-    sudo apt-get install cmake libglut3-dev pkg-config build-essential libxmu-dev libxi-dev libusb-1.0-0-dev
+    $ sudo apt-get install cmake libglut3-dev pkg-config build-essential libxmu-dev libxi-dev libusb-1.0-0-dev
 
 For Ubuntu 13.04, use this instead (replaced libglut3 with freeglut3):
 
 .. code-block:: console
 
-    sudo apt-get install cmake freeglut3-dev pkg-config build-essential libxmu-dev libxi-dev libusb-1.0-0-dev
+    $ sudo apt-get install cmake freeglut3-dev pkg-config build-essential libxmu-dev libxi-dev libusb-1.0-0-dev
 
 
 The python wrapper also need:
 
 .. code-block:: console
 
-    sudo apt-get install cython python-dev python-numpy
+    $ sudo apt-get install cython python-dev python-numpy
 
 
 Manual Build
@@ -51,33 +51,33 @@ Download last libfreenect version from github and compile with CMAKE:
 
 .. code-block:: console
 
-    git clone git://github.com/OpenKinect/libfreenect.git
-    cd libfreenect
-    mkdir build
-    cd build
-    cmake ..
-    make
-    sudo make install
-    sudo ldconfig /usr/local/lib64/
+    $ git clone git://github.com/OpenKinect/libfreenect.git
+    $ cd libfreenect
+    $ mkdir build
+    $ cd build
+    $ cmake ..
+    $ make
+    $ sudo make install
+    $ sudo ldconfig /usr/local/lib64/
 
 To test if the library is correctly installed use:
 
 .. code-block:: console
 
-   sudo glview
+    $ sudo glview
 
 To install the Python wrapper
 
 .. code-block:: console
 
-    cd libfreenect/wrappers/python
-    sudo python setup.py install
+    $ cd libfreenect/wrappers/python
+    $ sudo python setup.py install
 
 To use Kinect as a non-root user do the following:
 
 .. code-block:: console
 
-    sudo adduser $USER video
+    $ sudo adduser $USER video
 
 2. OpenCV
 ---------
@@ -86,9 +86,9 @@ To install OpenCV you can use the following script
 
 .. code-block:: console
 
-    wget https://raw.github.com/jayrambhia/Install-OpenCV/master/Ubuntu/opencv_latest.sh
-    chmod +x opencv_latest.sh
-    ./opencv_latest.sh
+    $ wget https://raw.github.com/jayrambhia/Install-OpenCV/master/Ubuntu/opencv_latest.sh
+    $ chmod +x opencv_latest.sh
+    $ ./opencv_latest.sh
 
 .. note::
     If you want cuda support add WITH_CUDA=ON in the cmake section if the above script
@@ -101,7 +101,7 @@ To display the video stream we use pygame so you'll need:
 
 .. code-block:: console
 
-    sudo apt-get install python-pygame
+    $ sudo apt-get install python-pygame
 
 
 4. Optional
@@ -120,4 +120,4 @@ To run memory and speed benchmark of the application
 
 .. code-block:: console
 
-    sudo apt-get install pythontracer
+    $ sudo apt-get install pythontracer

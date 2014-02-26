@@ -31,7 +31,7 @@ Contents
    usage
    dependencies
    dataset
-   
+
 
 Indices and tables
 ==================
