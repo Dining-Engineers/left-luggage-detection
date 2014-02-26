@@ -3,17 +3,31 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
+==================================================
 Welcome to Left Luggage Detection's documentation!
 ==================================================
 
-Lo sblinda
+**Authors:**
+    - *Andrea Rizzo*, andrearizzo[at]outlook.com
 
-Contents:
+    - *Matteo Bruni*, matteo.bruni[at]gmail.com
+
+*Abstract*
+------------------
+This wiki describes the method used to detect abandoned items in a public space.
+Today, video surveillance is used airports, train stations and public spaces where it is essential guarantee a high security level.
+The video stream is obtained by a Kinect.....
+
+Contents
+--------
+
+   .. :doc:`docs`
 
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 2
 
    wiki
+   docs
 
 Indices and tables
 ==================

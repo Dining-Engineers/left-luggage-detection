@@ -2,18 +2,6 @@
 Left luggage detection
 ===============
 
-**Authors:**
-    - *Andrea Rizzo*, andrearizzo[at]outlook.com
-
-    - *Matteo Bruni*, matteo.bruni[at]gmail.com
-
-*Abstract*
-------------------
-This wiki describes the method used to detect abandoned items in a public space.
-Today, video surveillance is used airports, train stations and public spaces where it is essential guarantee a high security level.
-The video stream is obtained by a Kinect.....
-
-
 Introduction
 ------------------
 
