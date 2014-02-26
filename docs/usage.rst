@@ -7,7 +7,7 @@ To use our application you can simply launch the main application via:
 
 .. code-block:: console
 
-    $ python left-luggage-detection.py
+    python left-luggage-detection.py
 
 
 .. note::
@@ -25,12 +25,12 @@ To record a video:
 
 .. code-block:: console
 
-    $ mkdir directory_record
-    $ record directory_record
+    mkdir directory_record
+    record directory_record
 
 
 To use a recorded video you need to specify two environment variables: ``LD_PRELOAD`` and ``FAKENECT_PATH``:
 
 .. code-block:: console
 
-    $ LD_PRELOAD="/usr/local/lib64/fakenect/libfreenect.so" FAKENECT_PATH="video/path" python left-luggage-detection.py
+    LD_PRELOAD="/usr/local/lib64/fakenect/libfreenect.so" FAKENECT_PATH="video/path" python left-luggage-detection.py

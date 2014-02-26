@@ -1,5 +1,10 @@
-from const import *
+__author__ = "Andrea Rizzo, Matteo Bruni"
+__copyright__ = "Copyright 2014, Dining Engineers"
+__license__ = "GPLv2"
+
 import numpy as np
+from const import *
+
 
 PYGAME = "PYGAME"
 SIMPLECV = "SIMPLECV"

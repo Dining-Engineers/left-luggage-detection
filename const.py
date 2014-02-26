@@ -1,3 +1,7 @@
+__author__ = "Andrea Rizzo, Matteo Bruni"
+__copyright__ = "Copyright 2014, Dining Engineers"
+__license__ = "GPLv2"
+
 """ Program constant """
 
 DEPTH_HOLE_VALUE = 2**11-1      #: Depth holes in openfreenect have maximum value in 11 bit
