@@ -1,4 +1,4 @@
-calibkinect Module
+Kinect Calibration
 ==================
 
 .. automodule:: calibkinect

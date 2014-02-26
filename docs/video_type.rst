@@ -1,5 +1,5 @@
-video_type Module
-=================
+Display
+=======
 
 .. automodule:: video_type
     :members:

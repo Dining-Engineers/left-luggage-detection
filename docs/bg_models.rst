@@ -1,5 +1,5 @@
-bg_models Module
-================
+Background Modules
+==================
 
 .. automodule:: bg_models
     :members:

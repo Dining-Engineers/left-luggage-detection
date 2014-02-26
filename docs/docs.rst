@@ -1,17 +1,17 @@
-=====================
-Project Documentation
-=====================
+=======================
+Developer Documentation
+=======================
 
+Here you can find the developer documentation
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 4
 
-   bg_models
    depth_processing
    intensity_processing
+   bg_models
    kinectconnector
    calibkinect
    const
-   left-luggage-detection
    utils
    video_type

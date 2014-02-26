@@ -1,5 +1,5 @@
-utils Module
-============
+Utility
+=======
 
 .. automodule:: utils
     :members:

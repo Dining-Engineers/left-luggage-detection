@@ -1,5 +1,6 @@
-depth_processing Module
-=======================
+Depth Processing
+================
+
 
 .. automodule:: depth_processing
     :members:

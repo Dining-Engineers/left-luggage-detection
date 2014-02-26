@@ -1,5 +1,5 @@
-const Module
-============
+Constant
+========
 
 .. automodule:: const
     :members:

@@ -1,5 +1,5 @@
-intensity_processing Module
-===========================
+Intensity Processing
+====================
 
 .. automodule:: intensity_processing
     :members:

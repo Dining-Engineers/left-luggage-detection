@@ -1,5 +1,5 @@
-kinectconnector Module
-======================
+Kinect Connector
+================
 
 .. automodule:: kinectconnector
     :members:
