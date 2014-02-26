@@ -22,7 +22,7 @@ BG_ZIV_SHORT_THRESH = 200       #: Threshold for Zivkovich method for short back
 AGG_RGB_MAX_E = 15              #: number of frames after which a pixel is considered an left item in rgb domain
 AGG_RGB_PENALTY = 15            #: penalty in the accumulator for a pixel not in current foreground in rgb domain
 AGG_DEPTH_MAX_E = 30            #: number of frames after which a pixel is considered an left item in depth domain
-AGG_DEPTH_PENALTY = 1           #: penalty in the accumulator for a pixel not in current foreground in depth domain
+AGG_DEPTH_PENALTY = 30           #: penalty in the accumulator for a pixel not in current foreground in depth domain
 AGG_DEPTH_BBOX = 5              #: accumulator threshold for RECT_MATCHING/RECT_MATCHING2 in depth detection
 
 # Bounding Boxes

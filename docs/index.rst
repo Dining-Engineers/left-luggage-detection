@@ -28,6 +28,10 @@ Contents
 
    wiki
    docs
+   usage
+   dependencies
+   dataset
+   
 
 Indices and tables
 ==================

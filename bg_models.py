@@ -1,5 +1,4 @@
 import cv2
-#from SimpleCV import *
 import numpy as np
 import utils
 from const import *

@@ -34,6 +34,10 @@ If code already exists to retrieve the data extracting the bounding boxes propos
             rgb_proposal_bbox = rgb.extract_proposal_bbox()
 
 
+
+IntensityProcessing class
+-------------------------
+
 .. automodule:: intensity_processing
     :members:
     :undoc-members:

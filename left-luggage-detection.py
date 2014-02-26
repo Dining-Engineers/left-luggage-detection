@@ -61,7 +61,7 @@ def left_luggage_detection():
         depth.extract_foreground_mask_from_run_avg(depth.current_frame)
 
         # apply opening to remove noise
-        depth.foreground_mask = bg_models.apply_opening(depth.foreground_mask, BG_OPEN_KSIZE, cv2.MORPH_ELLIPSE)
+        #depth.foreground_mask = bg_models.apply_opening(depth.foreground_mask, BG_OPEN_KSIZE, cv2.MORPH_ELLIPSE)
 
         depth_proposal_bbox = depth.extract_proposal_bbox(depth.ACCUMULATOR)
 
