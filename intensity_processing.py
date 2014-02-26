@@ -1,3 +1,9 @@
+"""
+This module contains class for intensity processing.
+This class handles the rgb camera status and its methods ensure proper updates to the background models
+and the bounding boxes extraction.
+"""
+
 import numpy as np
 import bg_models
 from const import *

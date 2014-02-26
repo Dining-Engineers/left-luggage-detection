@@ -1,9 +1,7 @@
+#FROM https://github.com/amiller/libfreenect-goodies/blob/master/calibkinect.py
 """
-FROM https://github.com/amiller/libfreenect-goodies/blob/master/calibkinect.py
-
 These are some functions to help work with kinect camera calibration and projective
-geometry. 
-
+geometry.
 Tasks:
 
     - Convert the kinect depth image to a metric 3D point cloud

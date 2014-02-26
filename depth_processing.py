@@ -1,3 +1,9 @@
+"""
+This module contains class for depth processing.
+This class handles the depth camera status and its methods ensure proper updates to the background models
+and the bounding boxes extraction.
+"""
+
 import numpy as np
 import bg_models
 from const import *
@@ -41,6 +47,7 @@ class DepthProcessing:
         :return: binary mask with 1 for foreground and 0 for background
         :rtype: np.int64
         """
+        # if current frame has holes use modelbg pixels instead
         current_frame_filtered = (np.where(current_frame == DEPTH_HOLE_VALUE, self.background_model, current_frame)).astype(np.float32)
         diff = (current_frame_filtered - self.background_model)
         self.foreground_mask = (np.where(np.abs(diff) >= BG_MASK_THRESHOLD, 1, 0))
