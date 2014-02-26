@@ -6,6 +6,8 @@
 Welcome to Left Luggage Detection's documentation!
 ==================================================
 
+Lo sblinda
+
 Contents:
 
 .. toctree::
