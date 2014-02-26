@@ -42,10 +42,10 @@ class IntensityProcessing:
         # get rgb dual background (long and short sensitivity)
         # N.B. background is black (0) and foreground white (1)
         self.foreground_mask_long_term = bg_models.compute_foreground_mask_from_func(self.f_bg_long, frame,
-                                                                                BG_ZIV_LONG_LRATE)
+                                                                                     BG_ZIV_LONG_LRATE)
 
         self.foreground_mask_short_term = bg_models.compute_foreground_mask_from_func(self.f_bg_short, frame,
-                                                                                 BG_ZIV_SHORT_LRATE)
+                                                                                      BG_ZIV_SHORT_LRATE)
         return self.foreground_mask_long_term, self.foreground_mask_short_term
 
     def update_detection_aggregator(self):
@@ -53,7 +53,8 @@ class IntensityProcessing:
         Update aggregator with the provided foregrounds.
         If a pixel is in foreground_long but not in foreground_short increment its accumulator
         otherwise decrement it.
-        If a particular area has already been detected as proposal don't decrement if the above condition is not verified.
+        If a particular area has already been detected as proposal don't decrement if the above condition is not
+        verified.
 
         :return: updated accumulator
         :rtype: np.int8
@@ -65,7 +66,7 @@ class IntensityProcessing:
         # increment aggregator
         result = self.background_aggregator + proposal_candidate
 
-        # AVOID REMOVING FROM PROPOSA OF ALREADY DETECTED OBJECT
+        # AVOID REMOVING FROM PROPOSAL OF ALREADY DETECTED OBJECT
         # mask of max values (proposal)
         mask_proposal = np.where((result >= AGG_RGB_MAX_E), 1, 0)
         mask_new_pixel_in_bg = np.int32(np.logical_not(self.foreground_mask_long_term)) * \
