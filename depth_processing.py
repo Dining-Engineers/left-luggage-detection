@@ -1,3 +1,7 @@
+__author__ = "Andrea Rizzo, Matteo Bruni"
+__copyright__ = "Copyright 2014, Dining Engineers"
+__license__ = "GPLv2"
+
 """
 This module contains class for depth processing.
 This class handles the depth camera status and its methods ensure proper updates to the background models
@@ -98,6 +102,7 @@ class DepthProcessing:
             bool_curr = [False]*len(bbox)
 
             if len(self.rect_accum) != 0:
+
 
                 for i in range(len(self.rect_accum)):
                     accum_entry = self.rect_accum[i]
@@ -214,6 +219,8 @@ class DepthProcessing:
                 # if counter at leas THRESHOLD print it
                 if box[-1] > AGG_DEPTH_BBOX:
                     bbox_to_draw.append(box[0:4])
+
+
 
         else:
             raise NotImplementedError("Not implemented")

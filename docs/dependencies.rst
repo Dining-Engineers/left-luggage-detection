@@ -64,7 +64,7 @@ To test if the library is correctly installed use:
 
 .. code-block:: console
 
-   sudo glview
+    sudo glview
 
 To install the Python wrapper
 

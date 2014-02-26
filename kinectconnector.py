@@ -1,5 +1,9 @@
-import freenect
+__author__ = "Andrea Rizzo, Matteo Bruni"
+__copyright__ = "Copyright 2014, Dining Engineers"
+__license__ = "GPLv2"
+
 import numpy as np
+import freenect
 
 
 class KinectConnector():

@@ -1,10 +1,22 @@
+#!/usr/bin/env python
+
+import numpy as np
+import cProfile
+
 from depth_processing import *
 from intensity_processing import *
-import cProfile
 from kinectconnector import *
-import numpy as np
 from video_type import VideoDisplay
 
+__author__ = "Andrea Rizzo, Matteo Bruni"
+__copyright__ = "Copyright 2014, Dining Engineers"
+__credits__ = ["Andrea Rizzo", "Matteo Bruni", "Lorenzo Seidenari",
+                    "Lamberto Ballan", "Alberto Del Bimbo"]
+__license__ = "GPLv2"
+__version__ = "0.0.1"
+__maintainer__ = "Andrea Rizzo, Matteo Bruni"
+__email__ = " diningengineers@gmail.com, andrearizzo@outlook.com, matteo.bruni@gmail.com"
+__status__ = "Development"
 
 def left_luggage_detection():
 

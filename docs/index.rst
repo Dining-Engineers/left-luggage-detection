@@ -31,7 +31,7 @@ Contents
    usage
    dependencies
    dataset
-   
+   LICENSE
 
 Indices and tables
 ==================
