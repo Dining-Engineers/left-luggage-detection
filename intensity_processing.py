@@ -83,25 +83,11 @@ class IntensityProcessing:
         Extract RGB proposal as the bounding boxes of the areas of the accumulator
         that have reached a value of AGG_RGB_MAX_E
 
-<<<<<<< HEAD
-    # AVOID REMOVING FROM PROPOSAL OF ALREADY DETECTED OBJECT
-    # mask of max values (proposal)
-    mask_proposal = np.where((result >= AGG_RGB_MAX_E), 1, 0)
-    mask_new_pixel_in_bg = np.int32(np.logical_not(foreground_long)) * np.int32(np.logical_not(foreground_short))
-    # pixel of older proposal that are becoming background (FL =0 and FS = 0)
-    mask = mask_proposal * mask_new_pixel_in_bg
-    # avoid previous pixel from being penalized
-    other_cases = np.where((other_cases == mask), 0, other_cases)
-
-    # caso 0 -1
-    # mask_penalty = np.int32(np.logical_not(foreground_long)) * np.int32(foreground_short)
-=======
         :return: list of bounding boxes
         """
         self.proposal_mask = np.where(self.background_aggregator == AGG_RGB_MAX_E, 1, 0)
         # get rgb blobs
         bbox = bg_models.get_bounding_boxes(self.proposal_mask.astype(np.uint8))
->>>>>>> bb9729d4045f7e58147ca94cc9b7ba02b870063d
 
         self.proposal_foreground = bg_models.cut_foreground(self.current_frame, self.proposal_mask)
 
