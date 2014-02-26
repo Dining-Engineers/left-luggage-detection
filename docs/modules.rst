@@ -5,9 +5,11 @@
    :maxdepth: 4
 
    bg_models
+   calibkinect
    const
    depth_processing
-   gist
    intensity_processing
+   kinectconnector
    left-luggage-detection
    utils
+   video_type

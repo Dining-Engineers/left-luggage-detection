@@ -42,10 +42,12 @@ def compute_foreground_mask_from_func(f_bg, current_frame, alpha):
     """
     Extract binary foreground mask (1 foreground, 0 background) from f_bg background modeling function and update
     background model.
+
     :param f_bg: background modeling function
     :param current_frame: current frame from which extract foreground
     :param alpha: update learning rate
-    :return:
+    :return: foreground mask
+    :rtype: np.uint8
     """
     foreground = np.zeros(shape=current_frame.shape, dtype=np.uint8)
     # get foreground in numpy array
@@ -57,10 +59,12 @@ def compute_foreground_mask_from_func(f_bg, current_frame, alpha):
 
 def cut_foreground(image, mask):
     """
+    Cut the foreground from the image using the mask supplied
 
-    :param image:
-    :param mask:
-    :return: :raise IndexError:
+    :param image: image from which cut foreground
+    :param mask: mask of the foreground
+    :return: image with only the foreground
+    :raise: *IndexError* error if the size of the image is wrong
     """
     if len(image.shape) == 2 or image.shape[2] == 1:
         # we have a greyscale image
@@ -72,13 +76,14 @@ def cut_foreground(image, mask):
 
 
 def apply_opening(image, kernel_size, kernel_type):
-    # get uint image because cv2 needs it
     """
+    Apply opening to image with the specified kernel type and image
 
-    :param image:
-    :param kernel_size:
-    :param kernel_type:
-    :return:
+    :param image:   image to which apply opening
+    :param kernel_size: size of the structuring element
+    :param kernel_type: structuring element
+    :return: image with opening applied
+    :rtype: np.uint8
     """
     u_image = image.astype(np.uint8)
     #foreground_mask_depth = foreground_mask_depth.astype(np.uint8)
@@ -86,11 +91,14 @@ def apply_opening(image, kernel_size, kernel_type):
     u_image = cv2.morphologyEx(u_image, cv2.MORPH_OPEN, kernel)
     return u_image
 
+
 def get_bounding_boxes(image):
     """
     Return Bounding Boxes in the format x,y,w,h where (x,y) is the top left corner
-    :param image:
-    :return:
+
+    :param image: image from which retrieve the bounding boxes
+    :return: bounding boxes list
+    :rtype: list
     """
     bbox = []
     contours, hierarchy = cv2.findContours(image, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
@@ -106,8 +114,12 @@ def get_bounding_boxes(image):
 
 
 def get_bounding_boxes2(image):
-    """ Return Bounding Boxes in the format x,y,w,h where (x,y) is the top left corner
-    :param image:
+    """
+    Return Bounding Boxes in the format x,y,w,h where (x,y) is the top left corner
+
+    :param image: image from which retrieve the bounding boxes
+    :return: bounding boxes array, where each element has the form (x, y, w, h, counter) with counter = 1
+    :rtype: np.array
     """
     squares = []
     bbox_elements = np.array([], dtype=int)
