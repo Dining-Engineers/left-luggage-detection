@@ -5,6 +5,8 @@ The depth module contains classes that hide some of all the repeated
 code associated with processing depth data. The main component
 is the :class:`.DepthProcessing` class, which is used to process
 continuously retrieved data from the kinect.
+The background model used in this class is obtained through running average via
+the method :meth:`.DepthProcessing.update_background_model`
 
 Usage Example
 -------------
@@ -12,6 +14,9 @@ Usage Example
 If code already exists to retrieve the data extracting the bounding boxes proposals can be reduced to as little as the following:
 
 .. code-block:: python
+
+    # DepthProcessing instance
+    depth = DepthProcessing(IMAGE_SHAPE)
 
     while True:
         # retrieve the depth information
