@@ -9,8 +9,9 @@ Welcome to Left Luggage Detection's documentation!
 Contents:
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
 
+   wiki
    bg_models
    depth_processing
    intensity_processing
