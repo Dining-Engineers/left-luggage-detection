@@ -30,7 +30,6 @@ where the coefficient :math:`\alpha` is the learning rate.
 Intensity background model and proposal
 `````````````
 
-
 .. image:: img/example1.png
    :height: 480
    :width: 640
