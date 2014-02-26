@@ -99,7 +99,6 @@ class DepthProcessing:
 
             if len(self.rect_accum) != 0:
 
-
                 for i in range(len(self.rect_accum)):
                     accum_entry = self.rect_accum[i]
                     for j in range(len(bbox)):
@@ -215,8 +214,6 @@ class DepthProcessing:
                 # if counter at leas THRESHOLD print it
                 if box[-1] > AGG_DEPTH_BBOX:
                     bbox_to_draw.append(box[0:4])
-
-
 
         else:
             raise NotImplementedError("Not implemented")
