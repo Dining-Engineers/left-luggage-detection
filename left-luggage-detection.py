@@ -38,13 +38,12 @@ def left_luggage_detection():
 
     bbox_last_frame_proposals = []
 
-    n_frame = 1
     loop = True
     # main loop
     while loop:
 
         # get next video frame
-        rgb.current_frame = cam.get_image()#.getNumpy()
+        rgb.current_frame = cam.get_image()     # .getNumpy()
 
         # get next depth frame (11-bit precision)
         # N.B. darker => closer
@@ -52,12 +51,7 @@ def left_luggage_detection():
         depth.current_frame = cam.get_depth_matrix()
 
         # xyz, uv = calibkinect.depth2xyzuv(depth.current_frame)
-        #
         # print xyz.shape, uv.shape, xyz[0][:], uv[0][:]
-
-        n_frame += 1
-        # if n_frame == 80:
-        #     loop = False
 
         # TODO correggi offset depth
         #depth_frame = depth_frame[25:, 0:605]
@@ -72,7 +66,10 @@ def left_luggage_detection():
         if first_run:
             # in first run moving average start from first frame
             depth.background_model = depth.current_frame.astype(depth.background_model.dtype)
+
+            # in first run the old_frame is the current frame
             old_frame = rgb.current_frame.copy()
+
             first_run = False
 
         # get depth background
@@ -122,31 +119,18 @@ def left_luggage_detection():
         # draw_depth_once = False
         # watershed_mask_seed = np.zeros(shape=IMAGE_SHAPE, dtype=np.int32)
 
-
-        bbox_current_frame_proposals = extract_bbox_proposal(rgb_proposal_bbox, depth_proposal_bbox)
+        bbox_current_frame_proposals = extract_proposal_bbox(rgb_proposal_bbox, depth_proposal_bbox)
 
         # segmentation
         watershed_mask_seed = create_watershed_seed(bbox_current_frame_proposals, rgb.proposal_mask)
         watershed_bg_mask = rgb.proposal_mask+depth.foreground_mask
         watershed_mask_seed = np.where(watershed_bg_mask == 0, 1, watershed_mask_seed)
+
         # apply watershed - result overwrite in mask
         cv2.watershed(final_result_image, watershed_mask_seed)
+
         # OUTPUT MASK FOR FURTHER STUDY
         final_result_mask = np.where(watershed_mask_seed == 1, 0, 1)
-
-
-        # bbox_last_frame_proposals = bbox_current_frame_proposals + check_bbox_not_moved(bbox_last_frame_proposals,
-        #                                                                                 bbox_current_frame_proposals,
-        #                                                                                 old_frame,
-        #                                                                                 rgb.current_frame.copy())
-
-
-        for s in bbox_current_frame_proposals:
-            cv2.rectangle(final_result_image, (s[0], s[1]), (s[0]+s[2], s[1]+s[3]), (255, 0, 0), 1)
-
-        # save the old frame
-        old_frame = rgb.current_frame.copy()
-
 
         # apply overlay of [0, 0, 0] for no info
         # [0, 255, 0] for left luggage
@@ -154,8 +138,20 @@ def left_luggage_detection():
         overlay = colors[final_result_mask]
         final_result_image = cv2.addWeighted(final_result_image, 0.5, overlay, 0.5, 0.0, dtype=cv2.CV_8UC3)
 
+        # bbox_last_frame_proposals = bbox_current_frame_proposals + check_bbox_not_moved(bbox_last_frame_proposals,
+        #                                                                                 bbox_current_frame_proposals,
+        #                                                                                 old_frame,
+        #                                                                                 rgb.current_frame.copy())
+
+        # draw the proposals bbox in the image
+        for s in bbox_current_frame_proposals:
+            cv2.rectangle(final_result_image, (s[0], s[1]), (s[0]+s[2], s[1]+s[3]), (255, 0, 0), 1)
+
+        # save the old frame
+        old_frame = rgb.current_frame.copy()
+
         frame_upper_left = rgb.current_frame
-        frame_upper_right = final_result_image# foreground_rgb_proposal
+        frame_upper_right = foreground_rgb_proposal
         frame_bottom_left = foreground_depth_proposal
         frame_bottom_right = final_result_image
 
@@ -166,9 +162,7 @@ def left_luggage_detection():
             screen.quit()
 
 
-
-
-def extract_bbox_proposal(rgb_proposal_bbox, depth_proposal_bbox):
+def extract_proposal_bbox(rgb_proposal_bbox, depth_proposal_bbox):
 
     bbox_current_frame_proposals = []
 
@@ -187,8 +181,9 @@ def extract_bbox_proposal(rgb_proposal_bbox, depth_proposal_bbox):
                 # mark rect slice for proposal for watershed segmentation
                 # set segment to k+1 since we use 1 for sure background segment
                 #watershed_mask_seed[s[1]:s[1]+s[3], s[0]:s[0]+s[2]] = rgb.proposal_mask[s[1]:s[1]+s[3], s[0]:s[0]+s[2]]*k+1
+
                 bbox_current_frame_proposals.append(s)
-                #print "bingo! ", len(bbox_current_frame_proposals)
+
         #draw_depth_once = True
 
     return bbox_current_frame_proposals
@@ -232,12 +227,12 @@ def check_bbox_not_moved(bbox_last_frame_proposals, bbox_current_frame_proposals
 
 
 if __name__ == "__main__":
-    #left_luggage_detection()
+    left_luggage_detection()
 
     # PROFILING
-    #cProfile.run('left_luggage_detection()')
-    command = """left_luggage_detection()"""
-    cProfile.runctx( command, globals(), locals(), filename="kinect_pygame.profile" )
+    # cProfile.run('left_luggage_detection()')
+    # command = """left_luggage_detection()"""
+    # cProfile.runctx( command, globals(), locals(), filename="kinect_pygame.profile" )
 
     ## GRAFO CHIAMATE
     # from pycallgraph import PyCallGraph

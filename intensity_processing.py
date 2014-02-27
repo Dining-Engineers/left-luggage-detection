@@ -47,8 +47,8 @@ class IntensityProcessing:
         self.foreground_mask_short_term = bg_models.compute_foreground_mask_from_func(self.f_bg_short, frame,
                                                                                       BG_ZIV_SHORT_LRATE)
 
-        self.foreground_mask_long_term = bg_models.apply_dilation(self.foreground_mask_long_term, 2, cv2.MORPH_ELLIPSE)
-        self.foreground_mask_short_term = bg_models.apply_dilation(self.foreground_mask_short_term, 2, cv2.MORPH_ELLIPSE)
+        self.foreground_mask_long_term = bg_models.apply_dilation(self.foreground_mask_long_term, 1, cv2.MORPH_ELLIPSE)
+        self.foreground_mask_short_term = bg_models.apply_dilation(self.foreground_mask_short_term, 1, cv2.MORPH_ELLIPSE)
 
         return self.foreground_mask_long_term, self.foreground_mask_short_term
 

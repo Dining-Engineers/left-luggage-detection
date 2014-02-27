@@ -16,17 +16,17 @@ BG_MASK_THRESHOLD = 3
 
 
 # Dual Background Porikli method using Zivkovich model background for (RGB) Paramethers
-BG_ZIV_LONG_LRATE = 0.001       #: Background learning rate in Zivkovich method for long background model
-BG_ZIV_SHORT_LRATE = 0.01       #: Background learning rate in Zivkovich method for short background model
+BG_ZIV_LONG_LRATE = 0.0005       #: Background learning rate in Zivkovich method for long background model
+BG_ZIV_SHORT_LRATE = 0.02       #: Background learning rate in Zivkovich method for short background model
 BG_ZIV_HIST = 1                 #: History for Zivkovick background method
 BG_ZIV_LONG_THRESH = 900        #: Threshold for Zivkovich method for long background model
 BG_ZIV_SHORT_THRESH = 200       #: Threshold for Zivkovich method for short background model
 
 #: Aggregator parameters
 AGG_RGB_MAX_E = 15              #: number of frames after which a pixel is considered an left item in rgb domain
-AGG_RGB_PENALTY = 1            #: penalty in the accumulator for a pixel not in current foreground in rgb domain
+AGG_RGB_PENALTY = 3            #: penalty in the accumulator for a pixel not in current foreground in rgb domain
 AGG_DEPTH_MAX_E = 30            #: number of frames after which a pixel is considered an left item in depth domain
-AGG_DEPTH_PENALTY = 30           #: penalty in the accumulator for a pixel not in current foreground in depth domain
+AGG_DEPTH_PENALTY = 20           #: penalty in the accumulator for a pixel not in current foreground in depth domain
 AGG_DEPTH_BBOX = 5              #: accumulator threshold for RECT_MATCHING/RECT_MATCHING2 in depth detection
 
 # Bounding Boxes
