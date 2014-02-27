@@ -37,3 +37,6 @@ DISPLAY_TYPE = "PYGAME"         #: Default display type: can be PYGAME or SIMPLE
 
 # shape of the image obtained from kinect
 IMAGE_SHAPE = (640, 480)        #: Default image size retrieved from kinect
+
+# Pygame Options
+PYGAME_LAYOUT = 2               #: number of images to show in the output can be 2 or 4

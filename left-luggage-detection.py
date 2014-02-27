@@ -23,7 +23,7 @@ __status__ = "Development"
 def left_luggage_detection():
 
     # Initialize video display
-    screen = VideoDisplay(DISPLAY_TYPE)
+    screen = VideoDisplay(DISPLAY_TYPE, 2)
 
     # initialize the camera
     cam = KinectConnector()
@@ -158,7 +158,7 @@ def left_luggage_detection():
                     old_section = old_frame[s[1]:s[1]+s[3], s[0]:s[0]+s[2]].flatten()
                     new_section = rgb.current_frame.copy()[s[1]:s[1]+s[3], s[0]:s[0]+s[2]].flatten()
 
-                    if norm_correlate(old_section, new_section)[0] > 0.8:
+                    if norm_correlate(old_section, new_section)[0] > 0.9:
                         cv2.rectangle(final_result_image, (old[0], old[1]), (old[0]+old[2], old[1]+old[3]), (255, 0, 0), 1)
                         bbox_current_frame_proposals.append(old)
 
@@ -179,15 +179,17 @@ def left_luggage_detection():
         final_result_image = cv2.addWeighted(final_result_image, 0.5, overlay, 0.5, 0.0, dtype=cv2.CV_8UC3)
 
         frame_upper_left = rgb.current_frame
-        frame_upper_right = foreground_rgb_proposal
+        frame_upper_right = final_result_image# foreground_rgb_proposal
         frame_bottom_left = foreground_depth_proposal
         frame_bottom_right = final_result_image
 
-        # loop = screen.show(frame_upper_left, frame_upper_right, frame_bottom_left, frame_bottom_right)
-        loop = screen.show(to_rgb(rgb.foreground_mask_long_term*255), to_rgb(rgb.foreground_mask_short_term*255), frame_bottom_left, frame_bottom_right)
+        loop = screen.show(frame_upper_left, frame_upper_right, frame_bottom_left, frame_bottom_right)
+        #loop = screen.show(to_rgb(rgb.foreground_mask_long_term*255), to_rgb(rgb.foreground_mask_short_term*255), frame_bottom_left, frame_bottom_right)
 
         if not loop:
             screen.quit()
+
+
 
 
 if __name__ == "__main__":
