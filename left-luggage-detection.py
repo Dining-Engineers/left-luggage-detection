@@ -16,14 +16,14 @@ __credits__ = ["Andrea Rizzo", "Matteo Bruni", "Lorenzo Seidenari",
 __license__ = "GPLv2"
 __version__ = "0.0.1"
 __maintainer__ = "Andrea Rizzo, Matteo Bruni"
-__email__ = " diningengineers@gmail.com, andrearizzo@outlook.com, matteo.bruni@gmail.com"
+__email__ = "diningengineers@gmail.com, andrearizzo@outlook.com, matteo.bruni@gmail.com"
 __status__ = "Development"
 
 
 def left_luggage_detection():
 
     # Initialize video display
-    screen = VideoDisplay(DISPLAY_TYPE, 2)
+    screen = VideoDisplay(DISPLAY_TYPE, 4)
 
     # initialize the camera
     cam = KinectConnector()
@@ -72,6 +72,7 @@ def left_luggage_detection():
         if first_run:
             # in first run moving average start from first frame
             depth.background_model = depth.current_frame.astype(depth.background_model.dtype)
+            old_frame = rgb.current_frame.copy()
             first_run = False
 
         # get depth background
@@ -111,69 +112,44 @@ def left_luggage_detection():
         ###################################
 
         foreground_rgb_proposal = rgb.proposal_foreground
+
         # convert to rgb to draw colored boxes
         foreground_depth_proposal = to_rgb(foreground_depth_proposal)
 
         # image where will draw the combined proposal
         final_result_image = rgb.current_frame.copy()
 
-        draw_depth_once = False
-        watershed_mask_seed = np.zeros(shape=IMAGE_SHAPE, dtype=np.int32)
+        # draw_depth_once = False
+        # watershed_mask_seed = np.zeros(shape=IMAGE_SHAPE, dtype=np.int32)
 
-        bbox_current_frame_proposals = []
 
-        # Draws bounding boxes
-        for k, s in enumerate(rgb_proposal_bbox):
-            # Draw BBOX on RGB
-            cv2.rectangle(foreground_rgb_proposal, (s[0], s[1]), (s[0]+s[2], s[1]+s[3]), 255, 1)
+        bbox_current_frame_proposals = extract_bbox_proposal(rgb_proposal_bbox, depth_proposal_bbox)
 
-            for r in depth_proposal_bbox:
-                if not draw_depth_once:
-                    # Draw BBOX on DEPTH
-                    cv2.rectangle(foreground_depth_proposal, (r[0], r[1]), (r[0]+r[2], r[1]+r[3]), 255, 1)
-                if rect_similarity2(s, r):
-                    # Draw BBOX on COMBINED proposal image
-                    cv2.rectangle(final_result_image, (s[0], s[1]), (s[0]+s[2], s[1]+s[3]), (255, 0, 0), 1)
-                    # mark rect slice for proposal for watershed segmentation
-                    # set segment to k+1 since we use 1 for sure background segment
-                    watershed_mask_seed[s[1]:s[1]+s[3], s[0]:s[0]+s[2]] = rgb.proposal_mask[s[1]:s[1]+s[3], s[0]:s[0]+s[2]]*k+1
-                    bbox_current_frame_proposals.append(s)
-                    #print "bingo! ", len(bbox_current_frame_proposals)
-            draw_depth_once = True
-
-        # not on first frame of video
-        if len(bbox_last_frame_proposals) > 0:
-            #print "ciclo vecchie proposte che sono:", len(bbox_last_frame_proposals)
-            for old in bbox_last_frame_proposals:
-                old_drawn = False
-                for curr in bbox_current_frame_proposals:
-
-                    if rect_similarity2(old, curr):
-                        old_drawn = True
-                        break
-
-                if not old_drawn:
-
-                    #print "borsa non piu disegnata"
-                    old_section = old_frame[s[1]:s[1]+s[3], s[0]:s[0]+s[2]].flatten()
-                    new_section = rgb.current_frame.copy()[s[1]:s[1]+s[3], s[0]:s[0]+s[2]].flatten()
-
-                    if norm_correlate(old_section, new_section)[0] > 0.9:
-                        cv2.rectangle(final_result_image, (old[0], old[1]), (old[0]+old[2], old[1]+old[3]), (255, 0, 0), 1)
-                        bbox_current_frame_proposals.append(old)
-
-        # save for usage in future frames
-        bbox_last_frame_proposals = bbox_current_frame_proposals
-        old_frame = rgb.current_frame.copy()
-
+        # segmentation
+        watershed_mask_seed = create_watershed_seed(bbox_current_frame_proposals, rgb.proposal_mask)
         watershed_bg_mask = rgb.proposal_mask+depth.foreground_mask
         watershed_mask_seed = np.where(watershed_bg_mask == 0, 1, watershed_mask_seed)
-
         # apply watershed - result overwrite in mask
         cv2.watershed(final_result_image, watershed_mask_seed)
-
         # OUTPUT MASK FOR FURTHER STUDY
         final_result_mask = np.where(watershed_mask_seed == 1, 0, 1)
+
+
+        # bbox_last_frame_proposals = bbox_current_frame_proposals + check_bbox_not_moved(bbox_last_frame_proposals,
+        #                                                                                 bbox_current_frame_proposals,
+        #                                                                                 old_frame,
+        #                                                                                 rgb.current_frame.copy())
+
+
+        for s in bbox_current_frame_proposals:
+            cv2.rectangle(final_result_image, (s[0], s[1]), (s[0]+s[2], s[1]+s[3]), (255, 0, 0), 1)
+
+        # save the old frame
+        old_frame = rgb.current_frame.copy()
+
+
+        # apply overlay of [0, 0, 0] for no info
+        # [0, 255, 0] for left luggage
         colors = np.array([[0, 0, 0], [0, 255, 0]])
         overlay = colors[final_result_mask]
         final_result_image = cv2.addWeighted(final_result_image, 0.5, overlay, 0.5, 0.0, dtype=cv2.CV_8UC3)
@@ -192,13 +168,76 @@ def left_luggage_detection():
 
 
 
+def extract_bbox_proposal(rgb_proposal_bbox, depth_proposal_bbox):
+
+    bbox_current_frame_proposals = []
+
+    # Draws bounding boxes
+    for k, s in enumerate(rgb_proposal_bbox):
+        # Draw BBOX on RGB
+        #cv2.rectangle(foreground_rgb_proposal, (s[0], s[1]), (s[0]+s[2], s[1]+s[3]), 255, 1)
+
+        for r in depth_proposal_bbox:
+            #if not draw_depth_once:
+                # Draw BBOX on DEPTH
+                #cv2.rectangle(foreground_depth_proposal, (r[0], r[1]), (r[0]+r[2], r[1]+r[3]), 255, 1)
+            if rect_similarity2(s, r):
+                # Draw BBOX on COMBINED proposal image
+                #cv2.rectangle(final_result_image, (s[0], s[1]), (s[0]+s[2], s[1]+s[3]), (255, 0, 0), 1)
+                # mark rect slice for proposal for watershed segmentation
+                # set segment to k+1 since we use 1 for sure background segment
+                #watershed_mask_seed[s[1]:s[1]+s[3], s[0]:s[0]+s[2]] = rgb.proposal_mask[s[1]:s[1]+s[3], s[0]:s[0]+s[2]]*k+1
+                bbox_current_frame_proposals.append(s)
+                #print "bingo! ", len(bbox_current_frame_proposals)
+        #draw_depth_once = True
+
+    return bbox_current_frame_proposals
+
+
+def create_watershed_seed(bbox_current_frame_proposals, proposal_mask):
+    watershed_mask_seed = np.zeros(shape=IMAGE_SHAPE, dtype=np.int32)
+    for k, s in enumerate(bbox_current_frame_proposals):
+        watershed_mask_seed[s[1]:s[1]+s[3], s[0]:s[0]+s[2]] = proposal_mask[s[1]:s[1]+s[3], s[0]:s[0]+s[2]]*(k+5)
+
+    return watershed_mask_seed
+
+
+def check_bbox_not_moved(bbox_last_frame_proposals, bbox_current_frame_proposals, old_frame, current_frame):
+
+    #bounding box present in old frame but not in the new frame
+    bbox_to_add = []
+
+    # not on first frame of video
+    if len(bbox_last_frame_proposals) > 0:
+        #print "ciclo vecchie proposte che sono:", len(bbox_last_frame_proposals)
+        for old in bbox_last_frame_proposals:
+            old_drawn = False
+            for curr in bbox_current_frame_proposals:
+
+                if rect_similarity2(old, curr):
+                    old_drawn = True
+                    break
+
+            if not old_drawn:
+
+                #print "borsa non piu disegnata"
+                old_section = old_frame[old[1]:old[1]+old[3], old[0]:old[0]+old[2]].flatten()
+                new_section = current_frame[old[1]:old[1]+old[3], old[0]:old[0]+old[2]].flatten()
+
+                if norm_correlate(old_section, new_section)[0] > 0.9:
+                    #cv2.rectangle(final_result_image, (old[0], old[1]), (old[0]+old[2], old[1]+old[3]), (255, 0, 0), 1)
+                    bbox_current_frame_proposals.append(old)
+
+    return bbox_to_add
+
+
 if __name__ == "__main__":
-    left_luggage_detection()
+    #left_luggage_detection()
 
     # PROFILING
-    # cProfile.run('left_luggage_detection()')
-    # command = """left_luggage_detection()"""
-    # cProfile.runctx( command, globals(), locals(), filename="kinect_pygame.profile" )
+    #cProfile.run('left_luggage_detection()')
+    command = """left_luggage_detection()"""
+    cProfile.runctx( command, globals(), locals(), filename="kinect_pygame.profile" )
 
     ## GRAFO CHIAMATE
     # from pycallgraph import PyCallGraph

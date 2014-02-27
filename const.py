@@ -19,7 +19,7 @@ BG_MASK_THRESHOLD = 3
 BG_ZIV_LONG_LRATE = 0.001       #: Background learning rate in Zivkovich method for long background model
 BG_ZIV_SHORT_LRATE = 0.01       #: Background learning rate in Zivkovich method for short background model
 BG_ZIV_HIST = 1                 #: History for Zivkovick background method
-BG_ZIV_LONG_THRESH = 400        #: Threshold for Zivkovich method for long background model
+BG_ZIV_LONG_THRESH = 900        #: Threshold for Zivkovich method for long background model
 BG_ZIV_SHORT_THRESH = 200       #: Threshold for Zivkovich method for short background model
 
 #: Aggregator parameters
@@ -39,4 +39,4 @@ DISPLAY_TYPE = "PYGAME"         #: Default display type: can be PYGAME or SIMPLE
 IMAGE_SHAPE = (640, 480)        #: Default image size retrieved from kinect
 
 # Pygame Options
-PYGAME_LAYOUT = 2               #: number of images to show in the output can be 2 or 4
+PYGAME_LAYOUT = 4               #: number of images to show in the output can be 2 or 4
