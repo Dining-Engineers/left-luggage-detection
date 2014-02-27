@@ -94,6 +94,22 @@ def apply_opening(image, kernel_size, kernel_type):
     u_image = cv2.morphologyEx(u_image, cv2.MORPH_OPEN, kernel)
     return u_image
 
+def apply_dilation(image, kernel_size, kernel_type):
+    """
+    Apply dilation to image with the specified kernel type and image
+
+    :param image:   image to which apply opening
+    :param kernel_size: size of the structuring element
+    :param kernel_type: structuring element
+    :return: image with opening applied
+    :rtype: np.uint8
+    """
+    u_image = image.astype(np.uint8)
+    #foreground_mask_depth = foreground_mask_depth.astype(np.uint8)
+    kernel = cv2.getStructuringElement(kernel_type, (kernel_size, kernel_size))
+    u_image = cv2.morphologyEx(u_image, cv2.MORPH_DILATE, kernel)
+    return u_image
+
 
 def get_bounding_boxes(image):
     """

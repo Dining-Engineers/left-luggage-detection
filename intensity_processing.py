@@ -46,6 +46,10 @@ class IntensityProcessing:
 
         self.foreground_mask_short_term = bg_models.compute_foreground_mask_from_func(self.f_bg_short, frame,
                                                                                       BG_ZIV_SHORT_LRATE)
+
+        self.foreground_mask_long_term = bg_models.apply_dilation(self.foreground_mask_long_term, 2, cv2.MORPH_ELLIPSE)
+        self.foreground_mask_short_term = bg_models.apply_dilation(self.foreground_mask_short_term, 2, cv2.MORPH_ELLIPSE)
+
         return self.foreground_mask_long_term, self.foreground_mask_short_term
 
     def update_detection_aggregator(self):
@@ -66,17 +70,17 @@ class IntensityProcessing:
         # increment aggregator
         result = self.background_aggregator + proposal_candidate
 
-        # AVOID REMOVING FROM PROPOSAL OF ALREADY DETECTED OBJECT
-        # mask of max values (proposal)
-        mask_proposal = np.where((result >= AGG_RGB_MAX_E), 1, 0)
-        mask_new_pixel_in_bg = np.int32(np.logical_not(self.foreground_mask_long_term)) * \
-                               np.int32(np.logical_not(self.foreground_mask_short_term))
-        # # pixel of older proposal that are becoming background (FL =0 and FS = 0)
-        mask = mask_proposal * mask_new_pixel_in_bg
-        # # # avoid previous pixel from being penalized
-        other_cases = np.where((other_cases == mask), 0, other_cases)
-        # # caso 0 -1
-        # mask_penalty = np.int32(np.logical_not(foreground_long)) * np.int32(foreground_short)
+        # # AVOID REMOVING FROM PROPOSAL OF ALREADY DETECTED OBJECT
+        # # mask of max values (proposal)
+        # mask_proposal = np.where((result >= AGG_RGB_MAX_E), 1, 0)
+        # mask_new_pixel_in_bg = np.int32(np.logical_not(self.foreground_mask_long_term)) * \
+        #                        np.int32(np.logical_not(self.foreground_mask_short_term))
+        # # # pixel of older proposal that are becoming background (FL =0 and FS = 0)
+        # mask = mask_proposal * mask_new_pixel_in_bg
+        # # # # avoid previous pixel from being penalized
+        # other_cases = np.where((other_cases == mask), 0, other_cases)
+        # # # caso 0 -1
+        # # mask_penalty = np.int32(np.logical_not(foreground_long)) * np.int32(foreground_short)
 
         # add penalty to pixel not in proposal
         result = result - other_cases * AGG_RGB_PENALTY #- mask_penalty * (AGG_RGB_MAX_E-1)
