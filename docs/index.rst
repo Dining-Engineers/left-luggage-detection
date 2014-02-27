@@ -26,7 +26,7 @@ Contents
 .. toctree::
    :maxdepth: 2
 
-   wiki
+   report
    docs
    usage
    dependencies
