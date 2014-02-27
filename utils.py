@@ -85,3 +85,9 @@ def similarity_measure_rect(bbox_test, bbox_target):
 
     return bbtarget.intersection(bbtest).area/bbtarget.union(bbtest).area
 
+
+def norm_correlate(a, v):
+    a = (a - np.mean(a)) / (np.std(a) * len(a))
+    v = (v - np.mean(v)) / np.std(v)
+
+    return np.correlate(a, v)

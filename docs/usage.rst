@@ -19,7 +19,7 @@ To use our application you can simply launch the main application via:
 Offline Usage
 -------------
 
-You can also test this application using registered video via Fakenect library which is included in Openkinect.
+You can also test this application using registered video via Fakenect library which is included inside Openkinect.
 
 To record a video:
 
@@ -29,7 +29,8 @@ To record a video:
     record directory_record
 
 
-To use a recorded video you need to specify two environment variables: ``LD_PRELOAD`` and ``FAKENECT_PATH``:
+To use a recorded video you need to specify two environment variables ``LD_PRELOAD`` to point to the fakenet lib
+instead of the freenect one and ``FAKENECT_PATH`` that point to the video folder:
 
 .. code-block:: console
 

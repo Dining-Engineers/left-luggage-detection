@@ -4,7 +4,7 @@ from OpenGL.GLU import *
 import time
 import freenect
 
-from misc.demo.ipython import calibkinect
+import calibkinect
 import pykinectwindow as wxwindow
 
 
@@ -16,9 +16,13 @@ except:
   TEXTURE_TARGET = GL_TEXTURE_RECTANGLE_ARB
 
 
-if not 'win' in globals(): win = wxwindow.Window(size=(640,480))
+if not 'win' in globals():
+  win = wxwindow.Window(size=(640, 480))
 
-def refresh(): win.Refresh()
+def refresh():
+
+  win.Refresh()
+  print type(win)
 
 if not 'rotangles' in globals(): rotangles = [0,0]
 if not 'zoomdist' in globals(): zoomdist = 1
@@ -229,6 +233,7 @@ def loopcv():
   while 1:
     cv.ShowImage('hi',get_depth().astype(np.uint8))
     cv.WaitKey(10)
+
 
 update() 
 #update_on()

@@ -61,7 +61,7 @@ def depth2xyzuv(depth, u=None, v=None):
     :returns: xyz - 3D world coordinates in meters (Nx3) uv - image coordinates for the RGB image (Nx3)
     """
     if u is None or v is None:
-        u, v = np.mgrid[:480,:640]
+        u, v = np.mgrid[:480, :640]
 
     # Build a 3xN matrix of the d,u,v data
     C = np.vstack((u.flatten(), v.flatten(), depth.flatten(), 0*u.flatten()+1))
@@ -70,7 +70,7 @@ def depth2xyzuv(depth, u=None, v=None):
     X, Y, Z, W = np.dot(xyz_matrix(), C)
     X, Y, Z = X/W, Y/W, Z/W
     xyz = np.vstack((X, Y, Z)).transpose()
-    xyz = xyz[Z<0, :]
+    xyz = xyz[Z < 0, :]
 
     # Project the duv matrix into U,V rgb coordinates using rgb_matrix() and xyz_matrix()
     U, V, _, W = np.dot(np.dot(uv_matrix(), xyz_matrix()), C)

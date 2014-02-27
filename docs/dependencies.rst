@@ -91,7 +91,7 @@ To install OpenCV you can use the following script
     ./opencv_latest.sh
 
 .. note::
-    If you want cuda support add WITH_CUDA=ON in the cmake section if the above script
+    If you want cuda support add WITH_CUDA=ON in the cmake section in the above script
 
 
 3. Pygame
@@ -107,8 +107,8 @@ To display the video stream we use pygame so you'll need:
 4. Optional
 -----------
 
-SimpleCV (optional)
-```````````````````
+SimpleCV
+````````
 
 If you decide to use SimpleCV class to display the video stream install SimpleCV from: http://simplecv.org/download
 
