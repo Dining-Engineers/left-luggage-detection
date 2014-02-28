@@ -12,13 +12,15 @@ independently. From each stream we obtain a set of proposal, i.e. left
 luggage item, that are combined in the final step of our pipeline.
 
 
+
+
 .. toctree::
    :maxdepth: 2
 
    report/introduction
-   report/approach
    report/background_models
    report/combination
+   report/acknowledgments
 
 
 
