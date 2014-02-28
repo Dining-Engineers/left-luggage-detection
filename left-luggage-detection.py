@@ -114,25 +114,24 @@ def left_luggage_detection():
         # convert to rgb to draw colored boxes
         foreground_depth_proposal = to_rgb(foreground_depth_proposal)
 
-
-
-        # draw_depth_once = False
-        # watershed_mask_seed = np.zeros(shape=IMAGE_SHAPE, dtype=np.int32)
-
+        # extract current frame proposal: bbox that match PASCAL overlapping criterion between the
+        # bbox in rgb and in depth
         bbox_current_frame_proposals = extract_proposal_bbox(rgb_proposal_bbox, depth_proposal_bbox)
 
         # image where will draw the combined proposal
         final_result_image = rgb.current_frame.copy()
-        # # segmentation
-        # watershed_mask_seed = create_watershed_seed(bbox_current_frame_proposals, rgb.proposal_mask)
-        # watershed_bg_mask = rgb.proposal_mask+depth.foreground_mask
-        # watershed_mask_seed = np.where(watershed_bg_mask == 0, 1, watershed_mask_seed)
-        # # apply watershed - result overwrite in mask
-        # cv2.watershed(final_result_image, watershed_mask_seed)
-        #
-        # # OUTPUT MASK FOR FURTHER STUDY
-        # final_result_mask = np.where(watershed_mask_seed == 1, 0, 1)
-        final_result_mask = get_segmentation_mask("watershed", final_result_image, bbox_current_frame_proposals,
+
+
+        bbox_last_frame_proposals = bbox_current_frame_proposals + check_bbox_not_moved(bbox_last_frame_proposals,
+                                                                                bbox_current_frame_proposals,
+                                                                                old_frame,
+                                                                                rgb.current_frame.copy())
+
+        # get segmentation mask where each pixel is:
+        #       - 0 unknown area
+        #       - 1 background area
+        #       - >1 item detection (luggage)
+        final_result_mask = get_segmentation_mask("watershed", final_result_image, bbox_last_frame_proposals,
                                                   rgb.proposal_mask, depth.foreground_mask, watershed_last_frame_seed_mask)
 
         # apply overlay of [0, 0, 0] for no info
@@ -142,10 +141,6 @@ def left_luggage_detection():
         final_result_image = cv2.addWeighted(final_result_image, 0.5, overlay, 0.5, 0.0, dtype=cv2.CV_8UC3)
 
 
-        bbox_last_frame_proposals = bbox_current_frame_proposals + check_bbox_not_moved(bbox_last_frame_proposals,
-                                                                                        bbox_current_frame_proposals,
-                                                                                        old_frame,
-                                                                                        rgb.current_frame.copy())
 
         watershed_last_frame_seed_mask = final_result_mask.copy()
 
@@ -195,11 +190,19 @@ def extract_proposal_bbox(rgb_proposal_bbox, depth_proposal_bbox):
     return bbox_current_frame_proposals
 
 
-
-
-
 def check_bbox_not_moved(bbox_last_frame_proposals, bbox_current_frame_proposals, old_frame, current_frame):
+    """ A bounding box can disappear because:
 
+            - a left item is removed
+            - the item detected is standing still for a long amount of time. After this time the item became part of
+              the depth and rgb background. When the item became part of the background model we can't detect
+              its presence doing current_frame-bg_model so we need a way to retain the information previously discovered
+              If a Bounding box is present at the frame t-1 but not in the frame t, we check if pixels in the area
+              defined by this bbox are still the same (i.e. the luggage is still there): this check is performed by
+              using the normalized correlation between the pixel in the t-1 and t frame.
+              If the similarity is above a certain threshold (i.e. 0.9) we keep drawing the old bbox
+
+    """
     #bounding box present in old frame but not in the new frame
     bbox_to_add = []
 
@@ -215,8 +218,8 @@ def check_bbox_not_moved(bbox_last_frame_proposals, bbox_current_frame_proposals
                     break
 
             if not old_drawn:
-
-                #print "borsa non piu disegnata"
+                # Check if the area defined by the bounding box in the old frame and in the new one
+                # is still the same
                 old_section = old_frame[old[1]:old[1]+old[3], old[0]:old[0]+old[2]].flatten()
                 new_section = current_frame[old[1]:old[1]+old[3], old[0]:old[0]+old[2]].flatten()
 
@@ -232,6 +235,7 @@ def create_watershed_seed(bbox_current_frame_proposals, proposal_mask, watershed
     for k, s in enumerate(bbox_current_frame_proposals):
         if np.sum(proposal_mask[s[1]:s[1]+s[3], s[0]:s[0]+s[2]]) == 0:
             watershed_mask_seed[s[1]:s[1]+s[3], s[0]:s[0]+s[2]] = watershed_last_frame_seed_mask[s[1]:s[1]+s[3], s[0]:s[0]+s[2]]
+            print "mi manca uso seed vecchi"
         else:
             watershed_mask_seed[s[1]:s[1]+s[3], s[0]:s[0]+s[2]] = proposal_mask[s[1]:s[1]+s[3], s[0]:s[0]+s[2]]*(k+5)
 
@@ -247,6 +251,8 @@ def watershed_segmentation(bbox, image, rgb_proposal_mask, depth_proposal_mask, 
     #        np.sum(depth_proposal_mask[s[1]:s[1]+s[3], s[0]:s[0]+s[2]]) == 0:
     #         #watershed_bg_mask[s[1]:s[1]+s[3], s[0]:s[0]+s[2]] = 1
 
+    # set the background to 1 the luggage pixel to the values found before
+    # the unknown pixel are still 0
     watershed_mask_seed = np.where(watershed_bg_mask == 0, 1, watershed_mask_seed)
     # apply watershed - result overwrite in mask
     cv2.watershed(image, watershed_mask_seed)
