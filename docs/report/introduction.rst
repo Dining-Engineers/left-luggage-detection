@@ -1,4 +1,4 @@
-Approach
+Introduction
 ------------------
 
 In this section we briefly describe the proposed approach.
