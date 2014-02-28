@@ -15,6 +15,14 @@ def to_rgb(im):
     return ret
 
 
+def rgb2gray(rgb):
+
+    r, g, b = rgb[:,:,0], rgb[:,:,1], rgb[:,:,2]
+    gray = 0.2989 * r + 0.5870 * g + 0.1140 * b
+
+    return gray
+
+
 # def query_kdtree(data_tree, data_query):
 #     kdtree = pykdtree.kdtree.KDTree(data_tree)
 #     dist, idx = kdtree.query(data_query)
