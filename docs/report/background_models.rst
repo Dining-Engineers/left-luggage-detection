@@ -60,7 +60,7 @@ using the best match found.
 
 
 Intensity background model and proposals
-````````````````````````````````````````
+-----------------------------------------
 
 The intensity background model is computed by using the method of Zivkovic et al [#note2]_. 
 The intensity-based proposal are generated with the dual foregrouonds model of Porikli et al. [#note3]_. 
