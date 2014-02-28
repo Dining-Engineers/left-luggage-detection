@@ -113,24 +113,26 @@ def left_luggage_detection():
         # convert to rgb to draw colored boxes
         foreground_depth_proposal = to_rgb(foreground_depth_proposal)
 
-        # image where will draw the combined proposal
-        final_result_image = rgb.current_frame.copy()
+
 
         # draw_depth_once = False
         # watershed_mask_seed = np.zeros(shape=IMAGE_SHAPE, dtype=np.int32)
 
         bbox_current_frame_proposals = extract_proposal_bbox(rgb_proposal_bbox, depth_proposal_bbox)
 
-        # segmentation
-        watershed_mask_seed = create_watershed_seed(bbox_current_frame_proposals, rgb.proposal_mask)
-        watershed_bg_mask = rgb.proposal_mask+depth.foreground_mask
-        watershed_mask_seed = np.where(watershed_bg_mask == 0, 1, watershed_mask_seed)
-
-        # apply watershed - result overwrite in mask
-        cv2.watershed(final_result_image, watershed_mask_seed)
-
-        # OUTPUT MASK FOR FURTHER STUDY
-        final_result_mask = np.where(watershed_mask_seed == 1, 0, 1)
+        # image where will draw the combined proposal
+        final_result_image = rgb.current_frame.copy()
+        # # segmentation
+        # watershed_mask_seed = create_watershed_seed(bbox_current_frame_proposals, rgb.proposal_mask)
+        # watershed_bg_mask = rgb.proposal_mask+depth.foreground_mask
+        # watershed_mask_seed = np.where(watershed_bg_mask == 0, 1, watershed_mask_seed)
+        # # apply watershed - result overwrite in mask
+        # cv2.watershed(final_result_image, watershed_mask_seed)
+        #
+        # # OUTPUT MASK FOR FURTHER STUDY
+        # final_result_mask = np.where(watershed_mask_seed == 1, 0, 1)
+        final_result_mask = get_segmentation_mask("watershed", final_result_image, bbox_current_frame_proposals,
+                                                  rgb.proposal_mask, depth.foreground_mask)
 
         # apply overlay of [0, 0, 0] for no info
         # [0, 255, 0] for left luggage
@@ -138,10 +140,10 @@ def left_luggage_detection():
         overlay = colors[final_result_mask]
         final_result_image = cv2.addWeighted(final_result_image, 0.5, overlay, 0.5, 0.0, dtype=cv2.CV_8UC3)
 
-        # bbox_last_frame_proposals = bbox_current_frame_proposals + check_bbox_not_moved(bbox_last_frame_proposals,
-        #                                                                                 bbox_current_frame_proposals,
-        #                                                                                 old_frame,
-        #                                                                                 rgb.current_frame.copy())
+        bbox_last_frame_proposals = bbox_current_frame_proposals + check_bbox_not_moved(bbox_last_frame_proposals,
+                                                                                        bbox_current_frame_proposals,
+                                                                                        old_frame,
+                                                                                        rgb.current_frame.copy())
 
         # draw the proposals bbox in the image
         for s in bbox_current_frame_proposals:
@@ -224,6 +226,34 @@ def check_bbox_not_moved(bbox_last_frame_proposals, bbox_current_frame_proposals
                     bbox_current_frame_proposals.append(old)
 
     return bbox_to_add
+
+
+def watershed_segmentation(bbox, image, rgb_proposal_mask, depth_proposal_mask):
+    # segmentation
+    watershed_mask_seed = create_watershed_seed(bbox, rgb_proposal_mask)
+    watershed_bg_mask = rgb_proposal_mask + depth_proposal_mask
+    watershed_mask_seed = np.where(watershed_bg_mask == 0, 1, watershed_mask_seed)
+    # apply watershed - result overwrite in mask
+    cv2.watershed(image, watershed_mask_seed)
+
+    # OUTPUT MASK FOR FURTHER STUDY
+    return np.where(watershed_mask_seed == 1, 0, 1)
+
+
+def region_growing_segmentation(bbox, image, rgb_proposal_mask, depth_proposal_mask):
+    pass
+
+
+def get_segmentation_mask(TYPE, image, bbox, rgb_proposal_mask, depth_proposal_mask):
+
+    if TYPE == "watershed":
+        mask = watershed_segmentation(bbox, image, rgb_proposal_mask, depth_proposal_mask)
+    else:
+        # region growing
+        mask = region_growing_segmentation(bbox, image, rgb_proposal_mask, depth_proposal_mask)
+
+    return mask
+
 
 
 if __name__ == "__main__":

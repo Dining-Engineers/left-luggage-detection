@@ -1,9 +1,8 @@
 """
-simple_region_growing modified from tippy implementation http://www.lengrand.fr/2011/11/simple-region-growing-implementation-in-python/
+simple_region_growing modified from tippy implementation
+http://www.lengrand.fr/2011/11/simple-region-growing-implementation-in-python/
 by Julien Lengrand-Lambert
 """
-
-
 
 import sys
 import cv
@@ -44,6 +43,7 @@ def simple_region_growing(img, seed, threshold=1):
 
     # parameters
     mean_reg = float(img[seed[1], seed[0]])
+
     size = 1
     pix_area = dims[0]*dims[1]
 
