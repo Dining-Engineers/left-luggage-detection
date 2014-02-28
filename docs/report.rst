@@ -3,8 +3,6 @@ Left luggage detection
 =======================
 
 
-Introduction
-------------------
 TODO
 
 

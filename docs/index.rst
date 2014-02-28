@@ -24,7 +24,7 @@ Contents
    .. :doc:`docs`
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
 
    report
    docs
