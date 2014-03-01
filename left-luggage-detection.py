@@ -69,7 +69,7 @@ def left_luggage_detection():
             depth.background_model = depth.current_frame.astype(depth.background_model.dtype)
 
             # in first run the old_frame is the current frame
-            old_frame = rgb.current_frame.copy()
+            old_rgb_frame = rgb.current_frame.copy()
             watershed_last_frame_seed_mask = np.zeros(shape=IMAGE_SHAPE, dtype=np.int32)
             first_run = False
 
@@ -124,17 +124,17 @@ def left_luggage_detection():
         # last frame proposal are bbox current plus the bbox not currently recognised
         # but hasn't changed the underlying pixel distribution respect to the bbox
         # of the previous frame
-        bbox_last_frame_proposals = bbox_current_frame_proposals + check_bbox_not_moved(bbox_last_frame_proposals,
-                                                                                bbox_current_frame_proposals,
-                                                                                old_frame,
-                                                                                rgb.current_frame.copy())
+        old_bbox_still_present = check_bbox_not_moved(bbox_last_frame_proposals, bbox_current_frame_proposals,
+                                                      old_rgb_frame, rgb.current_frame.copy())
+
 
         # get segmentation mask where each pixel is:
         #       - 0 unknown area
         #       - 1 background area
         #       - >1 item detection (luggage)
-        final_result_mask = get_segmentation_mask("watershed", final_result_image, bbox_last_frame_proposals,
-                                                  rgb.proposal_mask, depth.foreground_mask, watershed_last_frame_seed_mask)
+        final_result_mask = get_segmentation_mask("watershed", final_result_image, bbox_current_frame_proposals,
+                                                  rgb.proposal_mask, depth.foreground_mask, old_bbox_still_present,
+                                                  watershed_last_frame_seed_mask)
 
         # apply overlay of [0, 0, 0] for no info
         # [0, 255, 0] for left luggage
@@ -142,15 +142,14 @@ def left_luggage_detection():
         overlay = colors[final_result_mask]
         final_result_image = cv2.addWeighted(final_result_image, 0.5, overlay, 0.5, 0.0, dtype=cv2.CV_8UC3)
 
-
-
+        bbox_last_frame_proposals = bbox_current_frame_proposals + old_bbox_still_present
         watershed_last_frame_seed_mask = final_result_mask.copy()
 
         # draw the proposals bbox in the image
         draw_bounding_box(final_result_image, bbox_current_frame_proposals)
 
         # save the old frame
-        old_frame = rgb.current_frame.copy()
+        old_rgb_frame = rgb.current_frame.copy()
 
         frame_upper_left = rgb.current_frame
         frame_upper_right = foreground_rgb_proposal
@@ -226,26 +225,32 @@ def check_bbox_not_moved(bbox_last_frame_proposals, bbox_current_frame_proposals
 
                 if norm_correlate(old_section, new_section)[0] > 0.9:
                     #cv2.rectangle(final_result_image, (old[0], old[1]), (old[0]+old[2], old[1]+old[3]), (255, 0, 0), 1)
-                    bbox_current_frame_proposals.append(old)
+                    bbox_to_add.append(old)
+
 
     return bbox_to_add
 
 
-def create_watershed_seed(bbox_current_frame_proposals, proposal_mask, watershed_last_frame_seed_mask):
+def create_watershed_seed(bbox_current_frame_proposals, proposal_mask, bbox_not_moved, watershed_last_frame_seed_mask):
     watershed_mask_seed = np.zeros(shape=IMAGE_SHAPE, dtype=np.int32)
     for k, s in enumerate(bbox_current_frame_proposals):
-        if np.sum(proposal_mask[s[1]:s[1]+s[3], s[0]:s[0]+s[2]]) == 0:
-            watershed_mask_seed[s[1]:s[1]+s[3], s[0]:s[0]+s[2]] = watershed_last_frame_seed_mask[s[1]:s[1]+s[3], s[0]:s[0]+s[2]]
-            print "mi manca uso seed vecchi"
-        else:
-            watershed_mask_seed[s[1]:s[1]+s[3], s[0]:s[0]+s[2]] = proposal_mask[s[1]:s[1]+s[3], s[0]:s[0]+s[2]]*(k+5)
+        # if np.sum(proposal_mask[s[1]:s[1]+s[3], s[0]:s[0]+s[2]]) == 0:
+        #     print "mi manca uso seed vecchi"
+        # else:
+        watershed_mask_seed[s[1]:s[1]+s[3], s[0]:s[0]+s[2]] = proposal_mask[s[1]:s[1]+s[3], s[0]:s[0]+s[2]]*(k+5)
+
+    print len(bbox_not_moved)
+    for s in bbox_not_moved:
+        print "mi manca uso seed vecchi"
+        watershed_mask_seed[s[1]:s[1]+s[3], s[0]:s[0]+s[2]] = watershed_last_frame_seed_mask[s[1]:s[1]+s[3], s[0]:s[0]+s[2]]
+
 
     return watershed_mask_seed
 
 
-def watershed_segmentation(bbox, image, rgb_proposal_mask, depth_proposal_mask, watershed_last_frame_seed_mask):
+def watershed_segmentation(bbox, image, rgb_proposal_mask, depth_proposal_mask, bbox_not_moved, watershed_last_frame_seed_mask):
     # segmentation
-    watershed_mask_seed = create_watershed_seed(bbox, rgb_proposal_mask, watershed_last_frame_seed_mask)
+    watershed_mask_seed = create_watershed_seed(bbox, rgb_proposal_mask, bbox_not_moved, watershed_last_frame_seed_mask)
     watershed_bg_mask = rgb_proposal_mask + depth_proposal_mask
     # for s in bbox:
     #     if np.sum(rgb_proposal_mask[s[1]:s[1]+s[3], s[0]:s[0]+s[2]]) == 0 or   \
@@ -269,10 +274,11 @@ def region_growing_segmentation(bbox, image, rgb_proposal_mask, depth_proposal_m
     return np.where(mask == 255, 1, 0)
 
 
-def get_segmentation_mask(TYPE, image, bbox, rgb_proposal_mask, depth_proposal_mask, watershed_last_frame_seed_mask=None):
+def get_segmentation_mask(TYPE, image, bbox, rgb_proposal_mask, depth_proposal_mask,
+                          bbox_not_moved=None, watershed_last_frame_seed_mask=None):
 
     if TYPE == "watershed":
-        mask = watershed_segmentation(bbox, image, rgb_proposal_mask, depth_proposal_mask, watershed_last_frame_seed_mask)
+        mask = watershed_segmentation(bbox, image, rgb_proposal_mask, depth_proposal_mask, bbox_not_moved, watershed_last_frame_seed_mask)
     else:
         # region growing
         # CURRENTLY NOT WORKING

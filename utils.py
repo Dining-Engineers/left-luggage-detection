@@ -3,6 +3,7 @@ __copyright__ = "Copyright 2014, Dining Engineers"
 __license__ = "GPLv2"
 
 import numpy as np
+import cv2
 #import pykdtree.kdtree
 
 
