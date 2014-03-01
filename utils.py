@@ -82,6 +82,14 @@ def rect_similarity2(r1, r2):
 
 
 def similarity_measure_rect(bbox_test, bbox_target):
+    """ Return similarity measure between two bounding box.
+        measure:
+            :math:`r = \frac{area \left(B_{curr} \cap B_{acc} \right)}{area \left(B_{curr} \cup B_{acc} \right)}`
+
+    :param bbox_test:
+    :param bbox_target:
+    :return:
+    """
 
     def gen_box(bbox):
         from shapely.geometry import box
@@ -99,3 +107,16 @@ def norm_correlate(a, v):
     v = (v - np.mean(v)) / np.std(v)
 
     return np.correlate(a, v)
+
+
+def draw_bounding_box(image, bbox):
+    """ Draw all bounding box inside image as red rectangle
+
+    :param image: image where draw the bounding box
+    :param bbox: array of bounding boxes as (x,y,w,h) where x,y is the topleft corner of the rectangle
+    :return: image with bbox drawn
+    """
+    for s in bbox:
+        cv2.rectangle(image, (s[0], s[1]), (s[0]+s[2], s[1]+s[3]), 255, 1)
+
+    return image

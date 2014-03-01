@@ -121,7 +121,9 @@ def left_luggage_detection():
         # image where will draw the combined proposal
         final_result_image = rgb.current_frame.copy()
 
-
+        # last frame proposal are bbox current plus the bbox not currently recognised
+        # but hasn't changed the underlying pixel distribution respect to the bbox
+        # of the previous frame
         bbox_last_frame_proposals = bbox_current_frame_proposals + check_bbox_not_moved(bbox_last_frame_proposals,
                                                                                 bbox_current_frame_proposals,
                                                                                 old_frame,
@@ -145,8 +147,7 @@ def left_luggage_detection():
         watershed_last_frame_seed_mask = final_result_mask.copy()
 
         # draw the proposals bbox in the image
-        for s in bbox_current_frame_proposals:
-            cv2.rectangle(final_result_image, (s[0], s[1]), (s[0]+s[2], s[1]+s[3]), (255, 0, 0), 1)
+        draw_bounding_box(final_result_image, bbox_current_frame_proposals)
 
         # save the old frame
         old_frame = rgb.current_frame.copy()
@@ -268,12 +269,13 @@ def region_growing_segmentation(bbox, image, rgb_proposal_mask, depth_proposal_m
     return np.where(mask == 255, 1, 0)
 
 
-def get_segmentation_mask(TYPE, image, bbox, rgb_proposal_mask, depth_proposal_mask, watershed_last_frame_seed_mask):
+def get_segmentation_mask(TYPE, image, bbox, rgb_proposal_mask, depth_proposal_mask, watershed_last_frame_seed_mask=None):
 
     if TYPE == "watershed":
         mask = watershed_segmentation(bbox, image, rgb_proposal_mask, depth_proposal_mask, watershed_last_frame_seed_mask)
     else:
         # region growing
+        # CURRENTLY NOT WORKING
         mask = region_growing_segmentation(bbox, image, rgb_proposal_mask, depth_proposal_mask)
 
     return mask
