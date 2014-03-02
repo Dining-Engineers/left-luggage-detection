@@ -24,7 +24,7 @@ __status__ = "Development"
 def left_luggage_detection():
 
     # Initialize video display
-    screen = VideoDisplay(DISPLAY_TYPE, 2)
+    screen = VideoDisplay(DISPLAY_TYPE, 4)
 
     # initialize the camera
     cam = KinectConnector()
@@ -127,6 +127,8 @@ def left_luggage_detection():
         old_bbox_still_present = check_bbox_not_moved(bbox_last_frame_proposals, bbox_current_frame_proposals,
                                                       old_rgb_frame, rgb.current_frame.copy())
 
+        # add the old bbox still present in the current frame to the bbox detected
+        bbox_last_frame_proposals = bbox_current_frame_proposals + old_bbox_still_present
 
         # get segmentation mask where each pixel is:
         #       - 0 unknown area
@@ -137,19 +139,19 @@ def left_luggage_detection():
                                                   watershed_last_frame_seed_mask)
 
         # apply overlay of [0, 0, 0] for no info
-        # [0, 255, 0] for left luggage
+        # [0, 255, 0] for left luggage proposal
         colors = np.array([[0, 0, 0], [0, 255, 0]])
         overlay = colors[final_result_mask]
-        final_result_image = cv2.addWeighted(final_result_image, 0.5, overlay, 0.5, 0.0, dtype=cv2.CV_8UC3)
+        final_result_image = cv2.addWeighted(final_result_image, 0.7, overlay, 0.3, 0.0, dtype=cv2.CV_8UC3)
 
-        bbox_last_frame_proposals = bbox_current_frame_proposals + old_bbox_still_present
+        # save the old frame
+        old_rgb_frame = rgb.current_frame.copy()
         watershed_last_frame_seed_mask = final_result_mask.copy()
 
         # draw the proposals bbox in the image
         draw_bounding_box(final_result_image, bbox_current_frame_proposals)
-
-        # save the old frame
-        old_rgb_frame = rgb.current_frame.copy()
+        draw_bounding_box(foreground_depth_proposal, depth_proposal_bbox)
+        draw_bounding_box(foreground_rgb_proposal, rgb_proposal_bbox)
 
         frame_upper_left = rgb.current_frame
         frame_upper_right = final_result_image
@@ -227,7 +229,6 @@ def check_bbox_not_moved(bbox_last_frame_proposals, bbox_current_frame_proposals
                     #cv2.rectangle(final_result_image, (old[0], old[1]), (old[0]+old[2], old[1]+old[3]), (255, 0, 0), 1)
                     bbox_to_add.append(old)
 
-
     return bbox_to_add
 
 
@@ -243,7 +244,6 @@ def create_watershed_seed(bbox_current_frame_proposals, proposal_mask, bbox_not_
     for s in bbox_not_moved:
         print "mi manca uso seed vecchi"
         watershed_mask_seed[s[1]:s[1]+s[3], s[0]:s[0]+s[2]] = watershed_last_frame_seed_mask[s[1]:s[1]+s[3], s[0]:s[0]+s[2]]
-
 
     return watershed_mask_seed
 
@@ -285,7 +285,6 @@ def get_segmentation_mask(TYPE, image, bbox, rgb_proposal_mask, depth_proposal_m
         mask = region_growing_segmentation(bbox, image, rgb_proposal_mask, depth_proposal_mask)
 
     return mask
-
 
 
 if __name__ == "__main__":
@@ -332,5 +331,3 @@ if __name__ == "__main__":
     #
     # with PyCallGraph(output=graphviz, config=config):
     #     left_luggage_detection()
-
-
