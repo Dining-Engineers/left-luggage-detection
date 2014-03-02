@@ -24,7 +24,7 @@ __status__ = "Development"
 def left_luggage_detection():
 
     # Initialize video display
-    screen = VideoDisplay(DISPLAY_TYPE, 4)
+    screen = VideoDisplay(DISPLAY_TYPE, 2)
 
     # initialize the camera
     cam = KinectConnector()
@@ -157,9 +157,9 @@ def left_luggage_detection():
         old_frame = rgb.current_frame.copy()
 
         frame_upper_left = rgb.current_frame
-        frame_upper_right = foreground_rgb_proposal
+        frame_upper_right = final_result_image
         frame_bottom_left = foreground_depth_proposal
-        frame_bottom_right = final_result_image
+        frame_bottom_right = foreground_rgb_proposal
 
         loop = screen.show(frame_upper_left, frame_upper_right, frame_bottom_left, frame_bottom_right)
         #loop = screen.show(to_rgb(rgb.foreground_mask_long_term*255), to_rgb(rgb.foreground_mask_short_term*255), frame_bottom_left, frame_bottom_right)
