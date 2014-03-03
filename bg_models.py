@@ -34,6 +34,10 @@ def compute_background_running_average(frame, average, alpha):
     frame = np.where(holes_diff == 1, average, frame)
     average = np.where(holes_diff == -1, frame, average)
 
+
+
+
+
     # get running average
     #average = (1-alpha)*average + alpha*frame
     cv2.accumulateWeighted(frame, average, alpha)

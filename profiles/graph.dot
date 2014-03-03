@@ -1,0 +1,38 @@
+digraph "callgraph" {
+  F13dfd18 [label="update_background_model /home/...\n370"];
+  F13e2cb8 [label="compute_background_running_ave...\n370"];
+  F13e89e8 [label="get_segmentation_mask /home/hu...\n168"];
+  F142a9c8 [label="<method 'apply' of 'cv2.Backgr...\n198"];
+  F1461ba8 [label="<numpy.core.multiarray.where>\n773"];
+  F14970d8 [label="compute_foreground_mask_from_f...\n337"];
+  F1499dd8 [label="extract_proposal_bbox /home/hu...\n127"];
+  F149b2a8 [label="make_surface /usr/lib/python2....\n489"];
+  F149bb88 [label="<module> <string>:1\n2 463"];
+  F14c07f8 [label="make_surface /usr/lib/python2....\n489"];
+  F14ce0e8 [label="compute_foreground_masks /home...\n345"];
+  F14cec98 [label="show /home/hunter/git/left-lug...\n706"];
+  F14d2108 [label="extract_foreground_mask_from_r...\n214"];
+  F174c328 [label="blit_array /usr/lib/python2.7/...\n479"];
+  F18c1238 [label="<method 'tostring' of 'numpy.n...\n187"];
+  F1989ab8 [label="left_luggage_detection /home/h...\n2 463"];
+  F198a4d8 [label="watershed_segmentation /home/h...\n168"];
+  F13dfd18 -> F13e2cb8 [weight=1,label="370 (12x)"];
+  F13e2cb8 -> F1461ba8 [weight=1,label="338 (48x)"];
+  F13e89e8 -> F198a4d8 [weight=1,label="168 (12x)"];
+  F14970d8 -> F142a9c8 [weight=1,label="198 (24x)"];
+  F14970d8 -> F1461ba8 [weight=1,label="127 (24x)"];
+  F149b2a8 -> F14c07f8 [weight=1,label="489 (12x)"];
+  F149bb88 -> F1989ab8 [weight=2,label="2 463 (1x)"];
+  F14c07f8 -> F174c328 [weight=1,label="479 (12x)"];
+  F14ce0e8 -> F14970d8 [weight=1,label="337 (24x)"];
+  F14cec98 -> F149b2a8 [weight=1,label="489 (12x)"];
+  F14d2108 -> F1461ba8 [weight=1,label="182 (24x)"];
+  F174c328 -> F18c1238 [weight=1,label="187 (12x)"];
+  F1989ab8 -> F13dfd18 [weight=1,label="370 (12x)"];
+  F1989ab8 -> F13e89e8 [weight=1,label="168 (12x)"];
+  F1989ab8 -> F1499dd8 [weight=1,label="127 (12x)"];
+  F1989ab8 -> F14ce0e8 [weight=1,label="345 (12x)"];
+  F1989ab8 -> F14cec98 [weight=1,label="706 (12x)"];
+  F1989ab8 -> F14d2108 [weight=1,label="214 (12x)"];
+  F198a4d8 -> F1461ba8 [weight=1,label="126 (24x)"];
+}
