@@ -1,0 +1,584 @@
+events: Ticks
+summary: 2475
+fn=draw_bounding_box /home/hunter/git/left-luggage-detection/utils.py:111
+111 0
+
+fn=get_segmentation_mask /home/hunter/git/left-luggage-detection/left-luggage-detection.py:277
+277 0
+cfn=watershed_segmentation /home/hunter/git/left-luggage-detection/left-luggage-detection.py:251
+calls=12 251
+277 168
+
+fn=<method 'get' of 'dict' objects>
+0 0
+
+fn=clip /usr/lib/python2.7/dist-packages/numpy/core/fromnumeric.py:1365
+1365 0
+cfn=<method 'clip' of 'numpy.ndarray' objects>
+calls=24 0
+1365 7
+
+fn=compute_background_running_average /home/hunter/git/left-luggage-detection/bg_models.py:11
+11 28
+cfn=<cv2.accumulateWeighted>
+calls=12 0
+11 3
+cfn=<numpy.core.multiarray.where>
+calls=48 0
+11 338
+
+fn=<method 'blit' of 'pygame.Surface' objects>
+0 7
+
+fn=extract_proposal_bbox /home/hunter/git/left-luggage-detection/depth_processing.py:60
+60 2
+cfn=update_depth_detection_aggregator /home/hunter/git/left-luggage-detection/depth_processing.py:231
+calls=12 231
+60 25
+cfn=get_bounding_boxes /home/hunter/git/left-luggage-detection/bg_models.py:114
+calls=12 114
+60 6
+
+fn=<method 'lower' of 'str' objects>
+0 0
+
+fn=<cv2.accumulateWeighted>
+0 3
+
+fn=<method 'get_width' of 'pygame.Surface' objects>
+0 0
+
+fn=<method 'disable' of '_lsprof.Profiler' objects>
+0 0
+
+fn=<method 'split' of 'str' objects>
+0 0
+
+fn=<method 'get_losses' of 'pygame.Surface' objects>
+0 0
+
+fn=<module> <string>:1
+1 12
+cfn=left_luggage_detection /home/hunter/git/left-luggage-detection/left-luggage-detection.py:24
+calls=1 24
+1 2463
+
+fn=cut_foreground /home/hunter/git/left-luggage-detection/bg_models.py:63
+63 49
+cfn=<len>
+calls=36 0
+63 0
+cfn=to_rgb /home/hunter/git/left-luggage-detection/utils.py:10
+calls=12 10
+63 10
+
+fn=__init__ /home/hunter/git/left-luggage-detection/depth_processing.py:24
+24 0
+cfn=<numpy.core.multiarray.array>
+calls=1 0
+24 0
+cfn=<numpy.core.multiarray.zeros>
+calls=4 0
+24 0
+
+fn=<method 'get_pitch' of 'pygame.Surface' objects>
+0 0
+
+fn=<method 'copy' of 'numpy.ndarray' objects>
+0 103
+
+fn=make_surface /usr/lib/python2.7/dist-packages/pygame/surfarray.py:232
+232 0
+cfn=make_surface /usr/lib/python2.7/dist-packages/pygame/_numpysurfarray.py:340
+calls=12 340
+232 489
+
+fn=transpose /usr/lib/python2.7/dist-packages/numpy/core/fromnumeric.py:446
+446 0
+cfn=<method 'transpose' of 'numpy.ndarray' objects>
+calls=12 0
+446 0
+
+fn=<method 'write' of 'pygame.bufferproxy.BufferProxy' objects>
+0 8
+
+fn=update_detection_aggregator /home/hunter/git/left-luggage-detection/intensity_processing.py:55
+55 30
+cfn=clip /usr/lib/python2.7/dist-packages/numpy/core/fromnumeric.py:1365
+calls=12 1365
+55 3
+
+fn=<method 'tick' of 'Clock' objects>
+0 0
+
+fn=<method 'join' of 'str' objects>
+0 0
+
+fn=<freenect.sync_get_depth>
+0 0
+
+fn=__init__ /home/hunter/git/left-luggage-detection/video_type.py:26
+26 0
+cfn=<pygame.display.set_mode>
+calls=1 0
+26 13
+cfn=<pygame.base.init>
+calls=1 0
+26 8
+cfn=<pygame.display.set_caption>
+calls=1 0
+26 0
+cfn=<pygame.time.Clock>
+calls=1 0
+26 0
+
+fn=check_bbox_not_moved /home/hunter/git/left-luggage-detection/left-luggage-detection.py:193
+193 0
+cfn=<len>
+calls=12 0
+193 0
+
+fn=left_luggage_detection /home/hunter/git/left-luggage-detection/left-luggage-detection.py:24
+24 240
+cfn=draw_bounding_box /home/hunter/git/left-luggage-detection/utils.py:111
+calls=12 111
+24 0
+cfn=get_segmentation_mask /home/hunter/git/left-luggage-detection/left-luggage-detection.py:277
+calls=12 277
+24 168
+cfn=extract_proposal_bbox /home/hunter/git/left-luggage-detection/depth_processing.py:60
+calls=12 60
+24 33
+cfn=cut_foreground /home/hunter/git/left-luggage-detection/bg_models.py:63
+calls=12 63
+24 10
+cfn=__init__ /home/hunter/git/left-luggage-detection/depth_processing.py:24
+calls=1 24
+24 0
+cfn=<method 'copy' of 'numpy.ndarray' objects>
+calls=49 0
+24 103
+cfn=update_detection_aggregator /home/hunter/git/left-luggage-detection/intensity_processing.py:55
+calls=12 55
+24 34
+cfn=__init__ /home/hunter/git/left-luggage-detection/video_type.py:26
+calls=1 26
+24 22
+cfn=check_bbox_not_moved /home/hunter/git/left-luggage-detection/left-luggage-detection.py:193
+calls=12 193
+24 0
+cfn=apply_opening /home/hunter/git/left-luggage-detection/bg_models.py:81
+calls=12 81
+24 11
+cfn=<numpy.core.multiarray.array>
+calls=12 0
+24 0
+cfn=__init__ /home/hunter/git/left-luggage-detection/kinectconnector.py:15
+calls=1 15
+24 0
+cfn=quit /home/hunter/git/left-luggage-detection/video_type.py:168
+calls=1 168
+24 0
+cfn=extract_proposal_bbox /home/hunter/git/left-luggage-detection/left-luggage-detection.py:166
+calls=12 166
+24 0
+cfn=<method 'astype' of 'numpy.ndarray' objects>
+calls=1 0
+24 0
+cfn=update_background_model /home/hunter/git/left-luggage-detection/depth_processing.py:33
+calls=12 33
+24 370
+cfn=extract_foreground_mask_from_run_avg /home/hunter/git/left-luggage-detection/depth_processing.py:45
+calls=12 45
+24 214
+cfn=get_image /home/hunter/git/left-luggage-detection/kinectconnector.py:20
+calls=12 20
+24 0
+cfn=extract_proposal_bbox /home/hunter/git/left-luggage-detection/intensity_processing.py:92
+calls=12 92
+24 127
+cfn=__init__ /home/hunter/git/left-luggage-detection/intensity_processing.py:16
+calls=1 16
+24 0
+cfn=<cv2.addWeighted>
+calls=12 0
+24 61
+cfn=<numpy.core.multiarray.zeros>
+calls=1 0
+24 0
+cfn=show /home/hunter/git/left-luggage-detection/video_type.py:50
+calls=12 50
+24 706
+cfn=to_rgb /home/hunter/git/left-luggage-detection/utils.py:10
+calls=12 10
+24 7
+cfn=compute_foreground_masks /home/hunter/git/left-luggage-detection/intensity_processing.py:33
+calls=12 33
+24 345
+cfn=get_depth_matrix /home/hunter/git/left-luggage-detection/kinectconnector.py:47
+calls=12 47
+24 0
+
+fn=<len>
+0 0
+
+fn=apply_opening /home/hunter/git/left-luggage-detection/bg_models.py:81
+81 0
+cfn=<method 'astype' of 'numpy.ndarray' objects>
+calls=12 0
+81 3
+cfn=<cv2.morphologyEx>
+calls=12 0
+81 7
+cfn=<cv2.getStructuringElement>
+calls=12 0
+81 0
+
+fn=<numpy.core.multiarray.where>
+0 841
+
+fn=<numpy.core.multiarray.array>
+0 0
+
+fn=blit_array /usr/lib/python2.7/dist-packages/pygame/_numpysurfarray.py:371
+371 202
+cfn=<method 'get_width' of 'pygame.Surface' objects>
+calls=12 0
+371 0
+cfn=<method 'get_losses' of 'pygame.Surface' objects>
+calls=12 0
+371 0
+cfn=<method 'get_pitch' of 'pygame.Surface' objects>
+calls=12 0
+371 0
+cfn=transpose /usr/lib/python2.7/dist-packages/numpy/core/fromnumeric.py:446
+calls=12 446
+371 0
+cfn=<method 'write' of 'pygame.bufferproxy.BufferProxy' objects>
+calls=12 0
+371 8
+cfn=<len>
+calls=12 0
+371 0
+cfn=<method 'astype' of 'numpy.ndarray' objects>
+calls=12 0
+371 80
+cfn=<method 'get_buffer' of 'pygame.Surface' objects>
+calls=12 0
+371 0
+cfn=<method 'get_height' of 'pygame.Surface' objects>
+calls=12 0
+371 0
+cfn=<method 'get_shifts' of 'pygame.Surface' objects>
+calls=12 0
+371 0
+cfn=<method 'tostring' of 'numpy.ndarray' objects>
+calls=12 0
+371 187
+cfn=<method 'get_bytesize' of 'pygame.Surface' objects>
+calls=12 0
+371 0
+
+fn=<cv2.BackgroundSubtractorMOG2>
+0 0
+
+fn=__init__ /home/hunter/git/left-luggage-detection/kinectconnector.py:15
+15 0
+
+fn=quit /home/hunter/git/left-luggage-detection/video_type.py:168
+168 0
+cfn=<pygame.display.quit>
+calls=1 0
+168 0
+
+fn=extract_proposal_bbox /home/hunter/git/left-luggage-detection/left-luggage-detection.py:166
+166 0
+
+fn=<method 'astype' of 'numpy.ndarray' objects>
+0 96
+
+fn=update_background_model /home/hunter/git/left-luggage-detection/depth_processing.py:33
+33 0
+cfn=compute_background_running_average /home/hunter/git/left-luggage-detection/bg_models.py:11
+calls=12 11
+33 370
+
+fn=<cv2.contourArea>
+0 0
+
+fn=<method 'clip' of 'numpy.ndarray' objects>
+0 7
+
+fn=apply_dilation /home/hunter/git/left-luggage-detection/bg_models.py:97
+97 0
+cfn=<method 'astype' of 'numpy.ndarray' objects>
+calls=24 0
+97 6
+cfn=<cv2.morphologyEx>
+calls=24 0
+97 1
+cfn=<cv2.getStructuringElement>
+calls=24 0
+97 0
+
+fn=extract_foreground_mask_from_run_avg /home/hunter/git/left-luggage-detection/depth_processing.py:45
+45 29
+cfn=<numpy.core.multiarray.where>
+calls=24 0
+45 182
+cfn=<method 'astype' of 'numpy.ndarray' objects>
+calls=12 0
+45 2
+
+fn=<method 'get_buffer' of 'pygame.Surface' objects>
+0 0
+
+fn=<numpy.core.multiarray.empty>
+0 0
+
+fn=<freenect.sync_get_video>
+0 0
+
+fn=<cv2.morphologyEx>
+0 8
+
+fn=<pygame.event.get>
+0 0
+
+fn=create_watershed_seed /home/hunter/git/left-luggage-detection/left-luggage-detection.py:234
+234 0
+cfn=<numpy.core.multiarray.zeros>
+calls=12 0
+234 1
+
+fn=<cv2.watershed>
+0 24
+
+fn=<method 'get_height' of 'pygame.Surface' objects>
+0 0
+
+fn=<pygame.display.set_mode>
+0 13
+
+fn=make_surface /usr/lib/python2.7/dist-packages/pygame/_numpysurfarray.py:340
+340 9
+cfn=<len>
+calls=24 0
+340 0
+cfn=blit_array /usr/lib/python2.7/dist-packages/pygame/_numpysurfarray.py:371
+calls=12 371
+340 479
+
+fn=<pygame.display.quit>
+0 3
+
+fn=<pygame.base.init>
+0 8
+
+fn=get_image /home/hunter/git/left-luggage-detection/kinectconnector.py:20
+20 0
+cfn=<freenect.sync_get_video>
+calls=12 0
+20 0
+cfn=<method 'transpose' of 'numpy.ndarray' objects>
+calls=12 0
+20 0
+
+fn=extract_proposal_bbox /home/hunter/git/left-luggage-detection/intensity_processing.py:92
+92 4
+cfn=cut_foreground /home/hunter/git/left-luggage-detection/bg_models.py:63
+calls=12 63
+92 49
+cfn=<numpy.core.multiarray.where>
+calls=12 0
+92 66
+cfn=<method 'astype' of 'numpy.ndarray' objects>
+calls=12 0
+92 3
+cfn=get_bounding_boxes /home/hunter/git/left-luggage-detection/bg_models.py:114
+calls=12 114
+92 4
+
+fn=<cv2.findContours>
+0 10
+
+fn=<method 'get_shifts' of 'pygame.Surface' objects>
+0 0
+
+fn=<cv2.getStructuringElement>
+0 0
+
+fn=<method 'isalnum' of 'str' objects>
+0 0
+
+fn=__init__ /home/hunter/git/left-luggage-detection/intensity_processing.py:16
+16 0
+cfn=<cv2.BackgroundSubtractorMOG2>
+calls=2 0
+16 0
+cfn=<numpy.core.multiarray.zeros>
+calls=6 0
+16 0
+
+fn=<method 'append' of 'list' objects>
+0 0
+
+fn=<pygame.display.set_caption>
+0 0
+
+fn=<pygame.time.Clock>
+0 0
+
+fn=<pygame.display.flip>
+0 15
+
+fn=<cv2.addWeighted>
+0 61
+
+fn=<method 'tostring' of 'numpy.ndarray' objects>
+0 187
+
+fn=<cv2.boundingRect>
+0 0
+
+fn=<method 'transpose' of 'numpy.ndarray' objects>
+0 0
+
+fn=<method 'render' of 'pygame.font.Font' objects>
+0 11
+
+fn=SysFont /usr/lib/python2.7/dist-packages/pygame/sysfont.py:534
+534 1
+cfn=<method 'get' of 'dict' objects>
+calls=36 0
+534 0
+cfn=<method 'split' of 'str' objects>
+calls=12 0
+534 0
+cfn=_simplename /usr/lib/python2.7/dist-packages/pygame/sysfont.py:36
+calls=12 36
+534 0
+
+fn=_simplename /usr/lib/python2.7/dist-packages/pygame/sysfont.py:36
+36 0
+cfn=<method 'lower' of 'str' objects>
+calls=60 0
+36 0
+cfn=<method 'join' of 'str' objects>
+calls=12 0
+36 0
+cfn=<method 'isalnum' of 'str' objects>
+calls=60 0
+36 0
+
+fn=<method 'apply' of 'cv2.BackgroundSubtractor' objects>
+0 198
+
+fn=<numpy.core.multiarray.zeros>
+0 102
+
+fn=<method 'get_fps' of 'Clock' objects>
+0 0
+
+fn=show /home/hunter/git/left-luggage-detection/video_type.py:50
+50 78
+cfn=<method 'blit' of 'pygame.Surface' objects>
+calls=72 0
+50 7
+cfn=make_surface /usr/lib/python2.7/dist-packages/pygame/surfarray.py:232
+calls=12 232
+50 489
+cfn=<method 'tick' of 'Clock' objects>
+calls=12 0
+50 0
+cfn=<pygame.event.get>
+calls=12 0
+50 0
+cfn=<pygame.display.quit>
+calls=1 0
+50 3
+cfn=<pygame.display.flip>
+calls=12 0
+50 15
+cfn=<method 'render' of 'pygame.font.Font' objects>
+calls=60 0
+50 11
+cfn=SysFont /usr/lib/python2.7/dist-packages/pygame/sysfont.py:534
+calls=12 534
+50 2
+cfn=<numpy.core.multiarray.zeros>
+calls=12 0
+50 97
+cfn=<method 'get_fps' of 'Clock' objects>
+calls=12 0
+50 0
+
+fn=to_rgb /home/hunter/git/left-luggage-detection/utils.py:10
+10 18
+cfn=<numpy.core.multiarray.empty>
+calls=24 0
+10 0
+
+fn=<method 'get_bytesize' of 'pygame.Surface' objects>
+0 0
+
+fn=watershed_segmentation /home/hunter/git/left-luggage-detection/left-luggage-detection.py:251
+251 16
+cfn=<numpy.core.multiarray.where>
+calls=24 0
+251 126
+cfn=create_watershed_seed /home/hunter/git/left-luggage-detection/left-luggage-detection.py:234
+calls=12 234
+251 1
+cfn=<cv2.watershed>
+calls=12 0
+251 24
+
+fn=compute_foreground_masks /home/hunter/git/left-luggage-detection/intensity_processing.py:33
+33 0
+cfn=apply_dilation /home/hunter/git/left-luggage-detection/bg_models.py:97
+calls=24 97
+33 8
+cfn=compute_foreground_mask_from_func /home/hunter/git/left-luggage-detection/bg_models.py:44
+calls=24 44
+33 337
+
+fn=update_depth_detection_aggregator /home/hunter/git/left-luggage-detection/depth_processing.py:231
+231 20
+cfn=clip /usr/lib/python2.7/dist-packages/numpy/core/fromnumeric.py:1365
+calls=12 1365
+231 4
+
+fn=get_depth_matrix /home/hunter/git/left-luggage-detection/kinectconnector.py:47
+47 0
+cfn=<freenect.sync_get_depth>
+calls=12 0
+47 0
+
+fn=get_bounding_boxes /home/hunter/git/left-luggage-detection/bg_models.py:114
+114 0
+cfn=<cv2.contourArea>
+calls=169 0
+114 0
+cfn=<cv2.findContours>
+calls=24 0
+114 10
+cfn=<method 'append' of 'list' objects>
+calls=78 0
+114 0
+cfn=<cv2.boundingRect>
+calls=78 0
+114 0
+
+fn=compute_foreground_mask_from_func /home/hunter/git/left-luggage-detection/bg_models.py:44
+44 9
+cfn=<numpy.core.multiarray.where>
+calls=24 0
+44 127
+cfn=<method 'apply' of 'cv2.BackgroundSubtractor' objects>
+calls=24 0
+44 198
+cfn=<numpy.core.multiarray.zeros>
+calls=24 0
+44 1
+
