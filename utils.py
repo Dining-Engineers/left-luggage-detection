@@ -83,9 +83,7 @@ def rect_similarity2(r1, r2):
 
 
 def similarity_measure_rect(bbox_test, bbox_target):
-    """ Return similarity measure between two bounding box.
-        measure:
-            :math:`r = \frac{area \left(B_{curr} \cap B_{acc} \right)}{area \left(B_{curr} \cup B_{acc} \right)}`
+    """ Return similarity measure between two bounding box
 
     :param bbox_test:
     :param bbox_target:

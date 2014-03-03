@@ -40,3 +40,8 @@ IMAGE_SHAPE = (640, 480)        #: Default image size retrieved from kinect
 
 # Pygame Options
 PYGAME_LAYOUT = 4               #: number of images to show in the output can be 2 or 4
+
+# Debug Options
+
+SHOW_FPS = True
+ENABLE_PROFILING = False

@@ -239,7 +239,7 @@ def create_watershed_seed(bbox_current_frame_proposals, proposal_mask, bbox_not_
         # else:
         watershed_mask_seed[s[1]:s[1]+s[3], s[0]:s[0]+s[2]] = proposal_mask[s[1]:s[1]+s[3], s[0]:s[0]+s[2]]*(k+5)
 
-    print len(bbox_not_moved)
+    #print len(bbox_not_moved)
     for s in bbox_not_moved:
         print "mi manca uso seed vecchi"
         watershed_mask_seed[s[1]:s[1]+s[3], s[0]:s[0]+s[2]] = watershed_last_frame_seed_mask[s[1]:s[1]+s[3], s[0]:s[0]+s[2]]
@@ -289,12 +289,17 @@ def get_segmentation_mask(TYPE, image, bbox, rgb_proposal_mask, depth_proposal_m
 
 
 if __name__ == "__main__":
-    left_luggage_detection()
+    #left_luggage_detection()
 
-    # PROFILING
-    # cProfile.run('left_luggage_detection()')
-    # command = """left_luggage_detection()"""
-    # cProfile.runctx( command, globals(), locals(), filename="kinect_pygame.profile" )
+    if ENABLE_PROFILING:
+        #PROFILING
+        #cProfile.run('left_luggage_detection()')
+        command = """left_luggage_detection()"""
+        cProfile.runctx(command, globals(), locals(), filename="kinect_pygame_3_marzo.profile")
+    else:
+        left_luggage_detection()
+
+
 
     ## GRAFO CHIAMATE
     # from pycallgraph import PyCallGraph

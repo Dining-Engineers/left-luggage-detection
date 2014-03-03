@@ -23,27 +23,29 @@ class VideoDisplay:
     Initialize a screen type to show the output.
     """
 
-    def __init__(self, v_type, n_frames):
+    def __init__(self, v_type, n_views):
+
+        self.n_views = n_views
+        self.type = v_type
+        self.frame_count = 0
 
         if v_type == PYGAME:
             pygame.init()
-            self.type = v_type
-            self.n_frames = n_frames
-            if n_frames == 2:
+            if n_views == 2:
                 self.screen = pygame.display.set_mode([1280, 480])
             else:
                 self.screen = pygame.display.set_mode([1280, 960])
 
             pygame.display.set_caption("Left Luggage Detection")
 
-        else:
-            self.n_frames = n_frames
+            self.clock = pygame.time.Clock()
 
-            if n_frames == 2:
+        else:
+
+            if n_views == 2:
                 self.screen = Display(resolution=(1280, 480))
             else:
                 self.screen = Display(resolution=(1280, 960))
-            self.type = v_type
 
     def show(self, frame_upper_left, frame_upper_right, frame_bottom_left=None, frame_bottom_right=None):
         """
@@ -57,9 +59,13 @@ class VideoDisplay:
         :rtype: boolean
         :raise SystemExit:
         """
+        self.frame_count += 1
         if self.type == PYGAME:
 
-            if self.n_frames == 2:
+            tickFPS = self.clock.tick()
+            #print "fps:", self.clock.get_fps()
+
+            if self.n_views == 2:
 
                 # show only 2 frames
 
@@ -100,11 +106,16 @@ class VideoDisplay:
                 label_bl = myfont.render("DEPTH foreground and detection Proposals", 1, (255, 255, 255))
                 label_br = myfont.render("Final proposals", 1, (255, 255, 255))
 
+
                 # put the label object on the screen at point x=100, y=100
                 self.screen.blit(label_tl, (20, 10))
                 self.screen.blit(label_tr, (660, 10))
                 self.screen.blit(label_bl, (20, 490))
                 self.screen.blit(label_br, (660, 490))
+
+            if SHOW_FPS:
+                label_fps = myfont.render("FPS: "+str(self.clock.get_fps()), 1, (255, 255, 255))
+                self.screen.blit(label_fps, (1100, 10))
 
             pygame.display.flip()
 
@@ -118,12 +129,16 @@ class VideoDisplay:
                     return False
                     raise SystemExit
 
+            if ENABLE_PROFILING:
+                # profile only the first 100 frames
+                if self.frame_count == 100:
+                    return False
             return True
 
         else:
 
             # SIMPLECV
-            if self.n_frames == 2:
+            if self.n_views == 2:
                 # save images to display
                 i_frame_upper_left = Image(frame_upper_left)
                 i_frame_upper_right = Image(frame_upper_right)
