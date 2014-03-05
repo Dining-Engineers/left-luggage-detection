@@ -60,6 +60,10 @@ def compute_background_running_average(frame, average, alpha, holes_frame):
 
     #frame, average = preprocessing(frame, average)
 
+
+
+
+
     # get running average
     #average = (1-alpha)*average + alpha*frame
     cv2.accumulateWeighted(frame, average.copy(), alpha, holes_diff.astype(np.uint8))
