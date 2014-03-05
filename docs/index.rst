@@ -37,7 +37,7 @@ Contents
    dependencies
    dataset
    performance
-   LICENSE
+   license
 
 Indices and tables
 ==================
