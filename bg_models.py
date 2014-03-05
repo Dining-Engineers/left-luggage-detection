@@ -41,8 +41,6 @@ def compute_background_running_average(frame, average, alpha, holes_frame):
     #                 else:
     #                     average_result[i][j] = (average[i][j])
     #     return frame_result, average_result
-
-
     # detect holes in depth map
     # either in current frame and in average frame
     holes_average = np.where(average == DEPTH_HOLE_VALUE, 1, 0)
@@ -51,25 +49,29 @@ def compute_background_running_average(frame, average, alpha, holes_frame):
     #   hole in current frame and not in average = 1
     #   hole in average and not in current frame = -1
     # if holes in current and average leave hole (will be fixed by another frame in the future)
-    holes_diff = holes_frame + holes_average
     # replace holes with value of the other one
 
-    # frame = np.where(holes_diff == 1, average, frame)
-    # average = np.where(holes_diff == -1, frame, average)
+    # BEST CONFIGURATION BUT SLOWER
+    holes_diff = holes_frame - holes_average
+    #frame = np.where(holes_diff == 1, average, frame)
+    #average = np.where(holes_diff == -1, frame, average)
+    # optimize!
+    #frame = frame - holes_frame * frame + holes_frame * average
+    #average = average - holes_average * average + holes_average * frame
+    # MOAR OPTIMIZATIONS!
+    frame = frame + holes_frame * (average - frame)
+    average = average + holes_average * (frame - average)
+    cv2.accumulateWeighted(frame, average, alpha)
 
+    # SPEEDY BUT LESS EFFECTIVE FILTERING HOLES
+    ## needed to convert to C_CONTINUOUS AREA
+    # holes_diff = holes_frame + holes_average
+    # average = average.copy()
+    # cv2.accumulateWeighted(frame, average, alpha, holes_diff.astype(np.uint8))
 
-    #frame, average = preprocessing(frame, average)
-
-
-
-
-
-    # get running average
-    #average = (1-alpha)*average + alpha*frame
-    cv2.accumulateWeighted(frame, average.copy(), alpha, holes_diff.astype(np.uint8))
     #cv2.accumulateWeighted(frame, average, alpha)
 
-    return average
+    return average, holes_average
 
 
 def compute_holes_mask_in_frame(frame):
@@ -91,9 +93,12 @@ def compute_foreground_mask_from_func(f_bg, current_frame, alpha):
     foreground = np.zeros(shape=current_frame.shape, dtype=np.uint8)
     # get foreground in numpy array
     foreground = f_bg.apply(current_frame, foreground, alpha)
+    # NB WITH F_BG SET TO FALSE WE HAVE ONLY 2 POSSIBLE VALUES 0 (bg) or 255 (fg)
+    # with shadows == True we get 127
     # convert to 0 1 notation since by default apply => 0 bg, 255fg shadow other value
     foreground = np.where((foreground == 0), 0, 1)
     return foreground
+
 
 
 def cut_foreground(image, mask):

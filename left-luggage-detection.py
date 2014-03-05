@@ -243,7 +243,7 @@ def create_watershed_seed(bbox_current_frame_proposals, proposal_mask, bbox_not_
 
     #print len(bbox_not_moved)
     for s in bbox_not_moved:
-        print "mi manca uso seed vecchi"
+        #print "mi manca uso seed vecchi"
         watershed_mask_seed[s[1]:s[1]+s[3], s[0]:s[0]+s[2]] = watershed_last_frame_seed_mask[s[1]:s[1]+s[3], s[0]:s[0]+s[2]]
 
     return watershed_mask_seed
