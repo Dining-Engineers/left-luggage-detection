@@ -36,6 +36,7 @@ Contents
    usage
    dependencies
    dataset
+   performance
    LICENSE
 
 Indices and tables

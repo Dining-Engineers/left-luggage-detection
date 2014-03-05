@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
 import numpy as np
-import cProfile
 import calibkinect
 
 from depth_processing import *
@@ -294,9 +293,13 @@ if __name__ == "__main__":
 
     if ENABLE_PROFILING:
         #PROFILING
+        import cProfile
+        #profiler = cProfile.Profile()
         #cProfile.run('left_luggage_detection()')
         command = """left_luggage_detection()"""
-        cProfile.runctx(command, globals(), locals(), filename="kinect_pygame_5_marzo_NOT.profile")
+        cProfile.runctx(command, globals(), locals(), filename="kinect_opt_5_marzo.profile")
+        #from pyprof2calltree import convert, visualize
+        #convert(profiler.getstats(), 'kinect_opt_5_marzo.kgrind')
     else:
         left_luggage_detection()
 
