@@ -50,6 +50,7 @@ def left_luggage_detection():
         # N.B. darker => closer
         # the depth matrix obtained is transposed so we cast the right shape
         depth.current_frame = cam.get_depth_matrix()
+        depth.current_frame_holes = bg_models.compute_holes_mask_in_frame(depth.current_frame)
 
         # xyz, uv = calibkinect.depth2xyzuv(depth.current_frame)
         # print xyz.shape, uv.shape, xyz[0][:], uv[0][:]
@@ -74,7 +75,7 @@ def left_luggage_detection():
             first_run = False
 
         # get depth background
-        depth.update_background_model(depth.current_frame)
+        depth.update_background_model(depth.current_frame, depth.current_frame_holes)
 
         # get depth foreground
         depth.extract_foreground_mask_from_run_avg(depth.current_frame)
@@ -259,7 +260,8 @@ def watershed_segmentation(bbox, image, rgb_proposal_mask, depth_proposal_mask, 
 
     # set the background to 1 the luggage pixel to the values found before
     # the unknown pixel are still 0
-    watershed_mask_seed = np.where(watershed_bg_mask == 0, 1, watershed_mask_seed)
+    #watershed_mask_seed = np.where(watershed_bg_mask == 0, 1, watershed_mask_seed)
+    watershed_mask_seed += 1
     # apply watershed - result overwrite in mask
     cv2.watershed(image, watershed_mask_seed)
 
@@ -294,7 +296,7 @@ if __name__ == "__main__":
         #PROFILING
         #cProfile.run('left_luggage_detection()')
         command = """left_luggage_detection()"""
-        cProfile.runctx(command, globals(), locals(), filename="kinect_pygame_3_marzo.profile")
+        cProfile.runctx(command, globals(), locals(), filename="kinect_pygame_5_marzo_NOT.profile")
     else:
         left_luggage_detection()
 

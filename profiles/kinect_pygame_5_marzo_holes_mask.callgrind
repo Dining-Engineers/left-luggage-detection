@@ -1,0 +1,4805 @@
+events: Ticks
+summary: 21149
+fn=PreprocessError /usr/lib/python2.7/distutils/errors.py:73
+73 0
+
+fn=<genexpr> /usr/lib/python2.7/urlparse.py:331
+331 0
+cfn=<chr>
+calls=484 0
+331 0
+
+fn=Manager /usr/lib/python2.7/logging/__init__.py:993
+993 0
+
+fn=<method 'fileno' of 'file' objects>
+0 0
+
+fn=_FuncPtr /usr/lib/python2.7/ctypes/__init__.py:359
+359 0
+
+fn=<method 'split' of 'unicode' objects>
+0 0
+
+fn=Delegating /usr/lib/python2.7/dist-packages/shapely/topology.py:20
+20 0
+
+fn=getResource /usr/lib/python2.7/dist-packages/pygame/pkgdata.py:34
+34 0
+cfn=resource_stream /usr/lib/python2.7/dist-packages/pkg_resources.py:917
+calls=1 917
+34 0
+cfn=resource_exists /usr/lib/python2.7/dist-packages/pkg_resources.py:901
+calls=1 901
+34 0
+
+fn=<pygame.display.set_mode>
+0 10
+cfn=getResource /usr/lib/python2.7/dist-packages/pygame/pkgdata.py:34
+calls=1 34
+0 0
+cfn=<module> /usr/lib/python2.7/dist-packages/pygame/pkgdata.py:18
+calls=1 18
+0 60
+
+fn=<module> /usr/lib/python2.7/dist-packages/shapely/geometry/proxy.py:2
+2 0
+cfn=<method 'decode' of 'str' objects>
+calls=1 0
+2 0
+cfn=PolygonProxy /usr/lib/python2.7/dist-packages/shapely/geometry/proxy.py:43
+calls=1 43
+2 0
+cfn=deserialize /usr/lib/python2.7/dist-packages/shapely/wkb.py:11
+calls=1 11
+2 0
+cfn=CachingGeometryProxy /usr/lib/python2.7/dist-packages/shapely/geometry/proxy.py:10
+calls=1 10
+2 0
+
+fn=<cv2.rectangle>
+0 4
+
+fn=compute_foreground_mask_from_func /home/hunter/git/left-luggage-detection/bg_models.py:76
+76 80
+cfn=<numpy.core.multiarray.where>
+calls=200 0
+76 1188
+cfn=<method 'apply' of 'cv2.BackgroundSubtractor' objects>
+calls=200 0
+76 1843
+cfn=<numpy.core.multiarray.zeros>
+calls=200 0
+76 16
+
+fn=update_depth_detection_aggregator /home/hunter/git/left-luggage-detection/depth_processing.py:234
+234 185
+cfn=clip /usr/lib/python2.7/dist-packages/numpy/core/fromnumeric.py:1365
+calls=100 1365
+234 37
+
+fn=__del__ /usr/lib/python2.7/subprocess.py:753
+753 0
+cfn=_internal_poll /usr/lib/python2.7/subprocess.py:1343
+calls=1 1343
+753 0
+cfn=<getattr>
+calls=1 0
+753 0
+
+fn=__init__ /usr/lib/python2.7/threading.py:58
+58 0
+
+fn=acquire /usr/lib/python2.7/threading.py:146
+146 0
+cfn=_note /usr/lib/python2.7/threading.py:63
+calls=3 63
+146 0
+cfn=<method 'acquire' of 'thread.lock' objects>
+calls=3 0
+146 0
+cfn=<thread.get_ident>
+calls=3 0
+146 0
+
+fn=realpath /usr/lib/python2.7/posixpath.py:364
+364 0
+cfn=abspath /usr/lib/python2.7/posixpath.py:350
+calls=255 350
+364 2
+cfn=_joinrealpath /usr/lib/python2.7/posixpath.py:372
+calls=255 372
+364 8
+
+fn=UnaryRealProperty /usr/lib/python2.7/dist-packages/shapely/topology.py:32
+32 0
+
+fn=IncrementalDecoder /usr/lib/python2.7/encodings/hex_codec.py:57
+57 0
+
+fn=<module> /usr/lib/python2.7/dist-packages/shapely/geometry/multipolygon.py:2
+2 0
+cfn=MultiPolygonAdapter /usr/lib/python2.7/dist-packages/shapely/geometry/multipolygon.py:79
+calls=1 79
+2 0
+cfn=MultiPolygon /usr/lib/python2.7/dist-packages/shapely/geometry/multipolygon.py:14
+calls=1 14
+2 0
+
+fn=getregentry /usr/lib/python2.7/encodings/hex_codec.py:70
+70 0
+cfn=__new__ /usr/lib/python2.7/codecs.py:77
+calls=1 77
+70 0
+
+fn=InteriorRingSequence /usr/lib/python2.7/dist-packages/shapely/geometry/polygon.py:95
+95 0
+
+fn=<cv2.morphologyEx>
+0 126
+
+fn=<module> /usr/lib/python2.7/dist-packages/shapely/__init__.py:1
+1 0
+
+fn=GEOSImpl /usr/lib/python2.7/dist-packages/shapely/impl.py:46
+46 0
+
+fn=StreamHandler /usr/lib/python2.7/logging/__init__.py:810
+810 0
+
+fn=__init__ /usr/lib/python2.7/logging/__init__.py:998
+998 0
+
+fn=<genexpr> /usr/lib/python2.7/collections.py:329
+329 0
+cfn=<method 'isalnum' of 'str' objects>
+calls=86 0
+329 0
+
+fn=UnknownFileError /usr/lib/python2.7/distutils/errors.py:87
+87 0
+
+fn=DistutilsOptionError /usr/lib/python2.7/distutils/errors.py:38
+38 0
+
+fn=quit /home/hunter/git/left-luggage-detection/video_type.py:172
+172 0
+cfn=<pygame.display.quit>
+calls=1 0
+172 4
+
+fn=<_hashlib.openssl_sha1>
+0 0
+
+fn=__next /usr/lib/python2.7/sre_parse.py:183
+183 0
+cfn=<len>
+calls=750 0
+183 0
+
+fn=<method 'render' of 'pygame.font.Font' objects>
+0 105
+
+fn=__subclasscheck__ /usr/lib/python2.7/abc.py:148
+148 0
+cfn=<method '__subclasses__' of 'type' objects>
+calls=8 0
+148 0
+cfn=<method '__subclasshook__' of 'object' objects>
+calls=8 0
+148 0
+cfn=add /usr/lib/python2.7/_weakrefset.py:81
+calls=8 81
+148 0
+cfn=__init__ /usr/lib/python2.7/_weakrefset.py:36
+calls=7 36
+148 0
+cfn=<issubclass>
+calls=11 0
+148 0
+cfn=<getattr>
+calls=8 0
+148 0
+cfn=__contains__ /usr/lib/python2.7/_weakrefset.py:68
+calls=9 68
+148 0
+cfn=__iter__ /usr/lib/python2.7/_weakrefset.py:58
+calls=19 58
+148 0
+
+fn=NullHandler /usr/lib/python2.7/dist-packages/shapely/geos.py:20
+20 0
+
+fn=DistutilsGetoptError /usr/lib/python2.7/distutils/errors.py:26
+26 0
+
+fn=LinearRing /usr/lib/python2.7/dist-packages/shapely/geometry/polygon.py:17
+17 0
+
+fn=get_metadata_lines /usr/lib/python2.7/dist-packages/pkg_resources.py:1218
+1218 0
+cfn=get_metadata /usr/lib/python2.7/dist-packages/pkg_resources.py:1208
+calls=50 1208
+1218 1
+
+fn=namedtuple /usr/lib/python2.7/collections.py:288
+288 1
+cfn=<repr>
+calls=2 0
+288 0
+cfn=<method 'format' of 'str' objects>
+calls=2 0
+288 0
+cfn=<all>
+calls=13 0
+288 0
+cfn=<method 'isdigit' of 'str' objects>
+calls=13 0
+288 0
+cfn=<isinstance>
+calls=2 0
+288 0
+cfn=<method 'startswith' of 'str' objects>
+calls=11 0
+288 0
+cfn=<method 'split' of 'str' objects>
+calls=2 0
+288 0
+cfn=<sys._getframe>
+calls=2 0
+288 0
+cfn=<method 'replace' of 'str' objects>
+calls=4 0
+288 0
+cfn=<map>
+calls=2 0
+288 0
+cfn=<len>
+calls=2 0
+288 0
+cfn=<method 'join' of 'str' objects>
+calls=4 0
+288 0
+cfn=<module> <string>:1
+calls=1 1
+288 0
+cfn=<method 'get' of 'dict' objects>
+calls=2 0
+288 0
+cfn=<method 'add' of 'set' objects>
+calls=11 0
+288 0
+cfn=<method '__contains__' of 'frozenset' objects>
+calls=13 0
+288 0
+
+fn=ResultMixin /usr/lib/python2.7/urlparse.py:73
+73 0
+
+fn=UnknownExtra /usr/lib/python2.7/dist-packages/pkg_resources.py:192
+192 0
+
+fn=LineString /usr/lib/python2.7/dist-packages/shapely/geometry/linestring.py:14
+14 2
+
+fn=lower /usr/lib/python2.7/string.py:220
+220 0
+cfn=<method 'lower' of 'str' objects>
+calls=1 0
+220 0
+
+fn=<method 'splitlines' of 'str' objects>
+0 0
+
+fn=<method 'copy' of 'numpy.ndarray' objects>
+0 977
+
+fn=toascii /usr/lib/python2.7/dist-packages/pygame/sysfont.py:32
+32 0
+cfn=<method 'decode' of 'str' objects>
+calls=1 0
+32 2
+
+fn=Environment /usr/lib/python2.7/dist-packages/pkg_resources.py:730
+730 0
+cfn=get_supported_platform /usr/lib/python2.7/dist-packages/pkg_resources.py:99
+calls=1 99
+730 1
+
+fn=DistInfoDistribution /usr/lib/python2.7/dist-packages/pkg_resources.py:2446
+2446 0
+cfn=compile /usr/lib/python2.7/re.py:188
+calls=1 188
+2446 0
+
+fn=UnpicklingError /usr/lib/python2.7/pickle.py:69
+69 0
+
+fn=opengroup /usr/lib/python2.7/sre_parse.py:73
+73 0
+cfn=<method 'get' of 'dict' objects>
+calls=4 0
+73 0
+cfn=<method 'append' of 'list' objects>
+calls=29 0
+73 0
+
+fn=<method 'decode' of 'str' objects>
+0 2
+cfn=search_function /usr/lib/python2.7/encodings/__init__.py:71
+calls=2 71
+0 0
+cfn=hex_decode /usr/lib/python2.7/encodings/hex_codec.py:27
+calls=2 27
+0 0
+
+fn=<module> /usr/lib/python2.7/dist-packages/shapely/ftools.py:17
+17 0
+
+fn=cut_foreground /home/hunter/git/left-luggage-detection/bg_models.py:95
+95 445
+cfn=<len>
+calls=300 0
+95 0
+cfn=to_rgb /home/hunter/git/left-luggage-detection/utils.py:10
+calls=100 10
+95 99
+
+fn=is_ccw_impl /usr/lib/python2.7/dist-packages/shapely/algorithms/cga.py:12
+12 0
+
+fn=RLock /usr/lib/python2.7/threading.py:113
+113 0
+cfn=__init__ /usr/lib/python2.7/threading.py:131
+calls=2 131
+113 0
+
+fn=watershed_segmentation /home/hunter/git/left-luggage-detection/left-luggage-detection.py:252
+252 142
+cfn=<numpy.core.multiarray.where>
+calls=100 0
+252 597
+cfn=create_watershed_seed /home/hunter/git/left-luggage-detection/left-luggage-detection.py:236
+calls=100 236
+252 12
+cfn=<cv2.watershed>
+calls=100 0
+252 79
+
+fn=extract_proposal_bbox /home/hunter/git/left-luggage-detection/intensity_processing.py:92
+92 37
+cfn=cut_foreground /home/hunter/git/left-luggage-detection/bg_models.py:95
+calls=100 95
+92 451
+cfn=<numpy.core.multiarray.where>
+calls=100 0
+92 580
+cfn=get_bounding_boxes /home/hunter/git/left-luggage-detection/bg_models.py:146
+calls=100 146
+92 55
+cfn=<method 'astype' of 'numpy.ndarray' objects>
+calls=100 0
+92 29
+
+fn=<genexpr> /usr/lib/python2.7/abc.py:89
+89 0
+cfn=<getattr>
+calls=5 0
+89 0
+
+fn=BufferingFormatter /usr/lib/python2.7/logging/__init__.py:494
+494 0
+
+fn=check_version_conflict /usr/lib/python2.7/dist-packages/pkg_resources.py:2397
+2397 0
+cfn=<built-in method fromkeys>
+calls=98 0
+2397 1
+cfn=key /usr/lib/python2.7/dist-packages/pkg_resources.py:2186
+calls=99 2186
+2397 0
+cfn=normalize_path /usr/lib/python2.7/dist-packages/pkg_resources.py:1888
+calls=98 1888
+2397 3
+cfn=_get_metadata /usr/lib/python2.7/dist-packages/pkg_resources.py:2249
+calls=157 2249
+2397 2
+
+fn=HeterogeneousGeometrySequence /usr/lib/python2.7/dist-packages/shapely/geometry/base.py:590
+590 0
+
+fn=NullHandler /usr/lib/python2.7/logging/__init__.py:1672
+1672 0
+
+fn=initsysfonts_unix /usr/lib/python2.7/dist-packages/pygame/sysfont.py:445
+445 2
+cfn=<method 'split' of 'unicode' objects>
+calls=976 0
+445 0
+cfn=__del__ /usr/lib/python2.7/subprocess.py:753
+calls=1 753
+445 0
+cfn=toascii /usr/lib/python2.7/dist-packages/pygame/sysfont.py:32
+calls=1 32
+445 2
+cfn=<method 'find' of 'unicode' objects>
+calls=924 0
+445 0
+cfn=_simplename /usr/lib/python2.7/dist-packages/pygame/sysfont.py:36
+calls=308 36
+445 2
+cfn=_addfont /usr/lib/python2.7/dist-packages/pygame/sysfont.py:41
+calls=308 41
+445 0
+cfn=communicate /usr/lib/python2.7/subprocess.py:767
+calls=1 767
+445 26
+cfn=<module> /usr/lib/python2.7/subprocess.py:387
+calls=1 387
+445 2
+cfn=<method 'lower' of 'unicode' objects>
+calls=666 0
+445 0
+cfn=__init__ /usr/lib/python2.7/subprocess.py:648
+calls=1 648
+445 13
+
+fn=_simple /usr/lib/python2.7/sre_compile.py:355
+355 0
+cfn=getwidth /usr/lib/python2.7/sre_parse.py:141
+calls=48 141
+355 0
+cfn=__getitem__ /usr/lib/python2.7/sre_parse.py:131
+calls=42 131
+355 0
+
+fn=<method 'clip' of 'numpy.ndarray' objects>
+0 71
+
+fn=boxes_intersect /home/hunter/git/left-luggage-detection/utils.py:43
+43 13
+
+fn=compile /usr/lib/python2.7/sre_compile.py:494
+494 0
+cfn=parse /usr/lib/python2.7/sre_parse.py:676
+calls=18 676
+494 4
+cfn=<method 'items' of 'dict' objects>
+calls=18 0
+494 0
+cfn=_code /usr/lib/python2.7/sre_compile.py:479
+calls=18 479
+494 3
+cfn=isstring /usr/lib/python2.7/sre_compile.py:473
+calls=18 473
+494 0
+cfn=<_sre.compile>
+calls=18 0
+494 0
+
+fn=<method 'pop' of 'list' objects>
+0 0
+
+fn=<module> /usr/lib/python2.7/dist-packages/shapely/geometry/multipoint.py:2
+2 0
+cfn=MultiPoint /usr/lib/python2.7/dist-packages/shapely/geometry/multipoint.py:15
+calls=1 15
+2 0
+cfn=MultiPointAdapter /usr/lib/python2.7/dist-packages/shapely/geometry/multipoint.py:95
+calls=1 95
+2 0
+
+fn=<method 'tostring' of 'numpy.ndarray' objects>
+0 1627
+
+fn=match /usr/lib/python2.7/re.py:134
+134 0
+cfn=_compile /usr/lib/python2.7/re.py:226
+calls=117 226
+134 0
+cfn=<method 'match' of '_sre.SRE_Pattern' objects>
+calls=117 0
+134 0
+
+fn=show /home/hunter/git/left-luggage-detection/video_type.py:50
+50 674
+cfn=<method 'render' of 'pygame.font.Font' objects>
+calls=500 0
+50 105
+cfn=make_surface /usr/lib/python2.7/dist-packages/pygame/surfarray.py:232
+calls=100 232
+50 4436
+cfn=<pygame.display.flip>
+calls=100 0
+50 111
+cfn=<method 'tick' of 'Clock' objects>
+calls=100 0
+50 0
+cfn=<method 'blit' of 'pygame.Surface' objects>
+calls=600 0
+50 70
+cfn=SysFont /usr/lib/python2.7/dist-packages/pygame/sysfont.py:534
+calls=100 534
+50 70
+cfn=<pygame.event.get>
+calls=100 0
+50 1
+cfn=<numpy.core.multiarray.zeros>
+calls=100 0
+50 1131
+cfn=<method 'get_fps' of 'Clock' objects>
+calls=100 0
+50 0
+
+fn=parse /usr/lib/python2.7/sre_parse.py:676
+676 0
+cfn=__init__ /usr/lib/python2.7/sre_parse.py:179
+calls=18 179
+676 0
+cfn=__init__ /usr/lib/python2.7/sre_parse.py:68
+calls=18 68
+676 0
+cfn=_parse_sub /usr/lib/python2.7/sre_parse.py:302
+calls=18 302
+676 3
+cfn=get /usr/lib/python2.7/sre_parse.py:202
+calls=18 202
+676 0
+
+fn=Distribution /usr/lib/python2.7/dist-packages/pkg_resources.py:2118
+2118 0
+
+fn=CFunctionType /usr/lib/python2.7/ctypes/__init__.py:104
+104 0
+
+fn=rect_similarity2 /home/hunter/git/left-luggage-detection/utils.py:75
+75 1
+cfn=boxes_intersect /home/hunter/git/left-luggage-detection/utils.py:43
+calls=2620 43
+75 13
+cfn=similarity_measure_rect /home/hunter/git/left-luggage-detection/utils.py:85
+calls=165 85
+75 117
+cfn=__del__ /usr/lib/python2.7/dist-packages/shapely/geometry/base.py:113
+calls=330 113
+75 0
+
+fn=_checkLevel /usr/lib/python2.7/logging/__init__.py:182
+182 0
+cfn=<isinstance>
+calls=3 0
+182 0
+
+fn=<gc.enable>
+0 0
+
+fn=match /usr/lib/python2.7/sre_parse.py:196
+196 0
+cfn=__next /usr/lib/python2.7/sre_parse.py:183
+calls=64 183
+196 0
+
+fn=Popen /usr/lib/python2.7/subprocess.py:647
+647 0
+
+fn=__init__ /usr/lib/python2.7/distutils/log.py:16
+16 0
+
+fn=ExtractionError /usr/lib/python2.7/dist-packages/pkg_resources.py:876
+876 0
+
+fn=_note /usr/lib/python2.7/threading.py:63
+63 0
+
+fn=safe_name /usr/lib/python2.7/dist-packages/pkg_resources.py:1140
+1140 0
+cfn=sub /usr/lib/python2.7/re.py:144
+calls=198 144
+1140 1
+
+fn=<module> /usr/lib/python2.7/dist-packages/shapely/geometry/geo.py:3
+3 0
+cfn=<module> /usr/lib/python2.7/dist-packages/shapely/geometry/multipolygon.py:2
+calls=1 2
+3 0
+cfn=<module> /usr/lib/python2.7/dist-packages/shapely/geometry/multipoint.py:2
+calls=1 2
+3 0
+cfn=<module> /usr/lib/python2.7/dist-packages/shapely/geometry/polygon.py:2
+calls=1 2
+3 0
+cfn=<module> /usr/lib/python2.7/dist-packages/shapely/geometry/linestring.py:2
+calls=1 2
+3 2
+cfn=<module> /usr/lib/python2.7/dist-packages/shapely/geometry/multilinestring.py:2
+calls=1 2
+3 0
+cfn=<module> /usr/lib/python2.7/dist-packages/shapely/geometry/point.py:2
+calls=1 2
+3 39
+
+fn=has_resource /usr/lib/python2.7/dist-packages/pkg_resources.py:1201
+1201 0
+cfn=_has /usr/lib/python2.7/dist-packages/pkg_resources.py:1313
+calls=1 1313
+1201 0
+cfn=_fn /usr/lib/python2.7/dist-packages/pkg_resources.py:1269
+calls=1 1269
+1201 0
+
+fn=<numpy.core.multiarray.where>
+0 6017
+
+fn=<genexpr> /usr/lib/python2.7/collections.py:355
+355 0
+cfn=<method 'format' of 'str' objects>
+calls=11 0
+355 0
+
+fn=_declare_state /usr/lib/python2.7/dist-packages/pkg_resources.py:63
+63 0
+cfn=<globals>
+calls=4 0
+63 0
+cfn=<method 'iteritems' of 'dict' objects>
+calls=4 0
+63 0
+
+fn=<module> /usr/lib/python2.7/dist-packages/shapely/geometry/polygon.py:2
+2 0
+cfn=InteriorRingSequence /usr/lib/python2.7/dist-packages/shapely/geometry/polygon.py:95
+calls=1 95
+2 0
+cfn=LinearRing /usr/lib/python2.7/dist-packages/shapely/geometry/polygon.py:17
+calls=1 17
+2 0
+cfn=PolygonAdapter /usr/lib/python2.7/dist-packages/shapely/geometry/polygon.py:271
+calls=1 271
+2 0
+cfn=Polygon /usr/lib/python2.7/dist-packages/shapely/geometry/polygon.py:172
+calls=1 172
+2 0
+cfn=LinearRingAdapter /usr/lib/python2.7/dist-packages/shapely/geometry/polygon.py:72
+calls=1 72
+2 0
+
+fn=get_metadata /usr/lib/python2.7/dist-packages/pkg_resources.py:1208
+1208 0
+cfn=_get /usr/lib/python2.7/dist-packages/pkg_resources.py:1325
+calls=50 1325
+1208 1
+cfn=_fn /usr/lib/python2.7/dist-packages/pkg_resources.py:1269
+calls=50 1269
+1208 0
+
+fn=get_platform /usr/lib/python2.7/distutils/util.py:16
+16 0
+cfn=lower /usr/lib/python2.7/string.py:220
+calls=1 220
+16 0
+cfn=<hasattr>
+calls=1 0
+16 0
+cfn=replace /usr/lib/python2.7/string.py:511
+calls=3 511
+16 0
+cfn=__contains__ /usr/lib/python2.7/UserDict.py:70
+calls=1 70
+16 0
+cfn=<posix.uname>
+calls=1 0
+16 0
+
+fn=<module> /usr/lib/python2.7/dist-packages/shapely/geometry/linestring.py:2
+2 0
+cfn=LineString /usr/lib/python2.7/dist-packages/shapely/geometry/linestring.py:14
+calls=1 14
+2 2
+cfn=LineStringAdapter /usr/lib/python2.7/dist-packages/shapely/geometry/linestring.py:113
+calls=1 113
+2 0
+
+fn=<genexpr> /usr/lib/python2.7/dist-packages/shapely/geos.py:98
+98 0
+
+fn=<freenect.sync_get_video>
+0 11
+
+fn=<_hashlib.openssl_sha224>
+0 0
+
+fn=extract_proposal_bbox /home/hunter/git/left-luggage-detection/depth_processing.py:63
+63 19
+cfn=update_depth_detection_aggregator /home/hunter/git/left-luggage-detection/depth_processing.py:234
+calls=100 234
+63 222
+cfn=get_bounding_boxes /home/hunter/git/left-luggage-detection/bg_models.py:146
+calls=100 146
+63 71
+
+fn=UnaryTopologicalOp /usr/lib/python2.7/dist-packages/shapely/topology.py:56
+56 0
+
+fn=<method 'transpose' of 'numpy.ndarray' objects>
+0 1
+
+fn=join /usr/lib/python2.7/posixpath.py:68
+68 1
+cfn=<method 'endswith' of 'str' objects>
+calls=1597 0
+68 0
+cfn=<method 'startswith' of 'str' objects>
+calls=1597 0
+68 0
+
+fn=<module> /usr/lib/python2.7/dist-packages/google/__init__.py:1
+1 0
+
+fn=wait /usr/lib/python2.7/subprocess.py:1370
+1370 0
+cfn=_handle_exitstatus /usr/lib/python2.7/subprocess.py:1329
+calls=1 1329
+1370 0
+cfn=_eintr_retry_call /usr/lib/python2.7/subprocess.py:473
+calls=1 473
+1370 0
+
+fn=<posix.fork>
+0 4
+
+fn=S_IFMT /usr/lib/python2.7/stat.py:24
+24 0
+
+fn=release /usr/lib/python2.7/threading.py:186
+186 0
+cfn=_note /usr/lib/python2.7/threading.py:63
+calls=3 63
+186 0
+cfn=<thread.get_ident>
+calls=3 0
+186 0
+cfn=<method 'release' of 'thread.lock' objects>
+calls=3 0
+186 0
+
+fn=<method 'acquire' of 'thread.lock' objects>
+0 0
+
+fn=DistutilsArgError /usr/lib/python2.7/distutils/errors.py:29
+29 0
+
+fn=register_finder /usr/lib/python2.7/dist-packages/pkg_resources.py:1691
+1691 0
+
+fn=find_library /usr/lib/python2.7/ctypes/util.py:252
+252 0
+cfn=_findSoname_ldconfig /usr/lib/python2.7/ctypes/util.py:214
+calls=2 214
+252 25
+
+fn=LibError /usr/lib/python2.7/distutils/errors.py:79
+79 0
+
+fn=FileMetadata /usr/lib/python2.7/dist-packages/pkg_resources.py:1522
+1522 0
+
+fn=SpooledTemporaryFile /usr/lib/python2.7/tempfile.py:501
+501 0
+
+fn=GeometrySequence /usr/lib/python2.7/dist-packages/shapely/geometry/base.py:513
+513 0
+
+fn=<module> /usr/lib/python2.7/distutils/util.py:5
+5 0
+cfn=<module> /usr/lib/python2.7/distutils/spawn.py:7
+calls=1 7
+5 0
+cfn=<module> /usr/lib/python2.7/distutils/dep_util.py:5
+calls=1 5
+5 0
+cfn=<module> /usr/lib/python2.7/distutils/errors.py:9
+calls=1 9
+5 0
+
+fn=_handle_ns /usr/lib/python2.7/dist-packages/pkg_resources.py:1800
+1800 0
+cfn=find_module /usr/lib/python2.7/pkgutil.py:176
+calls=126 176
+1800 7
+cfn=<hasattr>
+calls=30 0
+1800 0
+cfn=load_module /usr/lib/python2.7/pkgutil.py:243
+calls=3 243
+1800 0
+cfn=file_ns_handler /usr/lib/python2.7/dist-packages/pkg_resources.py:1863
+calls=33 1863
+1800 0
+cfn=get_importer /usr/lib/python2.7/pkgutil.py:366
+calls=129 366
+1800 0
+cfn=<method 'find_module' of 'imp.NullImporter' objects>
+calls=3 0
+1800 0
+cfn=_set_parent_ns /usr/lib/python2.7/dist-packages/pkg_resources.py:1899
+calls=3 1899
+1800 0
+cfn=<method 'get' of 'dict' objects>
+calls=33 0
+1800 0
+cfn=_find_adapter /usr/lib/python2.7/dist-packages/pkg_resources.py:2738
+calls=33 2738
+1800 1
+cfn=<method 'append' of 'list' objects>
+calls=3 0
+1800 0
+
+fn=SplitResult /usr/lib/python2.7/urlparse.py:120
+120 0
+
+fn=__init__ /usr/lib/python2.7/_weakrefset.py:16
+16 0
+
+fn=<chr>
+0 0
+
+fn=__init__ /usr/lib/python2.7/logging/__init__.py:655
+655 0
+cfn=_checkLevel /usr/lib/python2.7/logging/__init__.py:182
+calls=1 182
+655 0
+cfn=createLock /usr/lib/python2.7/logging/__init__.py:684
+calls=1 684
+655 0
+cfn=_addHandlerRef /usr/lib/python2.7/logging/__init__.py:636
+calls=1 636
+655 0
+cfn=__init__ /usr/lib/python2.7/logging/__init__.py:578
+calls=1 578
+655 0
+
+fn=_escape /usr/lib/python2.7/sre_parse.py:258
+258 0
+cfn=<ord>
+calls=12 0
+258 0
+cfn=<len>
+calls=12 0
+258 0
+cfn=<method 'get' of 'dict' objects>
+calls=52 0
+258 0
+
+fn=_set_cloexec_flag /usr/lib/python2.7/subprocess.py:1147
+1147 0
+cfn=<fcntl.fcntl>
+calls=12 0
+1147 0
+
+fn=__exit__ /usr/lib/python2.7/_weakrefset.py:26
+26 0
+cfn=<method 'remove' of 'set' objects>
+calls=8 0
+26 0
+cfn=_commit_removals /usr/lib/python2.7/_weakrefset.py:52
+calls=8 52
+26 0
+
+fn=DistutilsSetupError /usr/lib/python2.7/distutils/errors.py:46
+46 0
+
+fn=box /usr/lib/python2.7/dist-packages/shapely/geometry/geo.py:13
+13 0
+cfn=__init__ /usr/lib/python2.7/dist-packages/shapely/geometry/polygon.py:192
+calls=330 192
+13 14
+
+fn=<method 'get_buffer' of 'pygame.Surface' objects>
+0 0
+
+fn=IMetadataProvider /usr/lib/python2.7/dist-packages/pkg_resources.py:354
+354 0
+
+fn=CalledProcessError /usr/lib/python2.7/subprocess.py:400
+400 0
+
+fn=BoundsOp /usr/lib/python2.7/dist-packages/shapely/coords.py:156
+156 0
+
+fn=activate /usr/lib/python2.7/dist-packages/pkg_resources.py:2254
+2254 0
+cfn=fixup_namespace_packages /usr/lib/python2.7/dist-packages/pkg_resources.py:1853
+calls=99 1853
+2254 3
+cfn=<map>
+calls=99 0
+2254 7
+cfn=insert_on /usr/lib/python2.7/dist-packages/pkg_resources.py:2345
+calls=99 2345
+2254 11
+
+fn=__init__ /usr/lib/python2.7/dist-packages/pkg_resources.py:1287
+1287 0
+cfn=_setup_prefix /usr/lib/python2.7/dist-packages/pkg_resources.py:1291
+calls=2 1291
+1287 0
+cfn=__init__ /usr/lib/python2.7/dist-packages/pkg_resources.py:1188
+calls=2 1188
+1287 0
+
+fn=DistutilsInternalError /usr/lib/python2.7/distutils/errors.py:59
+59 0
+
+fn=register_loader_type /usr/lib/python2.7/dist-packages/pkg_resources.py:203
+203 0
+
+fn=_geos_c_version /usr/lib/python2.7/dist-packages/shapely/geos.py:93
+93 0
+cfn=<genexpr> /usr/lib/python2.7/dist-packages/shapely/geos.py:98
+calls=4 98
+93 0
+cfn=<method 'split' of 'str' objects>
+calls=2 0
+93 0
+cfn=__getattr__ /usr/lib/python2.7/ctypes/__init__.py:375
+calls=1 375
+93 0
+
+fn=create_watershed_seed /home/hunter/git/left-luggage-detection/left-luggage-detection.py:236
+236 1
+cfn=<numpy.core.multiarray.zeros>
+calls=100 0
+236 10
+
+fn=Requirement /usr/lib/python2.7/dist-packages/pkg_resources.py:2631
+2631 0
+
+fn=<module> /usr/lib/python2.7/dist-packages/shapely/geometry/multilinestring.py:2
+2 0
+cfn=MultiLineString /usr/lib/python2.7/dist-packages/shapely/geometry/multilinestring.py:14
+calls=1 14
+2 0
+cfn=MultiLineStringAdapter /usr/lib/python2.7/dist-packages/shapely/geometry/multilinestring.py:60
+calls=1 60
+2 0
+
+fn=closegroup /usr/lib/python2.7/sre_parse.py:84
+84 0
+cfn=<method 'remove' of 'list' objects>
+calls=29 0
+84 0
+
+fn=<repr>
+0 0
+
+fn=RootLogger /usr/lib/python2.7/logging/__init__.py:1370
+1370 0
+
+fn=DistutilsClassError /usr/lib/python2.7/distutils/errors.py:20
+20 0
+
+fn=register /usr/lib/python2.7/pkgutil.py:59
+59 0
+
+fn=compute_foreground_masks /home/hunter/git/left-luggage-detection/intensity_processing.py:33
+33 3
+cfn=compute_foreground_mask_from_func /home/hunter/git/left-luggage-detection/bg_models.py:76
+calls=200 76
+33 3128
+cfn=apply_dilation /home/hunter/git/left-luggage-detection/bg_models.py:129
+calls=200 129
+33 73
+
+fn=pipe_cloexec /usr/lib/python2.7/subprocess.py:1160
+1160 0
+cfn=_set_cloexec_flag /usr/lib/python2.7/subprocess.py:1147
+calls=6 1147
+1160 0
+cfn=<posix.pipe>
+calls=3 0
+1160 0
+
+fn=InterpolateOp /usr/lib/python2.7/dist-packages/shapely/linref.py:21
+21 0
+
+fn=_Stop /usr/lib/python2.7/pickle.py:82
+82 0
+
+fn=__call__ /usr/lib/python2.7/dist-packages/shapely/topology.py:33
+33 1
+cfn=_validate /usr/lib/python2.7/dist-packages/shapely/topology.py:14
+calls=330 14
+33 0
+cfn=<_ctypes.byref>
+calls=330 0
+33 0
+cfn=_get_geom /usr/lib/python2.7/dist-packages/shapely/geometry/base.py:130
+calls=330 130
+33 0
+
+fn=<method 'partition' of 'str' objects>
+0 0
+
+fn=has_metadata /usr/lib/python2.7/dist-packages/pkg_resources.py:1537
+1537 0
+
+fn=LGEOS14 /usr/lib/python2.7/dist-packages/shapely/geos.py:197
+197 0
+
+fn=get_image /home/hunter/git/left-luggage-detection/kinectconnector.py:20
+20 0
+cfn=<freenect.sync_get_video>
+calls=100 0
+20 11
+cfn=<method 'transpose' of 'numpy.ndarray' objects>
+calls=100 0
+20 0
+
+fn=_validate /usr/lib/python2.7/dist-packages/shapely/topology.py:14
+14 0
+cfn=<hasattr>
+calls=330 0
+14 1
+cfn=_get_geom /usr/lib/python2.7/dist-packages/shapely/geometry/base.py:130
+calls=990 130
+14 0
+
+fn=<module> /usr/lib/python2.7/dist-packages/shapely/algorithms/cga.py:1
+1 0
+
+fn=<method 'rfind' of 'str' objects>
+0 0
+
+fn=<locals>
+0 0
+
+fn=<method 'format' of 'str' objects>
+0 0
+
+fn=<module> /usr/lib/python2.7/dist-packages/pygame/pkgdata.py:18
+18 4
+cfn=<module> /usr/lib/python2.7/dist-packages/pkg_resources.py:14
+calls=1 14
+18 55
+cfn=get_BytesIO /usr/lib/python2.7/dist-packages/pygame/compat.py:21
+calls=1 21
+18 0
+
+fn=__init__ /usr/lib/python2.7/pkgutil.py:237
+237 0
+
+fn=<method 'find' of 'unicode' objects>
+0 0
+
+fn=StreamWriter /usr/lib/python2.7/encodings/hex_codec.py:62
+62 0
+
+fn=<module> /usr/lib/python2.7/dist-packages/shapely/ctypes_declarations.py:4
+4 0
+cfn=allocated_c_char_p /usr/lib/python2.7/dist-packages/shapely/ctypes_declarations.py:6
+calls=1 6
+4 0
+cfn=CFUNCTYPE /usr/lib/python2.7/ctypes/__init__.py:78
+calls=1 78
+4 0
+
+fn=from_location /usr/lib/python2.7/dist-packages/pkg_resources.py:2136
+2136 1
+cfn=<method 'group' of '_sre.SRE_Match' objects>
+calls=198 0
+2136 0
+cfn=__init__ /usr/lib/python2.7/dist-packages/pkg_resources.py:2122
+calls=198 2122
+2136 3
+cfn=<method 'lower' of 'str' objects>
+calls=396 0
+2136 0
+cfn=<method 'match' of '_sre.SRE_Pattern' objects>
+calls=198 0
+2136 0
+cfn=splitext /usr/lib/python2.7/posixpath.py:104
+calls=198 104
+2136 0
+
+fn=EggMetadata /usr/lib/python2.7/dist-packages/pkg_resources.py:1591
+1591 0
+
+fn=<_struct.calcsize>
+0 0
+
+fn=CoordinateSequence /usr/lib/python2.7/dist-packages/shapely/coords.py:12
+12 0
+
+fn=<posix.urandom>
+0 0
+
+fn=__init__ /usr/lib/python2.7/dist-packages/shapely/topology.py:21
+21 0
+
+fn=<method 'isalnum' of 'str' objects>
+0 0
+
+fn=__init__ /usr/lib/python2.7/logging/__init__.py:1110
+1110 0
+cfn=_checkLevel /usr/lib/python2.7/logging/__init__.py:182
+calls=2 182
+1110 0
+cfn=__init__ /usr/lib/python2.7/logging/__init__.py:578
+calls=2 578
+1110 0
+
+fn=_setup_prefix /usr/lib/python2.7/dist-packages/pkg_resources.py:1291
+1291 0
+cfn=<method 'endswith' of 'str' objects>
+calls=12 0
+1291 0
+cfn=split /usr/lib/python2.7/posixpath.py:89
+calls=12 89
+1291 0
+cfn=<method 'lower' of 'str' objects>
+calls=12 0
+1291 0
+
+fn=<genexpr> /usr/lib/python2.7/collections.py:353
+353 0
+cfn=<method 'format' of 'str' objects>
+calls=11 0
+353 0
+
+fn=<module> /usr/lib/python2.7/dist-packages/shapely/coords.py:2
+2 0
+cfn=BoundsOp /usr/lib/python2.7/dist-packages/shapely/coords.py:156
+calls=1 156
+2 0
+cfn=CoordinateSequence /usr/lib/python2.7/dist-packages/shapely/coords.py:12
+calls=1 12
+2 0
+cfn=<module> /usr/lib/python2.7/dist-packages/shapely/topology.py:8
+calls=1 8
+2 0
+
+fn=SplitResult <string>:1
+1 0
+
+fn=seed /usr/lib/python2.7/random.py:100
+100 0
+cfn=<posix.urandom>
+calls=1 0
+100 0
+cfn=<function seed at 0x4d95050>
+calls=1 0
+100 0
+cfn=<binascii.hexlify>
+calls=1 0
+100 0
+
+fn=_has /usr/lib/python2.7/dist-packages/pkg_resources.py:1313
+1313 0
+cfn=exists /usr/lib/python2.7/genericpath.py:15
+calls=134 15
+1313 0
+
+fn=<method '__subclasses__' of 'type' objects>
+0 0
+
+fn=_identityfunction /usr/lib/python2.7/sre_compile.py:25
+25 0
+
+fn=<globals>
+0 0
+
+fn=_TemporaryFileWrapper /usr/lib/python2.7/tempfile.py:372
+372 0
+
+fn=draw_bounding_box /home/hunter/git/left-luggage-detection/utils.py:111
+111 2
+cfn=<cv2.rectangle>
+calls=2130 0
+111 4
+
+fn=<built-in method fromkeys>
+0 0
+cfn=_get_metadata /usr/lib/python2.7/dist-packages/pkg_resources.py:2249
+calls=101 2249
+0 1
+
+fn=ProjectOp /usr/lib/python2.7/dist-packages/shapely/linref.py:15
+15 0
+
+fn=<module> /usr/lib/python2.7/dist-packages/shapely/geometry/base.py:2
+2 0
+cfn=<method 'decode' of 'str' objects>
+calls=1 0
+2 0
+cfn=HeterogeneousGeometrySequence /usr/lib/python2.7/dist-packages/shapely/geometry/base.py:590
+calls=1 590
+2 0
+cfn=GeometrySequence /usr/lib/python2.7/dist-packages/shapely/geometry/base.py:513
+calls=1 513
+2 0
+cfn=<module> /usr/lib/python2.7/dist-packages/shapely/coords.py:2
+calls=1 2
+2 0
+cfn=<module> /usr/lib/python2.7/dist-packages/shapely/wkt.py:2
+calls=1 2
+2 0
+cfn=BaseMultipartGeometry /usr/lib/python2.7/dist-packages/shapely/geometry/base.py:458
+calls=1 458
+2 0
+cfn=<module> /usr/lib/python2.7/dist-packages/shapely/wkb.py:2
+calls=1 2
+2 0
+cfn=<module> /usr/lib/python2.7/dist-packages/shapely/impl.py:12
+calls=1 12
+2 0
+cfn=deserialize /usr/lib/python2.7/dist-packages/shapely/wkb.py:11
+calls=1 11
+2 0
+cfn=BaseGeometry /usr/lib/python2.7/dist-packages/shapely/geometry/base.py:62
+calls=1 62
+2 0
+
+fn=TopologicalError /usr/lib/python2.7/dist-packages/shapely/geos.py:144
+144 0
+
+fn=<module> /usr/lib/python2.7/encodings/ascii.py:8
+8 0
+cfn=StreamConverter /usr/lib/python2.7/encodings/ascii.py:34
+calls=1 34
+8 0
+cfn=StreamReader /usr/lib/python2.7/encodings/ascii.py:31
+calls=1 31
+8 0
+cfn=Codec /usr/lib/python2.7/encodings/ascii.py:13
+calls=1 13
+8 0
+cfn=IncrementalDecoder /usr/lib/python2.7/encodings/ascii.py:24
+calls=1 24
+8 0
+cfn=IncrementalEncoder /usr/lib/python2.7/encodings/ascii.py:20
+calls=1 20
+8 0
+cfn=StreamWriter /usr/lib/python2.7/encodings/ascii.py:28
+calls=1 28
+8 0
+
+fn=<method 'strip' of 'str' objects>
+0 0
+
+fn=<method 'keys' of 'dict' objects>
+0 0
+
+fn=ImpWrapper /usr/lib/python2.7/dist-packages/pkg_resources.py:1607
+1607 0
+
+fn=<method 'group' of '_sre.SRE_Match' objects>
+0 0
+
+fn=abspath /usr/lib/python2.7/posixpath.py:350
+350 0
+cfn=isabs /usr/lib/python2.7/posixpath.py:59
+calls=255 59
+350 0
+cfn=normpath /usr/lib/python2.7/posixpath.py:321
+calls=255 321
+350 1
+
+fn=make_surface /usr/lib/python2.7/dist-packages/pygame/surfarray.py:232
+232 0
+cfn=make_surface /usr/lib/python2.7/dist-packages/pygame/_numpysurfarray.py:340
+calls=100 340
+232 4436
+
+fn=<module> /usr/lib/python2.7/pickle.py:25
+25 0
+cfn=UnpicklingError /usr/lib/python2.7/pickle.py:69
+calls=1 69
+25 0
+cfn=match /usr/lib/python2.7/re.py:134
+calls=117 134
+25 0
+cfn=_Stop /usr/lib/python2.7/pickle.py:82
+calls=1 82
+25 0
+cfn=<dir>
+calls=1 0
+25 0
+cfn=_EmptyClass /usr/lib/python2.7/pickle.py:1261
+calls=1 1261
+25 0
+cfn=PicklingError /usr/lib/python2.7/pickle.py:62
+calls=1 62
+25 0
+cfn=<method 'extend' of 'list' objects>
+calls=1 0
+25 0
+cfn=PickleError /usr/lib/python2.7/pickle.py:58
+calls=1 58
+25 0
+cfn=Pickler /usr/lib/python2.7/pickle.py:171
+calls=1 171
+25 0
+cfn=Unpickler /usr/lib/python2.7/pickle.py:827
+calls=1 827
+25 0
+
+fn=ResourceManager /usr/lib/python2.7/dist-packages/pkg_resources.py:894
+894 0
+
+fn=transpose /usr/lib/python2.7/dist-packages/numpy/core/fromnumeric.py:446
+446 0
+cfn=<method 'transpose' of 'numpy.ndarray' objects>
+calls=100 0
+446 0
+
+fn=<method 'update' of 'set' objects>
+0 0
+
+fn=append /usr/lib/python2.7/sre_parse.py:139
+139 0
+cfn=<method 'append' of 'list' objects>
+calls=165 0
+139 0
+
+fn=Filter /usr/lib/python2.7/logging/__init__.py:536
+536 0
+
+fn=register /usr/lib/python2.7/atexit.py:37
+37 0
+cfn=<method 'append' of 'list' objects>
+calls=2 0
+37 0
+
+fn=<dir>
+0 0
+
+fn=find_module /usr/lib/python2.7/pkgutil.py:176
+176 0
+cfn=realpath /usr/lib/python2.7/posixpath.py:364
+calls=126 364
+176 5
+cfn=__init__ /usr/lib/python2.7/pkgutil.py:237
+calls=33 237
+176 0
+cfn=<method 'split' of 'str' objects>
+calls=126 0
+176 0
+cfn=<imp.find_module>
+calls=126 0
+176 1
+
+fn=VersionConflict /usr/lib/python2.7/dist-packages/pkg_resources.py:186
+186 0
+
+fn=<pygame.base.init>
+0 32
+
+fn=<posix.WIFSIGNALED>
+0 0
+
+fn=find_nothing /usr/lib/python2.7/dist-packages/pkg_resources.py:1730
+1730 0
+
+fn=__init__ /usr/lib/python2.7/UserDict.py:4
+4 0
+cfn=<len>
+calls=1 0
+4 0
+
+fn=Point /usr/lib/python2.7/dist-packages/shapely/geometry/point.py:14
+14 0
+
+fn=<method '__subclasshook__' of 'object' objects>
+0 0
+
+fn=add /usr/lib/python2.7/_weakrefset.py:81
+81 0
+cfn=<method 'add' of 'set' objects>
+calls=16 0
+81 0
+
+fn=_get /usr/lib/python2.7/dist-packages/pkg_resources.py:1325
+1325 0
+cfn=<method 'close' of 'file' objects>
+calls=50 0
+1325 0
+cfn=<method 'read' of 'file' objects>
+calls=50 0
+1325 0
+cfn=<open>
+calls=50 0
+1325 0
+
+fn=__init__ /usr/lib/python2.7/dist-packages/shapely/geos.py:351
+351 0
+cfn=__init__ /usr/lib/python2.7/dist-packages/shapely/geos.py:342
+calls=1 342
+351 0
+
+fn=LGEOSBase /usr/lib/python2.7/dist-packages/shapely/geos.py:186
+186 0
+
+fn=<_ctypes.POINTER>
+0 0
+
+fn=__init__ /usr/lib/python2.7/dist-packages/pkg_resources.py:1534
+1534 0
+
+fn=<max>
+0 0
+
+fn=<pygame.display.flip>
+0 111
+
+fn=<all>
+0 0
+cfn=<genexpr> /usr/lib/python2.7/collections.py:329
+calls=99 329
+0 0
+
+fn=find_on_path /usr/lib/python2.7/dist-packages/pkg_resources.py:1734
+1734 2
+cfn=join /usr/lib/python2.7/posixpath.py:68
+calls=198 68
+1734 0
+cfn=from_location /usr/lib/python2.7/dist-packages/pkg_resources.py:2136
+calls=174 2136
+1734 4
+cfn=__init__ /usr/lib/python2.7/dist-packages/pkg_resources.py:1534
+calls=108 1534
+1734 0
+cfn=__init__ /usr/lib/python2.7/dist-packages/pkg_resources.py:1586
+calls=90 1586
+1734 0
+cfn=from_filename /usr/lib/python2.7/dist-packages/pkg_resources.py:2293
+calls=24 2293
+1734 1
+cfn=<method 'endswith' of 'str' objects>
+calls=3270 0
+1734 0
+cfn=_normalize_cached /usr/lib/python2.7/dist-packages/pkg_resources.py:1892
+calls=56 1892
+1734 1
+cfn=<method 'lower' of 'str' objects>
+calls=1750 0
+1734 0
+cfn=<posix.listdir>
+calls=32 0
+1734 1
+cfn=isdir /usr/lib/python2.7/genericpath.py:38
+calls=230 38
+1734 1
+cfn=<posix.access>
+calls=56 0
+1734 0
+
+fn=close_unregister_and_remove /usr/lib/python2.7/subprocess.py:1435
+1435 0
+cfn=<built-in method unregister>
+calls=2 0
+1435 0
+cfn=<method 'close' of 'file' objects>
+calls=2 0
+1435 0
+cfn=<method 'pop' of 'dict' objects>
+calls=2 0
+1435 0
+
+fn=gen_box /home/hunter/git/left-luggage-detection/utils.py:93
+93 2
+cfn=<module> /usr/lib/python2.7/dist-packages/shapely/__init__.py:1
+calls=1 1
+93 0
+cfn=box /usr/lib/python2.7/dist-packages/shapely/geometry/geo.py:13
+calls=330 13
+93 15
+cfn=<module> /usr/lib/python2.7/dist-packages/shapely/geometry/__init__.py:2
+calls=1 2
+93 43
+
+fn=_releaseLock /usr/lib/python2.7/logging/__init__.py:219
+219 0
+cfn=release /usr/lib/python2.7/threading.py:186
+calls=3 186
+219 0
+
+fn=register_namespace_handler /usr/lib/python2.7/dist-packages/pkg_resources.py:1783
+1783 0
+
+fn=get_build_platform /usr/lib/python2.7/dist-packages/pkg_resources.py:244
+244 0
+cfn=get_platform /usr/lib/python2.7/distutils/util.py:16
+calls=1 16
+244 0
+cfn=<module> /usr/lib/python2.7/distutils/util.py:5
+calls=1 5
+244 1
+cfn=<module> /usr/lib/python2.7/distutils/__init__.py:9
+calls=1 9
+244 0
+
+fn=<method 'items' of 'dict' objects>
+0 0
+
+fn=<module> /usr/lib/python2.7/dist-packages/shapely/wkt.py:2
+2 0
+
+fn=DefaultProvider /usr/lib/python2.7/dist-packages/pkg_resources.py:1310
+1310 0
+
+fn=ZipProvider /usr/lib/python2.7/dist-packages/pkg_resources.py:1354
+1354 0
+
+fn=ParseResult <string>:1
+1 0
+
+fn=createLock /usr/lib/python2.7/logging/__init__.py:684
+684 0
+cfn=RLock /usr/lib/python2.7/threading.py:113
+calls=1 113
+684 0
+
+fn=<method 'tick' of 'Clock' objects>
+0 0
+
+fn=<method 'isdigit' of 'str' objects>
+0 0
+
+fn=DistutilsByteCompileError /usr/lib/python2.7/distutils/errors.py:66
+66 0
+
+fn=<freenect.sync_get_depth>
+0 25
+
+fn=_RandomNameSequence /usr/lib/python2.7/tempfile.py:108
+108 0
+
+fn=PathMetadata /usr/lib/python2.7/dist-packages/pkg_resources.py:1566
+1566 0
+
+fn=<thread.allocate_lock>
+0 0
+
+fn=dirname /usr/lib/python2.7/posixpath.py:127
+127 0
+cfn=<method 'rfind' of 'str' objects>
+calls=101 0
+127 0
+cfn=<method 'rstrip' of 'str' objects>
+calls=101 0
+127 0
+cfn=<len>
+calls=101 0
+127 0
+
+fn=<__import__>
+0 3
+cfn=<module> /usr/lib/python2.7/encodings/ascii.py:8
+calls=1 8
+0 0
+cfn=<module> /usr/lib/python2.7/encodings/hex_codec.py:8
+calls=1 8
+0 0
+
+fn=<module> /usr/lib/python2.7/dist-packages/zope/__init__.py:2
+2 0
+cfn=declare_namespace /usr/lib/python2.7/dist-packages/pkg_resources.py:1821
+calls=1 1821
+2 0
+
+fn=__init__ /usr/lib/python2.7/sre_parse.py:91
+91 0
+
+fn=<method 'get_width' of 'pygame.Surface' objects>
+0 0
+
+fn=EggProvider /usr/lib/python2.7/dist-packages/pkg_resources.py:1284
+1284 0
+
+fn=get_supported_platform /usr/lib/python2.7/dist-packages/pkg_resources.py:99
+99 0
+cfn=get_build_platform /usr/lib/python2.7/dist-packages/pkg_resources.py:244
+calls=1 244
+99 1
+cfn=<method 'match' of '_sre.SRE_Pattern' objects>
+calls=1 0
+99 0
+
+fn=LoggerAdapter /usr/lib/python2.7/logging/__init__.py:1384
+1384 0
+
+fn=BinaryPredicate /usr/lib/python2.7/dist-packages/shapely/predicates.py:7
+7 0
+
+fn=__init__ /usr/lib/python2.7/_weakrefset.py:36
+36 0
+
+fn=Random /usr/lib/python2.7/random.py:72
+72 0
+
+fn=<posix.fdopen>
+0 0
+
+fn=_EmptyClass /usr/lib/python2.7/pickle.py:1261
+1261 0
+
+fn=<imp.load_module>
+0 0
+cfn=<module> /usr/lib/python2.7/dist-packages/google/__init__.py:1
+calls=1 1
+0 0
+cfn=<module> /usr/lib/python2.7/dist-packages/zope/__init__.py:2
+calls=1 2
+0 0
+cfn=<module> /usr/lib/pymodules/python2.7/mpl_toolkits/__init__.py:1
+calls=1 1
+0 0
+
+fn=<method 'isalnum' of 'unicode' objects>
+0 0
+
+fn=<module> /usr/lib/python2.7/urlparse.py:29
+29 0
+cfn=<genexpr> /usr/lib/python2.7/urlparse.py:331
+calls=485 331
+29 0
+cfn=namedtuple /usr/lib/python2.7/collections.py:288
+calls=2 288
+29 1
+cfn=ResultMixin /usr/lib/python2.7/urlparse.py:73
+calls=1 73
+29 0
+cfn=SplitResult /usr/lib/python2.7/urlparse.py:120
+calls=1 120
+29 0
+cfn=ParseResult /usr/lib/python2.7/urlparse.py:128
+calls=1 128
+29 0
+cfn=compile /usr/lib/python2.7/re.py:188
+calls=1 188
+29 0
+
+fn=<select.poll>
+0 0
+
+fn=<posix.stat>
+0 1
+
+fn=allocated_c_char_p /usr/lib/python2.7/dist-packages/shapely/ctypes_declarations.py:6
+6 0
+
+fn=LinearRefBase /usr/lib/python2.7/dist-packages/shapely/linref.py:7
+7 0
+
+fn=<hasattr>
+0 0
+cfn=__getattr__ /usr/lib/python2.7/ctypes/__init__.py:375
+calls=87 375
+0 0
+cfn=type /usr/lib/python2.7/dist-packages/shapely/geometry/base.py:198
+calls=330 198
+0 1
+
+fn=<posix.read>
+0 7
+
+fn=search_function /usr/lib/python2.7/encodings/__init__.py:71
+71 0
+cfn=getregentry /usr/lib/python2.7/encodings/hex_codec.py:70
+calls=1 70
+71 0
+cfn=<__import__>
+calls=2 0
+71 0
+cfn=<isinstance>
+calls=2 0
+71 0
+cfn=getregentry /usr/lib/python2.7/encodings/ascii.py:41
+calls=1 41
+71 0
+cfn=normalize_encoding /usr/lib/python2.7/encodings/__init__.py:49
+calls=2 49
+71 0
+cfn=<method 'replace' of 'str' objects>
+calls=1 0
+71 0
+cfn=<method 'get' of 'dict' objects>
+calls=5 0
+71 0
+
+fn=cls /usr/lib/python2.7/dist-packages/pkg_resources.py:2734
+2734 0
+
+fn=<pygame.display.set_caption>
+0 0
+
+fn=PredicateError /usr/lib/python2.7/dist-packages/shapely/geos.py:147
+147 0
+
+fn=__init__ /usr/lib/python2.7/dist-packages/pkg_resources.py:1586
+1586 0
+
+fn=replace /usr/lib/python2.7/string.py:511
+511 0
+cfn=<method 'replace' of 'str' objects>
+calls=3 0
+511 0
+
+fn=<built-in method register>
+0 0
+
+fn=<gc.disable>
+0 0
+
+fn=isident /usr/lib/python2.7/sre_parse.py:211
+211 0
+
+fn=ImpLoader /usr/lib/python2.7/dist-packages/pkg_resources.py:1628
+1628 0
+
+fn=<_hashlib.openssl_sha384>
+0 0
+
+fn=__init__ /usr/lib/python2.7/dist-packages/shapely/geos.py:342
+342 0
+cfn=__init__ /usr/lib/python2.7/dist-packages/shapely/geos.py:265
+calls=1 265
+342 0
+
+fn=<method 'blit' of 'pygame.Surface' objects>
+0 70
+
+fn=<method 'translate' of 'str' objects>
+0 0
+
+fn=_compile_info /usr/lib/python2.7/sre_compile.py:360
+360 0
+cfn=getwidth /usr/lib/python2.7/sre_parse.py:141
+calls=18 141
+360 0
+cfn=<len>
+calls=63 0
+360 0
+cfn=<method 'extend' of 'list' objects>
+calls=4 0
+360 0
+cfn=__len__ /usr/lib/python2.7/sre_parse.py:127
+calls=4 127
+360 0
+cfn=__getitem__ /usr/lib/python2.7/sre_parse.py:131
+calls=9 131
+360 0
+cfn=<method 'append' of 'list' objects>
+calls=103 0
+360 0
+cfn=_compile_charset /usr/lib/python2.7/sre_compile.py:179
+calls=1 179
+360 0
+
+fn=__getitem__ /usr/lib/python2.7/dist-packages/shapely/impl.py:43
+43 0
+
+fn=initsysfonts /usr/lib/python2.7/dist-packages/pygame/sysfont.py:518
+518 0
+cfn=initsysfonts_unix /usr/lib/python2.7/dist-packages/pygame/sysfont.py:445
+calls=1 445
+518 50
+cfn=create_aliases /usr/lib/python2.7/dist-packages/pygame/sysfont.py:487
+calls=1 487
+518 0
+cfn=<method 'update' of 'dict' objects>
+calls=1 0
+518 0
+
+fn=from_filename /usr/lib/python2.7/dist-packages/pkg_resources.py:2293
+2293 0
+cfn=from_location /usr/lib/python2.7/dist-packages/pkg_resources.py:2136
+calls=24 2136
+2293 1
+cfn=_normalize_cached /usr/lib/python2.7/dist-packages/pkg_resources.py:1892
+calls=24 1892
+2293 0
+cfn=basename /usr/lib/python2.7/posixpath.py:119
+calls=24 119
+2293 0
+
+fn=<method 'get_losses' of 'pygame.Surface' objects>
+0 0
+
+fn=Filterer /usr/lib/python2.7/logging/__init__.py:573
+573 0
+
+fn=<method 'rstrip' of 'str' objects>
+0 0
+
+fn=_joinrealpath /usr/lib/python2.7/posixpath.py:372
+372 1
+cfn=join /usr/lib/python2.7/posixpath.py:68
+calls=1181 68
+372 1
+cfn=<method 'partition' of 'str' objects>
+calls=1181 0
+372 0
+cfn=islink /usr/lib/python2.7/posixpath.py:139
+calls=1181 139
+372 3
+cfn=isabs /usr/lib/python2.7/posixpath.py:59
+calls=255 59
+372 0
+
+fn=DistutilsError /usr/lib/python2.7/distutils/errors.py:13
+13 0
+
+fn=LogRecord /usr/lib/python2.7/logging/__init__.py:230
+230 0
+
+fn=<method 'remove' of 'set' objects>
+0 0
+
+fn=UnaryPredicate /usr/lib/python2.7/dist-packages/shapely/predicates.py:19
+19 0
+
+fn=_get_mro /usr/lib/python2.7/dist-packages/pkg_resources.py:2731
+2731 2
+cfn=cls /usr/lib/python2.7/dist-packages/pkg_resources.py:2734
+calls=89 2734
+2731 0
+cfn=<isinstance>
+calls=93 0
+2731 0
+
+fn=<built-in method unregister>
+0 0
+
+fn=<cv2.findContours>
+0 112
+
+fn=SysFont /usr/lib/python2.7/dist-packages/pygame/sysfont.py:534
+534 17
+cfn=initsysfonts /usr/lib/python2.7/dist-packages/pygame/sysfont.py:518
+calls=1 518
+534 50
+cfn=<method 'split' of 'str' objects>
+calls=100 0
+534 0
+cfn=_simplename /usr/lib/python2.7/dist-packages/pygame/sysfont.py:36
+calls=100 36
+534 1
+cfn=<method 'get' of 'dict' objects>
+calls=300 0
+534 0
+
+fn=<method 'endswith' of 'str' objects>
+0 0
+
+fn=<built-in method poll>
+0 25
+
+fn=isname /usr/lib/python2.7/sre_parse.py:217
+217 0
+cfn=isident /usr/lib/python2.7/sre_parse.py:211
+calls=16 211
+217 0
+
+fn=<method 'close' of 'file' objects>
+0 0
+
+fn=update_background_model /home/hunter/git/left-luggage-detection/depth_processing.py:34
+34 1
+cfn=compute_background_running_average /home/hunter/git/left-luggage-detection/bg_models.py:11
+calls=100 11
+34 1301
+
+fn=<cv2.watershed>
+0 79
+
+fn=<isinstance>
+0 0
+
+fn=getregentry /usr/lib/python2.7/encodings/ascii.py:41
+41 0
+cfn=__new__ /usr/lib/python2.7/codecs.py:77
+calls=1 77
+41 0
+
+fn=<module> /usr/lib/python2.7/hashlib.py:55
+55 0
+cfn=<globals>
+calls=6 0
+55 0
+cfn=__get_openssl_constructor /usr/lib/python2.7/hashlib.py:94
+calls=6 94
+55 0
+
+fn=load_module /usr/lib/python2.7/pkgutil.py:243
+243 0
+cfn=<imp.load_module>
+calls=3 0
+243 0
+cfn=_reopen /usr/lib/python2.7/pkgutil.py:257
+calls=3 257
+243 0
+
+fn=<module> /usr/lib/python2.7/dist-packages/shapely/topology.py:8
+8 0
+cfn=Delegating /usr/lib/python2.7/dist-packages/shapely/topology.py:20
+calls=1 20
+8 0
+cfn=UnaryRealProperty /usr/lib/python2.7/dist-packages/shapely/topology.py:32
+calls=1 32
+8 0
+cfn=UnaryTopologicalOp /usr/lib/python2.7/dist-packages/shapely/topology.py:56
+calls=1 56
+8 0
+cfn=BinaryTopologicalOp /usr/lib/python2.7/dist-packages/shapely/topology.py:39
+calls=1 39
+8 0
+cfn=Validating /usr/lib/python2.7/dist-packages/shapely/topology.py:13
+calls=1 13
+8 0
+cfn=BinaryRealProperty /usr/lib/python2.7/dist-packages/shapely/topology.py:24
+calls=1 24
+8 0
+
+fn=<method 'pop' of 'dict' objects>
+0 0
+
+fn=apply_dilation /home/hunter/git/left-luggage-detection/bg_models.py:129
+129 1
+cfn=<cv2.morphologyEx>
+calls=200 0
+129 10
+cfn=<method 'astype' of 'numpy.ndarray' objects>
+calls=200 0
+129 59
+cfn=<cv2.getStructuringElement>
+calls=200 0
+129 2
+
+fn=S_ISDIR /usr/lib/python2.7/stat.py:40
+40 0
+cfn=S_IFMT /usr/lib/python2.7/stat.py:24
+calls=230 24
+40 0
+
+fn=TextIOBase /usr/lib/python2.7/io.py:78
+78 0
+
+fn=<issubclass>
+0 0
+cfn=__subclasscheck__ /usr/lib/python2.7/abc.py:148
+calls=8 148
+0 0
+
+fn=<math.log>
+0 0
+
+fn=<fcntl.fcntl>
+0 0
+
+fn=__init__ /usr/lib/python2.7/sre_parse.py:179
+179 0
+cfn=__next /usr/lib/python2.7/sre_parse.py:183
+calls=18 183
+179 0
+
+fn=DimensionError /usr/lib/python2.7/dist-packages/shapely/geos.py:141
+141 0
+
+fn=ImpImporter /usr/lib/python2.7/pkgutil.py:162
+162 0
+
+fn=CCompilerError /usr/lib/python2.7/distutils/errors.py:70
+70 0
+
+fn=<method 'apply' of 'cv2.BackgroundSubtractor' objects>
+0 1843
+
+fn=__init__ /usr/lib/python2.7/sre_parse.py:68
+68 0
+
+fn=<method 'startswith' of 'str' objects>
+0 0
+
+fn=__init__ /usr/lib/python2.7/logging/__init__.py:952
+952 0
+
+fn=file_ns_handler /usr/lib/python2.7/dist-packages/pkg_resources.py:1863
+1863 0
+cfn=join /usr/lib/python2.7/posixpath.py:68
+calls=33 68
+1863 0
+cfn=<method 'split' of 'str' objects>
+calls=33 0
+1863 0
+cfn=_normalize_cached /usr/lib/python2.7/dist-packages/pkg_resources.py:1892
+calls=63 1892
+1863 0
+
+fn=__contains__ /usr/lib/python2.7/UserDict.py:70
+70 0
+
+fn=normalize_encoding /usr/lib/python2.7/encodings/__init__.py:49
+49 0
+cfn=<hasattr>
+calls=2 0
+49 0
+cfn=<method 'translate' of 'str' objects>
+calls=2 0
+49 0
+cfn=<isinstance>
+calls=2 0
+49 0
+cfn=<method 'split' of 'str' objects>
+calls=2 0
+49 0
+cfn=<method 'join' of 'str' objects>
+calls=2 0
+49 0
+
+fn=<method 'split' of 'str' objects>
+0 0
+
+fn=__iter__ /usr/lib/python2.7/dist-packages/pkg_resources.py:509
+509 0
+
+fn=getwidth /usr/lib/python2.7/sre_parse.py:141
+141 0
+cfn=<max>
+calls=12 0
+141 0
+cfn=getwidth /usr/lib/python2.7/sre_parse.py:141
+calls=89 141
+141 0
+cfn=<min>
+calls=226 0
+141 0
+
+fn=get_importer /usr/lib/python2.7/pkgutil.py:366
+366 0
+cfn=__init__ /usr/lib/python2.7/pkgutil.py:173
+calls=182 173
+366 0
+
+fn=<_hashlib.openssl_sha256>
+0 0
+
+fn=<method 'find_module' of 'imp.NullImporter' objects>
+0 0
+
+fn=addHandler /usr/lib/python2.7/logging/__init__.py:1281
+1281 0
+cfn=_releaseLock /usr/lib/python2.7/logging/__init__.py:219
+calls=1 219
+1281 0
+cfn=_acquireLock /usr/lib/python2.7/logging/__init__.py:210
+calls=1 210
+1281 0
+cfn=<method 'append' of 'list' objects>
+calls=1 0
+1281 0
+
+fn=key /usr/lib/python2.7/dist-packages/pkg_resources.py:2186
+2186 0
+cfn=<method 'lower' of 'str' objects>
+calls=198 0
+2186 0
+cfn=__getattr__ /usr/lib/python2.7/dist-packages/pkg_resources.py:2286
+calls=198 2286
+2186 0
+
+fn=EmptyProvider /usr/lib/python2.7/dist-packages/pkg_resources.py:1338
+1338 0
+
+fn=IncrementalEncoder /usr/lib/python2.7/encodings/hex_codec.py:52
+52 0
+
+fn=<imp.acquire_lock>
+0 0
+
+fn=<method 'read' of 'file' objects>
+0 13
+
+fn=StreamConverter /usr/lib/python2.7/encodings/ascii.py:34
+34 0
+
+fn=extract_foreground_mask_from_run_avg /home/hunter/git/left-luggage-detection/depth_processing.py:48
+48 305
+cfn=<numpy.core.multiarray.where>
+calls=200 0
+48 1693
+cfn=<method 'astype' of 'numpy.ndarray' objects>
+calls=100 0
+48 20
+
+fn=<lambda> /usr/lib/python2.7/dist-packages/pkg_resources.py:2825
+2825 0
+cfn=activate /usr/lib/python2.7/dist-packages/pkg_resources.py:2254
+calls=99 2254
+2825 23
+
+fn=<method 'iteritems' of 'dict' objects>
+0 0
+
+fn=_code /usr/lib/python2.7/sre_compile.py:479
+479 0
+cfn=_compile_info /usr/lib/python2.7/sre_compile.py:360
+calls=18 360
+479 1
+cfn=_compile /usr/lib/python2.7/sre_compile.py:33
+calls=18 33
+479 2
+cfn=<method 'append' of 'list' objects>
+calls=18 0
+479 0
+
+fn=<module> /usr/lib/python2.7/encodings/hex_codec.py:8
+8 0
+cfn=IncrementalDecoder /usr/lib/python2.7/encodings/hex_codec.py:57
+calls=1 57
+8 0
+cfn=StreamWriter /usr/lib/python2.7/encodings/hex_codec.py:62
+calls=1 62
+8 0
+cfn=IncrementalEncoder /usr/lib/python2.7/encodings/hex_codec.py:52
+calls=1 52
+8 0
+cfn=Codec /usr/lib/python2.7/encodings/hex_codec.py:45
+calls=1 45
+8 0
+cfn=StreamReader /usr/lib/python2.7/encodings/hex_codec.py:65
+calls=1 65
+8 0
+
+fn=_handle_exitstatus /usr/lib/python2.7/subprocess.py:1329
+1329 0
+cfn=<posix.WIFSIGNALED>
+calls=1 0
+1329 0
+cfn=<posix.WEXITSTATUS>
+calls=1 0
+1329 0
+cfn=<posix.WIFEXITED>
+calls=1 0
+1329 0
+
+fn=BaseMultipartGeometry /usr/lib/python2.7/dist-packages/shapely/geometry/base.py:458
+458 0
+
+fn=<sys._getframe>
+0 0
+
+fn=_optimize_charset /usr/lib/python2.7/sre_compile.py:208
+208 0
+cfn=_identityfunction /usr/lib/python2.7/sre_compile.py:25
+calls=28 25
+208 0
+cfn=<range>
+calls=9 0
+208 0
+cfn=<len>
+calls=26 0
+208 0
+cfn=_mk_bitmap /usr/lib/python2.7/sre_compile.py:259
+calls=2 259
+208 0
+cfn=<method 'append' of 'list' objects>
+calls=32 0
+208 0
+
+fn=<cv2.boundingRect>
+0 2
+
+fn=<posix.close>
+0 0
+
+fn=_simplename /usr/lib/python2.7/dist-packages/pygame/sysfont.py:36
+36 2
+cfn=<method 'isalnum' of 'str' objects>
+calls=500 0
+36 0
+cfn=<method 'isalnum' of 'unicode' objects>
+calls=3388 0
+36 0
+cfn=<method 'lower' of 'str' objects>
+calls=500 0
+36 0
+cfn=<method 'join' of 'str' objects>
+calls=408 0
+36 0
+cfn=<method 'lower' of 'unicode' objects>
+calls=2906 0
+36 0
+
+fn=getLogger /usr/lib/python2.7/logging/__init__.py:1008
+1008 0
+cfn=__init__ /usr/lib/python2.7/logging/__init__.py:1110
+calls=1 1110
+1008 0
+cfn=_releaseLock /usr/lib/python2.7/logging/__init__.py:219
+calls=1 219
+1008 0
+cfn=<isinstance>
+calls=2 0
+1008 0
+cfn=_fixupParents /usr/lib/python2.7/logging/__init__.py:1054
+calls=1 1054
+1008 0
+cfn=_acquireLock /usr/lib/python2.7/logging/__init__.py:210
+calls=1 210
+1008 0
+
+fn=_cleanup /usr/lib/python2.7/subprocess.py:458
+458 0
+
+fn=_fixupParents /usr/lib/python2.7/logging/__init__.py:1054
+1054 0
+cfn=<method 'rfind' of 'str' objects>
+calls=2 0
+1054 0
+cfn=__init__ /usr/lib/python2.7/logging/__init__.py:952
+calls=1 952
+1054 0
+
+fn=ResolutionError /usr/lib/python2.7/dist-packages/pkg_resources.py:181
+181 0
+
+fn=<module> /usr/lib/python2.7/dist-packages/shapely/geometry/point.py:2
+2 0
+cfn=<module> /usr/lib/python2.7/dist-packages/shapely/geometry/proxy.py:2
+calls=1 2
+2 0
+cfn=<module> /usr/lib/python2.7/dist-packages/shapely/geometry/base.py:2
+calls=1 2
+2 2
+cfn=Point /usr/lib/python2.7/dist-packages/shapely/geometry/point.py:14
+calls=1 14
+2 0
+cfn=<module> /usr/lib/python2.7/dist-packages/shapely/geos.py:3
+calls=1 3
+2 36
+cfn=PointAdapter /usr/lib/python2.7/dist-packages/shapely/geometry/point.py:128
+calls=1 128
+2 0
+
+fn=DistributionNotFound /usr/lib/python2.7/dist-packages/pkg_resources.py:189
+189 0
+
+fn=Codec /usr/lib/python2.7/encodings/hex_codec.py:45
+45 0
+
+fn=empty /usr/lib/python2.7/dist-packages/shapely/geometry/base.py:103
+103 2
+cfn=_is_empty /usr/lib/python2.7/dist-packages/shapely/geometry/base.py:96
+calls=990 96
+103 0
+
+fn=<function seed at 0x4d95050>
+0 0
+
+fn=<posix.sysconf>
+0 0
+
+fn=<method 'replace' of 'str' objects>
+0 0
+
+fn=<posix.pipe>
+0 0
+
+fn=<ord>
+0 0
+
+fn=<thread.get_ident>
+0 0
+
+fn=subscribe /usr/lib/python2.7/dist-packages/pkg_resources.py:704
+704 0
+cfn=__iter__ /usr/lib/python2.7/dist-packages/pkg_resources.py:509
+calls=100 509
+704 0
+cfn=<lambda> /usr/lib/python2.7/dist-packages/pkg_resources.py:2825
+calls=99 2825
+704 23
+cfn=<method 'append' of 'list' objects>
+calls=1 0
+704 0
+
+fn=<module> /usr/lib/python2.7/dist-packages/shapely/geometry/__init__.py:2
+2 0
+cfn=<module> /usr/lib/python2.7/dist-packages/shapely/geometry/geo.py:3
+calls=1 3
+2 43
+cfn=<module> /usr/lib/python2.7/dist-packages/shapely/geometry/collection.py:2
+calls=1 2
+2 0
+
+fn=exists /usr/lib/python2.7/genericpath.py:15
+15 0
+cfn=<posix.stat>
+calls=134 0
+15 0
+
+fn=StreamReader /usr/lib/python2.7/encodings/ascii.py:31
+31 0
+
+fn=get_bounding_boxes /home/hunter/git/left-luggage-detection/bg_models.py:146
+146 7
+cfn=<cv2.findContours>
+calls=200 0
+146 112
+cfn=<cv2.boundingRect>
+calls=2110 0
+146 2
+cfn=<cv2.contourArea>
+calls=11402 0
+146 5
+cfn=<method 'append' of 'list' objects>
+calls=2110 0
+146 0
+
+fn=<posix.waitpid>
+0 0
+
+fn=get_metadata /usr/lib/python2.7/dist-packages/pkg_resources.py:1540
+1540 0
+cfn=<method 'close' of 'file' objects>
+calls=1 0
+1540 0
+cfn=<method 'read' of 'file' objects>
+calls=1 0
+1540 0
+cfn=<open>
+calls=1 0
+1540 0
+
+fn=<cv2.contourArea>
+0 5
+
+fn=<module> /usr/lib/python2.7/distutils/spawn.py:7
+7 0
+cfn=<module> /usr/lib/python2.7/distutils/log.py:1
+calls=1 1
+7 0
+
+fn=_internal_poll /usr/lib/python2.7/subprocess.py:1343
+1343 0
+
+fn=__init__ /usr/lib/python2.7/dist-packages/shapely/geos.py:192
+192 0
+
+fn=Codec /usr/lib/python2.7/encodings/ascii.py:13
+13 0
+
+fn=<imp.release_lock>
+0 0
+
+fn=IResourceProvider /usr/lib/python2.7/dist-packages/pkg_resources.py:386
+386 0
+
+fn=LGEOS16 /usr/lib/python2.7/dist-packages/shapely/geos.py:338
+338 0
+
+fn=BaseImpl /usr/lib/python2.7/dist-packages/shapely/impl.py:38
+38 0
+
+fn=geometryType /usr/lib/python2.7/dist-packages/shapely/geometry/base.py:195
+195 0
+cfn=geometry_type_name /usr/lib/python2.7/dist-packages/shapely/geometry/base.py:24
+calls=330 24
+195 0
+cfn=_get_geom /usr/lib/python2.7/dist-packages/shapely/geometry/base.py:130
+calls=330 130
+195 0
+
+fn=register /usr/lib/python2.7/abc.py:105
+105 0
+cfn=add /usr/lib/python2.7/_weakrefset.py:81
+calls=8 81
+105 0
+cfn=<isinstance>
+calls=8 0
+105 0
+cfn=<issubclass>
+calls=16 0
+105 0
+
+fn=<method 'setdefault' of 'dict' objects>
+0 0
+
+fn=<built-in method __new__ of type object at 0x916e80>
+0 0
+
+fn=IOBase /usr/lib/python2.7/io.py:69
+69 0
+
+fn=split /usr/lib/python2.7/posixpath.py:89
+89 0
+cfn=<method 'rfind' of 'str' objects>
+calls=12 0
+89 0
+cfn=<method 'rstrip' of 'str' objects>
+calls=8 0
+89 0
+cfn=<len>
+calls=12 0
+89 0
+
+fn=MultiLineString /usr/lib/python2.7/dist-packages/shapely/geometry/multilinestring.py:14
+14 0
+
+fn=fixup_namespace_packages /usr/lib/python2.7/dist-packages/pkg_resources.py:1853
+1853 0
+cfn=_handle_ns /usr/lib/python2.7/dist-packages/pkg_resources.py:1800
+calls=42 1800
+1853 3
+cfn=<imp.acquire_lock>
+calls=99 0
+1853 0
+cfn=<imp.release_lock>
+calls=99 0
+1853 0
+cfn=<method 'get' of 'dict' objects>
+calls=99 0
+1853 0
+
+fn=CompileError /usr/lib/python2.7/distutils/errors.py:76
+76 0
+
+fn=DistutilsFileError /usr/lib/python2.7/distutils/errors.py:33
+33 0
+
+fn=__init__ /usr/lib/python2.7/logging/__init__.py:390
+390 0
+
+fn=WichmannHill /usr/lib/python2.7/random.py:651
+651 0
+
+fn=__init__ /usr/lib/python2.7/dist-packages/shapely/geometry/polygon.py:192
+192 1
+cfn=_set_geom /usr/lib/python2.7/dist-packages/shapely/geometry/base.py:132
+calls=330 132
+192 0
+cfn=geos_polygon_from_py /usr/lib/python2.7/dist-packages/shapely/geometry/polygon.py:420
+calls=330 420
+192 12
+
+fn=PicklingError /usr/lib/python2.7/pickle.py:62
+62 0
+
+fn=<module> /usr/lib/python2.7/tempfile.py:18
+18 0
+cfn=SpooledTemporaryFile /usr/lib/python2.7/tempfile.py:501
+calls=1 501
+18 0
+cfn=_TemporaryFileWrapper /usr/lib/python2.7/tempfile.py:372
+calls=1 372
+18 0
+cfn=_RandomNameSequence /usr/lib/python2.7/tempfile.py:108
+calls=1 108
+18 0
+cfn=<thread.allocate_lock>
+calls=1 0
+18 0
+cfn=<hasattr>
+calls=5 0
+18 0
+cfn=<module> /usr/lib/python2.7/io.py:34
+calls=1 34
+18 0
+cfn=<module> /usr/lib/python2.7/random.py:40
+calls=1 40
+18 1
+
+fn=_addfont /usr/lib/python2.7/dist-packages/pygame/sysfont.py:41
+41 0
+
+fn=get_depth_matrix /home/hunter/git/left-luggage-detection/kinectconnector.py:47
+47 0
+cfn=<freenect.sync_get_depth>
+calls=100 0
+47 25
+
+fn=update_wrapper /usr/lib/python2.7/functools.py:17
+17 0
+cfn=<getattr>
+calls=30 0
+17 0
+cfn=<setattr>
+calls=18 0
+17 0
+cfn=<method 'update' of 'dict' objects>
+calls=6 0
+17 0
+
+fn=__init__ /usr/lib/python2.7/pkgutil.py:173
+173 0
+
+fn=<map>
+0 1
+cfn=_normalize_cached /usr/lib/python2.7/dist-packages/pkg_resources.py:1892
+calls=2871 1892
+0 0
+cfn=declare_namespace /usr/lib/python2.7/dist-packages/pkg_resources.py:1821
+calls=3 1821
+0 6
+cfn=add_entry /usr/lib/python2.7/dist-packages/pkg_resources.py:444
+calls=29 444
+0 6
+cfn=_get_metadata /usr/lib/python2.7/dist-packages/pkg_resources.py:2249
+calls=102 2249
+0 1
+
+fn=__init__ /usr/lib/python2.7/logging/__init__.py:1376
+1376 0
+cfn=__init__ /usr/lib/python2.7/logging/__init__.py:1110
+calls=1 1110
+1376 0
+
+fn=_set_geom /usr/lib/python2.7/dist-packages/shapely/geometry/base.py:132
+132 0
+cfn=empty /usr/lib/python2.7/dist-packages/shapely/geometry/base.py:103
+calls=330 103
+132 0
+
+fn=<module> /usr/lib/python2.7/io.py:34
+34 0
+cfn=TextIOBase /usr/lib/python2.7/io.py:78
+calls=1 78
+34 0
+cfn=register /usr/lib/python2.7/abc.py:105
+calls=8 105
+34 0
+cfn=IOBase /usr/lib/python2.7/io.py:69
+calls=1 69
+34 0
+cfn=BufferedIOBase /usr/lib/python2.7/io.py:75
+calls=1 75
+34 0
+cfn=RawIOBase /usr/lib/python2.7/io.py:72
+calls=1 72
+34 0
+cfn=__new__ /usr/lib/python2.7/abc.py:86
+calls=4 86
+34 0
+
+fn=__init__ /usr/lib/python2.7/weakref.py:47
+47 0
+cfn=__init__ /usr/lib/python2.7/UserDict.py:4
+calls=1 4
+47 0
+
+fn=_communicate_with_poll /usr/lib/python2.7/subprocess.py:1424
+1424 0
+cfn=<method 'fileno' of 'file' objects>
+calls=2 0
+1424 0
+cfn=close_unregister_and_remove /usr/lib/python2.7/subprocess.py:1435
+calls=2 1435
+1424 0
+cfn=<select.poll>
+calls=1 0
+1424 0
+cfn=<posix.read>
+calls=19 0
+1424 0
+cfn=<built-in method poll>
+calls=20 0
+1424 25
+cfn=register_and_append /usr/lib/python2.7/subprocess.py:1431
+calls=2 1431
+1424 0
+cfn=<method 'append' of 'list' objects>
+calls=19 0
+1424 0
+
+fn=<numpy.core.multiarray.array>
+0 2
+
+fn=<method 'count' of 'list' objects>
+0 0
+
+fn=<module> /usr/lib/python2.7/dist-packages/shapely/predicates.py:3
+3 0
+cfn=BinaryPredicate /usr/lib/python2.7/dist-packages/shapely/predicates.py:7
+calls=1 7
+3 0
+cfn=UnaryPredicate /usr/lib/python2.7/dist-packages/shapely/predicates.py:19
+calls=1 19
+3 0
+cfn=RelateOp /usr/lib/python2.7/dist-packages/shapely/predicates.py:13
+calls=1 13
+3 0
+
+fn=__init__ /home/hunter/git/left-luggage-detection/video_type.py:26
+26 0
+cfn=<pygame.display.set_mode>
+calls=1 0
+26 70
+cfn=<pygame.base.init>
+calls=1 0
+26 32
+cfn=<pygame.display.set_caption>
+calls=1 0
+26 0
+cfn=<pygame.time.Clock>
+calls=1 0
+26 0
+
+fn=_reopen /usr/lib/python2.7/pkgutil.py:257
+257 0
+
+fn=blit_array /usr/lib/python2.7/dist-packages/pygame/_numpysurfarray.py:371
+371 1867
+cfn=<method 'tostring' of 'numpy.ndarray' objects>
+calls=100 0
+371 1627
+cfn=<method 'get_buffer' of 'pygame.Surface' objects>
+calls=100 0
+371 0
+cfn=transpose /usr/lib/python2.7/dist-packages/numpy/core/fromnumeric.py:446
+calls=100 446
+371 0
+cfn=<method 'get_width' of 'pygame.Surface' objects>
+calls=100 0
+371 0
+cfn=<method 'get_losses' of 'pygame.Surface' objects>
+calls=100 0
+371 0
+cfn=<method 'astype' of 'numpy.ndarray' objects>
+calls=100 0
+371 794
+cfn=<len>
+calls=100 0
+371 0
+cfn=<method 'get_height' of 'pygame.Surface' objects>
+calls=100 0
+371 0
+cfn=<method 'get_shifts' of 'pygame.Surface' objects>
+calls=100 0
+371 0
+cfn=<method 'get_pitch' of 'pygame.Surface' objects>
+calls=100 0
+371 0
+cfn=<method 'get_bytesize' of 'pygame.Surface' objects>
+calls=100 0
+371 0
+cfn=<method 'write' of 'pygame.bufferproxy.BufferProxy' objects>
+calls=100 0
+371 74
+
+fn=<_sre.getlower>
+0 0
+
+fn=__enter__ /usr/lib/python2.7/_weakrefset.py:20
+20 0
+cfn=<method 'add' of 'set' objects>
+calls=8 0
+20 0
+
+fn=__init__ /usr/lib/python2.7/dist-packages/pkg_resources.py:1346
+1346 0
+
+fn=has_metadata /usr/lib/python2.7/dist-packages/pkg_resources.py:1204
+1204 0
+cfn=_has /usr/lib/python2.7/dist-packages/pkg_resources.py:1313
+calls=133 1313
+1204 1
+cfn=_fn /usr/lib/python2.7/dist-packages/pkg_resources.py:1269
+calls=133 1269
+1204 0
+
+fn=__init__ /usr/lib/python2.7/dist-packages/shapely/geos.py:265
+265 0
+cfn=<method 'keys' of 'dict' objects>
+calls=1 0
+265 0
+cfn=<hasattr>
+calls=1 0
+265 0
+cfn=__init__ /usr/lib/python2.7/dist-packages/shapely/geos.py:192
+calls=1 192
+265 0
+cfn=<getattr>
+calls=89 0
+265 0
+cfn=<setattr>
+calls=89 0
+265 0
+cfn=<filter>
+calls=1 0
+265 0
+
+fn=Logger /usr/lib/python2.7/logging/__init__.py:1095
+1095 0
+
+fn=make_surface /usr/lib/python2.7/dist-packages/pygame/_numpysurfarray.py:340
+340 70
+cfn=blit_array /usr/lib/python2.7/dist-packages/pygame/_numpysurfarray.py:371
+calls=100 371
+340 4366
+cfn=<len>
+calls=200 0
+340 0
+
+fn=_addHandlerRef /usr/lib/python2.7/logging/__init__.py:636
+636 0
+cfn=_releaseLock /usr/lib/python2.7/logging/__init__.py:219
+calls=1 219
+636 0
+cfn=_acquireLock /usr/lib/python2.7/logging/__init__.py:210
+calls=1 210
+636 0
+cfn=<method 'append' of 'list' objects>
+calls=1 0
+636 0
+
+fn=_is_empty /usr/lib/python2.7/dist-packages/shapely/geometry/base.py:96
+96 0
+
+fn=_commit_removals /usr/lib/python2.7/_weakrefset.py:52
+52 0
+
+fn=LGEOS15 /usr/lib/python2.7/dist-packages/shapely/geos.py:261
+261 0
+
+fn=__init__ /usr/lib/python2.7/dist-packages/shapely/impl.py:39
+39 0
+
+fn=<module> /usr/lib/python2.7/dist-packages/shapely/wkb.py:2
+2 0
+
+fn=<posix.WEXITSTATUS>
+0 0
+
+fn=isstring /usr/lib/python2.7/sre_compile.py:473
+473 0
+cfn=<isinstance>
+calls=36 0
+473 0
+
+fn=<range>
+0 0
+
+fn=<method 'astype' of 'numpy.ndarray' objects>
+0 967
+
+fn=RelateOp /usr/lib/python2.7/dist-packages/shapely/predicates.py:13
+13 0
+
+fn=__init__ /usr/lib/python2.7/dist-packages/pkg_resources.py:2122
+2122 0
+cfn=safe_name /usr/lib/python2.7/dist-packages/pkg_resources.py:1140
+calls=198 1140
+2122 1
+cfn=safe_version /usr/lib/python2.7/dist-packages/pkg_resources.py:1148
+calls=192 1148
+2122 0
+
+fn=ParseResult /usr/lib/python2.7/urlparse.py:128
+128 0
+
+fn=__init__ /usr/lib/python2.7/dist-packages/pkg_resources.py:898
+898 0
+
+fn=<gc.isenabled>
+0 0
+
+fn=__setitem__ /usr/lib/python2.7/sre_parse.py:135
+135 0
+
+fn=DistutilsPlatformError /usr/lib/python2.7/distutils/errors.py:50
+50 0
+
+fn=<getattr>
+0 0
+
+fn=BufferedIOBase /usr/lib/python2.7/io.py:75
+75 0
+
+fn=__init__ /home/hunter/git/left-luggage-detection/depth_processing.py:24
+24 0
+cfn=<numpy.core.multiarray.array>
+calls=1 0
+24 0
+cfn=<numpy.core.multiarray.zeros>
+calls=5 0
+24 3
+
+fn=_normalize_cached /usr/lib/python2.7/dist-packages/pkg_resources.py:1892
+1892 0
+cfn=normalize_path /usr/lib/python2.7/dist-packages/pkg_resources.py:1888
+calls=31 1888
+1892 1
+
+fn=_parse_sub /usr/lib/python2.7/sre_parse.py:302
+302 0
+cfn=match /usr/lib/python2.7/sre_parse.py:196
+calls=84 196
+302 0
+cfn=append /usr/lib/python2.7/sre_parse.py:139
+calls=4 139
+302 0
+cfn=__init__ /usr/lib/python2.7/sre_parse.py:91
+calls=4 91
+302 0
+cfn=<len>
+calls=51 0
+302 0
+cfn=_parse /usr/lib/python2.7/sre_parse.py:380
+calls=55 380
+302 3
+cfn=__len__ /usr/lib/python2.7/sre_parse.py:127
+calls=8 127
+302 0
+cfn=__getitem__ /usr/lib/python2.7/sre_parse.py:131
+calls=11 131
+302 0
+cfn=<method 'append' of 'list' objects>
+calls=55 0
+302 0
+
+fn=GeometryCollection /usr/lib/python2.7/dist-packages/shapely/geometry/collection.py:8
+8 0
+
+fn=<method 'lower' of 'str' objects>
+0 0
+
+fn=getLogger /usr/lib/python2.7/logging/__init__.py:1550
+1550 0
+cfn=getLogger /usr/lib/python2.7/logging/__init__.py:1008
+calls=1 1008
+1550 0
+
+fn=<posix.lstat>
+0 2
+
+fn=__get_openssl_constructor /usr/lib/python2.7/hashlib.py:94
+94 0
+cfn=<_hashlib.openssl_sha1>
+calls=1 0
+94 0
+cfn=<_hashlib.openssl_sha224>
+calls=1 0
+94 0
+cfn=<_hashlib.openssl_sha384>
+calls=1 0
+94 0
+cfn=<_hashlib.openssl_sha256>
+calls=1 0
+94 0
+cfn=<getattr>
+calls=6 0
+94 0
+cfn=<_hashlib.openssl_md5>
+calls=1 0
+94 0
+cfn=<_hashlib.openssl_sha512>
+calls=1 0
+94 0
+
+fn=declare_namespace /usr/lib/python2.7/dist-packages/pkg_resources.py:1821
+1821 0
+cfn=_handle_ns /usr/lib/python2.7/dist-packages/pkg_resources.py:1800
+calls=87 1800
+1821 6
+cfn=<imp.acquire_lock>
+calls=5 0
+1821 0
+cfn=<imp.release_lock>
+calls=5 0
+1821 0
+cfn=<method 'setdefault' of 'dict' objects>
+calls=6 0
+1821 0
+cfn=<method 'append' of 'list' objects>
+calls=3 0
+1821 0
+
+fn=<method 'release' of 'thread.lock' objects>
+0 0
+
+fn=SystemRandom /usr/lib/python2.7/random.py:801
+801 0
+
+fn=__init__ /usr/lib/python2.7/dist-packages/shapely/coords.py:158
+158 0
+
+fn=_close_in_parent /usr/lib/python2.7/subprocess.py:1207
+1207 0
+cfn=<method 'remove' of 'set' objects>
+calls=2 0
+1207 0
+cfn=<posix.close>
+calls=2 0
+1207 0
+
+fn=Log /usr/lib/python2.7/distutils/log.py:14
+14 0
+
+fn=<numpy.core.multiarray.empty>
+0 1
+
+fn=update_detection_aggregator /home/hunter/git/left-luggage-detection/intensity_processing.py:55
+55 278
+cfn=clip /usr/lib/python2.7/dist-packages/numpy/core/fromnumeric.py:1365
+calls=100 1365
+55 35
+
+fn=MultiPolygonAdapter /usr/lib/python2.7/dist-packages/shapely/geometry/multipolygon.py:79
+79 0
+
+fn=__getattr__ /usr/lib/python2.7/dist-packages/pkg_resources.py:2286
+2286 0
+cfn=<method 'startswith' of 'str' objects>
+calls=546 0
+2286 0
+cfn=<getattr>
+calls=347 0
+2286 0
+
+fn=EntryPoint /usr/lib/python2.7/dist-packages/pkg_resources.py:1990
+1990 0
+
+fn=delegated /usr/lib/python2.7/dist-packages/shapely/impl.py:24
+24 0
+cfn=update_wrapper /usr/lib/python2.7/functools.py:17
+calls=4 17
+24 0
+cfn=wraps /usr/lib/python2.7/functools.py:39
+calls=4 39
+24 0
+
+fn=<len>
+0 0
+cfn=__len__ /usr/lib/python2.7/sre_parse.py:127
+calls=57 127
+0 0
+
+fn=LinkError /usr/lib/python2.7/distutils/errors.py:83
+83 0
+
+fn=islink /usr/lib/python2.7/posixpath.py:139
+139 1
+cfn=<posix.lstat>
+calls=1181 0
+139 2
+cfn=S_ISLNK /usr/lib/python2.7/stat.py:55
+calls=1180 55
+139 0
+
+fn=StreamReader /usr/lib/python2.7/encodings/hex_codec.py:65
+65 0
+
+fn=to_rgb /home/hunter/git/left-luggage-detection/utils.py:10
+10 163
+cfn=<numpy.core.multiarray.empty>
+calls=200 0
+10 1
+
+fn=S_ISLNK /usr/lib/python2.7/stat.py:55
+55 0
+cfn=S_IFMT /usr/lib/python2.7/stat.py:24
+calls=1180 24
+55 0
+
+fn=<pygame.event.get>
+0 1
+
+fn=union /usr/lib/python2.7/dist-packages/shapely/geometry/base.py:341
+341 0
+cfn=__getitem__ /usr/lib/python2.7/dist-packages/shapely/impl.py:43
+calls=165 43
+341 0
+cfn=geom_factory /usr/lib/python2.7/dist-packages/shapely/geometry/base.py:29
+calls=165 29
+341 3
+cfn=__call__ /usr/lib/python2.7/dist-packages/shapely/topology.py:40
+calls=165 40
+341 17
+
+fn=apply_opening /home/hunter/git/left-luggage-detection/bg_models.py:113
+113 1
+cfn=<cv2.morphologyEx>
+calls=100 0
+113 116
+cfn=<method 'astype' of 'numpy.ndarray' objects>
+calls=100 0
+113 29
+cfn=<cv2.getStructuringElement>
+calls=100 0
+113 1
+
+fn=escape /usr/lib/python2.7/re.py:204
+204 0
+cfn=<method 'join' of 'str' objects>
+calls=2 0
+204 0
+
+fn=<math.exp>
+0 0
+
+fn=<_ctypes.byref>
+0 0
+
+fn=geos_polygon_from_py /usr/lib/python2.7/dist-packages/shapely/geometry/polygon.py:420
+420 2
+cfn=<_ctypes.POINTER>
+calls=330 0
+420 0
+cfn=geos_linearring_from_py /usr/lib/python2.7/dist-packages/shapely/geometry/polygon.py:311
+calls=330 311
+420 9
+
+fn=<math.sqrt>
+0 0
+
+fn=resource_stream /usr/lib/python2.7/dist-packages/pkg_resources.py:917
+917 0
+cfn=get_resource_stream /usr/lib/python2.7/dist-packages/pkg_resources.py:1322
+calls=1 1322
+917 0
+cfn=get_provider /usr/lib/python2.7/dist-packages/pkg_resources.py:212
+calls=1 212
+917 0
+
+fn=yield_lines /usr/lib/python2.7/dist-packages/pkg_resources.py:1907
+1907 0
+cfn=<method 'splitlines' of 'str' objects>
+calls=51 0
+1907 0
+cfn=<method 'strip' of 'str' objects>
+calls=68 0
+1907 0
+cfn=<isinstance>
+calls=51 0
+1907 0
+cfn=<method 'startswith' of 'str' objects>
+calls=68 0
+1907 0
+
+fn=safe_version /usr/lib/python2.7/dist-packages/pkg_resources.py:1148
+1148 0
+cfn=<method 'replace' of 'str' objects>
+calls=193 0
+1148 0
+cfn=sub /usr/lib/python2.7/re.py:144
+calls=193 144
+1148 0
+
+fn=geometry_type_name /usr/lib/python2.7/dist-packages/shapely/geometry/base.py:24
+24 1
+
+fn=_parse /usr/lib/python2.7/sre_parse.py:380
+380 1
+cfn=opengroup /usr/lib/python2.7/sre_parse.py:73
+calls=29 73
+380 0
+cfn=match /usr/lib/python2.7/sre_parse.py:196
+calls=151 196
+380 0
+cfn=_escape /usr/lib/python2.7/sre_parse.py:258
+calls=39 258
+380 0
+cfn=closegroup /usr/lib/python2.7/sre_parse.py:84
+calls=29 84
+380 0
+cfn=append /usr/lib/python2.7/sre_parse.py:139
+calls=161 139
+380 0
+cfn=__init__ /usr/lib/python2.7/sre_parse.py:91
+calls=55 91
+380 0
+cfn=isname /usr/lib/python2.7/sre_parse.py:217
+calls=4 217
+380 0
+cfn=<ord>
+calls=96 0
+380 0
+cfn=__setitem__ /usr/lib/python2.7/sre_parse.py:135
+calls=48 135
+380 0
+cfn=_parse_sub /usr/lib/python2.7/sre_parse.py:302
+calls=29 302
+380 1
+cfn=<len>
+calls=76 0
+380 0
+cfn=__len__ /usr/lib/python2.7/sre_parse.py:127
+calls=144 127
+380 0
+cfn=get /usr/lib/python2.7/sre_parse.py:202
+calls=302 202
+380 0
+cfn=__getitem__ /usr/lib/python2.7/sre_parse.py:131
+calls=144 131
+380 0
+cfn=_class_escape /usr/lib/python2.7/sre_parse.py:226
+calls=4 226
+380 0
+cfn=<method 'append' of 'list' objects>
+calls=29 0
+380 0
+
+fn=clip /usr/lib/python2.7/dist-packages/numpy/core/fromnumeric.py:1365
+1365 0
+cfn=<method 'clip' of 'numpy.ndarray' objects>
+calls=200 0
+1365 71
+
+fn=<method 'join' of 'str' objects>
+0 0
+cfn=<genexpr> /usr/lib/python2.7/collections.py:355
+calls=13 355
+0 0
+cfn=<genexpr> /usr/lib/python2.7/collections.py:353
+calls=13 353
+0 0
+
+fn=LGEOS16LR /usr/lib/python2.7/dist-packages/shapely/geos.py:346
+346 0
+
+fn=PolygonAdapter /usr/lib/python2.7/dist-packages/shapely/geometry/polygon.py:271
+271 0
+
+fn=<module> /usr/lib/python2.7/distutils/dep_util.py:5
+5 0
+
+fn=find_distributions /usr/lib/python2.7/dist-packages/pkg_resources.py:1701
+1701 0
+cfn=find_nothing /usr/lib/python2.7/dist-packages/pkg_resources.py:1730
+calls=2 1730
+1701 0
+cfn=get_importer /usr/lib/python2.7/pkgutil.py:366
+calls=58 366
+1701 0
+cfn=_find_adapter /usr/lib/python2.7/dist-packages/pkg_resources.py:2738
+calls=58 2738
+1701 1
+
+fn=<time.time>
+0 0
+
+fn=<module> /usr/lib/python2.7/dist-packages/shapely/geometry/collection.py:2
+2 0
+cfn=GeometryCollection /usr/lib/python2.7/dist-packages/shapely/geometry/collection.py:8
+calls=1 8
+2 0
+
+fn=__init__ /usr/lib/python2.7/random.py:91
+91 0
+cfn=seed /usr/lib/python2.7/random.py:100
+calls=1 100
+91 0
+
+fn=_compile /usr/lib/python2.7/re.py:226
+226 0
+cfn=compile /usr/lib/python2.7/sre_compile.py:494
+calls=18 494
+226 7
+cfn=<isinstance>
+calls=18 0
+226 0
+cfn=isstring /usr/lib/python2.7/sre_compile.py:473
+calls=18 473
+226 0
+cfn=<len>
+calls=18 0
+226 0
+cfn=<method 'get' of 'dict' objects>
+calls=524 0
+226 0
+
+fn=prototype /usr/lib/python2.7/dist-packages/shapely/ctypes_declarations.py:11
+11 0
+cfn=<_ctypes.POINTER>
+calls=1 0
+11 0
+cfn=<hasattr>
+calls=2 0
+11 0
+cfn=__getattr__ /usr/lib/python2.7/ctypes/__init__.py:375
+calls=83 375
+11 0
+
+fn=compute_background_running_average /home/hunter/git/left-luggage-detection/bg_models.py:11
+11 137
+cfn=<method 'copy' of 'numpy.ndarray' objects>
+calls=100 0
+11 86
+cfn=<numpy.core.multiarray.where>
+calls=100 0
+11 943
+cfn=<method 'astype' of 'numpy.ndarray' objects>
+calls=100 0
+11 32
+cfn=<cv2.accumulateWeighted>
+calls=100 0
+11 101
+
+fn=<open>
+0 0
+
+fn=<_sre.compile>
+0 0
+
+fn=left_luggage_detection /home/hunter/git/left-luggage-detection/left-luggage-detection.py:24
+24 2331
+cfn=quit /home/hunter/git/left-luggage-detection/video_type.py:172
+calls=1 172
+24 4
+cfn=<method 'copy' of 'numpy.ndarray' objects>
+calls=401 0
+24 891
+cfn=cut_foreground /home/hunter/git/left-luggage-detection/bg_models.py:95
+calls=100 95
+24 93
+cfn=extract_proposal_bbox /home/hunter/git/left-luggage-detection/intensity_processing.py:92
+calls=100 92
+24 1154
+cfn=show /home/hunter/git/left-luggage-detection/video_type.py:50
+calls=100 50
+24 6601
+cfn=extract_proposal_bbox /home/hunter/git/left-luggage-detection/depth_processing.py:63
+calls=100 63
+24 313
+cfn=compute_foreground_masks /home/hunter/git/left-luggage-detection/intensity_processing.py:33
+calls=100 33
+24 3206
+cfn=get_image /home/hunter/git/left-luggage-detection/kinectconnector.py:20
+calls=100 20
+24 12
+cfn=draw_bounding_box /home/hunter/git/left-luggage-detection/utils.py:111
+calls=300 111
+24 7
+cfn=update_background_model /home/hunter/git/left-luggage-detection/depth_processing.py:34
+calls=100 34
+24 1302
+cfn=extract_foreground_mask_from_run_avg /home/hunter/git/left-luggage-detection/depth_processing.py:48
+calls=100 48
+24 2019
+cfn=get_depth_matrix /home/hunter/git/left-luggage-detection/kinectconnector.py:47
+calls=100 47
+24 26
+cfn=<numpy.core.multiarray.array>
+calls=100 0
+24 2
+cfn=__init__ /home/hunter/git/left-luggage-detection/video_type.py:26
+calls=1 26
+24 103
+cfn=<method 'astype' of 'numpy.ndarray' objects>
+calls=1 0
+24 0
+cfn=__init__ /home/hunter/git/left-luggage-detection/depth_processing.py:24
+calls=1 24
+24 3
+cfn=update_detection_aggregator /home/hunter/git/left-luggage-detection/intensity_processing.py:55
+calls=100 55
+24 313
+cfn=to_rgb /home/hunter/git/left-luggage-detection/utils.py:10
+calls=100 10
+24 65
+cfn=apply_opening /home/hunter/git/left-luggage-detection/bg_models.py:113
+calls=100 113
+24 148
+cfn=__init__ /home/hunter/git/left-luggage-detection/kinectconnector.py:15
+calls=1 15
+24 0
+cfn=<numpy.core.multiarray.zeros>
+calls=1 0
+24 0
+cfn=get_segmentation_mask /home/hunter/git/left-luggage-detection/left-luggage-detection.py:279
+calls=100 279
+24 832
+cfn=extract_proposal_bbox /home/hunter/git/left-luggage-detection/left-luggage-detection.py:169
+calls=100 169
+24 123
+cfn=compute_holes_mask_in_frame /home/hunter/git/left-luggage-detection/bg_models.py:71
+calls=100 71
+24 1053
+cfn=check_bbox_not_moved /home/hunter/git/left-luggage-detection/left-luggage-detection.py:196
+calls=100 196
+24 11
+cfn=__init__ /home/hunter/git/left-luggage-detection/intensity_processing.py:16
+calls=1 16
+24 3
+cfn=<cv2.addWeighted>
+calls=100 0
+24 521
+
+fn=_communicate /usr/lib/python2.7/subprocess.py:1391
+1391 0
+cfn=wait /usr/lib/python2.7/subprocess.py:1370
+calls=1 1370
+1391 0
+cfn=_communicate_with_poll /usr/lib/python2.7/subprocess.py:1424
+calls=1 1424
+1391 26
+cfn=<method 'join' of 'str' objects>
+calls=2 0
+1391 0
+
+fn=<module> /usr/lib/python2.7/ctypes/util.py:4
+4 0
+cfn=<method 'startswith' of 'str' objects>
+calls=3 0
+4 0
+cfn=<module> /usr/lib/python2.7/tempfile.py:18
+calls=1 18
+4 2
+
+fn=MultiPoint /usr/lib/python2.7/dist-packages/shapely/geometry/multipoint.py:15
+15 0
+cfn=exceptNull /usr/lib/python2.7/dist-packages/shapely/geometry/base.py:51
+calls=2 51
+15 0
+
+fn=IncrementalDecoder /usr/lib/python2.7/encodings/ascii.py:24
+24 0
+
+fn=<module> /usr/lib/python2.7/random.py:40
+40 0
+cfn=Random /usr/lib/python2.7/random.py:72
+calls=1 72
+40 0
+cfn=<module> /usr/lib/python2.7/hashlib.py:55
+calls=1 55
+40 0
+cfn=<math.log>
+calls=2 0
+40 0
+cfn=WichmannHill /usr/lib/python2.7/random.py:651
+calls=1 651
+40 0
+cfn=SystemRandom /usr/lib/python2.7/random.py:801
+calls=1 801
+40 0
+cfn=<math.exp>
+calls=1 0
+40 0
+cfn=<math.sqrt>
+calls=1 0
+40 0
+cfn=__init__ /usr/lib/python2.7/random.py:91
+calls=1 91
+40 0
+
+fn=similarity_measure_rect /home/hunter/git/left-luggage-detection/utils.py:85
+85 1
+cfn=gen_box /home/hunter/git/left-luggage-detection/utils.py:93
+calls=330 93
+85 61
+cfn=union /usr/lib/python2.7/dist-packages/shapely/geometry/base.py:341
+calls=165 341
+85 21
+cfn=intersection /usr/lib/python2.7/dist-packages/shapely/geometry/base.py:332
+calls=165 332
+85 27
+cfn=area /usr/lib/python2.7/dist-packages/shapely/geometry/base.py:219
+calls=330 219
+85 3
+cfn=__del__ /usr/lib/python2.7/dist-packages/shapely/geometry/base.py:113
+calls=330 113
+85 1
+
+fn=<_hashlib.openssl_md5>
+0 0
+
+fn=BinaryTopologicalOp /usr/lib/python2.7/dist-packages/shapely/topology.py:39
+39 0
+
+fn=__init__ /usr/lib/python2.7/threading.py:131
+131 0
+cfn=__init__ /usr/lib/python2.7/threading.py:58
+calls=2 58
+131 0
+cfn=<thread.allocate_lock>
+calls=2 0
+131 0
+
+fn=_set_parent_ns /usr/lib/python2.7/dist-packages/pkg_resources.py:1899
+1899 0
+cfn=<method 'pop' of 'list' objects>
+calls=3 0
+1899 0
+cfn=<method 'split' of 'str' objects>
+calls=3 0
+1899 0
+
+fn=communicate /usr/lib/python2.7/subprocess.py:767
+767 0
+cfn=<method 'count' of 'list' objects>
+calls=1 0
+767 0
+cfn=_communicate /usr/lib/python2.7/subprocess.py:1391
+calls=1 1391
+767 26
+
+fn=<module> /usr/lib/python2.7/dist-packages/pkg_resources.py:14
+14 1
+cfn=UnknownExtra /usr/lib/python2.7/dist-packages/pkg_resources.py:192
+calls=1 192
+14 0
+cfn=Environment /usr/lib/python2.7/dist-packages/pkg_resources.py:730
+calls=1 730
+14 1
+cfn=DistInfoDistribution /usr/lib/python2.7/dist-packages/pkg_resources.py:2446
+calls=1 2446
+14 0
+cfn=Distribution /usr/lib/python2.7/dist-packages/pkg_resources.py:2118
+calls=1 2118
+14 0
+cfn=ExtractionError /usr/lib/python2.7/dist-packages/pkg_resources.py:876
+calls=1 876
+14 0
+cfn=_declare_state /usr/lib/python2.7/dist-packages/pkg_resources.py:63
+calls=4 63
+14 0
+cfn=register_finder /usr/lib/python2.7/dist-packages/pkg_resources.py:1691
+calls=3 1691
+14 0
+cfn=FileMetadata /usr/lib/python2.7/dist-packages/pkg_resources.py:1522
+calls=1 1522
+14 0
+cfn=IMetadataProvider /usr/lib/python2.7/dist-packages/pkg_resources.py:354
+calls=1 354
+14 0
+cfn=register_loader_type /usr/lib/python2.7/dist-packages/pkg_resources.py:203
+calls=3 203
+14 0
+cfn=Requirement /usr/lib/python2.7/dist-packages/pkg_resources.py:2631
+calls=1 2631
+14 0
+cfn=EggMetadata /usr/lib/python2.7/dist-packages/pkg_resources.py:1591
+calls=1 1591
+14 0
+cfn=<globals>
+calls=1 0
+14 0
+cfn=ImpWrapper /usr/lib/python2.7/dist-packages/pkg_resources.py:1607
+calls=1 1607
+14 0
+cfn=ResourceManager /usr/lib/python2.7/dist-packages/pkg_resources.py:894
+calls=1 894
+14 0
+cfn=VersionConflict /usr/lib/python2.7/dist-packages/pkg_resources.py:186
+calls=1 186
+14 0
+cfn=register_namespace_handler /usr/lib/python2.7/dist-packages/pkg_resources.py:1783
+calls=3 1783
+14 0
+cfn=DefaultProvider /usr/lib/python2.7/dist-packages/pkg_resources.py:1310
+calls=1 1310
+14 0
+cfn=ZipProvider /usr/lib/python2.7/dist-packages/pkg_resources.py:1354
+calls=1 1354
+14 0
+cfn=PathMetadata /usr/lib/python2.7/dist-packages/pkg_resources.py:1566
+calls=1 1566
+14 0
+cfn=EggProvider /usr/lib/python2.7/dist-packages/pkg_resources.py:1284
+calls=1 1284
+14 0
+cfn=<module> /usr/lib/python2.7/urlparse.py:29
+calls=1 29
+14 2
+cfn=ImpLoader /usr/lib/python2.7/dist-packages/pkg_resources.py:1628
+calls=1 1628
+14 0
+cfn=EmptyProvider /usr/lib/python2.7/dist-packages/pkg_resources.py:1338
+calls=1 1338
+14 0
+cfn=ResolutionError /usr/lib/python2.7/dist-packages/pkg_resources.py:181
+calls=1 181
+14 0
+cfn=DistributionNotFound /usr/lib/python2.7/dist-packages/pkg_resources.py:189
+calls=1 189
+14 0
+cfn=subscribe /usr/lib/python2.7/dist-packages/pkg_resources.py:704
+calls=1 704
+14 23
+cfn=IResourceProvider /usr/lib/python2.7/dist-packages/pkg_resources.py:386
+calls=1 386
+14 0
+cfn=<map>
+calls=1 0
+14 6
+cfn=__init__ /usr/lib/python2.7/dist-packages/pkg_resources.py:1346
+calls=1 1346
+14 0
+cfn=__init__ /usr/lib/python2.7/dist-packages/pkg_resources.py:898
+calls=1 898
+14 0
+cfn=EntryPoint /usr/lib/python2.7/dist-packages/pkg_resources.py:1990
+calls=1 1990
+14 0
+cfn=WorkingSet /usr/lib/python2.7/dist-packages/pkg_resources.py:427
+calls=1 427
+14 0
+cfn=__init__ /usr/lib/python2.7/dist-packages/pkg_resources.py:430
+calls=1 430
+14 12
+cfn=compile /usr/lib/python2.7/re.py:188
+calls=12 188
+14 5
+cfn=_initialize /usr/lib/python2.7/dist-packages/pkg_resources.py:2788
+calls=1 2788
+14 0
+cfn=NullProvider /usr/lib/python2.7/dist-packages/pkg_resources.py:1181
+calls=1 1181
+14 0
+cfn=<module> /usr/lib/python2.7/pkgutil.py:1
+calls=1 1
+14 0
+
+fn=<binascii.hexlify>
+0 0
+
+fn=_eintr_retry_call /usr/lib/python2.7/subprocess.py:473
+473 0
+cfn=<posix.read>
+calls=1 0
+473 7
+cfn=<posix.waitpid>
+calls=1 0
+473 0
+
+fn=__init__ /home/hunter/git/left-luggage-detection/kinectconnector.py:15
+15 0
+
+fn=register_and_append /usr/lib/python2.7/subprocess.py:1431
+1431 0
+cfn=<method 'fileno' of 'file' objects>
+calls=4 0
+1431 0
+cfn=<built-in method register>
+calls=2 0
+1431 0
+
+fn=_acquireLock /usr/lib/python2.7/logging/__init__.py:210
+210 0
+cfn=acquire /usr/lib/python2.7/threading.py:146
+calls=3 146
+210 0
+
+fn=normalize_path /usr/lib/python2.7/dist-packages/pkg_resources.py:1888
+1888 0
+cfn=realpath /usr/lib/python2.7/posixpath.py:364
+calls=129 364
+1888 5
+cfn=normcase /usr/lib/python2.7/posixpath.py:51
+calls=129 51
+1888 0
+
+fn=search /usr/lib/python2.7/re.py:139
+139 0
+cfn=_compile /usr/lib/python2.7/re.py:226
+calls=2 226
+139 1
+cfn=<method 'search' of '_sre.SRE_Pattern' objects>
+calls=2 0
+139 4
+
+fn=MultiPointAdapter /usr/lib/python2.7/dist-packages/shapely/geometry/multipoint.py:95
+95 0
+
+fn=<module> /usr/lib/python2.7/dist-packages/shapely/geos.py:3
+3 3
+cfn=NullHandler /usr/lib/python2.7/dist-packages/shapely/geos.py:20
+calls=1 20
+3 0
+cfn=<module> /usr/lib/python2.7/dist-packages/shapely/ftools.py:17
+calls=1 17
+3 0
+cfn=__init__ /usr/lib/python2.7/logging/__init__.py:655
+calls=1 655
+3 0
+cfn=_geos_c_version /usr/lib/python2.7/dist-packages/shapely/geos.py:93
+calls=1 93
+3 0
+cfn=LGEOS14 /usr/lib/python2.7/dist-packages/shapely/geos.py:197
+calls=1 197
+3 0
+cfn=<module> /usr/lib/python2.7/dist-packages/shapely/ctypes_declarations.py:4
+calls=1 4
+3 0
+cfn=TopologicalError /usr/lib/python2.7/dist-packages/shapely/geos.py:144
+calls=1 144
+3 0
+cfn=register /usr/lib/python2.7/atexit.py:37
+calls=1 37
+3 0
+cfn=__init__ /usr/lib/python2.7/dist-packages/shapely/geos.py:351
+calls=1 351
+3 0
+cfn=LGEOSBase /usr/lib/python2.7/dist-packages/shapely/geos.py:186
+calls=1 186
+3 0
+cfn=<hasattr>
+calls=86 0
+3 0
+cfn=PredicateError /usr/lib/python2.7/dist-packages/shapely/geos.py:147
+calls=1 147
+3 0
+cfn=DimensionError /usr/lib/python2.7/dist-packages/shapely/geos.py:141
+calls=1 141
+3 0
+cfn=<method 'startswith' of 'str' objects>
+calls=1 0
+3 0
+cfn=addHandler /usr/lib/python2.7/logging/__init__.py:1281
+calls=1 1281
+3 0
+cfn=LGEOS16 /usr/lib/python2.7/dist-packages/shapely/geos.py:338
+calls=1 338
+3 0
+cfn=LGEOS15 /usr/lib/python2.7/dist-packages/shapely/geos.py:261
+calls=1 261
+3 0
+cfn=<getattr>
+calls=170 0
+3 0
+cfn=getLogger /usr/lib/python2.7/logging/__init__.py:1550
+calls=1 1550
+3 0
+cfn=LGEOS16LR /usr/lib/python2.7/dist-packages/shapely/geos.py:346
+calls=1 346
+3 0
+cfn=prototype /usr/lib/python2.7/dist-packages/shapely/ctypes_declarations.py:11
+calls=1 11
+3 0
+cfn=<module> /usr/lib/python2.7/ctypes/util.py:4
+calls=1 4
+3 3
+cfn=__getattr__ /usr/lib/python2.7/ctypes/__init__.py:375
+calls=1 375
+3 0
+cfn=ReadingError /usr/lib/python2.7/dist-packages/shapely/geos.py:138
+calls=1 138
+3 0
+cfn=load_dll /usr/lib/python2.7/dist-packages/shapely/geos.py:29
+calls=2 29
+3 27
+cfn=<module> /usr/lib/python2.7/logging/__init__.py:24
+calls=1 24
+3 0
+
+fn=get_metadata_lines /usr/lib/python2.7/dist-packages/pkg_resources.py:1548
+1548 0
+cfn=get_metadata /usr/lib/python2.7/dist-packages/pkg_resources.py:1540
+calls=1 1540
+1548 0
+
+fn=<pygame.display.quit>
+0 4
+
+fn=<method 'match' of '_sre.SRE_Pattern' objects>
+0 0
+
+fn=<method 'extend' of 'list' objects>
+0 0
+
+fn=<cv2.getStructuringElement>
+0 3
+
+fn=<pygame.time.Clock>
+0 0
+
+fn=<setattr>
+0 0
+
+fn=RawIOBase /usr/lib/python2.7/io.py:72
+72 0
+
+fn=__contains__ /usr/lib/python2.7/_weakrefset.py:68
+68 0
+
+fn=get_resource_stream /usr/lib/python2.7/dist-packages/pkg_resources.py:1322
+1322 0
+cfn=<open>
+calls=1 0
+1322 0
+cfn=_fn /usr/lib/python2.7/dist-packages/pkg_resources.py:1269
+calls=1 1269
+1322 0
+
+fn=<posix.listdir>
+0 1
+
+fn=_findSoname_ldconfig /usr/lib/python2.7/ctypes/util.py:214
+214 0
+cfn=<_struct.calcsize>
+calls=2 0
+214 0
+cfn=<method 'group' of '_sre.SRE_Match' objects>
+calls=2 0
+214 0
+cfn=<method 'close' of 'file' objects>
+calls=2 0
+214 0
+cfn=<method 'startswith' of 'str' objects>
+calls=2 0
+214 0
+cfn=<method 'read' of 'file' objects>
+calls=2 0
+214 13
+cfn=escape /usr/lib/python2.7/re.py:204
+calls=2 204
+214 0
+cfn=search /usr/lib/python2.7/re.py:139
+calls=2 139
+214 5
+cfn=<method 'get' of 'dict' objects>
+calls=2 0
+214 0
+cfn=<posix.popen>
+calls=2 0
+214 6
+cfn=<posix.uname>
+calls=2 0
+214 0
+
+fn=isabs /usr/lib/python2.7/posixpath.py:59
+59 0
+cfn=<method 'startswith' of 'str' objects>
+calls=510 0
+59 0
+
+fn=<_ctypes.dlopen>
+0 1
+
+fn=MultiLineStringAdapter /usr/lib/python2.7/dist-packages/shapely/geometry/multilinestring.py:60
+60 0
+
+fn=<module> /usr/lib/python2.7/dist-packages/shapely/impl.py:12
+12 0
+cfn=GEOSImpl /usr/lib/python2.7/dist-packages/shapely/impl.py:46
+calls=1 46
+12 0
+cfn=<module> /usr/lib/python2.7/dist-packages/shapely/algorithms/cga.py:1
+calls=1 1
+12 0
+cfn=BaseImpl /usr/lib/python2.7/dist-packages/shapely/impl.py:38
+calls=1 38
+12 0
+cfn=<module> /usr/lib/python2.7/dist-packages/shapely/predicates.py:3
+calls=1 3
+12 0
+cfn=__init__ /usr/lib/python2.7/dist-packages/shapely/impl.py:39
+calls=1 39
+12 0
+cfn=impl_items /usr/lib/python2.7/dist-packages/shapely/impl.py:112
+calls=4 112
+12 0
+cfn=update /usr/lib/python2.7/dist-packages/shapely/impl.py:41
+calls=3 41
+12 0
+cfn=<module> /usr/lib/python2.7/dist-packages/shapely/linref.py:2
+calls=1 2
+12 0
+cfn=<module> /usr/lib/python2.7/dist-packages/shapely/algorithms/__init__.py:1
+calls=1 1
+12 0
+
+fn=<numpy.core.multiarray.zeros>
+0 1165
+
+fn=<method 'search' of '_sre.SRE_Pattern' objects>
+0 4
+
+fn=__len__ /usr/lib/python2.7/sre_parse.py:127
+127 0
+cfn=<len>
+calls=213 0
+127 0
+
+fn=__getattr__ /usr/lib/python2.7/ctypes/__init__.py:375
+375 0
+cfn=<method 'startswith' of 'str' objects>
+calls=172 0
+375 0
+cfn=<setattr>
+calls=172 0
+375 0
+cfn=__getitem__ /usr/lib/python2.7/ctypes/__init__.py:382
+calls=172 382
+375 0
+
+fn=PolygonProxy /usr/lib/python2.7/dist-packages/shapely/geometry/proxy.py:43
+43 0
+
+fn=<module> <string>:1
+1 0
+cfn=SplitResult <string>:1
+calls=1 1
+1 0
+cfn=ParseResult <string>:1
+calls=1 1
+1 0
+cfn=left_luggage_detection /home/hunter/git/left-luggage-detection/left-luggage-detection.py:24
+calls=1 24
+1 21149
+
+fn=deserialize /usr/lib/python2.7/dist-packages/shapely/wkb.py:11
+11 0
+cfn=<len>
+calls=2 0
+11 0
+
+fn=type /usr/lib/python2.7/dist-packages/shapely/geometry/base.py:198
+198 0
+cfn=geometryType /usr/lib/python2.7/dist-packages/shapely/geometry/base.py:195
+calls=330 195
+198 0
+
+fn=get_segmentation_mask /home/hunter/git/left-luggage-detection/left-luggage-detection.py:279
+279 0
+cfn=watershed_segmentation /home/hunter/git/left-luggage-detection/left-luggage-detection.py:252
+calls=100 252
+279 832
+
+fn=create_aliases /usr/lib/python2.7/dist-packages/pygame/sysfont.py:487
+487 0
+
+fn=get_provider /usr/lib/python2.7/dist-packages/pkg_resources.py:212
+212 0
+cfn=__init__ /usr/lib/python2.7/dist-packages/pkg_resources.py:1287
+calls=2 1287
+212 0
+cfn=<isinstance>
+calls=2 0
+212 0
+cfn=<getattr>
+calls=2 0
+212 0
+cfn=_find_adapter /usr/lib/python2.7/dist-packages/pkg_resources.py:2738
+calls=2 2738
+212 0
+
+fn=CFUNCTYPE /usr/lib/python2.7/ctypes/__init__.py:78
+78 0
+cfn=CFunctionType /usr/lib/python2.7/ctypes/__init__.py:104
+calls=1 104
+78 0
+cfn=<method 'pop' of 'dict' objects>
+calls=2 0
+78 0
+
+fn=extract_proposal_bbox /home/hunter/git/left-luggage-detection/left-luggage-detection.py:169
+169 1
+cfn=rect_similarity2 /home/hunter/git/left-luggage-detection/utils.py:75
+calls=2601 75
+169 122
+cfn=<method 'append' of 'list' objects>
+calls=20 0
+169 0
+
+fn=compute_holes_mask_in_frame /home/hunter/git/left-luggage-detection/bg_models.py:71
+71 39
+cfn=<numpy.core.multiarray.where>
+calls=100 0
+71 1014
+
+fn=Validating /usr/lib/python2.7/dist-packages/shapely/topology.py:13
+13 0
+
+fn=simplegeneric /usr/lib/python2.7/pkgutil.py:31
+31 0
+
+fn=<cv2.BackgroundSubtractorMOG2>
+0 0
+
+fn=__getitem__ /usr/lib/python2.7/ctypes/__init__.py:382
+382 0
+cfn=<isinstance>
+calls=172 0
+382 0
+
+fn=isdir /usr/lib/python2.7/genericpath.py:38
+38 0
+cfn=<posix.stat>
+calls=230 0
+38 0
+cfn=S_ISDIR /usr/lib/python2.7/stat.py:40
+calls=230 40
+38 0
+
+fn=get /usr/lib/python2.7/sre_parse.py:202
+202 0
+cfn=__next /usr/lib/python2.7/sre_parse.py:183
+calls=320 183
+202 0
+
+fn=LineStringAdapter /usr/lib/python2.7/dist-packages/shapely/geometry/linestring.py:113
+113 0
+
+fn=_splitext /usr/lib/python2.7/genericpath.py:85
+85 0
+cfn=<method 'rfind' of 'str' objects>
+calls=396 0
+85 0
+
+fn=<method 'get_height' of 'pygame.Surface' objects>
+0 0
+
+fn=ReadingError /usr/lib/python2.7/dist-packages/shapely/geos.py:138
+138 0
+
+fn=add_entry /usr/lib/python2.7/dist-packages/pkg_resources.py:444
+444 0
+cfn=find_on_path /usr/lib/python2.7/dist-packages/pkg_resources.py:1734
+calls=254 1734
+444 14
+cfn=<method 'setdefault' of 'dict' objects>
+calls=58 0
+444 0
+cfn=find_distributions /usr/lib/python2.7/dist-packages/pkg_resources.py:1701
+calls=58 1701
+444 1
+cfn=add /usr/lib/python2.7/dist-packages/pkg_resources.py:526
+calls=198 526
+444 2
+cfn=<method 'append' of 'list' objects>
+calls=58 0
+444 0
+
+fn=WorkingSet /usr/lib/python2.7/dist-packages/pkg_resources.py:427
+427 0
+
+fn=<module> /usr/lib/python2.7/distutils/log.py:1
+1 0
+cfn=__init__ /usr/lib/python2.7/distutils/log.py:16
+calls=1 16
+1 0
+cfn=Log /usr/lib/python2.7/distutils/log.py:14
+calls=1 14
+1 0
+
+fn=PointAdapter /usr/lib/python2.7/dist-packages/shapely/geometry/point.py:128
+128 0
+
+fn=<method 'get_shifts' of 'pygame.Surface' objects>
+0 0
+
+fn=<filter>
+0 0
+cfn=<lambda> /usr/lib/python2.7/dist-packages/shapely/geos.py:269
+calls=174 269
+0 0
+
+fn=__new__ /usr/lib/python2.7/codecs.py:77
+77 0
+cfn=<built-in method __new__ of type object at 0x916e80>
+calls=2 0
+77 0
+
+fn=get_BytesIO /usr/lib/python2.7/dist-packages/pygame/compat.py:21
+21 0
+
+fn=Handler /usr/lib/python2.7/logging/__init__.py:646
+646 0
+
+fn=intersection /usr/lib/python2.7/dist-packages/shapely/geometry/base.py:332
+332 0
+cfn=__getitem__ /usr/lib/python2.7/dist-packages/shapely/impl.py:43
+calls=165 43
+332 0
+cfn=geom_factory /usr/lib/python2.7/dist-packages/shapely/geometry/base.py:29
+calls=165 29
+332 3
+cfn=__call__ /usr/lib/python2.7/dist-packages/shapely/topology.py:40
+calls=165 40
+332 22
+
+fn=DistutilsModuleError /usr/lib/python2.7/distutils/errors.py:16
+16 0
+
+fn=_get_geom /usr/lib/python2.7/dist-packages/shapely/geometry/base.py:130
+130 0
+
+fn=<method 'get_fps' of 'Clock' objects>
+0 0
+
+fn=check_bbox_not_moved /home/hunter/git/left-luggage-detection/left-luggage-detection.py:196
+196 0
+cfn=rect_similarity2 /home/hunter/git/left-luggage-detection/utils.py:75
+calls=19 75
+196 10
+cfn=<len>
+calls=100 0
+196 0
+
+fn=__init__ /usr/lib/python2.7/dist-packages/pkg_resources.py:430
+430 0
+cfn=add_entry /usr/lib/python2.7/dist-packages/pkg_resources.py:444
+calls=29 444
+430 12
+
+fn=__getitem__ /usr/lib/python2.7/sre_parse.py:131
+131 0
+cfn=__init__ /usr/lib/python2.7/sre_parse.py:91
+calls=48 91
+131 0
+cfn=<isinstance>
+calls=414 0
+131 0
+
+fn=_get_metadata /usr/lib/python2.7/dist-packages/pkg_resources.py:2249
+2249 0
+cfn=get_metadata_lines /usr/lib/python2.7/dist-packages/pkg_resources.py:1218
+calls=50 1218
+2249 1
+cfn=has_metadata /usr/lib/python2.7/dist-packages/pkg_resources.py:1537
+calls=163 1537
+2249 0
+cfn=has_metadata /usr/lib/python2.7/dist-packages/pkg_resources.py:1204
+calls=133 1204
+2249 1
+cfn=__getattr__ /usr/lib/python2.7/dist-packages/pkg_resources.py:2286
+calls=347 2286
+2249 0
+cfn=yield_lines /usr/lib/python2.7/dist-packages/pkg_resources.py:1907
+calls=119 1907
+2249 0
+cfn=get_metadata_lines /usr/lib/python2.7/dist-packages/pkg_resources.py:1548
+calls=1 1548
+2249 0
+
+fn=impl_items /usr/lib/python2.7/dist-packages/shapely/impl.py:112
+112 0
+cfn=is_ccw_impl /usr/lib/python2.7/dist-packages/shapely/algorithms/cga.py:12
+calls=1 12
+112 0
+cfn=__init__ /usr/lib/python2.7/dist-packages/shapely/topology.py:21
+calls=39 21
+112 0
+cfn=<method 'items' of 'dict' objects>
+calls=4 0
+112 0
+cfn=__init__ /usr/lib/python2.7/dist-packages/shapely/coords.py:158
+calls=1 158
+112 0
+
+fn=<_hashlib.openssl_sha512>
+0 0
+
+fn=<method 'get' of 'dict' objects>
+0 0
+
+fn=wraps /usr/lib/python2.7/functools.py:39
+39 0
+
+fn=_class_escape /usr/lib/python2.7/sre_parse.py:226
+226 0
+cfn=<ord>
+calls=2 0
+226 0
+cfn=<len>
+calls=2 0
+226 0
+cfn=<method 'get' of 'dict' objects>
+calls=8 0
+226 0
+
+fn=version /usr/lib/python2.7/dist-packages/pkg_resources.py:2205
+2205 0
+cfn=<method 'strip' of 'str' objects>
+calls=1 0
+2205 0
+cfn=<method 'startswith' of 'str' objects>
+calls=3 0
+2205 0
+cfn=<method 'split' of 'str' objects>
+calls=1 0
+2205 0
+cfn=<method 'lower' of 'str' objects>
+calls=3 0
+2205 0
+cfn=__getattr__ /usr/lib/python2.7/dist-packages/pkg_resources.py:2286
+calls=1 2286
+2205 0
+cfn=safe_version /usr/lib/python2.7/dist-packages/pkg_resources.py:1148
+calls=1 1148
+2205 0
+cfn=_get_metadata /usr/lib/python2.7/dist-packages/pkg_resources.py:2249
+calls=4 2249
+2205 0
+
+fn=sub /usr/lib/python2.7/re.py:144
+144 0
+cfn=_compile /usr/lib/python2.7/re.py:226
+calls=391 226
+144 0
+cfn=<method 'sub' of '_sre.SRE_Pattern' objects>
+calls=391 0
+144 0
+
+fn=IncrementalEncoder /usr/lib/python2.7/encodings/ascii.py:20
+20 0
+
+fn=<method 'remove' of 'list' objects>
+0 0
+
+fn=area /usr/lib/python2.7/dist-packages/shapely/geometry/base.py:219
+219 0
+cfn=__call__ /usr/lib/python2.7/dist-packages/shapely/topology.py:33
+calls=330 33
+219 2
+cfn=__getitem__ /usr/lib/python2.7/dist-packages/shapely/impl.py:43
+calls=330 43
+219 0
+
+fn=__init__ /usr/lib/python2.7/ctypes/__init__.py:349
+349 0
+cfn=_FuncPtr /usr/lib/python2.7/ctypes/__init__.py:359
+calls=2 359
+349 0
+cfn=<_ctypes.dlopen>
+calls=2 0
+349 1
+
+fn=add /usr/lib/python2.7/dist-packages/pkg_resources.py:526
+526 1
+cfn=key /usr/lib/python2.7/dist-packages/pkg_resources.py:2186
+calls=594 2186
+526 1
+cfn=<method 'setdefault' of 'dict' objects>
+calls=396 0
+526 0
+cfn=_added_new /usr/lib/python2.7/dist-packages/pkg_resources.py:713
+calls=99 713
+526 0
+cfn=<method 'append' of 'list' objects>
+calls=99 0
+526 0
+
+fn=_added_new /usr/lib/python2.7/dist-packages/pkg_resources.py:713
+713 0
+
+fn=load_dll /usr/lib/python2.7/dist-packages/shapely/geos.py:29
+29 0
+cfn=find_library /usr/lib/python2.7/ctypes/util.py:252
+calls=2 252
+29 25
+cfn=__init__ /usr/lib/python2.7/ctypes/__init__.py:349
+calls=2 349
+29 1
+
+fn=<min>
+0 0
+
+fn=<posix.access>
+0 0
+
+fn=Polygon /usr/lib/python2.7/dist-packages/shapely/geometry/polygon.py:172
+172 0
+
+fn=<posix.popen>
+0 6
+
+fn=update /usr/lib/python2.7/dist-packages/shapely/impl.py:41
+41 0
+cfn=<method 'update' of 'dict' objects>
+calls=3 0
+41 0
+
+fn=_mk_bitmap /usr/lib/python2.7/sre_compile.py:259
+259 0
+cfn=<method 'append' of 'list' objects>
+calls=16 0
+259 0
+
+fn=BinaryRealProperty /usr/lib/python2.7/dist-packages/shapely/topology.py:24
+24 0
+
+fn=PlaceHolder /usr/lib/python2.7/logging/__init__.py:946
+946 0
+
+fn=PickleError /usr/lib/python2.7/pickle.py:58
+58 0
+
+fn=<method 'sub' of '_sre.SRE_Pattern' objects>
+0 0
+
+fn=_find_adapter /usr/lib/python2.7/dist-packages/pkg_resources.py:2738
+2738 0
+cfn=_get_mro /usr/lib/python2.7/dist-packages/pkg_resources.py:2731
+calls=93 2731
+2738 2
+cfn=<getattr>
+calls=93 0
+2738 0
+
+fn=<method 'update' of 'dict' objects>
+0 0
+
+fn=__iter__ /usr/lib/python2.7/_weakrefset.py:58
+58 0
+cfn=__init__ /usr/lib/python2.7/_weakrefset.py:16
+calls=8 16
+58 0
+cfn=__exit__ /usr/lib/python2.7/_weakrefset.py:26
+calls=8 26
+58 0
+cfn=__enter__ /usr/lib/python2.7/_weakrefset.py:20
+calls=8 20
+58 0
+
+fn=normcase /usr/lib/python2.7/posixpath.py:51
+51 0
+
+fn=Formatter /usr/lib/python2.7/logging/__init__.py:346
+346 0
+
+fn=DistutilsTemplateError /usr/lib/python2.7/distutils/errors.py:63
+63 0
+
+fn=<method 'add' of 'set' objects>
+0 0
+
+fn=<method '__contains__' of 'frozenset' objects>
+0 0
+
+fn=<module> /usr/lib/python2.7/distutils/errors.py:9
+9 0
+cfn=PreprocessError /usr/lib/python2.7/distutils/errors.py:73
+calls=1 73
+9 0
+cfn=UnknownFileError /usr/lib/python2.7/distutils/errors.py:87
+calls=1 87
+9 0
+cfn=DistutilsOptionError /usr/lib/python2.7/distutils/errors.py:38
+calls=1 38
+9 0
+cfn=DistutilsGetoptError /usr/lib/python2.7/distutils/errors.py:26
+calls=1 26
+9 0
+cfn=DistutilsArgError /usr/lib/python2.7/distutils/errors.py:29
+calls=1 29
+9 0
+cfn=LibError /usr/lib/python2.7/distutils/errors.py:79
+calls=1 79
+9 0
+cfn=DistutilsSetupError /usr/lib/python2.7/distutils/errors.py:46
+calls=1 46
+9 0
+cfn=DistutilsInternalError /usr/lib/python2.7/distutils/errors.py:59
+calls=1 59
+9 0
+cfn=DistutilsClassError /usr/lib/python2.7/distutils/errors.py:20
+calls=1 20
+9 0
+cfn=DistutilsByteCompileError /usr/lib/python2.7/distutils/errors.py:66
+calls=1 66
+9 0
+cfn=DistutilsError /usr/lib/python2.7/distutils/errors.py:13
+calls=1 13
+9 0
+cfn=CCompilerError /usr/lib/python2.7/distutils/errors.py:70
+calls=1 70
+9 0
+cfn=CompileError /usr/lib/python2.7/distutils/errors.py:76
+calls=1 76
+9 0
+cfn=DistutilsFileError /usr/lib/python2.7/distutils/errors.py:33
+calls=1 33
+9 0
+cfn=DistutilsPlatformError /usr/lib/python2.7/distutils/errors.py:50
+calls=1 50
+9 0
+cfn=LinkError /usr/lib/python2.7/distutils/errors.py:83
+calls=1 83
+9 0
+cfn=DistutilsModuleError /usr/lib/python2.7/distutils/errors.py:16
+calls=1 16
+9 0
+cfn=DistutilsTemplateError /usr/lib/python2.7/distutils/errors.py:63
+calls=1 63
+9 0
+cfn=DistutilsExecError /usr/lib/python2.7/distutils/errors.py:55
+calls=1 55
+9 0
+
+fn=compile /usr/lib/python2.7/re.py:188
+188 0
+cfn=_compile /usr/lib/python2.7/re.py:226
+calls=14 226
+188 6
+
+fn=__init__ /usr/lib/python2.7/logging/__init__.py:578
+578 0
+
+fn=errcheck_predicate /usr/lib/python2.7/dist-packages/shapely/geos.py:180
+180 0
+
+fn=_compile /usr/lib/python2.7/sre_compile.py:33
+33 1
+cfn=_simple /usr/lib/python2.7/sre_compile.py:355
+calls=48 355
+33 0
+cfn=<_sre.getlower>
+calls=8 0
+33 0
+cfn=<len>
+calls=218 0
+33 0
+cfn=__getitem__ /usr/lib/python2.7/sre_parse.py:131
+calls=208 131
+33 0
+cfn=_compile /usr/lib/python2.7/sre_compile.py:33
+calls=89 33
+33 1
+cfn=<method 'append' of 'list' objects>
+calls=670 0
+33 0
+cfn=_compile_charset /usr/lib/python2.7/sre_compile.py:179
+calls=37 179
+33 0
+
+fn=<method 'get_pitch' of 'pygame.Surface' objects>
+0 0
+
+fn=<method 'append' of 'list' objects>
+0 0
+
+fn=<module> /usr/lib/python2.7/dist-packages/shapely/linref.py:2
+2 0
+cfn=InterpolateOp /usr/lib/python2.7/dist-packages/shapely/linref.py:21
+calls=1 21
+2 0
+cfn=ProjectOp /usr/lib/python2.7/dist-packages/shapely/linref.py:15
+calls=1 15
+2 0
+cfn=LinearRefBase /usr/lib/python2.7/dist-packages/shapely/linref.py:7
+calls=1 7
+2 0
+
+fn=<module> /usr/lib/python2.7/logging/__init__.py:24
+24 0
+cfn=Manager /usr/lib/python2.7/logging/__init__.py:993
+calls=1 993
+24 0
+cfn=StreamHandler /usr/lib/python2.7/logging/__init__.py:810
+calls=1 810
+24 0
+cfn=__init__ /usr/lib/python2.7/logging/__init__.py:998
+calls=1 998
+24 0
+cfn=RLock /usr/lib/python2.7/threading.py:113
+calls=1 113
+24 0
+cfn=BufferingFormatter /usr/lib/python2.7/logging/__init__.py:494
+calls=1 494
+24 0
+cfn=NullHandler /usr/lib/python2.7/logging/__init__.py:1672
+calls=1 1672
+24 0
+cfn=RootLogger /usr/lib/python2.7/logging/__init__.py:1370
+calls=1 1370
+24 0
+cfn=Filter /usr/lib/python2.7/logging/__init__.py:536
+calls=1 536
+24 0
+cfn=register /usr/lib/python2.7/atexit.py:37
+calls=1 37
+24 0
+cfn=LoggerAdapter /usr/lib/python2.7/logging/__init__.py:1384
+calls=1 1384
+24 0
+cfn=<hasattr>
+calls=2 0
+24 0
+cfn=Filterer /usr/lib/python2.7/logging/__init__.py:573
+calls=1 573
+24 0
+cfn=LogRecord /usr/lib/python2.7/logging/__init__.py:230
+calls=1 230
+24 0
+cfn=__init__ /usr/lib/python2.7/logging/__init__.py:390
+calls=1 390
+24 0
+cfn=__init__ /usr/lib/python2.7/logging/__init__.py:1376
+calls=1 1376
+24 0
+cfn=__init__ /usr/lib/python2.7/weakref.py:47
+calls=1 47
+24 0
+cfn=Logger /usr/lib/python2.7/logging/__init__.py:1095
+calls=1 1095
+24 0
+cfn=<method 'lower' of 'str' objects>
+calls=1 0
+24 0
+cfn=<time.time>
+calls=1 0
+24 0
+cfn=Handler /usr/lib/python2.7/logging/__init__.py:646
+calls=1 646
+24 0
+cfn=PlaceHolder /usr/lib/python2.7/logging/__init__.py:946
+calls=1 946
+24 0
+cfn=normcase /usr/lib/python2.7/posixpath.py:51
+calls=1 51
+24 0
+cfn=Formatter /usr/lib/python2.7/logging/__init__.py:346
+calls=1 346
+24 0
+cfn=FileHandler /usr/lib/python2.7/logging/__init__.py:881
+calls=1 881
+24 0
+
+fn=ImpLoader /usr/lib/python2.7/pkgutil.py:232
+232 0
+
+fn=exceptNull /usr/lib/python2.7/dist-packages/shapely/geometry/base.py:51
+51 0
+cfn=update_wrapper /usr/lib/python2.7/functools.py:17
+calls=2 17
+51 0
+cfn=wraps /usr/lib/python2.7/functools.py:39
+calls=2 39
+51 0
+
+fn=_compile_charset /usr/lib/python2.7/sre_compile.py:179
+179 0
+cfn=_identityfunction /usr/lib/python2.7/sre_compile.py:25
+calls=16 25
+179 0
+cfn=_optimize_charset /usr/lib/python2.7/sre_compile.py:208
+calls=38 208
+179 0
+cfn=<method 'extend' of 'list' objects>
+calls=2 0
+179 0
+cfn=<method 'append' of 'list' objects>
+calls=125 0
+179 0
+
+fn=MultiPolygon /usr/lib/python2.7/dist-packages/shapely/geometry/multipolygon.py:14
+14 0
+
+fn=DistutilsExecError /usr/lib/python2.7/distutils/errors.py:55
+55 0
+
+fn=<method 'get_bytesize' of 'pygame.Surface' objects>
+0 0
+
+fn=_execute_child /usr/lib/python2.7/subprocess.py:1186
+1186 0
+cfn=<gc.enable>
+calls=1 0
+1186 0
+cfn=<posix.fork>
+calls=1 0
+1186 4
+cfn=pipe_cloexec /usr/lib/python2.7/subprocess.py:1160
+calls=1 1160
+1186 0
+cfn=<gc.disable>
+calls=1 0
+1186 0
+cfn=<isinstance>
+calls=1 0
+1186 0
+cfn=<posix.close>
+calls=2 0
+1186 0
+cfn=<gc.isenabled>
+calls=1 0
+1186 0
+cfn=_close_in_parent /usr/lib/python2.7/subprocess.py:1207
+calls=2 1207
+1186 0
+cfn=_eintr_retry_call /usr/lib/python2.7/subprocess.py:473
+calls=1 473
+1186 7
+
+fn=_initialize /usr/lib/python2.7/dist-packages/pkg_resources.py:2788
+2788 0
+cfn=<dir>
+calls=1 0
+2788 0
+cfn=<method 'startswith' of 'str' objects>
+calls=16 0
+2788 0
+cfn=<getattr>
+calls=13 0
+2788 0
+
+fn=LinearRingAdapter /usr/lib/python2.7/dist-packages/shapely/geometry/polygon.py:72
+72 0
+
+fn=FileHandler /usr/lib/python2.7/logging/__init__.py:881
+881 0
+
+fn=<cv2.accumulateWeighted>
+0 101
+
+fn=geos_linearring_from_py /usr/lib/python2.7/dist-packages/shapely/geometry/polygon.py:311
+311 9
+cfn=<len>
+calls=660 0
+311 0
+
+fn=<module> /usr/lib/python2.7/dist-packages/shapely/algorithms/__init__.py:1
+1 0
+
+fn=<method 'write' of 'pygame.bufferproxy.BufferProxy' objects>
+0 74
+
+fn=NullProvider /usr/lib/python2.7/dist-packages/pkg_resources.py:1181
+1181 0
+
+fn=_fn /usr/lib/python2.7/dist-packages/pkg_resources.py:1269
+1269 0
+cfn=join /usr/lib/python2.7/posixpath.py:68
+calls=185 68
+1269 0
+cfn=<method 'split' of 'str' objects>
+calls=185 0
+1269 0
+
+fn=geom_factory /usr/lib/python2.7/dist-packages/shapely/geometry/base.py:29
+29 2
+cfn=<locals>
+calls=330 0
+29 0
+cfn=<globals>
+calls=330 0
+29 0
+cfn=<__import__>
+calls=330 0
+29 2
+cfn=<getattr>
+calls=330 0
+29 0
+cfn=geometry_type_name /usr/lib/python2.7/dist-packages/shapely/geometry/base.py:24
+calls=330 24
+29 1
+cfn=errcheck_predicate /usr/lib/python2.7/dist-packages/shapely/geos.py:180
+calls=330 180
+29 0
+
+fn=BaseGeometry /usr/lib/python2.7/dist-packages/shapely/geometry/base.py:62
+62 0
+cfn=delegated /usr/lib/python2.7/dist-packages/shapely/impl.py:24
+calls=4 24
+62 0
+
+fn=splitext /usr/lib/python2.7/posixpath.py:104
+104 0
+cfn=_splitext /usr/lib/python2.7/genericpath.py:85
+calls=198 85
+104 0
+
+fn=basename /usr/lib/python2.7/posixpath.py:119
+119 0
+cfn=<method 'rfind' of 'str' objects>
+calls=24 0
+119 0
+
+fn=__del__ /usr/lib/python2.7/dist-packages/shapely/geometry/base.py:113
+113 0
+cfn=empty /usr/lib/python2.7/dist-packages/shapely/geometry/base.py:103
+calls=660 103
+113 2
+
+fn=<imp.find_module>
+0 1
+
+fn=_get_handles /usr/lib/python2.7/subprocess.py:1098
+1098 0
+cfn=pipe_cloexec /usr/lib/python2.7/subprocess.py:1160
+calls=2 1160
+1098 0
+cfn=<method 'update' of 'set' objects>
+calls=2 0
+1098 0
+
+fn=StreamWriter /usr/lib/python2.7/encodings/ascii.py:28
+28 0
+
+fn=Pickler /usr/lib/python2.7/pickle.py:171
+171 0
+
+fn=<binascii.a2b_hex>
+0 0
+
+fn=<module> /usr/lib/python2.7/subprocess.py:387
+387 0
+cfn=Popen /usr/lib/python2.7/subprocess.py:647
+calls=1 647
+387 0
+cfn=CalledProcessError /usr/lib/python2.7/subprocess.py:400
+calls=1 400
+387 0
+cfn=<module> /usr/lib/python2.7/pickle.py:25
+calls=1 25
+387 1
+cfn=<hasattr>
+calls=1 0
+387 0
+cfn=<posix.sysconf>
+calls=1 0
+387 0
+cfn=<getattr>
+calls=1 0
+387 0
+
+fn=resource_exists /usr/lib/python2.7/dist-packages/pkg_resources.py:901
+901 0
+cfn=has_resource /usr/lib/python2.7/dist-packages/pkg_resources.py:1201
+calls=1 1201
+901 0
+cfn=get_provider /usr/lib/python2.7/dist-packages/pkg_resources.py:212
+calls=1 212
+901 0
+
+fn=<module> /usr/lib/python2.7/pkgutil.py:1
+1 0
+cfn=register /usr/lib/python2.7/pkgutil.py:59
+calls=1 59
+1 0
+cfn=ImpImporter /usr/lib/python2.7/pkgutil.py:162
+calls=1 162
+1 0
+cfn=simplegeneric /usr/lib/python2.7/pkgutil.py:31
+calls=1 31
+1 0
+cfn=ImpLoader /usr/lib/python2.7/pkgutil.py:232
+calls=1 232
+1 0
+
+fn=<module> /usr/lib/pymodules/python2.7/mpl_toolkits/__init__.py:1
+1 0
+cfn=<__import__>
+calls=1 0
+1 0
+cfn=declare_namespace /usr/lib/python2.7/dist-packages/pkg_resources.py:1821
+calls=1 1821
+1 0
+
+fn=__init__ /home/hunter/git/left-luggage-detection/intensity_processing.py:16
+16 0
+cfn=<numpy.core.multiarray.zeros>
+calls=6 0
+16 3
+cfn=<cv2.BackgroundSubtractorMOG2>
+calls=2 0
+16 0
+
+fn=<posix.WIFEXITED>
+0 0
+
+fn=<method 'lower' of 'unicode' objects>
+0 0
+
+fn=hex_decode /usr/lib/python2.7/encodings/hex_codec.py:27
+27 0
+cfn=<len>
+calls=2 0
+27 0
+cfn=<binascii.a2b_hex>
+calls=2 0
+27 0
+
+fn=__call__ /usr/lib/python2.7/dist-packages/shapely/topology.py:40
+40 38
+cfn=_validate /usr/lib/python2.7/dist-packages/shapely/topology.py:14
+calls=660 14
+40 2
+cfn=_get_geom /usr/lib/python2.7/dist-packages/shapely/geometry/base.py:130
+calls=660 130
+40 0
+
+fn=<cv2.addWeighted>
+0 521
+
+fn=__new__ /usr/lib/python2.7/abc.py:86
+86 0
+cfn=<genexpr> /usr/lib/python2.7/abc.py:89
+calls=4 89
+86 0
+cfn=<method 'items' of 'dict' objects>
+calls=4 0
+86 0
+cfn=__init__ /usr/lib/python2.7/_weakrefset.py:36
+calls=12 36
+86 0
+cfn=<built-in method __new__ of type object at 0x916e80>
+calls=4 0
+86 0
+cfn=<getattr>
+calls=7 0
+86 0
+
+fn=__init__ /usr/lib/python2.7/subprocess.py:648
+648 0
+cfn=<posix.fdopen>
+calls=2 0
+648 0
+cfn=<isinstance>
+calls=1 0
+648 0
+cfn=_cleanup /usr/lib/python2.7/subprocess.py:458
+calls=1 458
+648 0
+cfn=_execute_child /usr/lib/python2.7/subprocess.py:1186
+calls=1 1186
+648 12
+cfn=_get_handles /usr/lib/python2.7/subprocess.py:1098
+calls=1 1098
+648 0
+
+fn=<lambda> /usr/lib/python2.7/dist-packages/shapely/geos.py:269
+269 0
+cfn=<method 'endswith' of 'str' objects>
+calls=174 0
+269 0
+
+fn=Unpickler /usr/lib/python2.7/pickle.py:827
+827 0
+
+fn=<module> /usr/lib/python2.7/distutils/__init__.py:9
+9 0
+
+fn=normpath /usr/lib/python2.7/posixpath.py:321
+321 1
+cfn=<isinstance>
+calls=255 0
+321 0
+cfn=<method 'startswith' of 'str' objects>
+calls=510 0
+321 0
+cfn=<method 'split' of 'str' objects>
+calls=255 0
+321 0
+cfn=<method 'join' of 'str' objects>
+calls=255 0
+321 0
+cfn=<method 'append' of 'list' objects>
+calls=1181 0
+321 0
+
+fn=__init__ /usr/lib/python2.7/dist-packages/pkg_resources.py:1188
+1188 0
+cfn=dirname /usr/lib/python2.7/posixpath.py:127
+calls=2 127
+1188 0
+cfn=<getattr>
+calls=4 0
+1188 0
+
+fn=insert_on /usr/lib/python2.7/dist-packages/pkg_resources.py:2345
+2345 0
+cfn=check_version_conflict /usr/lib/python2.7/dist-packages/pkg_resources.py:2397
+calls=99 2397
+2345 8
+cfn=dirname /usr/lib/python2.7/posixpath.py:127
+calls=99 127
+2345 0
+cfn=<map>
+calls=99 0
+2345 1
+cfn=_normalize_cached /usr/lib/python2.7/dist-packages/pkg_resources.py:1892
+calls=99 1892
+2345 0
+cfn=version /usr/lib/python2.7/dist-packages/pkg_resources.py:2205
+calls=1 2205
+2345 0
+cfn=<method 'index' of 'list' objects>
+calls=99 0
+2345 0
+
+fn=<method 'disable' of '_lsprof.Profiler' objects>
+0 0
+
+fn=<posix.uname>
+0 0
+
+fn=CachingGeometryProxy /usr/lib/python2.7/dist-packages/shapely/geometry/proxy.py:10
+10 0
+
+fn=<method 'index' of 'list' objects>
+0 0
+

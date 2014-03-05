@@ -23,6 +23,7 @@ class DepthProcessing:
 
     def __init__(self, image_shape=(640, 480)):
         self.current_frame = np.zeros(shape=image_shape, dtype=np.uint16)
+        self.current_frame_holes = np.zeros(shape=image_shape, dtype=np.uint64)
         self.accumulator = np.zeros(shape=image_shape, dtype=np.uint8)
         #self.background_aggregator = np.zeros(shape=image_shape, dtype=np.int8)
         self.background_model = np.zeros(shape=image_shape, dtype=np.float32)
@@ -30,7 +31,7 @@ class DepthProcessing:
         self.rect_accum = []
         self.rect_accum2 = np.array([], dtype=int)
 
-    def update_background_model(self, current_frame):
+    def update_background_model(self, current_frame, holes_frame=np.zeros(shape=IMAGE_SHAPE, dtype=np.uint64)):
         """
         Update depth background by running average
 
@@ -39,7 +40,9 @@ class DepthProcessing:
         :rtype: np.float32
         """
         self.background_model = bg_models.compute_background_running_average(current_frame,
-                                                                             self.background_model, BG_RUN_AVG_LRATE)
+                                                                             self.background_model,
+                                                                             BG_RUN_AVG_LRATE,
+                                                                             holes_frame)
         return self.background_model
 
     def extract_foreground_mask_from_run_avg(self, current_frame):
@@ -52,9 +55,13 @@ class DepthProcessing:
         :rtype: np.int64
         """
         # if current frame has holes use modelbg pixels instead
-        current_frame_filtered = (np.where(current_frame == DEPTH_HOLE_VALUE, self.background_model, current_frame)).astype(np.float32)
-        diff = (current_frame_filtered - self.background_model)
-        self.foreground_mask = (np.where(np.abs(diff) >= BG_MASK_THRESHOLD, 1, 0))
+        #current_frame_filtered = (np.where(current_frame == DEPTH_HOLE_VALUE, self.background_model, current_frame)).astype(np.float32)
+        #diff = (current_frame_filtered - self.background_model)
+        diff = (current_frame - self.background_model)
+        # true_3 = np.abs(diff) >= BG_MASK_THRESHOLD
+        # true_1000 = np.abs(diff) <= 1000
+        # truth = np.int_(true_3)*np.int_()
+        self.foreground_mask = (np.where(np.abs(diff) >= BG_MASK_THRESHOLD, 1, 0))*np.logical_not(self.current_frame_holes)
         return self.foreground_mask
 
     def extract_proposal_bbox(self, method=ACCUMULATOR):

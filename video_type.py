@@ -102,9 +102,9 @@ class VideoDisplay:
                 myfont = pygame.font.SysFont("Arial", 15)
                 # apply it to text on a label
                 label_tl = myfont.render("Video Stream RGB", 1, (255, 255, 255))
-                label_tr = myfont.render("RGB foreground and detection Proposals", 1, (255, 255, 255))
+                label_tr = myfont.render("Final proposals", 1, (255, 255, 255))
                 label_bl = myfont.render("DEPTH foreground and detection Proposals", 1, (255, 255, 255))
-                label_br = myfont.render("Final proposals", 1, (255, 255, 255))
+                label_br = myfont.render("RGB foreground and detection Proposals", 1, (255, 255, 255))
 
 
                 # put the label object on the screen at point x=100, y=100
