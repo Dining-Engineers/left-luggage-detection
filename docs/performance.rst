@@ -1,3 +1,8 @@
+===========
+Performance
+===========
+
+
 .. image:: ../img/performance.png
    :height: 480
    :width: 640
