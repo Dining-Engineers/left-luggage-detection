@@ -52,7 +52,7 @@ def compute_background_running_average(frame, average, alpha, holes_frame):
     # replace holes with value of the other one
 
     # BEST CONFIGURATION BUT SLOWER
-    holes_diff = holes_frame - holes_average
+    #holes_diff = holes_frame - holes_average
     #frame = np.where(holes_diff == 1, average, frame)
     #average = np.where(holes_diff == -1, frame, average)
     # optimize!

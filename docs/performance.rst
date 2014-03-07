@@ -3,7 +3,7 @@ Performance
 ===========
 
 
-.. image:: ../img/performance.png
+.. image:: ./img/performance.png
    :height: 480
    :width: 640
    :scale: 80
