@@ -48,5 +48,6 @@ def get_segmentation_mask(TYPE, image, bbox, rgb_proposal_mask, depth_proposal_m
         # region growing
         # CURRENTLY NOT WORKING
         #mask = region_growing_segmentation(bbox, image, rgb_proposal_mask, depth_proposal_mask)
+        pass
 
     return mask
