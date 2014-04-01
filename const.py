@@ -44,4 +44,4 @@ PYGAME_LAYOUT = 4               #: number of images to show in the output can be
 # Debug Options
 
 SHOW_FPS = True                 #: shows fps
-ENABLE_PROFILING = True         #: get profiling info for the first 100 frames
+ENABLE_PROFILING = False         #: get profiling info for the first 100 frames
