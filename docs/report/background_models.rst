@@ -9,8 +9,8 @@ are processed to extract the proposals.
 
 Depth background model and proposals
 -------------------------------------
-The depth background model is computed by using the higher-resolution (11-bit) depth matrix 
-because we want to do computations with the depth. The method used to model the background is the 
+The depth background model is computed by using an high-resolution (11-bit) depth matrix.
+The method used to model the background is the
 accumulate running average. At time :math:`t` the model is updated with the following function:
 
 :math:`model_{t} = (1-\alpha) \cdot model_{t-1} + \alpha \cdot frame_{t}`
